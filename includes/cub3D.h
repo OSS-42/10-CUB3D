@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/30 12:54:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:28:13 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,12 @@
 # include "../libart/includes/libart.h"
 # include "../libft/includes/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
-// # include "../MLX42/include/MLX42/MLX42_Int.h"
-// # include "../MLX42/include/MLX42/MLX42_Input.h"
-// # include "../MLX42/include/glad/glad.h"
-// # include "../MLX42/include/KHR/khrplatform.h"
-// # include "../MLX42/include/lodepng/lodepng.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
 
 /***** STRUCTURES *****/
-
-typedef struct s_mlx
-{
-	void*	window;     // Window pointer, only really relevant to MLX itself.
-	void*	context;    // Abstracted data only relevant to MLX & OpenGL.
-	int32_t	width;      // The current width of the window, gets updated on resize.
-	int32_t	height;     // The current height of the window, gets updated on resize.
-	double	delta_time; // The time it took to draw the last frame, useful to interpolations.
-}	t_mlx;
 
 typedef struct s_player
 {
@@ -79,7 +65,6 @@ typedef struct s_vault
 	int			height;
 	int			lines;
 	int			lenght;
-	int			moves;
 	int			collect;
 	int			total_c;
 	int			player_x;
@@ -87,11 +72,29 @@ typedef struct s_vault
 	int			p_dir;
 	t_player	*player;
 	t_level		*lvl1;
-	t_mlx		*win;
+	t_param		*map_param;
 }	t_vault;
 
+typedef struct s_param
+{
+	char	*no_wall_path;
+	int		no_exist;
+	char	*so_wall_path;
+	int		so_exist;
+	char	*we_wall_path;
+	int		we_exist;
+	char	*ea_wall_path;
+	int		ea_exist;
+	char	*f_color;
+	int		f_exist;
+	char	*c_color;
+	int		c_exist;
+}	t_param;
+
 /***** cub3D.c *****/
-void	check_map_name(t_vault *data);
+int		create_win(t_vault *data);
+void	keyhandler(mlx_key_data_t keydata, void *param);
+void	quit_game(t_vault *data);
 
 /***** error_management.c *****/
 void	errors(t_vault *data);
@@ -100,5 +103,10 @@ void	destroy_and_free_level(t_vault *data);
 void	destroy_and_free_player(t_vault *data);
 void	free_all(t_vault *data);
 
+/***** map_parsing.c *****/
+void	check_map_name(t_vault *data);
+void	scene_to_array(t_vault *data);
+void	check_map(t_vault *data); //relevance ? a integrer ailleurs
+void	check_map_params(t_vault *data);
 
 #endif

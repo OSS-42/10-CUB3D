@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/30 11:44:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/30 16:47:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	errors(t_vault *data)
 	else if (data->error_code == 11)
 		printf("%s\n%s\n", "Error", "Doublon (P)");
 	else if (data->error_code == 12)
-		printf("%s\n%s\n", "Error", "Ce n'est pas un fichier, mais un répertoire");
+		printf("%s\n%s\n", "Error", "C'est un répertoire !");
 	free_map(data);
 }
 
@@ -61,32 +61,32 @@ void	free_map(t_vault *data)
 
 void	destroy_and_free_level(t_vault *data)
 {
-	mlx_destroy_image(data->mlx, data->lvl1->collect);
-	mlx_destroy_image(data->mlx, data->lvl1->corner_1);
-	mlx_destroy_image(data->mlx, data->lvl1->corner_2);
-	mlx_destroy_image(data->mlx, data->lvl1->corner_3);
-	mlx_destroy_image(data->mlx, data->lvl1->corner_4);
-	mlx_destroy_image(data->mlx, data->lvl1->exit);
-	mlx_destroy_image(data->mlx, data->lvl1->floor);
-	mlx_destroy_image(data->mlx, data->lvl1->pilar);
-	mlx_destroy_image(data->mlx, data->lvl1->start);
-	mlx_destroy_image(data->mlx, data->lvl1->wall_bottom);
-	mlx_destroy_image(data->mlx, data->lvl1->wall_left);
-	mlx_destroy_image(data->mlx, data->lvl1->wall_right);
-	mlx_destroy_image(data->mlx, data->lvl1->wall_top);
+	mlx_delete_image(data->mlx, data->lvl1->collect);
+	mlx_delete_image(data->mlx, data->lvl1->corner_1);
+	mlx_delete_image(data->mlx, data->lvl1->corner_2);
+	mlx_delete_image(data->mlx, data->lvl1->corner_3);
+	mlx_delete_image(data->mlx, data->lvl1->corner_4);
+	mlx_delete_image(data->mlx, data->lvl1->exit);
+	mlx_delete_image(data->mlx, data->lvl1->floor);
+	mlx_delete_image(data->mlx, data->lvl1->pilar);
+	mlx_delete_image(data->mlx, data->lvl1->start);
+	mlx_delete_image(data->mlx, data->lvl1->wall_bottom);
+	mlx_delete_image(data->mlx, data->lvl1->wall_left);
+	mlx_delete_image(data->mlx, data->lvl1->wall_right);
+	mlx_delete_image(data->mlx, data->lvl1->wall_top);
 	free (data->lvl1);
 }
 
 void	destroy_and_free_player(t_vault *data)
 {
-	mlx_destroy_image(data->mlx, data->player->p_right);
-	mlx_destroy_image(data->mlx, data->player->p_left);
+	mlx_delete_image(data->mlx, data->player->p_right);
+	mlx_delete_image(data->mlx, data->player->p_left);
 	free (data->player);
 }
 
 void	free_all(t_vault *data)
 {
-	mlx_destroy_window(data->mlx, data->mlx_win);
+	mlx_terminate(data->mlx);
 	free_map(data);
 	destroy_and_free_level(data);
 	destroy_and_free_player(data);

@@ -37,8 +37,6 @@ OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 SRCS =	src/cub3D.c \
 		src/error_management.c
 
-#retire : 		src/redir_in_next_array.c
-
 #HEADER_BONUS = includes/cub3D_bonus.h
 #D_SRC_BONUS = src_bonus/
 #D_OBJ_BONUS = obj_bonus/
@@ -50,9 +48,8 @@ SRCS =	src/cub3D.c \
 
 all:	deadpool $(NAME)
 
-#-lcurses pour les signaux
 $(NAME):	$(LIBFT) $(LIBART) $(MLX42) $(OBJS)
-	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBART) $(MLX) -I include -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/" -o $@)
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
 #	@sleep 2
 #	@clear
