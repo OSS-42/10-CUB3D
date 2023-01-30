@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/30 10:25:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/30 12:54:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+
+/***** STRUCTURES *****/
+
+typedef struct s_mlx
+{
+	void*	window;     // Window pointer, only really relevant to MLX itself.
+	void*	context;    // Abstracted data only relevant to MLX & OpenGL.
+	int32_t	width;      // The current width of the window, gets updated on resize.
+	int32_t	height;     // The current height of the window, gets updated on resize.
+	double	delta_time; // The time it took to draw the last frame, useful to interpolations.
+}	t_mlx;
 
 typedef struct s_player
 {
@@ -76,6 +87,18 @@ typedef struct s_vault
 	int			p_dir;
 	t_player	*player;
 	t_level		*lvl1;
+	t_mlx		*win;
 }	t_vault;
+
+/***** cub3D.c *****/
+void	check_map_name(t_vault *data);
+
+/***** error_management.c *****/
+void	errors(t_vault *data);
+void	free_map(t_vault *data);
+void	destroy_and_free_level(t_vault *data);
+void	destroy_and_free_player(t_vault *data);
+void	free_all(t_vault *data);
+
 
 #endif

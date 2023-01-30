@@ -34,7 +34,8 @@ HEADER = includes/cub3D.h
 D_SRC = src/
 D_OBJ = obj/
 OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
-SRCS =	src/cub3D.c 
+SRCS =	src/cub3D.c \
+		src/error_management.c
 
 #retire : 		src/redir_in_next_array.c
 

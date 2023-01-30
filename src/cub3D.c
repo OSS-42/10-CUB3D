@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/30 10:30:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/30 12:45:53 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	check_map_name(t_vault *data)
 	}
 }
 
-
 int	main(int argc, char **argv, char **env)
 {
 	t_vault	data;
@@ -48,12 +47,12 @@ int	main(int argc, char **argv, char **env)
 	data.error_code = 0;
 	if (argc != 2)
 		data.error_code = 9;
-	// errors(&data);
+	errors(&data);
 	data.argv = argv[1];
 	check_map_name(&data);
 	// map_to_array(&data);
 	// check_map(&data);
-	// errors(&data);
+	errors(&data);
 	// newgame(&data);
 	printf("hello\n");
 	return (0);
