@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/30 17:28:13 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/30 23:39:53 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,22 @@ typedef struct s_level
 	int		img_y;
 }	t_level;
 
+typedef struct s_param
+{
+	char	*no_wall_path;
+	int		no_exist;
+	char	*so_wall_path;
+	int		so_exist;
+	char	*we_wall_path;
+	int		we_exist;
+	char	*ea_wall_path;
+	int		ea_exist;
+	char	*f_color;
+	int		f_exist;
+	char	*c_color;
+	int		c_exist;
+}	t_param;
+
 typedef struct s_vault
 {
 	void		*img;
@@ -75,22 +91,6 @@ typedef struct s_vault
 	t_param		*map_param;
 }	t_vault;
 
-typedef struct s_param
-{
-	char	*no_wall_path;
-	int		no_exist;
-	char	*so_wall_path;
-	int		so_exist;
-	char	*we_wall_path;
-	int		we_exist;
-	char	*ea_wall_path;
-	int		ea_exist;
-	char	*f_color;
-	int		f_exist;
-	char	*c_color;
-	int		c_exist;
-}	t_param;
-
 /***** cub3D.c *****/
 int		create_win(t_vault *data);
 void	keyhandler(mlx_key_data_t keydata, void *param);
@@ -105,8 +105,14 @@ void	free_all(t_vault *data);
 
 /***** map_parsing.c *****/
 void	check_map_name(t_vault *data);
+void	check_fd(t_vault *data, int fd);
 void	scene_to_array(t_vault *data);
 void	check_map(t_vault *data); //relevance ? a integrer ailleurs
 void	check_map_params(t_vault *data);
+void	check_wall_path(t_vault *data);
+void	check_color_code(t_vault *data);
+
+/***** cub3d_utils.c *****/
+int		correct_rgb(char *rgb_code);
 
 #endif

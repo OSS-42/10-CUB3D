@@ -1,0 +1,7 @@
+NO ./path_to_north_wall_texture
+SO ./path_to_south_wall_texture
+WE ./path_to_west_wall_texture
+EA ./path_to_east_wall_texture
+
+F 220,100,0
+C 225,30,0

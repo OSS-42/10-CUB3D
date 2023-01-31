@@ -6,11 +6,36 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/30 17:47:10 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/30 23:45:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+void	check_fd(t_vault *data, int fd)
+{
+	char	*line;
+
+	if (fd < 0)
+	{
+		data->error_code = 7;
+		errors(data);
+	}
+	data->lines = 0;
+	line = get_next_line(fd);
+	if (line == NULL)
+	{
+		data->error_code = 1;
+		errors(data);
+	}
+	while (line)
+	{
+		data->lines++;
+		free (line);
+		line = get_next_line(fd);
+	}
+	close (fd);
+}
 
 void	scene_to_array(t_vault *data)
 {
@@ -186,10 +211,35 @@ void	check_map_params(t_vault *data)
 				else
 				{
 					temp = ft_substr(data->map[x], y, slen);
-					data->map_param->ea_wall_path = ft_strcpy(temp);
+					data->map_param->ea_wall_path = ft_strdup(temp);
 					free (temp);
 				}
 			}
 		}
+		if (data->map_param->c_exist == 0 || data->map_param->f_exist == 0
+			|| data->map_param->no_exist == 0 || data->map_param->so_exist == 0
+			|| data->map_param->we_exist == 0 || data->map_param->ea_exist == 0)
+			data->error_code = 13;
+		errors(data);
+		check_wall_path(data);
+		check_color_code(data);
 	}
+}
+
+void	check_wall_path(t_vault *data)
+{
+	if (!(data->map_param->no_wall_path) || !(data->map_param->so_wall_path)
+		|| (data->map_param->we_wall_path) || (data->map_param->ea_wall_path)
+		|| (data->map_param->f_color) || (data->map_param->c_color))
+			data->error_code = 14;
+	errors(data);
+}	
+
+void	check_color_code(t_vault *data)
+{
+	if (correct_rgb(data->map_param->c_color) == 0 
+		|| correct_rgb(data->map_param->f_color) == 0)
+		data->error_code = 15;
+	errors(data);
+	//fonction range of rgb [0,255]
 }

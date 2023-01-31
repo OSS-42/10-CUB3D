@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/30 17:18:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/30 23:42:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,17 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 
 	data = (t_vault *) param;
 	// if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-	// 	go_up(data);
+	// 	forward(data);
 	// if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-	// 	go_down(data);
+	// 	backward(data);
 	// if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-	// 	go_left(data);
+	// 	straf_left(data);
 	// if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-	// 	go_right(data);
+	// 	straf_right(data);
 	// if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-	// 	turn_cam_left(data);
+	// 	rotate_left(data);
 	// if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-	// 	turn_cam_right(data);
-	// ajouter un reset de la camera (gauche/droite) lorsque la touche est relachee ?
+	// 	rotate_right(data);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		quit_game(data);
 }

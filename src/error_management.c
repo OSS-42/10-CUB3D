@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/30 16:47:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/30 23:31:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ void	errors(t_vault *data)
 		printf("%s\n%s\n", "Error", "Doublon (P)");
 	else if (data->error_code == 12)
 		printf("%s\n%s\n", "Error", "C'est un répertoire !");
+	else if (data->error_code == 13)
+		printf("%s\n%s\n", "Error", "Parametres non valides");
+	else if (data->error_code == 14)
+		printf("%s\n%s\n", "Error", "textures's path or color code invalid");
+	else if (data->error_code == 15)
+		printf("%s\n%s\n", "Error", "RGB color code invalid");
 	free_map(data);
 }
 
