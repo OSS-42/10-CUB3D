@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/31 08:53:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/31 17:17:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,8 @@ void	check_map_params(t_vault *data)
 		errors(data);
 		check_wall_path(data);
 		check_color_code(data);
-		// find map section
+		while (ft_strchr(data->map[x], '1') == 0)
+			x++;
 		// check map validity
 	}
 }
