@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/30 23:39:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/31 08:39:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	check_wall_path(t_vault *data);
 void	check_color_code(t_vault *data);
 
 /***** cub3d_utils.c *****/
-int		correct_rgb(char *rgb_code);
+int		correct_rgb_char(char *rgb_code);
+int		correct_rgb_range(char *rgb_code);
 
 #endif

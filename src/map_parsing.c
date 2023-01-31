@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/30 23:45:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/31 08:53:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,23 +223,33 @@ void	check_map_params(t_vault *data)
 		errors(data);
 		check_wall_path(data);
 		check_color_code(data);
+		// find map section
+		// check map validity
 	}
 }
 
 void	check_wall_path(t_vault *data)
 {
-	if (!(data->map_param->no_wall_path) || !(data->map_param->so_wall_path)
-		|| (data->map_param->we_wall_path) || (data->map_param->ea_wall_path)
-		|| (data->map_param->f_color) || (data->map_param->c_color))
+	if (open(data->map_param->no_wall_path, 0, 0) < 0
+		|| open(data->map_param->so_wall_path, 0, 0) < 0
+		|| open(data->map_param->we_wall_path, 0, 0) < 0
+		|| open(data->map_param->ea_wall_path, 0, 0) < 0)
 			data->error_code = 14;
+	close (data->map_param->no_wall_path);
+	close (data->map_param->so_wall_path);
+	close (data->map_param->we_wall_path);
+	close (data->map_param->ea_wall_path);
 	errors(data);
 }	
 
 void	check_color_code(t_vault *data)
 {
-	if (correct_rgb(data->map_param->c_color) == 0 
-		|| correct_rgb(data->map_param->f_color) == 0)
+	if (correct_rgb_char(data->map_param->c_color) == 0 
+		|| correct_rgb_char(data->map_param->f_color) == 0)
 		data->error_code = 15;
 	errors(data);
-	//fonction range of rgb [0,255]
+	if (correct_rbg_range(data->map_param->c_color) == 0
+		|| correct_rgb_range(data->map_param->f_color) == 0)
+		data->error_code = 16;
+	errors(data);
 }
