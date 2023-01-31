@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/31 17:17:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/31 17:20:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,10 @@ void	check_map_params(t_vault *data)
 	temp = NULL;
 	while (data->map[x])
 	{
-		y = 2;
 		slen = ft_strlen(data->map[x]);
 		if (ft_strncmp(data->map[x], "NO", 2) == 1)
 		{
+			y = 2;
 			data->map_param->no_exist = 1;
 			while (data->map[x][y])
 			{
@@ -128,6 +128,7 @@ void	check_map_params(t_vault *data)
 		}
 		else if (ft_strncmp(data->map[x], "SO", 2) == 1)
 		{
+			y = 2;
 			data->map_param->so_exist = 1;
 			while (data->map[x][y])
 			{
@@ -143,6 +144,7 @@ void	check_map_params(t_vault *data)
 		}
 		else if (ft_strncmp(data->map[x], "WE", 2) == 1)
 		{
+			y = 2;
 			data->map_param->we_exist = 1;
 			while (data->map[x][y])
 			{
@@ -158,6 +160,7 @@ void	check_map_params(t_vault *data)
 		}
 		else if (ft_strncmp(data->map[x], "EA", 2) == 1)
 		{
+			y = 2;
 			data->map_param->ea_exist = 1;
 			while (data->map[x][y])
 			{
@@ -173,6 +176,7 @@ void	check_map_params(t_vault *data)
 		}
 		else if (ft_strncmp(data->map[x], "F", 1) == 1)
 		{
+			y = 1;
 			data->map_param->f_exist = 1;
 			while (data->map[x][y])
 			{
@@ -188,6 +192,7 @@ void	check_map_params(t_vault *data)
 		}
 		else if (ft_strncmp(data->map[x], "C", 1) == 1)
 		{
+			y = 1;
 			data->map_param->ea_exist = 1;
 			while (data->map[x][y])
 			{
@@ -197,21 +202,6 @@ void	check_map_params(t_vault *data)
 				{
 					temp = ft_substr(data->map[x], y, slen);
 					data->map_param->c_color = ft_strdup(temp);
-					free (temp);
-				}
-			}
-		}
-		else if (ft_strncmp(data->map[x], "EA", 2) == 1)
-		{
-			data->map_param->ea_exist = 1;
-			while (data->map[x][y])
-			{
-				if (data->map[x][y] == ' ')
-					y++;
-				else
-				{
-					temp = ft_substr(data->map[x], y, slen);
-					data->map_param->ea_wall_path = ft_strdup(temp);
 					free (temp);
 				}
 			}
