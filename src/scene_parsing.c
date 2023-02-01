@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*   scene_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 14:14:00 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:27:17 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	scene_to_array(t_vault *data)
 	fd = open(data->argv, O_RDONLY);
 	check_fd(data, fd);
 	fd = open(data->argv, O_RDONLY);
-	data->scene = ft_calloc(sizeof(char *), data->lines + 1);
+	data->scene = malloc(sizeof(char *) * data->lines + 1);
 	if (!data->scene)
-		free_map(data);
+		return ;
 	x = 0;
 	while (1)
 	{
@@ -63,7 +63,7 @@ void	scene_to_array(t_vault *data)
 	close (fd);
 }
 
-void	check_scene_name(t_vault *data);
+void	check_map_name(t_vault *data)
 {
 	char	*filename;
 	int		fd;
@@ -76,8 +76,12 @@ void	check_scene_name(t_vault *data);
 		errors(data);
 	}
 	filename = ft_strrchr(data->argv, '.');
-	if (filename == NULL
-		|| ft_strncmp(filename, ".cub", ft_strlen(filename)) != 0)
+	if (filename == NULL)
+	{
+		data->error_code = 8;
+		errors(data);
+	}
+	if (ft_strncmp(filename, ".cub", ft_strlen(filename)) != 0)
 	{
 		data->error_code = 8;
 		errors(data);
@@ -114,6 +118,11 @@ void	check_scene_params(t_vault *data)
 		if (ft_strncmp(data->scene[x], "NO", 2) == 0)
 		{
 			y = 2;
+			if (data->scene_param->no_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->scene_param->no_exist = 1;
 			while (data->scene[x][y])
 			{
@@ -133,6 +142,11 @@ void	check_scene_params(t_vault *data)
 		else if (ft_strncmp(data->scene[x], "SO", 2) == 0)
 		{
 			y = 2;
+			if (data->scene_param->so_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->scene_param->so_exist = 1;
 			while (data->scene[x][y])
 			{
@@ -152,6 +166,11 @@ void	check_scene_params(t_vault *data)
 		else if (ft_strncmp(data->scene[x], "WE", 2) == 0)
 		{
 			y = 2;
+			if (data->scene_param->we_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->scene_param->we_exist = 1;
 			while (data->scene[x][y])
 			{
@@ -171,6 +190,11 @@ void	check_scene_params(t_vault *data)
 		else if (ft_strncmp(data->scene[x], "EA", 2) == 0)
 		{
 			y = 2;
+			if (data->scene_param->ea_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->scene_param->ea_exist = 1;
 			while (data->scene[x][y])
 			{
@@ -183,7 +207,6 @@ void	check_scene_params(t_vault *data)
 					data->scene_param->ea_wall_path = ft_strdup(temp2);
 					free (temp);
 					free (temp2);
-					// y = y + slen;
 					break ;
 				}
 			}
@@ -191,6 +214,11 @@ void	check_scene_params(t_vault *data)
 		else if (ft_strncmp(data->scene[x], "F", 1) == 0)
 		{
 			y = 1;
+			if (data->scene_param->f_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->scene_param->f_exist = 1;
 			while (data->scene[x][y])
 			{
@@ -210,6 +238,11 @@ void	check_scene_params(t_vault *data)
 		else if (ft_strncmp(data->scene[x], "C", 1) == 0)
 		{
 			y = 1;
+			if (data->scene_param->c_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->scene_param->c_exist = 1;
 			while (data->scene[x][y])
 			{

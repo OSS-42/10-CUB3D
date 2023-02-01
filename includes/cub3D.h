@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 14:14:38 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:18:12 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,9 @@ void	check_scene_params(t_vault *data);
 void	check_wall_path(t_vault *data);
 void	check_color_code(t_vault *data);
 int		check_param_existence(t_vault *data);
+int		check_white_spaces(char c);
+int		isinset(char *s1, char *set);
+void	check_valid_char(t_vault *data);
 
 /***** cub3d_utils.c *****/
 int		correct_rgb_char(char *rgb_code);
