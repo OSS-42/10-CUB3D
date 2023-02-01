@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/31 22:28:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/01 11:28:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,9 @@ void	check_map(t_vault *data)
 	check_map_params(data);
 }
 
+// attention on ne check pas les whitespace, juste les espaces pour l'instant
+// pas de gestion des whitespaces avant les parametres
+// on ne gere pas si le code rgb a plus que 3 parametres
 void	check_map_params(t_vault *data)
 {
 	int		x;
@@ -127,7 +130,6 @@ void	check_map_params(t_vault *data)
 					data->map_param->no_wall_path = ft_strdup(temp2);
 					free (temp);
 					free (temp2);
-					// y = y + slen;
 					break ;
 				}
 			}
@@ -147,7 +149,6 @@ void	check_map_params(t_vault *data)
 					data->map_param->so_wall_path = ft_strdup(temp2);
 					free (temp);
 					free (temp2);
-					// y = y + slen;
 					break ;
 				}
 			}
@@ -167,7 +168,6 @@ void	check_map_params(t_vault *data)
 					data->map_param->we_wall_path = ft_strdup(temp2);
 					free (temp);
 					free (temp2);
-					// y = y + slen;
 					break ;
 				}
 			}
@@ -207,7 +207,6 @@ void	check_map_params(t_vault *data)
 					data->map_param->f_color = ft_strdup(temp2);
 					free (temp);
 					free (temp2);
-					// y = y + slen;
 					break ;
 				}
 			}
@@ -227,7 +226,6 @@ void	check_map_params(t_vault *data)
 					data->map_param->c_color = ft_strdup(temp2);
 					free (temp);
 					free (temp2);
-					// y = y + slen;
 					break ;
 				}
 			}

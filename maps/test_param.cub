@@ -1,9 +1,21 @@
+
+
 WE       assets/tile_wall_window_left.xpm
+
 NO assets/tile_wall_window_bottom.xpm
-SO assets/tile_wall_window_right.xpm
-EA assets/tile_wall_window_top.xpm
 
 F 220,100,0
+
+SO assets/tile_wall_window_right.xpm
+
+
+EA assets/tile_wall_window_top.xpm
+
+
+
+
+
+
 C     225,30,0
 
 
