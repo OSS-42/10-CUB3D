@@ -25,7 +25,7 @@ LIBART = libart/libart.a
 D_LIBARTHEAD = libart/includes/libart.h
 
 D_MLX42 = MLX42/
-MLX42 = MLX42/libmlx42.a
+MLX42 = MLX42/build/libmlx42.a
 
 #------------------------------------------------------------------------------#
 #									SOURCES									   #
@@ -74,7 +74,7 @@ $(MLX42):
 	@brew install glfw --quiet
 	@echo "$(LGREEN)MLX42 Configuration completed ...$(NC)"
 	@echo "$(LGREEN)MLX42 Compilation started ...$(NC)"
-	@$(MAKE) -s --no-print-directory -C $(D_MLX42)
+	@$(MAKE) cmake -s --no-print-directory -C $(D_MLX42)
 	@echo "$(LGREEN)MLX42 Compilation completed ...$(NC)"
 
 $(D_OBJ):
@@ -100,7 +100,7 @@ lclean: fclean
 	@$(call lcleaning)
 	@$(MAKE) -s --no-print-directory -C $(D_LIBFT) fclean
 	@$(MAKE) -s --no-print-directory -C $(D_LIBART) fclean
-	@$(MAKE) -s --no-print-directory -C $(D_MLX42) fclean
+	@$(MAKE) cmake -s --no-print-directory -C $(D_MLX42) fclean
 
 re:	fclean all
 

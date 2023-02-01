@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/31 08:41:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/01 13:31:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ void	errors(t_vault *data)
 	else if (data->error_code == 13)
 		printf("%s\n%s\n", "Error", "Parametres non valides");
 	else if (data->error_code == 14)
-		printf("%s\n%s\n", "Error", "textures's path or color code invalid");
+		printf("%s\n%s\n", "Error", "Code RGB ou chemin de texture non valides");
 	else if (data->error_code == 15)
-		printf("%s\n%s\n", "Error", "RGB color code invalid");
+		printf("%s\n%s\n", "Error", "Code RGB non valide");
 	else if (data->error_code == 16)
-		printf("%s\n%s\n", "Error", "RGB color code out of range");
+		printf("%s\n%s\n", "Error", "Code RGB hors portee");
+	else if (data->error_code == 17)
+		printf("%s\n%s\n", "Error", "Doublon de parametre");
 	free_map(data);
 }
 

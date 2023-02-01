@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 12:38:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/01 13:48:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,19 @@ void	check_map(t_vault *data)
 	check_map_params(data);
 }
 
-// attention on ne check pas les whitespace, juste les espaces pour l'instant
+// on gere pas l'extension de la texture
 // pas de gestion des whitespaces avant les parametres
-// on ne gere pas si le code rgb a plus que 3 parametres
+// on ne gere pas si le code rgb a plus que ou moins que 3 parametres
+// watch doublon --- OK
+
+int		check_white_spaces(char c)
+{
+	if (c == '\t' || c == '\n' || c == '\r' || c == '\v' || c == '\f'
+		|| c == ' ')
+		return (0);
+	return (1);
+}
+
 void	check_map_params(t_vault *data)
 {
 	int		x;
@@ -110,13 +120,13 @@ void	check_map_params(t_vault *data)
 	char	*temp2;
 
 	x = 0;
-	y = 0;
 	temp = NULL;
 	temp2 = NULL;
 	while (data->map[x] && check_param_existence(data) == 0)
 	{
+		y = 0;
 		slen = ft_strlen(data->map[x]);
-		while (data->map[x][y] == ' ')
+		while (check_white_spaces(data->map[x][y]) == 1)
 			y++;
 		temp = ft_substr(data->map[x], y, slen);
 		free (data->map[x]);
@@ -125,10 +135,15 @@ void	check_map_params(t_vault *data)
 		if (ft_strncmp(data->map[x], "NO", 2) == 0)
 		{
 			y = 2;
+			if (data->map_param->no_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->map_param->no_exist = 1;
 			while (data->map[x][y])
 			{
-				if (data->map[x][y] == ' ')
+				if (check_white_spaces(data->map[x][y]) == 1)
 					y++;
 				else
 				{
@@ -144,10 +159,15 @@ void	check_map_params(t_vault *data)
 		else if (ft_strncmp(data->map[x], "SO", 2) == 0)
 		{
 			y = 2;
+			if (data->map_param->so_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->map_param->so_exist = 1;
 			while (data->map[x][y])
 			{
-				if (data->map[x][y] == ' ')
+				if (check_white_spaces(data->map[x][y]) == 1)
 					y++;
 				else
 				{
@@ -163,10 +183,15 @@ void	check_map_params(t_vault *data)
 		else if (ft_strncmp(data->map[x], "WE", 2) == 0)
 		{
 			y = 2;
+			if (data->map_param->we_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->map_param->we_exist = 1;
 			while (data->map[x][y])
 			{
-				if (data->map[x][y] == ' ')
+				if (check_white_spaces(data->map[x][y]) == 1)
 					y++;
 				else
 				{
@@ -182,10 +207,15 @@ void	check_map_params(t_vault *data)
 		else if (ft_strncmp(data->map[x], "EA", 2) == 0)
 		{
 			y = 2;
+			if (data->map_param->ea_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->map_param->ea_exist = 1;
 			while (data->map[x][y])
 			{
-				if (data->map[x][y] == ' ')
+				if (check_white_spaces(data->map[x][y]) == 1)
 					y++;
 				else
 				{
@@ -194,7 +224,6 @@ void	check_map_params(t_vault *data)
 					data->map_param->ea_wall_path = ft_strdup(temp2);
 					free (temp);
 					free (temp2);
-					// y = y + slen;
 					break ;
 				}
 			}
@@ -202,10 +231,15 @@ void	check_map_params(t_vault *data)
 		else if (ft_strncmp(data->map[x], "F", 1) == 0)
 		{
 			y = 1;
+			if (data->map_param->f_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->map_param->f_exist = 1;
 			while (data->map[x][y])
 			{
-				if (data->map[x][y] == ' ')
+				if (check_white_spaces(data->map[x][y]) == 1)
 					y++;
 				else
 				{
@@ -221,10 +255,15 @@ void	check_map_params(t_vault *data)
 		else if (ft_strncmp(data->map[x], "C", 1) == 0)
 		{
 			y = 1;
+			if (data->map_param->c_exist == 1)
+			{
+				data->error_code = 17;
+				errors(data);
+			}
 			data->map_param->c_exist = 1;
 			while (data->map[x][y])
 			{
-				if (data->map[x][y] == ' ')
+				if (check_white_spaces(data->map[x][y]) == 1)
 					y++;
 				else
 				{
@@ -244,10 +283,44 @@ void	check_map_params(t_vault *data)
 	errors(data);
 	check_wall_path(data);
 	check_color_code(data);
+	check_valid_char(data);
 	while (ft_strchr(data->map[x], '1') == 0)
 		x++;
 	printf("map start here : %d\n", x);
 	// check map validity
+}
+
+int	isinset(char *s1, char *set)
+{
+	int	x;
+	int	len;
+
+	x = 0;
+	len = ft_strlen(s1);
+	while (x < len - 1)
+	{
+		if (ft_strchr(set, s1[x]) == NULL)
+			return (0);
+		x++;
+	}
+	return (1);
+}
+
+void	check_valid_char(t_vault *data)
+{
+	int	x;
+
+	x = 0;
+	while (data->map[x])
+	{
+		if (isinset(data->map[x], "01NSEW") != 1)
+		{
+			data->error_code = 3;
+			errors(data);
+		}
+		x++;
+	}
+	errors(data);
 }
 
 int	check_param_existence(t_vault *data)
