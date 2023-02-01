@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 14:27:17 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:31:14 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	scene_to_array(t_vault *data)
 	close (fd);
 }
 
-void	check_map_name(t_vault *data)
+void	check_scene_name(t_vault *data)
 {
 	char	*filename;
 	int		fd;
