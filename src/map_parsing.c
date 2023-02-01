@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 11:28:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:38:34 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,18 @@ void	check_map_params(t_vault *data)
 	char	*temp2;
 
 	x = 0;
+	y = 0;
 	temp = NULL;
 	temp2 = NULL;
 	while (data->map[x] && check_param_existence(data) == 0)
 	{
 		slen = ft_strlen(data->map[x]);
+		while (data->map[x][y] == ' ')
+			y++;
+		temp = ft_substr(data->map[x], y, slen);
+		free (data->map[x]);
+		data->map[x] = ft_strdup(temp);
+		free (temp);
 		if (ft_strncmp(data->map[x], "NO", 2) == 0)
 		{
 			y = 2;
