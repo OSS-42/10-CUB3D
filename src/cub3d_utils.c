@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:21:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/31 08:39:37 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/31 22:17:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	correct_rgb_char(char *rgb_code)
 			if (rgb_code[x] == '\0')
 				return (0);
 		}
-		if (ft_isdigit(rgb_code[x] == 1) || rgb_code[x] == ',')
+		if (ft_isdigit(rgb_code[x]) == 1 || rgb_code[x] == ',')
 			x++;
 		else
 			return (0);
@@ -50,31 +50,33 @@ int	correct_rgb_range(char *rgb_code)
 	temp = NULL;
 	while (rgb_code && rgb_code[x] && rgb_code[x] != ',')
 	{
-		if (ft_is_digit(rgb_code[x]) == 1)
+		if (ft_isdigit(rgb_code[x]) == 1)
 			x++;
 	}
-	temp = ft_substr(rgb_code, 0, x);
+	temp = ft_substr(rgb_code, len, x - len);
 	code_r = ft_atoi(temp);
-	len = ft_strlen(temp) - 1;
+	// len = ft_strlen(temp);
 	free (temp);
 	x++;
+	len = x;
 	while (rgb_code && rgb_code[x] && rgb_code[x] != ',')
 	{
-		if (ft_is_digit(rgb_code[x]) == 1)
+		if (ft_isdigit(rgb_code[x]) == 1)
 			x++;
 	}
-	temp = ft_substr(rgb_code, len, x);
+	temp = ft_substr(rgb_code, len, x - len);
 	code_g = ft_atoi(temp);
-	len = ft_strlen(temp) - 1;
+	// len = ft_strlen(temp);
 	free (temp);
 	x++;
+	len = x;
 	while (rgb_code && rgb_code[x] && rgb_code[x] != ',')
 	{
-		if (ft_is_digit(rgb_code[x]) == 1)
+		if (ft_isdigit(rgb_code[x]) == 1)
 			x++;
 	}
-	temp = ft_substr(rgb_code, len, x);
-	code_g = ft_atoi(temp);
+	temp = ft_substr(rgb_code, len, x - len);
+	code_b = ft_atoi(temp);
 	free (temp);
 	temp = NULL;
 	if (code_r > 255 || code_g > 255 || code_b > 255

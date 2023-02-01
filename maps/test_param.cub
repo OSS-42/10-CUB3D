@@ -1,7 +1,17 @@
-NO ./path_to_north_wall_texture
-SO ./path_to_south_wall_texture
-WE ./path_to_west_wall_texture
-EA ./path_to_east_wall_texture
+WE       assets/tile_wall_window_left.xpm
+NO assets/tile_wall_window_bottom.xpm
+SO assets/tile_wall_window_right.xpm
+EA assets/tile_wall_window_top.xpm
 
 F 220,100,0
-C 225,30,0
+C     225,30,0
+
+
+
+
+
+ 111111
+ 100101
+111001
+1100N1
+111111

@@ -8,7 +8,7 @@ CC = gcc
 #CC = gcc-11
 CFLAGS = -g -Wall -Werror -Wextra
 #CFLAGS = -g -Wall -Wextra -Werror -fsanitize=leak
-# CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+#CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 RM = rm -rf
 
 #LSAN_OPTIONS=detect_leaks=1 ./cub3D

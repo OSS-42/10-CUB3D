@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/31 08:39:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/31 22:29:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	check_map(t_vault *data); //relevance ? a integrer ailleurs
 void	check_map_params(t_vault *data);
 void	check_wall_path(t_vault *data);
 void	check_color_code(t_vault *data);
+int		check_param_existence(t_vault *data);
 
 /***** cub3d_utils.c *****/
 int		correct_rgb_char(char *rgb_code);
