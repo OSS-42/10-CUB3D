@@ -8,7 +8,6 @@ F 220,100,10
 
 SO assets/tile_wall_window_right.xpm
 
-
 EA assets/tile_wall_window_top.xpm
 
 
@@ -21,7 +20,7 @@ C     225,30,0
 
 
 
-   F
+
  111110
  100101
 111001

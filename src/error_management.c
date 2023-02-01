@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 14:18:20 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/01 15:59:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	errors_2(t_vault *data)
 		printf("%s\n%s\n", "Error", "Code RGB hors portee");
 	else if (data->error_code == 17)
 		printf("%s\n%s\n", "Error", "Doublon de parametre");
+	else if (data->error_code == 18)
+		printf("%s\n%s\n", "Error", "Carte incorrecte");
 	free_map(data);
 }
 

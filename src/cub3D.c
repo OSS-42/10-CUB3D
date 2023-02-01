@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 14:24:41 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/01 16:20:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	init_data(t_vault *data, char **argv)
 	data->player = ft_calloc(1, sizeof(t_player));
 	data->lvl1 = ft_calloc(1, sizeof(t_level));
 	data->scene_param = ft_calloc(1, sizeof(t_param));
+	data->map = ft_calloc(1, sizeof(t_map));
 }
 
 int	main(int argc, char **argv)

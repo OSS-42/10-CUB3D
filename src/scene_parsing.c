@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 14:31:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:24:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	scene_to_array(t_vault *data)
 	fd = open(data->argv, O_RDONLY);
 	check_fd(data, fd);
 	fd = open(data->argv, O_RDONLY);
-	data->scene = malloc(sizeof(char *) * data->lines + 1);
+	data->scene = ft_calloc(sizeof(char *), data->lines + 1);
 	if (!data->scene)
-		return ;
+		free_map(data) ;
 	x = 0;
 	while (1)
 	{
@@ -88,9 +88,6 @@ void	check_scene_name(t_vault *data)
 	}
 }
 
-// attention on ne check pas les whitespace, juste les espaces pour l'instant
-// pas de gestion des whitespaces avant les parametres
-// on ne gere pas si le code rgb a plus que 3 parametres
 void	check_scene_params(t_vault *data)
 {
 	int		x;
@@ -108,8 +105,11 @@ void	check_scene_params(t_vault *data)
 	errors(data);
 	while (data->scene[x] && check_param_existence(data) == 0)
 	{
+		y = 0;
+		while (data->scene[x][y] == '\n')
+			x++;
 		slen = ft_strlen(data->scene[x]);
-		while (data->scene[x][y] == ' ')
+		while (check_white_spaces(data->scene[x][y]) == 0)
 			y++;
 		temp = ft_substr(data->scene[x], y, slen);
 		free (data->scene[x]);
@@ -126,17 +126,14 @@ void	check_scene_params(t_vault *data)
 			data->scene_param->no_exist = 1;
 			while (data->scene[x][y])
 			{
-				if (data->scene[x][y] == ' ')
+				while (check_white_spaces(data->scene[x][y]) == 0)
 					y++;
-				else
-				{
-					temp = ft_substr(data->scene[x], y, slen);
-					temp2 = ft_strtrim(temp, "\n");
-					data->scene_param->no_wall_path = ft_strdup(temp2);
-					free (temp);
-					free (temp2);
-					break ;
-				}
+				temp = ft_substr(data->scene[x], y, slen);
+				temp2 = ft_strtrim(temp, "\n");
+				data->scene_param->no_wall_path = ft_strdup(temp2);
+				free (temp);
+				free (temp2);
+				break ;
 			}
 		}
 		else if (ft_strncmp(data->scene[x], "SO", 2) == 0)
@@ -150,17 +147,14 @@ void	check_scene_params(t_vault *data)
 			data->scene_param->so_exist = 1;
 			while (data->scene[x][y])
 			{
-				if (data->scene[x][y] == ' ')
+				while (check_white_spaces(data->scene[x][y]) == 0)
 					y++;
-				else
-				{
-					temp = ft_substr(data->scene[x], y, slen);
-					temp2 = ft_strtrim(temp, "\n");
-					data->scene_param->so_wall_path = ft_strdup(temp2);
-					free (temp);
-					free (temp2);
-					break ;
-				}
+				temp = ft_substr(data->scene[x], y, slen);
+				temp2 = ft_strtrim(temp, "\n");
+				data->scene_param->so_wall_path = ft_strdup(temp2);
+				free (temp);
+				free (temp2);
+				break ;
 			}
 		}
 		else if (ft_strncmp(data->scene[x], "WE", 2) == 0)
@@ -174,17 +168,14 @@ void	check_scene_params(t_vault *data)
 			data->scene_param->we_exist = 1;
 			while (data->scene[x][y])
 			{
-				if (data->scene[x][y] == ' ')
+				while (check_white_spaces(data->scene[x][y]) == 0)
 					y++;
-				else
-				{
-					temp = ft_substr(data->scene[x], y, slen);
-					temp2 = ft_strtrim(temp, "\n");
-					data->scene_param->we_wall_path = ft_strdup(temp2);
-					free (temp);
-					free (temp2);
-					break ;
-				}
+				temp = ft_substr(data->scene[x], y, slen);
+				temp2 = ft_strtrim(temp, "\n");
+				data->scene_param->we_wall_path = ft_strdup(temp2);
+				free (temp);
+				free (temp2);
+				break ;
 			}
 		}
 		else if (ft_strncmp(data->scene[x], "EA", 2) == 0)
@@ -198,17 +189,14 @@ void	check_scene_params(t_vault *data)
 			data->scene_param->ea_exist = 1;
 			while (data->scene[x][y])
 			{
-				if (data->scene[x][y] == ' ')
+				while (check_white_spaces(data->scene[x][y]) == 0)
 					y++;
-				else
-				{
-					temp = ft_substr(data->scene[x], y, slen);
-					temp2 = ft_strtrim(temp, "\n");
-					data->scene_param->ea_wall_path = ft_strdup(temp2);
-					free (temp);
-					free (temp2);
-					break ;
-				}
+				temp = ft_substr(data->scene[x], y, slen);
+				temp2 = ft_strtrim(temp, "\n");
+				data->scene_param->ea_wall_path = ft_strdup(temp2);
+				free (temp);
+				free (temp2);
+				break ;
 			}
 		}
 		else if (ft_strncmp(data->scene[x], "F", 1) == 0)
@@ -222,17 +210,14 @@ void	check_scene_params(t_vault *data)
 			data->scene_param->f_exist = 1;
 			while (data->scene[x][y])
 			{
-				if (data->scene[x][y] == ' ')
+				while (check_white_spaces(data->scene[x][y]) == 0)
 					y++;
-				else
-				{
-					temp = ft_substr(data->scene[x], y, slen);
-					temp2 = ft_strtrim(temp, "\n");
-					data->scene_param->f_color = ft_strdup(temp2);
-					free (temp);
-					free (temp2);
-					break ;
-				}
+				temp = ft_substr(data->scene[x], y, slen);
+				temp2 = ft_strtrim(temp, "\n");
+				data->scene_param->f_color = ft_strdup(temp2);
+				free (temp);
+				free (temp2);
+				break ;
 			}
 		}
 		else if (ft_strncmp(data->scene[x], "C", 1) == 0)
@@ -246,17 +231,14 @@ void	check_scene_params(t_vault *data)
 			data->scene_param->c_exist = 1;
 			while (data->scene[x][y])
 			{
-				if (data->scene[x][y] == ' ')
+				while (check_white_spaces(data->scene[x][y]) == 0)
 					y++;
-				else
-				{
-					temp = ft_substr(data->scene[x], y, slen);
-					temp2 = ft_strtrim(temp, "\n");
-					data->scene_param->c_color = ft_strdup(temp2);
-					free (temp);
-					free (temp2);
-					break ;
-				}
+				temp = ft_substr(data->scene[x], y, slen);
+				temp2 = ft_strtrim(temp, "\n");
+				data->scene_param->c_color = ft_strdup(temp2);
+				free (temp);
+				free (temp2);
+				break ;
 			}
 		}
 		x++;
@@ -266,10 +248,18 @@ void	check_scene_params(t_vault *data)
 	errors(data);
 	check_wall_path(data);
 	check_color_code(data);
+	check_valid_char(data, x);
+	x = find_map_start(data, x);
+	map_to_new_array(data, x);
+	// check map validity
+}
+
+int	find_map_start(t_vault *data, int x)
+{
 	while (ft_strchr(data->scene[x], '1') == 0)
 		x++;
+	return (x);
 	printf("map start here : %d\n", x);
-	// check map validity
 }
 
 int	check_param_existence(t_vault *data)
@@ -313,5 +303,35 @@ void	check_color_code(t_vault *data)
 	if (correct_rgb_range(data->scene_param->c_color) == 0
 		|| correct_rgb_range(data->scene_param->f_color) == 0)
 		data->error_code = 16;
+	errors(data);
+}
+
+int	isinset(char *s1, char *set)
+{
+	int	x;
+	int	len;
+
+	x = 0;
+	len = ft_strlen(s1);
+	while (x < len - 1)
+	{
+		if (ft_strchr(set, s1[x]) == NULL)
+			return (0);
+		x++;
+	}
+	return (1);
+}
+
+void	check_valid_char(t_vault *data, int x)
+{
+	while (data->scene[x])
+	{
+		if (isinset(data->scene[x], " 01NSEW") != 1)
+		{
+			data->error_code = 3;
+			errors(data);
+		}
+		x++;
+	}
 	errors(data);
 }
