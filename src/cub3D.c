@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/31 20:14:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:15:30 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,26 @@ int	create_win(t_vault *data)
 	return (EXIT_SUCCESS);
 }
 
-void	init_data(t_vault *data)
+void	init_data(t_vault *data, char **argv)
 {
+	data->argv = argv[1];
 	data->player = ft_calloc(1, sizeof(t_player));
 	data->lvl1 = ft_calloc(1, sizeof(t_level));
-	data->map_param = ft_calloc(1, sizeof(t_param));
+	data->scene_param = ft_calloc(1, sizeof(t_param));
 }
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv)
 {
 	t_vault	data;
 
-	(void)argc;
-	(void)argv;
-	(void)env;
 	data.error_code = 0;
 	if (argc != 2)
 		data.error_code = 9;
 	errors(&data);
-	data.argv = argv[1];
-	init_data(&data);
-	check_map_name(&data);
+	init_data(&data, argv);
+	check_scene_name(&data);
 	scene_to_array(&data);
-	check_map(&data);
+	check_scene_params(&data);
 	// errors(&data);
 	// newgame(&data);
 	create_win(&data);

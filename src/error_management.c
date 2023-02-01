@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/31 08:41:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:07:10 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,12 @@ void	errors(t_vault *data)
 		printf("%s\n%s\n", "Error", "Probleme FD");
 	else if (data->error_code == 8)
 		printf("%s\n%s\n", "Error", "Mauvais nom de fichier carte");
-	else if (data->error_code == 9)
+	errors_2(data);
+}
+
+void	errors_2(t_vault *data)
+{
+	if (data->error_code == 9)
 		printf("%s\n%s\n", "Error", "Mauvais nombre d'arguments");
 	else if (data->error_code == 10)
 		printf("%s\n%s\n", "Error", "Carte incomplète (P, E, C manquant)");
@@ -61,7 +66,7 @@ void	free_map(t_vault *data)
 	x = 0;
 	while (x < data->lines)
 	{
-		free (data->map[x]);
+		free (data->scene[x]);
 		x++;
 	}
 	exit (0);

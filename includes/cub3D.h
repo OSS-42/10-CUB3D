@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/31 22:29:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:14:38 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_vault
 	void		*img;
 	void		*mlx;
 	void		*mlx_win;
-	char		**map;
+	char		**scene;
 	char		*argv;
 	int			error_code;
 	int			char_check;
@@ -88,27 +88,28 @@ typedef struct s_vault
 	int			p_dir;
 	t_player	*player;
 	t_level		*lvl1;
-	t_param		*map_param;
+	t_param		*scene_param;
 }	t_vault;
 
 /***** cub3D.c *****/
 int		create_win(t_vault *data);
 void	keyhandler(mlx_key_data_t keydata, void *param);
+void	init_data(t_vault *data, char **argv);
 void	quit_game(t_vault *data);
 
 /***** error_management.c *****/
 void	errors(t_vault *data);
+void	errors_2(t_vault *data);
 void	free_map(t_vault *data);
 void	destroy_and_free_level(t_vault *data);
 void	destroy_and_free_player(t_vault *data);
 void	free_all(t_vault *data);
 
-/***** map_parsing.c *****/
-void	check_map_name(t_vault *data);
+/***** scene_parsing.c *****/
+void	check_scene_name(t_vault *data);
 void	check_fd(t_vault *data, int fd);
 void	scene_to_array(t_vault *data);
-void	check_map(t_vault *data); //relevance ? a integrer ailleurs
-void	check_map_params(t_vault *data);
+void	check_scene_params(t_vault *data);
 void	check_wall_path(t_vault *data);
 void	check_color_code(t_vault *data);
 int		check_param_existence(t_vault *data);
