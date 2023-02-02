@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 15:18:04 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/02 15:58:11 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	errors(t_vault *data)
 	else if (data->error_code == 3)
 		printf("%s\n%s\n", "Error", "Mauvais caractère");
 	else if (data->error_code == 4)
-		printf("%s\n%s\n", "Error", "Murs non valides (haut/bas)");
+		printf("%s\n%s\n", "Error", "Carte non valide (flood_fill)");
 	else if (data->error_code == 5)
-		printf("%s\n%s\n", "Error", "Murs non valides (gauche/droite)");
+		printf("%s\n%s\n", "Error", "...");
 	else if (data->error_code == 6)
 		printf("%s\n%s\n", "Error", "La carte n'est pas un rectangle parfait");
 	else if (data->error_code == 7)

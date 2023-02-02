@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 14:46:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:59:02 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,16 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
+# define TRUE 1
+# define FALSE 0
+
 /***** STRUCTURES *****/
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
 
 typedef struct s_player
 {
@@ -98,6 +107,8 @@ typedef struct s_vault
 	t_level		*lvl1;
 	t_param		*scene_param;
 	t_map		*map;
+	t_point		*size;
+	t_point		*actual;
 }	t_vault;
 
 /***** cub3D.c *****/
@@ -125,7 +136,6 @@ void	check_fd(t_vault *data, int fd);
 int		check_param_existence(t_vault *data);
 void	skip_white_space(t_vault *data, int x, int y, int *slen);
 int		isinset(char *s1, char *set);
-void	check_valid_char(t_vault *data, int x);
 
 /***** check_orientation_params.c *****/
 void	check_no_params(t_vault *data, int x, int y, int slen);
@@ -148,9 +158,13 @@ int		ft_find_char(char *src, char c);
 
 /***** map_parsing.c *****/
 void	check_map(t_vault *data);
+void	check_valid_char(t_vault *data, int x);
 
 /***** map_parsing_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
 void	find_map_start(t_vault *data);
+
+/***** flood_fill *****/
+void	flood_fill(char **tab, t_point size, t_point actual, char to_replace);
 
 #endif

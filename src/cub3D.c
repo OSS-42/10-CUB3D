@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 11:30:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/02 15:42:49 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	init_data(t_vault *data, char **argv)
 	data->lvl1 = ft_calloc(1, sizeof(t_level));
 	data->scene_param = ft_calloc(1, sizeof(t_param));
 	data->map = ft_calloc(1, sizeof(t_map));
+	data->size = ft_calloc(1, sizeof(t_point));
+	data->actual = ft_calloc(1, sizeof(t_point));
 }
 
 int	main(int argc, char **argv)
