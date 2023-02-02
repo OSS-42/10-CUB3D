@@ -36,9 +36,12 @@ OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 SRCS =	src/cub3D.c \
 		src/error_management.c \
 		src/scene_parsing.c \
+		src/scene_parsing_utils.c \
 		src/cub3d_utils.c \
 		src/check_orientation_params.c \
-		src/check_fc_params.c
+		src/check_fc_params.c \
+		src/map_parsing.c \
+		src/map_parsing_utils.c \
 
 #HEADER_BONUS = includes/cub3D_bonus.h
 #D_SRC_BONUS = src_bonus/

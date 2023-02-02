@@ -6,35 +6,35 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 11:13:25 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/02 12:00:13 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	check_fd(t_vault *data, int fd)
+void	check_scene_name(t_vault *data)
 {
-	char	*line;
+	char	*filename;
+	int		fd;
 
-	if (fd < 0)
+	fd = open(data->argv, O_DIRECTORY);
+	if (fd > 0)
 	{
-		data->error_code = 7;
+		close(fd);
+		data->error_code = 12;
 		errors(data);
 	}
-	data->lines = 0;
-	line = get_next_line(fd);
-	if (line == NULL)
+	filename = ft_strrchr(data->argv, '.');
+	if (filename == NULL)
 	{
-		data->error_code = 1;
+		data->error_code = 8;
 		errors(data);
 	}
-	while (line)
+	if (ft_strncmp(filename, ".cub", ft_strlen(filename)) != 0)
 	{
-		data->lines++;
-		free (line);
-		line = get_next_line(fd);
+		data->error_code = 8;
+		errors(data);
 	}
-	close (fd);
 }
 
 void	scene_to_array(t_vault *data)
@@ -63,34 +63,10 @@ void	scene_to_array(t_vault *data)
 	close (fd);
 }
 
-void	check_scene_name(t_vault *data)
-{
-	char	*filename;
-	int		fd;
-
-	fd = open(data->argv, O_DIRECTORY);
-	if (fd > 0)
-	{
-		close(fd);
-		data->error_code = 12;
-		errors(data);
-	}
-	filename = ft_strrchr(data->argv, '.');
-	if (filename == NULL)
-	{
-		data->error_code = 8;
-		errors(data);
-	}
-	if (ft_strncmp(filename, ".cub", ft_strlen(filename)) != 0)
-	{
-		data->error_code = 8;
-		errors(data);
-	}
-}
 
 void	check_scene_params(t_vault *data)
 {
-	int		x;
+	int	x;
 
 	x = 0;
 	if (data->scene[0][0] == '\0')
@@ -103,72 +79,7 @@ void	check_scene_params(t_vault *data)
 	check_wall_path(data);
 	check_color_code(data);
 	check_valid_char(data, x);
-	x = find_map_start(data, x);
-	map_to_new_array(data, x);
-	// check map validity
-}
-
-int	find_map_start(t_vault *data, int x)
-{
-	while (ft_strchr(data->scene[x], '1') == 0)
-		x++;
-	return (x);
-	printf("map start here : %d\n", x);
-}
-
-int	check_param_existence(t_vault *data)
-{
-	if (data->scene_param->c_exist == 0 || data->scene_param->f_exist == 0
-		|| data->scene_param->no_exist == 0 || data->scene_param->so_exist == 0
-		|| data->scene_param->we_exist == 0 || data->scene_param->ea_exist == 0)
-		return (0);
-	return (1);
-}
-
-int	isinset(char *s1, char *set)
-{
-	int	x;
-	int	len;
-
-	x = 0;
-	len = ft_strlen(s1);
-	while (x < len - 1)
-	{
-		if (ft_strchr(set, s1[x]) == NULL)
-			return (0);
-		x++;
-	}
-	return (1);
-}
-
-void	check_valid_char(t_vault *data, int x)
-{
-	while (data->scene[x])
-	{
-		if (isinset(data->scene[x], " 01NSEW") != 1)
-		{
-			data->error_code = 3;
-			errors(data);
-		}
-		x++;
-	}
-	errors(data);
-}
-
-void	skip_white_space(t_vault *data, int x, int y, int *slen)
-{
-	char	*temp;
-
-	y = 0;
-	while (data->scene[x][y] == '\n')
-		x++;
-	*slen = ft_strlen(data->scene[x]);
-	while (check_white_spaces(data->scene[x][y]) == 0)
-		y++;
-	temp = ft_substr(data->scene[x], y, *slen);
-	free (data->scene[x]);
-	data->scene[x] = ft_strdup(temp);
-	free (temp);
+	data->map_start = x;
 }
 
 void	check_scene_syntax(t_vault *data, int *x)

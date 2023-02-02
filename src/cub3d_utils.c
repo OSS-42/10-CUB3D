@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:21:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 16:21:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 11:27:11 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,20 +92,20 @@ int	check_white_spaces(char c)
 	return (1);
 }
 
-void	map_to_new_array(t_vault *data, int x)
-{
-	int	line;
+// void	map_to_new_array(t_vault *data, int x)
+// {
+// 	int	line;
 
-	line = x;
-	while (data->scene[line])
-		line++;
-	data->map->map = ft_calloc(line - x + 1, sizeof(char *));
-	line = 0;
-	while (data->scene[x])
-	{
-		data->map->map[line] = ft_strdup(data->scene[x]);
-		line++;
-		x++;
-	}
-	data->map->lines = line;
-}
+// 	line = x;
+// 	while (data->scene[line])
+// 		line++;
+// 	data->map->map = ft_calloc(line - x + 1, sizeof(char *));
+// 	line = 0;
+// 	while (data->scene[x])
+// 	{
+// 		data->map->map[line] = ft_strdup(data->scene[x]);
+// 		line++;
+// 		x++;
+// 	}
+// 	data->map->lines = line;
+// }
