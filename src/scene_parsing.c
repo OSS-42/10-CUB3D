@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 11:12:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/02 11:13:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,36 +91,12 @@ void	check_scene_name(t_vault *data)
 void	check_scene_params(t_vault *data)
 {
 	int		x;
-	// int		y;
-	// int		slen;
-	// char	*temp;
-	// char	*temp2;
 
 	x = 0;
-	// y = 0;
-	// temp = NULL;
-	// temp2 = NULL;
 	if (data->scene[0][0] == '\0')
 		data->error_code = 1;
 	errors(data);
 	check_scene_syntax(data, &x);
-	// while (data->scene[x] && check_param_existence(data) == 0)
-	// {
-	// 	skip_white_space(data, x, y, slen);
-	// 	if (ft_strncmp(data->scene[x], "NO", 2) == 0)
-	// 		check_no_params(data, x, y, slen);
-	// 	else if (ft_strncmp(data->scene[x], "SO", 2) == 0)
-	// 		check_so_params(data, x, y, slen);
-	// 	else if (ft_strncmp(data->scene[x], "WE", 2) == 0)
-	// 		check_we_params(data, x, y, slen);
-	// 	else if (ft_strncmp(data->scene[x], "EA", 2) == 0)
-	// 		check_ea_params(data, x, y, slen);
-	// 	else if (ft_strncmp(data->scene[x], "F", 1) == 0)
-	// 		check_f_params(data, x, y, slen);
-	// 	else if (ft_strncmp(data->scene[x], "C", 1) == 0)
-	// 		check_c_params(data, x, y, slen);
-	// 	x++;
-	// }
 	if (check_param_existence(data) == 0)
 		data->error_code = 13;
 	errors(data);
