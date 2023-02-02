@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:21:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/31 22:17:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:21:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	correct_rgb_char(char *rgb_code)
 	return (1);
 }
 
+// on ne gere pas si le code rgb a plus que ou moins que 3 parametres
 int	correct_rgb_range(char *rgb_code)
 {
 	int		code_r;
@@ -55,7 +56,6 @@ int	correct_rgb_range(char *rgb_code)
 	}
 	temp = ft_substr(rgb_code, len, x - len);
 	code_r = ft_atoi(temp);
-	// len = ft_strlen(temp);
 	free (temp);
 	x++;
 	len = x;
@@ -66,7 +66,6 @@ int	correct_rgb_range(char *rgb_code)
 	}
 	temp = ft_substr(rgb_code, len, x - len);
 	code_g = ft_atoi(temp);
-	// len = ft_strlen(temp);
 	free (temp);
 	x++;
 	len = x;
@@ -83,4 +82,30 @@ int	correct_rgb_range(char *rgb_code)
 		|| code_r < 0 || code_g < 0 || code_b < 0)
 		return (0);
 	return (1);
+}
+
+int	check_white_spaces(char c)
+{
+	if (c == '\t' || c == '\n' || c == '\r' || c == '\v' || c == '\f'
+		|| c == ' ')
+		return (0);
+	return (1);
+}
+
+void	map_to_new_array(t_vault *data, int x)
+{
+	int	line;
+
+	line = x;
+	while (data->scene[line])
+		line++;
+	data->map->map = ft_calloc(line - x + 1, sizeof(char *));
+	line = 0;
+	while (data->scene[x])
+	{
+		data->map->map[line] = ft_strdup(data->scene[x]);
+		line++;
+		x++;
+	}
+	data->map->lines = line;
 }

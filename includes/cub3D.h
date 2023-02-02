@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 14:18:12 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/01 16:17:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ typedef struct s_player
 	void	*p_right;
 	void	*p_left;
 }	t_player;
+
+typedef struct s_map
+{
+	char	**map;
+	int		lines;
+}	t_map;
+
 
 typedef struct s_level
 {
@@ -89,6 +96,7 @@ typedef struct s_vault
 	t_player	*player;
 	t_level		*lvl1;
 	t_param		*scene_param;
+	t_map		*map;
 }	t_vault;
 
 /***** cub3D.c *****/
@@ -115,10 +123,12 @@ void	check_color_code(t_vault *data);
 int		check_param_existence(t_vault *data);
 int		check_white_spaces(char c);
 int		isinset(char *s1, char *set);
-void	check_valid_char(t_vault *data);
+void	check_valid_char(t_vault *data, int x);
+int		find_map_start(t_vault *data, int x);
 
 /***** cub3d_utils.c *****/
 int		correct_rgb_char(char *rgb_code);
 int		correct_rgb_range(char *rgb_code);
+void	map_to_new_array(t_vault *data, int x);
 
 #endif
