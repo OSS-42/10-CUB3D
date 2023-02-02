@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 16:17:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 13:10:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int		find_map_start(t_vault *data, int x);
 
 /***** cub3d_utils.c *****/
 int		correct_rgb_char(char *rgb_code);
-int		correct_rgb_range(char *rgb_code);
+int		correct_rgb_range(t_vault *data, char *rgb_code);
 void	map_to_new_array(t_vault *data, int x);
 
 #endif

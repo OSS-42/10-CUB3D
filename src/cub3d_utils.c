@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:21:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 13:04:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 13:10:35 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ int	correct_rgb_char(char *rgb_code)
 }
 
 // on ne gere pas si le code rgb a plus que ou moins que 3 parametres
-int	correct_rgb_range(char *rgb_code)
+int	correct_rgb_range(t_vault *data, char *rgb_code)
 {
 	int		code_r;
 	int		code_g;
 	int		code_b;
+	int		comma_count;
+	int		i;
 	int		x;
 	int		len;
 	char	*temp;
@@ -49,6 +51,18 @@ int	correct_rgb_range(char *rgb_code)
 	x = 0;
 	len = 0;
 	temp = NULL;
+
+	while (rgb_code && rgb_code[i])
+	{
+		if (ft_strchr(rgb_code, ',') == 1)
+			comma_count++;
+		i++;
+	}
+	if (comma_count != 2)
+	{
+		data->error_code = 15;
+		errors(data);
+	}
 	while (rgb_code && rgb_code[x] && rgb_code[x] != ',')
 	{
 		if (ft_isdigit(rgb_code[x]) == 1)
