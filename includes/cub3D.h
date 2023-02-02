@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/01 16:17:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 11:07:03 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,18 @@ int		check_white_spaces(char c);
 int		isinset(char *s1, char *set);
 void	check_valid_char(t_vault *data, int x);
 int		find_map_start(t_vault *data, int x);
+void	skip_white_space(t_vault *data, int x, int y, int *slen);
+void	check_scene_syntax(t_vault *data, int *x);
+
+/***** check_scene_params.c *****/
+void	check_no_params(t_vault *data, int x, int y, int slen);
+void	check_so_params(t_vault *data, int x, int y, int slen);
+void	check_we_params(t_vault *data, int x, int y, int slen);
+void	check_ea_params(t_vault *data, int x, int y, int slen);
+
+/***** check_fc_params.c *****/
+void	check_f_params(t_vault *data, int x, int y, int slen);
+void	check_c_params(t_vault *data, int x, int y, int slen);
 
 /***** cub3d_utils.c *****/
 int		correct_rgb_char(char *rgb_code);
