@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:21:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 16:15:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:22:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	ft_find_char(char *src, char c)
 	return (count);
 }
 
-// on ne gere pas si le code rgb a plus que ou moins que 3 parametres
 void	correct_rgb_range(t_vault *data, char *rgb_code, char c)
 {
 	int		i;
