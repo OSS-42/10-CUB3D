@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:37:22 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/02 13:52:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:16:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ void	check_color_code(t_vault *data)
 		|| correct_rgb_char(data->scene_param->f_color) == 0)
 		data->error_code = 15;
 	errors(data);
-	if (correct_rgb_range(data, data->scene_param->c_color) == 0
-		|| correct_rgb_range(data, data->scene_param->f_color) == 0)
-		data->error_code = 16;
+	correct_rgb_range(data, data->scene_param->c_color, 'C');
+	correct_rgb_range(data, data->scene_param->c_color, 'F');
 	errors(data);
 }
 

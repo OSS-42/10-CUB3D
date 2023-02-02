@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 14:46:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:16:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ typedef struct s_param
 {
 	char	*no_wall_path;
 	int		no_exist;
+	int		r_ceiling;
+	int		g_ceiling;
+	int		b_ceiling;
+	int		r_floor;
+	int		g_floor;
+	int		b_floor;
 	char	*so_wall_path;
 	int		so_exist;
 	char	*we_wall_path;
@@ -71,6 +77,8 @@ typedef struct s_param
 	int		f_exist;
 	char	*c_color;
 	int		c_exist;
+	int		a_ceiling;
+	int		a_floor;
 }	t_param;
 
 typedef struct s_vault
@@ -139,7 +147,7 @@ void	check_f_params(t_vault *data, int x, int y, int slen);
 void	check_c_params(t_vault *data, int x, int y, int slen);
 void	check_color_code(t_vault *data);
 int		correct_rgb_char(char *rgb_code);
-int		correct_rgb_range(t_vault *data, char *rgb_code);
+void	correct_rgb_range(t_vault *data, char *rgb_code, char c);
 
 /***** cub3d_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
@@ -152,5 +160,15 @@ void	check_map(t_vault *data);
 /***** map_parsing_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
 void	find_map_start(t_vault *data);
+
+/***** check_ceiling_rgb.c *****/
+void	extract_r_ceiling(t_vault *data, char *rgb_code, int *x, int *len);
+void	extract_g_ceiling(t_vault *data, char *rgb_code, int *x, int *len);
+void	extract_b_ceiling(t_vault *data, char *rgb_code, int *x, int *len);
+
+/***** check_floor_rbg.c *****/
+void	extract_r_floor(t_vault *data, char *rgb_code, int *x, int *len);
+void	extract_g_floor(t_vault *data, char *rgb_code, int *x, int *len);
+void	extract_b_floor(t_vault *data, char *rgb_code, int *x, int *len);
 
 #endif
