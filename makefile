@@ -77,9 +77,9 @@ $(MLX42):
 	@brew update --quiet
 	@brew install glfw --quiet
 	@echo "$(LGREEN)MLX42 Configuration completed ...$(NC)"
-	@echo "$(LGREEN)MLX42 Compilation started ...$(NC)"
-	@$(MAKE) cmake -s --no-print-directory -C $(D_MLX42)
-	@echo "$(LGREEN)MLX42 Compilation completed ...$(NC)"
+# @echo "$(LGREEN)MLX42 Compilation started ...$(NC)"
+# @$(MAKE) cmake -s --no-print-directory -C $(D_MLX42)
+# @echo "$(LGREEN)MLX42 Compilation completed ...$(NC)"
 
 $(D_OBJ):
 	@mkdir -p $(D_OBJ)
@@ -104,7 +104,7 @@ lclean: fclean
 	@$(call lcleaning)
 	@$(MAKE) -s --no-print-directory -C $(D_LIBFT) fclean
 	@$(MAKE) -s --no-print-directory -C $(D_LIBART) fclean
-	@$(MAKE) cmake -s --no-print-directory -C $(D_MLX42) fclean
+# @$(MAKE) cmake -s --no-print-directory -C $(D_MLX42) fclean
 
 re:	fclean all
 
