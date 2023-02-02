@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 12:00:13 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/02 15:18:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	scene_to_array(t_vault *data)
 	}
 	close (fd);
 }
-
 
 void	check_scene_params(t_vault *data)
 {

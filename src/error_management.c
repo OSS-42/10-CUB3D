@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 13:10:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:18:04 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,4 @@ void	destroy_and_free_player(t_vault *data)
 	mlx_delete_image(data->mlx, data->player->p_right);
 	mlx_delete_image(data->mlx, data->player->p_left);
 	free (data->player);
-}
-
-void	free_all(t_vault *data)
-{
-	mlx_terminate(data->mlx);
-	free_map(data);
-	destroy_and_free_level(data);
-	destroy_and_free_player(data);
 }
