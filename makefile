@@ -42,6 +42,7 @@ SRCS =	src/cub3D.c \
 		src/check_fc_params.c \
 		src/map_parsing.c \
 		src/map_parsing_utils.c \
+		src/error_utils.c \
 
 #HEADER_BONUS = includes/cub3D_bonus.h
 #D_SRC_BONUS = src_bonus/
