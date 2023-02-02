@@ -6,32 +6,11 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:21:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 13:33:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 13:51:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
-
-int	correct_rgb_char(char *rgb_code)
-{
-	int	x;
-
-	x = 0;
-	while (rgb_code && rgb_code[x])
-	{
-		while (rgb_code[x] == ' ')
-		{
-			x++;
-			if (rgb_code[x] == '\0')
-				return (0);
-		}
-		if (ft_isdigit(rgb_code[x]) == 1 || rgb_code[x] == ',')
-			x++;
-		else
-			return (0);
-	}
-	return (1);
-}
 
 // on ne gere pas si le code rgb a plus que ou moins que 3 parametres
 int	correct_rgb_range(t_vault *data, char *rgb_code)
@@ -45,9 +24,9 @@ int	correct_rgb_range(t_vault *data, char *rgb_code)
 	int		len;
 	char	*temp;
 
-	code_r = 0;
-	code_g = 0;
-	code_b = 0;
+	code_r = -1;
+	code_g = -1;
+	code_b = -1;
 	x = 0;
 	len = 0;
 	temp = NULL;
@@ -69,7 +48,8 @@ int	correct_rgb_range(t_vault *data, char *rgb_code)
 			x++;
 	}
 	temp = ft_substr(rgb_code, len, x - len);
-	code_r = ft_atoi(temp);
+	if (temp)
+		code_r = ft_atoi(temp);
 	free (temp);
 	x++;
 	len = x;
@@ -79,7 +59,8 @@ int	correct_rgb_range(t_vault *data, char *rgb_code)
 			x++;
 	}
 	temp = ft_substr(rgb_code, len, x - len);
-	code_g = ft_atoi(temp);
+	if (temp)
+		code_g = ft_atoi(temp);
 	free (temp);
 	x++;
 	len = x;
@@ -89,7 +70,8 @@ int	correct_rgb_range(t_vault *data, char *rgb_code)
 			x++;
 	}
 	temp = ft_substr(rgb_code, len, x - len);
-	code_b = ft_atoi(temp);
+	if (temp)
+		code_b = ft_atoi(temp);
 	free (temp);
 	temp = NULL;
 	if (code_r > 255 || code_g > 255 || code_b > 255
@@ -105,21 +87,3 @@ int	check_white_spaces(char c)
 		return (0);
 	return (1);
 }
-
-// void	map_to_new_array(t_vault *data, int x)
-// {
-// 	int	line;
-
-// 	line = x;
-// 	while (data->scene[line])
-// 		line++;
-// 	data->map->map = ft_calloc(line - x + 1, sizeof(char *));
-// 	line = 0;
-// 	while (data->scene[x])
-// 	{
-// 		data->map->map[line] = ft_strdup(data->scene[x]);
-// 		line++;
-// 		x++;
-// 	}
-// 	data->map->lines = line;
-// }

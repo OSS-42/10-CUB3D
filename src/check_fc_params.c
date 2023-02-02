@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_fc_params.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:37:22 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/02 09:45:28 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/02 13:52:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,29 @@ void	check_color_code(t_vault *data)
 		|| correct_rgb_char(data->scene_param->f_color) == 0)
 		data->error_code = 15;
 	errors(data);
-	if (correct_rgb_range(data->scene_param->c_color) == 0
-		|| correct_rgb_range(data->scene_param->f_color) == 0)
+	if (correct_rgb_range(data, data->scene_param->c_color) == 0
+		|| correct_rgb_range(data, data->scene_param->f_color) == 0)
 		data->error_code = 16;
 	errors(data);
+}
+
+int	correct_rgb_char(char *rgb_code)
+{
+	int	x;
+
+	x = 0;
+	while (rgb_code && rgb_code[x])
+	{
+		while (rgb_code[x] == ' ')
+		{
+			x++;
+			if (rgb_code[x] == '\0')
+				return (0);
+		}
+		if (ft_isdigit(rgb_code[x]) == 1 || rgb_code[x] == ',')
+			x++;
+		else
+			return (0);
+	}
+	return (1);
 }
