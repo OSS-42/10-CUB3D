@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:21:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 13:10:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 13:33:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,24 +106,20 @@ int	check_white_spaces(char c)
 	return (1);
 }
 
-void	map_to_new_array(t_vault *data, int x)
-{
-	int		line;
-	char	*temp;
+// void	map_to_new_array(t_vault *data, int x)
+// {
+// 	int	line;
 
-	line = x;
-	temp = NULL;
-	while (data->scene[line])
-		line++;
-	data->map->map = ft_calloc(line - x + 1, sizeof(char *));
-	line = 0;
-	while (data->scene[x])
-	{
-		temp = ft_strdup(data->scene[x]);
-		data->map->map[line] = ft_strtrim(temp, '\n');
-		free (temp);
-		line++;
-		x++;
-	}
-	data->map->lines = line;
-}
+// 	line = x;
+// 	while (data->scene[line])
+// 		line++;
+// 	data->map->map = ft_calloc(line - x + 1, sizeof(char *));
+// 	line = 0;
+// 	while (data->scene[x])
+// 	{
+// 		data->map->map[line] = ft_strdup(data->scene[x]);
+// 		line++;
+// 		x++;
+// 	}
+// 	data->map->lines = line;
+// }

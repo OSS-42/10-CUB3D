@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 13:10:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/02 13:34:46 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_vault
 	void		*mlx_win;
 	char		**scene;
 	char		*argv;
+	int			map_start;
 	int			error_code;
 	int			char_check;
 	int			char_p;
@@ -115,20 +116,40 @@ void	free_all(t_vault *data);
 
 /***** scene_parsing.c *****/
 void	check_scene_name(t_vault *data);
-void	check_fd(t_vault *data, int fd);
 void	scene_to_array(t_vault *data);
 void	check_scene_params(t_vault *data);
-void	check_wall_path(t_vault *data);
-void	check_color_code(t_vault *data);
+void	check_scene_syntax(t_vault *data, int *x);
+
+/***** scene_parsing_utils.c *****/
+void	check_fd(t_vault *data, int fd);
 int		check_param_existence(t_vault *data);
-int		check_white_spaces(char c);
+void	skip_white_space(t_vault *data, int x, int y, int *slen);
 int		isinset(char *s1, char *set);
 void	check_valid_char(t_vault *data, int x);
-int		find_map_start(t_vault *data, int x);
+
+/***** check_orientation_params.c *****/
+void	check_no_params(t_vault *data, int x, int y, int slen);
+void	check_so_params(t_vault *data, int x, int y, int slen);
+void	check_we_params(t_vault *data, int x, int y, int slen);
+void	check_ea_params(t_vault *data, int x, int y, int slen);
+void	check_wall_path(t_vault *data);
+
+/***** check_fc_params.c *****/
+void	check_f_params(t_vault *data, int x, int y, int slen);
+void	check_c_params(t_vault *data, int x, int y, int slen);
+void	check_color_code(t_vault *data);
 
 /***** cub3d_utils.c *****/
 int		correct_rgb_char(char *rgb_code);
 int		correct_rgb_range(t_vault *data, char *rgb_code);
 void	map_to_new_array(t_vault *data, int x);
+int		check_white_spaces(char c);
+
+/***** map_parsing.c *****/
+void	check_map(t_vault *data);
+
+/***** map_parsing_utils.c *****/
+void	map_to_new_array(t_vault *data, int x);
+void	find_map_start(t_vault *data);
 
 #endif
