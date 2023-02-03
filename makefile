@@ -55,7 +55,7 @@ SRCS =	src/cub3D.c \
 #									 RULES									   #
 #------------------------------------------------------------------------------#
 
-all:	deadpool $(NAME)
+all:	art_intro $(NAME)
 
 $(NAME):	$(LIBFT) $(LIBART) $(MLX42) $(OBJS)
 # MacOS 42
@@ -66,8 +66,8 @@ $(NAME):	$(LIBFT) $(LIBART) $(MLX42) $(OBJS)
 #	@sleep 2
 #	@clear
 
-deadpool:
-	@$(MAKE) intro_deadpool -C $(D_LIBART)
+art_intro:
+	@$(MAKE) intro_cub3D -C $(D_LIBART)
 
 $(LIBFT): $(D_OBJ) $(D_LIBFTHEAD)
 	@$(MAKE) -C $(D_LIBFT)
