@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   check_orientation_params.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:08:43 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/02 09:46:28 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/03 09:11:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	check_no_params(t_vault *data, int x, int y, int slen)
+void	check_no_params(t_vault *data, int i, int j, int slen)
 {
 	char	*temp;
 	char	*temp2;
 
-	y = 2;
+	j = 2;
 	if (data->scene_param->no_exist == 1)
 	{
 		data->error_code = 17;
 		errors(data);
 	}
 	data->scene_param->no_exist = 1;
-	while (data->scene[x][y])
+	while (data->scene[i][j])
 	{
-		while (check_white_spaces(data->scene[x][y]) == 0)
-			y++;
-		temp = ft_substr(data->scene[x], y, slen);
+		while (check_white_spaces(data->scene[i][j]) == 0)
+			j++;
+		temp = ft_substr(data->scene[i], j, slen);
 		temp2 = ft_strtrim(temp, "\n");
 		data->scene_param->no_wall_path = ft_strdup(temp2);
 		free (temp);
@@ -37,23 +37,23 @@ void	check_no_params(t_vault *data, int x, int y, int slen)
 	}
 }
 
-void	check_so_params(t_vault *data, int x, int y, int slen)
+void	check_so_params(t_vault *data, int i, int j, int slen)
 {
 	char	*temp;
 	char	*temp2;
 
-	y = 2;
+	j = 2;
 	if (data->scene_param->so_exist == 1)
 	{
 		data->error_code = 17;
 		errors(data);
 	}
 	data->scene_param->so_exist = 1;
-	while (data->scene[x][y])
+	while (data->scene[i][j])
 	{
-		while (check_white_spaces(data->scene[x][y]) == 0)
-			y++;
-		temp = ft_substr(data->scene[x], y, slen);
+		while (check_white_spaces(data->scene[i][j]) == 0)
+			j++;
+		temp = ft_substr(data->scene[i], j, slen);
 		temp2 = ft_strtrim(temp, "\n");
 		data->scene_param->so_wall_path = ft_strdup(temp2);
 		free (temp);
@@ -62,23 +62,23 @@ void	check_so_params(t_vault *data, int x, int y, int slen)
 	}
 }
 
-void	check_we_params(t_vault *data, int x, int y, int slen)
+void	check_we_params(t_vault *data, int i, int j, int slen)
 {
 	char	*temp;
 	char	*temp2;
 
-	y = 2;
+	j = 2;
 	if (data->scene_param->we_exist == 1)
 	{
 		data->error_code = 17;
 		errors(data);
 	}
 	data->scene_param->we_exist = 1;
-	while (data->scene[x][y])
+	while (data->scene[i][j])
 	{
-		while (check_white_spaces(data->scene[x][y]) == 0)
-			y++;
-		temp = ft_substr(data->scene[x], y, slen);
+		while (check_white_spaces(data->scene[i][j]) == 0)
+			j++;
+		temp = ft_substr(data->scene[i], j, slen);
 		temp2 = ft_strtrim(temp, "\n");
 		data->scene_param->we_wall_path = ft_strdup(temp2);
 		free (temp);
@@ -87,23 +87,23 @@ void	check_we_params(t_vault *data, int x, int y, int slen)
 	}
 }
 
-void	check_ea_params(t_vault *data, int x, int y, int slen)
+void	check_ea_params(t_vault *data, int i, int j, int slen)
 {
 	char	*temp;
 	char	*temp2;
 
-	y = 2;
+	j = 2;
 	if (data->scene_param->ea_exist == 1)
 	{
 		data->error_code = 17;
 		errors(data);
 	}
 	data->scene_param->ea_exist = 1;
-	while (data->scene[x][y])
+	while (data->scene[i][j])
 	{
-		while (check_white_spaces(data->scene[x][y]) == 0)
-			y++;
-		temp = ft_substr(data->scene[x], y, slen);
+		while (check_white_spaces(data->scene[i][j]) == 0)
+			j++;
+		temp = ft_substr(data->scene[i], j, slen);
 		temp2 = ft_strtrim(temp, "\n");
 		data->scene_param->ea_wall_path = ft_strdup(temp2);
 		free (temp);

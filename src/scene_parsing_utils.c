@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_parsing_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:15:48 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/02 11:22:36 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/03 09:13:58 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,48 +46,48 @@ int	check_param_existence(t_vault *data)
 	return (1);
 }
 
-void	skip_white_space(t_vault *data, int x, int y, int *slen)
+void	skip_white_space(t_vault *data, int i, int j, int *slen)
 {
 	char	*temp;
 
-	y = 0;
-	while (data->scene[x][y] == '\n')
-		x++;
+	j = 0;
+	while (data->scene[i][j] == '\n')
+		i++;
 	*slen = ft_strlen(data->scene[x]);
-	while (check_white_spaces(data->scene[x][y]) == 0)
-		y++;
-	temp = ft_substr(data->scene[x], y, *slen);
+	while (check_white_spaces(data->scene[i][j]) == 0)
+		j++;
+	temp = ft_substr(data->scene[i], j, *slen);
 	free (data->scene[x]);
-	data->scene[x] = ft_strdup(temp);
+	data->scene[i] = ft_strdup(temp);
 	free (temp);
 }
 
 int	isinset(char *s1, char *set)
 {
-	int	x;
+	int	i;
 	int	len;
 
-	x = 0;
+	i = 0;
 	len = ft_strlen(s1);
-	while (x < len - 1)
+	while (i < len - 1)
 	{
-		if (ft_strchr(set, s1[x]) == NULL)
+		if (ft_strchr(set, s1[i]) == NULL)
 			return (0);
-		x++;
+		i++;
 	}
 	return (1);
 }
 
-void	check_valid_char(t_vault *data, int x)
+void	check_valid_char(t_vault *data, int i)
 {
-	while (data->scene[x])
+	while (data->scene[i])
 	{
-		if (isinset(data->scene[x], " 01NSEW") != 1)
+		if (isinset(data->scene[i], " 01NSEW") != 1)
 		{
 			data->error_code = 3;
 			errors(data);
 		}
-		x++;
+		i++;
 	}
 	errors(data);
 }

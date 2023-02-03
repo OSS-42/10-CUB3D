@@ -6,29 +6,29 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:37:22 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/02 16:16:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/03 09:09:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	check_f_params(t_vault *data, int x, int y, int slen)
+void	check_f_params(t_vault *data, int i, int j, int slen)
 {
 	char	*temp;
 	char	*temp2;
 
-	y = 1;
+	j = 1;
 	if (data->scene_param->f_exist == 1)
 	{
 		data->error_code = 17;
 		errors(data);
 	}
 	data->scene_param->f_exist = 1;
-	while (data->scene[x][y])
+	while (data->scene[i][j])
 	{
-		while (check_white_spaces(data->scene[x][y]) == 0)
-			y++;
-		temp = ft_substr(data->scene[x], y, slen);
+		while (check_white_spaces(data->scene[i][j]) == 0)
+			j++;
+		temp = ft_substr(data->scene[i], j, slen);
 		temp2 = ft_strtrim(temp, "\n");
 		data->scene_param->f_color = ft_strdup(temp2);
 		free (temp);
@@ -37,23 +37,23 @@ void	check_f_params(t_vault *data, int x, int y, int slen)
 	}
 }
 
-void	check_c_params(t_vault *data, int x, int y, int slen)
+void	check_c_params(t_vault *data, int i, int j, int slen)
 {
 	char	*temp;
 	char	*temp2;
 
-	y = 1;
+	j = 1;
 	if (data->scene_param->c_exist == 1)
 	{
 		data->error_code = 17;
 		errors(data);
 	}
 	data->scene_param->c_exist = 1;
-	while (data->scene[x][y])
+	while (data->scene[i][j])
 	{
-		while (check_white_spaces(data->scene[x][y]) == 0)
-			y++;
-		temp = ft_substr(data->scene[x], y, slen);
+		while (check_white_spaces(data->scene[i][j]) == 0)
+			j++;
+		temp = ft_substr(data->scene[i], j, slen);
 		temp2 = ft_strtrim(temp, "\n");
 		data->scene_param->c_color = ft_strdup(temp2);
 		free (temp);
@@ -75,19 +75,19 @@ void	check_color_code(t_vault *data)
 
 int	correct_rgb_char(char *rgb_code)
 {
-	int	x;
+	int	i;
 
-	x = 0;
-	while (rgb_code && rgb_code[x])
+	i = 0;
+	while (rgb_code && rgb_code[i])
 	{
-		while (rgb_code[x] == ' ')
+		while (rgb_code[i] == ' ')
 		{
-			x++;
-			if (rgb_code[x] == '\0')
+			i++;
+			if (rgb_code[i] == '\0')
 				return (0);
 		}
-		if (ft_isdigit(rgb_code[x]) == 1 || rgb_code[x] == ',')
-			x++;
+		if (ft_isdigit(rgb_code[i]) == 1 || rgb_code[i] == ',')
+			i++;
 		else
 			return (0);
 	}
