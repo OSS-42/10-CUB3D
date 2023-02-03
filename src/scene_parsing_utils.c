@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:15:48 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/03 09:13:58 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/03 09:42:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ void	skip_white_space(t_vault *data, int i, int j, int *slen)
 	j = 0;
 	while (data->scene[i][j] == '\n')
 		i++;
-	*slen = ft_strlen(data->scene[x]);
+	*slen = ft_strlen(data->scene[i]);
 	while (check_white_spaces(data->scene[i][j]) == 0)
 		j++;
 	temp = ft_substr(data->scene[i], j, *slen);
-	free (data->scene[x]);
+	free (data->scene[i]);
 	data->scene[i] = ft_strdup(temp);
 	free (temp);
 }
