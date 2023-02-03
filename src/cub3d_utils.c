@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:21:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 16:22:29 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/03 08:53:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ int	ft_find_char(char *src, char c)
 void	correct_rgb_range(t_vault *data, char *rgb_code, char c)
 {
 	int		i;
-	int		x;
 	int		len;
 
 	i = 0;
-	x = 0;
 	len = 0;
 	if (ft_find_char(rgb_code, ',') != 2)
 	{
@@ -46,15 +44,15 @@ void	correct_rgb_range(t_vault *data, char *rgb_code, char c)
 	}
 	if (c == 'C')
 	{
-		extract_r_ceiling(data, rgb_code, &x, &len);
-		extract_g_ceiling(data, rgb_code, &x, &len);
-		extract_b_ceiling(data, rgb_code, &x, &len);
+		extract_r_ceiling(data, rgb_code, &i, &len);
+		extract_g_ceiling(data, rgb_code, &i, &len);
+		extract_b_ceiling(data, rgb_code, &i, &len);
 	}
 	else if (c == 'F')
 	{
-		extract_r_floor(data, rgb_code, &x, &len);
-		extract_g_floor(data, rgb_code, &x, &len);
-		extract_b_floor(data, rgb_code, &x, &len);
+		extract_r_floor(data, rgb_code, &i, &len);
+		extract_g_floor(data, rgb_code, &i, &len);
+		extract_b_floor(data, rgb_code, &i, &len);
 	}
 }
 

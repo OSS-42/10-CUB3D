@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 16:16:06 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/03 08:56:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,13 +162,13 @@ void	map_to_new_array(t_vault *data, int x);
 void	find_map_start(t_vault *data);
 
 /***** check_ceiling_rgb.c *****/
-void	extract_r_ceiling(t_vault *data, char *rgb_code, int *x, int *len);
-void	extract_g_ceiling(t_vault *data, char *rgb_code, int *x, int *len);
-void	extract_b_ceiling(t_vault *data, char *rgb_code, int *x, int *len);
+void	extract_r_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
+void	extract_g_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
+void	extract_b_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
 
 /***** check_floor_rbg.c *****/
-void	extract_r_floor(t_vault *data, char *rgb_code, int *x, int *len);
-void	extract_g_floor(t_vault *data, char *rgb_code, int *x, int *len);
-void	extract_b_floor(t_vault *data, char *rgb_code, int *x, int *len);
+void	extract_r_floor(t_vault *data, char *rgb_code, int *i, int *len);
+void	extract_g_floor(t_vault *data, char *rgb_code, int *i, int *len);
+void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len);
 
 #endif
