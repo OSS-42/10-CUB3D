@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/03 23:16:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:45:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_map
 {
 	char	**map;
 	int		lines;
+	int		max_lenght;
 }	t_map;
 
 typedef struct s_minimap
@@ -172,6 +173,7 @@ void	check_map(t_vault *data);
 /***** map_parsing_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
 void	find_map_start(t_vault *data);
+void	map_max_lenght(t_vault *data);
 
 /***** check_ceiling_rgb.c *****/
 void	extract_r_ceiling(t_vault *data, char *rgb_code, int *i, int *len);

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/03 22:59:01 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/04 10:26:41 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 		quit_game(data);
 }
 
-static mlx_image_t *g_img;
+static mlx_image_t *minimap;
 
 int	create_win(t_vault *data)
 {
@@ -49,12 +49,15 @@ int	create_win(t_vault *data)
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
-	g_img = mlx_new_image(data->mlx, 128, 128);   // Creates a new image.
+	printf("max_lenght: %d\n", data->map->max_lenght);
+	printf("lines: %d\n", data->map->lines);
+	minimap = mlx_new_image(data->mlx, data->map->max_lenght, data->map->lines);   // Creates a new image.
 	init_minimap(data);
-	// mlx_image_to_window(data->mlx, g_img, 0, 0);   // Adds an image to the render queue.
-    // mlx_put_pixel(g_img, 64, 64, 0xFFFFFFFF); // Single white pixel in the middle.
+	// mlx_image_to_window(data->mlx, minimap, 0, 0);   // Adds an image to the render queue.
+    // mlx_put_pixel(minimap, 64, 64, 0xFFFFFFFF); // Single white pixel in the middle.
 	// mlx_hook(data->mlx_win, 02, 0, key_hook, data); // cliquer sur la croix
 	mlx_loop(data->mlx);
+	mlx_delete_image(data->mlx, minimap); // Once the application request an exit, cleanup.
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
 }
