@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/03 08:56:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/03 23:16:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ typedef struct s_map
 	char	**map;
 	int		lines;
 }	t_map;
+
+typedef struct s_minimap
+{
+	void	*wall;
+	void	*floor;
+	void	*start;
+	int		x;
+	int		y;
+	int		img_x;
+	int		img_y;
+}	t_minimap;
 
 
 typedef struct s_level
@@ -106,6 +117,7 @@ typedef struct s_vault
 	t_level		*lvl1;
 	t_param		*scene_param;
 	t_map		*map;
+	t_minimap	*minimap;
 }	t_vault;
 
 /***** cub3D.c *****/
@@ -170,5 +182,11 @@ void	extract_b_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
 void	extract_r_floor(t_vault *data, char *rgb_code, int *i, int *len);
 void	extract_g_floor(t_vault *data, char *rgb_code, int *i, int *len);
 void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len);
+
+/***** init_assets_bonus.c *****/
+void	init_minimap(t_vault *data);
+
+/***** init_assets_bonus.c *****/
+void	draw_map(t_vault *data);
 
 #endif

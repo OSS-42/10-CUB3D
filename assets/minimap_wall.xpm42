@@ -1,0 +1,4 @@
+!XPM42            <- File declaration
+1 1 1 1 m        <- Width | Height | Color count | Characters per Pixel | Mode (C: Color or M: Monochrome)
+█ #FFFFFFFF       <- Entry always: <Char> <Space> <Hexadecimal> Colors MUST have all four channels (RGBA)
+█  <- Literal pixel data

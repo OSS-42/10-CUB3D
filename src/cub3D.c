@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 16:20:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/03 22:59:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,20 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 		quit_game(data);
 }
 
+static mlx_image_t *g_img;
+
 int	create_win(t_vault *data)
 {
-	data->mlx = mlx_init(256, 256, "Une autre journée à 42 Québec !", true);
+	
+	// data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true); // pour écran plus grand
+	data->mlx = mlx_init(1280, 720, "Une autre journée à 42 Québec !", true);
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
+	g_img = mlx_new_image(data->mlx, 128, 128);   // Creates a new image.
+	init_minimap(data);
+	// mlx_image_to_window(data->mlx, g_img, 0, 0);   // Adds an image to the render queue.
+    // mlx_put_pixel(g_img, 64, 64, 0xFFFFFFFF); // Single white pixel in the middle.
 	// mlx_hook(data->mlx_win, 02, 0, key_hook, data); // cliquer sur la croix
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
@@ -56,6 +64,7 @@ void	init_data(t_vault *data, char **argv)
 	data->argv = argv[1];
 	data->player = ft_calloc(1, sizeof(t_player));
 	data->lvl1 = ft_calloc(1, sizeof(t_level));
+	data->minimap = ft_calloc(1, sizeof(t_minimap));
 	data->scene_param = ft_calloc(1, sizeof(t_param));
 	data->map = ft_calloc(1, sizeof(t_map));
 	data->scene_param->r_ceiling = -1;
