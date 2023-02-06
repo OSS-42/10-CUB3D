@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 15:59:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/06 09:07:33 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,19 @@ typedef struct s_map
 {
 	char	**map;
 	int		lines;
+	int		max_lenght;
 }	t_map;
+
+typedef struct s_minimap
+{
+	void	*wall;
+	void	*floor;
+	void	*start;
+	int		x;
+	int		y;
+	int		img_x;
+	int		img_y;
+}	t_minimap;
 
 
 typedef struct s_level
@@ -70,6 +82,12 @@ typedef struct s_param
 {
 	char	*no_wall_path;
 	int		no_exist;
+	int		r_ceiling;
+	int		g_ceiling;
+	int		b_ceiling;
+	int		r_floor;
+	int		g_floor;
+	int		b_floor;
 	char	*so_wall_path;
 	int		so_exist;
 	char	*we_wall_path;
@@ -80,6 +98,8 @@ typedef struct s_param
 	int		f_exist;
 	char	*c_color;
 	int		c_exist;
+	int		a_ceiling;
+	int		a_floor;
 }	t_param;
 
 typedef struct s_vault
@@ -109,6 +129,7 @@ typedef struct s_vault
 	t_map		*map;
 	t_point		*size;
 	t_point		*actual;
+	t_minimap	*minimap;
 }	t_vault;
 
 /***** cub3D.c *****/
@@ -149,7 +170,7 @@ void	check_f_params(t_vault *data, int x, int y, int slen);
 void	check_c_params(t_vault *data, int x, int y, int slen);
 void	check_color_code(t_vault *data);
 int		correct_rgb_char(char *rgb_code);
-int		correct_rgb_range(t_vault *data, char *rgb_code);
+void	correct_rgb_range(t_vault *data, char *rgb_code, char c);
 
 /***** cub3d_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
@@ -163,6 +184,23 @@ void	check_valid_char(t_vault *data, int x);
 /***** map_parsing_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
 void	find_map_start(t_vault *data);
+void	map_max_lenght(t_vault *data);
+
+/***** check_ceiling_rgb.c *****/
+void	extract_r_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
+void	extract_g_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
+void	extract_b_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
+
+/***** check_floor_rbg.c *****/
+void	extract_r_floor(t_vault *data, char *rgb_code, int *i, int *len);
+void	extract_g_floor(t_vault *data, char *rgb_code, int *i, int *len);
+void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len);
+
+/***** init_assets_bonus.c *****/
+void	init_minimap(t_vault *data);
+
+/***** init_assets_bonus.c *****/
+void	draw_map(t_vault *data);
 
 /***** flood_fill *****/
 void	flood_fill(char **tab, t_point size, t_point actual, char to_replace);

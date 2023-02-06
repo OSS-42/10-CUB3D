@@ -6,8 +6,8 @@ NAME = cub3D
 
 CC = gcc
 #CC = gcc-11
-CFLAGS = -g -Wall -Werror -Wextra
-#CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+#CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 RM = rm -rf
 
 #LSAN_OPTIONS=detect_leaks=1 ./cub3D
@@ -44,6 +44,10 @@ SRCS =	src/cub3D.c \
 		src/map_parsing_utils.c \
 		src/error_utils.c \
 		src/flood_fill.c \
+		src/check_ceiling_rgb.c \
+		src/check_floor_rgb.c \
+		src/draw_map.c \
+		src/init_assets_bonus.c
 
 #HEADER_BONUS = includes/cub3D_bonus.h
 #D_SRC_BONUS = src_bonus/
@@ -54,19 +58,19 @@ SRCS =	src/cub3D.c \
 #									 RULES									   #
 #------------------------------------------------------------------------------#
 
-all:	deadpool $(NAME)
+all:	art_intro $(NAME)
 
 $(NAME):	$(LIBFT) $(LIBART) $(MLX42) $(OBJS)
 # MacOS 42
-	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+#	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 # Apple M2
-#	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
 #	@sleep 2
 #	@clear
 
-deadpool:
-	@$(MAKE) intro_deadpool -C $(D_LIBART)
+art_intro:
+	@$(MAKE) intro_cub3D -C $(D_LIBART)
 
 $(LIBFT): $(D_OBJ) $(D_LIBFTHEAD)
 	@$(MAKE) -C $(D_LIBFT)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:26:47 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/02 13:26:56 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/04 10:47:58 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,56 @@
 
 void	find_map_start(t_vault *data)
 {
-	while (isinset(data->scene[data->map_start], " 01NSEW") != 1)
-		(data->map_start)++;
+	int	i;
+
+	i = data->map_start;
+	while (data->scene[i])
+	{
+// isinset(data->scene[i], " 01NSEW") == 0
+		if ((int)ft_strlen(data->scene[i]) - 1 == 0)
+		{
+			data->map_start++;
+			i++;
+		}
+		else
+			break ;
+	}
 	printf("map start here : %d\n", data->map_start);
 }
 
-void	map_to_new_array(t_vault *data, int x)
+void	map_max_lenght(t_vault *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->map->map[i])
+	{
+		if ((int)ft_strlen(data->map->map[i]) > data->map->max_lenght)
+			data->map->max_lenght = ft_strlen(data->map->map[i]);
+		i++;
+	}
+}
+
+void	map_to_new_array(t_vault *data, int i)
 {
 	int		line;
 	char	*temp;
 
 	temp = NULL;
-	line = x;
+	line = i;
 	while (data->scene[line])
 		line++;
-	data->map->map = ft_calloc(line - x + 1, sizeof(char *));
+	data->map->map = ft_calloc(line - i + 1, sizeof(char *));
 	line = 0;
-	while (data->scene[x])
+	while (data->scene[i])
 	{
-		temp = ft_strdup(data->scene[x]);
+		temp = ft_strdup(data->scene[i]);
 		data->map->map[line] = ft_strtrim(temp, "\n");
 		free(temp);
 		line++;
-		x++;
+		i++;
 	}
+	map_max_lenght(data);
 	data->map->lines = line;
+	data->lines = line;
 }

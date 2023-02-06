@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/02 15:58:11 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/06 09:07:59 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,16 @@ void	errors_2(t_vault *data)
 
 void	free_map(t_vault *data)
 {
-	int	x;
+	int	i;
 
 	if (data->error_code == 7 || data->error_code == 8 || data->error_code == 9
 		|| data->error_code == 12)
 		exit (0);
-	x = 0;
-	while (x < data->lines)
+	i = 0;
+	while (i < data->lines)
 	{
-		free (data->scene[x]);
-		x++;
+		free (data->scene[i]);
+		i++;
 	}
 	exit (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/02 15:43:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/06 09:08:05 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_map(t_vault *data)
 {
 	find_map_start(data);
 	map_to_new_array(data, data->map_start);
-	// check map validity
+	// flood_fill
 }
 
 void	check_valid_char(t_vault *data, int x)
