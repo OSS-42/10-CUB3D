@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:37:22 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/03 09:09:59 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/06 08:34:20 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	correct_rgb_char(char *rgb_code)
 	i = 0;
 	while (rgb_code && rgb_code[i])
 	{
-		while (rgb_code[i] == ' ')
+		while (check_white_spaces(rgb_code[i]) == 0)
 		{
 			i++;
 			if (rgb_code[i] == '\0')
