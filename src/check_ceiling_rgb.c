@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:11:11 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/03 08:54:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/06 08:39:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	extract_b_ceiling(t_vault *data, char *rgb_code, int *i, int *len)
 	char	*temp;
 
 	temp = NULL;
-	while (rgb_code && rgb_code[*i] && rgb_code[*i] != ',')
+	while (rgb_code && rgb_code[*i] && rgb_code[*i] != ',') // invalid read ici
 	{
 		if (ft_isdigit(rgb_code[*i]) == 1)
 			(*i)++;
