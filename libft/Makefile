@@ -71,7 +71,8 @@ SRCS = \
 		src/ft_dbl_ptr_copy.c\
 		src/ft_atolong.c\
 		src/ft_free_n_null.c\
-		src/ft_is_str_digit.c
+		src/ft_is_str_digit.c\
+		src/ft_char_isinset.c
 
 #------------------------------------------------------------------------------#
 #									 RULES									   #

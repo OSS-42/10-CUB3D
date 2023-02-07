@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/03 09:15:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:21:18 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	check_scene_params(t_vault *data)
 	errors(data);
 	check_wall_path(data);
 	check_color_code(data);
-	check_valid_char(data, i);
 	data->map_start = i;
 }
 

@@ -6,8 +6,8 @@ NAME = cub3D
 
 CC = gcc
 #CC = gcc-11
-#CFLAGS = -g -Wall -Werror -Wextra
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -g -Wall -Werror -Wextra
+# CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 RM = rm -rf
 
 #LSAN_OPTIONS=detect_leaks=1 ./cub3D
@@ -62,10 +62,10 @@ all:	art_intro $(NAME)
 
 $(NAME):	$(LIBFT) $(LIBART) $(MLX42) $(OBJS)
 # MacOS 42
-#	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 # Apple M2
-	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
-	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
+# @$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+# @echo "$(LGREEN)Software Compilation completed ...!$(NC)"
 #	@sleep 2
 #	@clear
 

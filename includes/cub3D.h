@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/06 09:07:33 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/07 14:25:58 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_player
 {
 	void	*p_right;
 	void	*p_left;
+	int		start_x;
+	int		start_y;
 }	t_player;
 
 typedef struct s_map
@@ -47,8 +49,8 @@ typedef struct s_map
 
 typedef struct s_minimap
 {
-	void	*wall;
-	void	*floor;
+	xpm_t	*wall;
+	xpm_t	*floor;
 	void	*start;
 	int		x;
 	int		y;
@@ -59,23 +61,25 @@ typedef struct s_minimap
 
 typedef struct s_level
 {
-	void	*corner_1;
-	void	*corner_2;
-	void	*corner_3;
-	void	*corner_4;
-	void	*wall_left;
-	void	*wall_right;
-	void	*wall_top;
-	void	*wall_bottom;
-	void	*floor;
-	void	*pilar;
-	void	*collect;
-	void	*start;
-	void	*exit;
-	int		x;
-	int		y;
-	int		img_x;
-	int		img_y;
+	void		*corner_1;
+	void		*corner_2;
+	void		*corner_3;
+	void		*corner_4;
+	void		*wall_left;
+	void		*wall_right;
+	void		*wall_top;
+	void		*wall_bottom;
+	void		*floor;
+	void		*pilar;
+	void		*collect;
+	void		*start;
+	void		*exit;
+	int			x;
+	int			y;
+	int			img_x;
+	int			img_y;
+	mlx_image_t	*floor_img;
+	mlx_image_t	*wall_img;
 }	t_level;
 
 typedef struct s_param
@@ -120,8 +124,6 @@ typedef struct s_vault
 	int			lenght;
 	int			collect;
 	int			total_c;
-	int			player_x;
-	int			player_y;
 	int			p_dir;
 	t_player	*player;
 	t_level		*lvl1;
@@ -157,6 +159,7 @@ void	check_fd(t_vault *data, int fd);
 int		check_param_existence(t_vault *data);
 void	skip_white_space(t_vault *data, int x, int y, int *slen);
 int		isinset(char *s1, char *set);
+void	check_valid_char(t_vault *data, int x);
 
 /***** check_orientation_params.c *****/
 void	check_no_params(t_vault *data, int x, int y, int slen);
@@ -179,7 +182,7 @@ int		ft_find_char(char *src, char c);
 
 /***** map_parsing.c *****/
 void	check_map(t_vault *data);
-void	check_valid_char(t_vault *data, int x);
+void	find_player_start(t_vault *data);
 
 /***** map_parsing_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
@@ -203,6 +206,6 @@ void	init_minimap(t_vault *data);
 void	draw_map(t_vault *data);
 
 /***** flood_fill *****/
-void	flood_fill(char **tab, t_point size, t_point actual, char to_replace);
+void	flood_fill(t_vault *data, int x, int y, char **temp);
 
 #endif

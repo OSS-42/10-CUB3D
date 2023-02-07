@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:15:48 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/06 09:08:13 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/07 13:26:02 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,18 @@ int	isinset(char *s1, char *set)
 	len = ft_strlen(s1);
 	while (i < len - 1)
 	{
-		if (ft_strchr(set, s1[i]) == NULL)
-			return (0);
+		if (ft_char_isinset(set, s1[i]) == TRUE)
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 void	check_valid_char(t_vault *data, int i)
 {
-	while (data->scene[i])
+	while (data->map->map[i])
 	{
-		if (isinset(data->scene[i], " 01NSEW") != 1)
+		if (isinset(data->map->map[i], " 01NSEW") == FALSE)
 		{
 			data->error_code = 3;
 			errors(data);
