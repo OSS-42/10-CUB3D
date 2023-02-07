@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/06 09:07:59 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/07 16:05:09 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	errors_2(t_vault *data)
 	if (data->error_code == 9)
 		printf("%s\n%s\n", "Error", "Mauvais nombre d'arguments");
 	else if (data->error_code == 10)
-		printf("%s\n%s\n", "Error", "Carte incomplète (P, E, C manquant)");
+		printf("%s\n%s\n", "Error", "Probleme de start (doublon ou inexistant)");
 	else if (data->error_code == 11)
 		printf("%s\n%s\n", "Error", "Doublon (P)");
 	else if (data->error_code == 12)
