@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 15:02:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:03:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,5 @@ void	move_forward(t_vault *data);
 void	move_backward(t_vault *data);
 void	move_left(t_vault *data);
 void	move_right(t_vault *data);
-void	player_pixels_2(t_vault *data, char direction);
 
 #endif
