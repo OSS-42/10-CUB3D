@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:37:22 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/06 08:53:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/07 21:14:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,40 +37,6 @@ void	check_f_params(t_vault *data, int i, int j, int slen)
 	}
 }
 
-//essai d'une autre maniere de trim
-// void	check_c_params(t_vault *data, int i, int j, int slen)
-// {
-// 	char	*temp;
-// 	int		k;
-
-// 	j = 1;
-// 	if (data->scene_param->c_exist == 1)
-// 	{
-// 		data->error_code = 17;
-// 		errors(data);
-// 	}
-// 	data->scene_param->c_exist = 1;
-// 	while (data->scene[i][j])
-// 	{
-// 		while (check_white_spaces(data->scene[i][j]) == 0)
-// 			j++;
-// 		temp = ft_substr(data->scene[i], j, slen);
-// 		k = 0;
-// 		while (temp && temp[k])
-// 		{
-// 			if (temp[k] == '\n')
-// 			{
-// 				temp[k] = '\0';
-// 				break ;
-// 			}
-// 			k++;
-// 		}
-// 		data->scene_param->c_color = ft_strdup(temp);
-// 		free (temp);
-// 		break ;
-// 	}
-// }
-
 void	check_c_params(t_vault *data, int i, int j, int slen)
 {
 	char	*temp;
@@ -88,7 +54,7 @@ void	check_c_params(t_vault *data, int i, int j, int slen)
 		while (check_white_spaces(data->scene[i][j]) == 0)
 			j++;
 		temp = ft_substr(data->scene[i], j, slen);
-		temp2 = ft_strtrim(temp, "\n"); // semble que l'allocation ici ne soit pas bonne
+		temp2 = ft_strtrim(temp, "\n");
 		data->scene_param->c_color = ft_strdup(temp2);
 		free (temp);
 		free (temp2);

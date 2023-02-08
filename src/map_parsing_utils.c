@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:26:47 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/04 10:47:58 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/07 21:21:37 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	find_map_start(t_vault *data)
 	i = data->map_start;
 	while (data->scene[i])
 	{
-// isinset(data->scene[i], " 01NSEW") == 0
 		if ((int)ft_strlen(data->scene[i]) - 1 == 0)
 		{
 			data->map_start++;

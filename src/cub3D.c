@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/06 14:06:16 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/07 21:20:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 		quit_game(data);
 }
 
-static mlx_image_t *minimap;
+static mlx_image_t *minimap; // attention a global variable
 
 int	create_win(t_vault *data)
 {
-
-	// data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true); // pour écran plus grand
+	// pour écran plus grand
+	// data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true);
 	data->mlx = mlx_init(1280, 720, "Une autre journée à 42 Québec !", true);
 	if (!data->mlx)
 		exit (EXIT_FAILURE);

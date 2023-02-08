@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/07 16:04:52 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/07 21:19:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	check_map(t_vault *data)
 	check_valid_char(data, 0);
 	find_player_start(data);
 	errors(data);
-	flood_fill(data, data->player->start_x, data->player->start_y, ft_dbl_ptr_copy(data->map->map));
+	flood_fill(data, data->player->start_x, data->player->start_y,
+		ft_dbl_ptr_copy(data->map->map));
 	errors(data);
 }
 
@@ -31,7 +32,7 @@ void	find_player_start(t_vault *data)
 
 	x = 0;
 	flag = 0;
-	while (data->map->map[x] && isinset(data->map->map[x], "NSEW") == 0)
+	while (data->map->map[x])
 	{
 		y = 0;
 		while (data->map->map[x][y])
