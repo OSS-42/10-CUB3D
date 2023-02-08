@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 16:03:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:17:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define TRUE 1
 # define FALSE 0
-# define PI 3.14159265
+# define PI 3.1415926535
 
 /***** STRUCTURES *****/
 
@@ -42,6 +42,9 @@ typedef struct s_player
 	int		start_y;
 	float	px;
 	float	py;
+	float	pdx;
+	float	pdy;
+	float	pa;
 }	t_player;
 
 typedef struct s_map
