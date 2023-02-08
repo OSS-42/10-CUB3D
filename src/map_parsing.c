@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/08 08:30:07 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/08 11:48:52 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,8 @@ void	fill_map_void(t_vault *data)
 	{
 		if ((int)ft_strlen(data->map->map[x]) <= data->map->max_lenght)
 		{
-			printf("avant #%d: %s\n",x, data->map->map[x]);
 			replace_voids(data, x);
 			fill_rest_of_line(data, x);
-			printf("apres #%d: %s\n", x, data->map->map[x]);
 		}
 		x++;
 	}
@@ -79,7 +77,7 @@ void	replace_voids(t_vault *data, int x)
 	while (data->map->map[x][y])
 	{
 		if (data->map->map[x][y] == ' ')
-			data->map->map[x][y] = '1';
+			data->map->map[x][y] = '2';
 		y++;
 	}
 }
@@ -99,7 +97,7 @@ void	fill_rest_of_line(t_vault *data, int x)
 	}
 	while (y < data->map->max_lenght)
 	{
-		temp[y] = '1';
+		temp[y] = '2';
 		y++;
 	}
 	data->map->map[x] = ft_strdup(temp);
