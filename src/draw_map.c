@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:02:31 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 08:59:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 09:57:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	draw_minimap(t_vault *data)
 {
 	data->minimap->x = 0;
-	data->minimap->img_y = 10;
+	data->minimap->img_y = 0;
 	while (data->minimap->x < data->lines)
 	{
 		data->minimap->y = 0;
-		data->minimap->img_x = 10;
+		data->minimap->img_x = 0;
 		printf("%s\n", data->map->map[data->minimap->x]);
 		while (data->minimap->y
 			< (int)ft_strlen(data->map->map[data->minimap->x]))
