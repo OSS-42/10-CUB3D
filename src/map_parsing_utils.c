@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:26:47 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/07 21:21:37 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/07 22:12:46 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	find_map_start(t_vault *data)
 		else
 			break ;
 	}
-	printf("map start here : %d\n", data->map_start);
 }
 
 void	map_max_lenght(t_vault *data)

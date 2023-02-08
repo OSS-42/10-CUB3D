@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/07 21:20:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/07 22:11:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	create_win(t_vault *data)
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
-	printf("max_lenght: %d\n", data->map->max_lenght);
-	printf("lines: %d\n", data->map->lines);
 	minimap = mlx_new_image(data->mlx, data->map->max_lenght, data->map->lines);   // Creates a new image.
 	init_minimap(data);
 	// mlx_image_to_window(data->mlx, minimap, 0, 0);   // Adds an image to the render queue.

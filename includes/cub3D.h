@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/07 14:25:58 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/07 22:59:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_minimap
 {
 	xpm_t	*wall;
 	xpm_t	*floor;
+	xpm_t	*player;
 	void	*start;
 	int		x;
 	int		y;
@@ -80,6 +81,7 @@ typedef struct s_level
 	int			img_y;
 	mlx_image_t	*floor_img;
 	mlx_image_t	*wall_img;
+	mlx_image_t	*player_img;
 }	t_level;
 
 typedef struct s_param
@@ -183,6 +185,9 @@ int		ft_find_char(char *src, char c);
 /***** map_parsing.c *****/
 void	check_map(t_vault *data);
 void	find_player_start(t_vault *data);
+void	fill_map_void(t_vault *data);
+void	replace_voids(t_vault *data, int x);
+void	fill_rest_of_line(t_vault *data, int x);
 
 /***** map_parsing_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
@@ -203,7 +208,7 @@ void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len);
 void	init_minimap(t_vault *data);
 
 /***** init_assets_bonus.c *****/
-void	draw_map(t_vault *data);
+void	draw_minimap(t_vault *data);
 
 /***** flood_fill *****/
 void	flood_fill(t_vault *data, int x, int y, char **temp);

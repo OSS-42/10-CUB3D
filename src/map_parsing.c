@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/07 21:19:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/07 22:59:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	check_map(t_vault *data)
 	flood_fill(data, data->player->start_x, data->player->start_y,
 		ft_dbl_ptr_copy(data->map->map));
 	errors(data);
+	fill_map_void(data);
 }
 
 void	find_player_start(t_vault *data)
@@ -39,13 +40,69 @@ void	find_player_start(t_vault *data)
 		{
 			if (data->map->map[x][y] == 'N' || data->map->map[x][y] == 'S'
 				|| data->map->map[x][y] == 'E' || data->map->map[x][y] == 'W')
+			{
+				data->player->start_x = x;
+				data->player->start_y = y;
 				flag++;
+			}
 			y++;
 		}
 		x++;
 	}
-	data->player->start_x = x;
-	data->player->start_y = y;
 	if (flag > 1 || flag == 0)
 		data->error_code = 10;
+}
+
+void	fill_map_void(t_vault *data)
+{
+	int		x;
+
+	x = 0;
+	while (data->map->map[x])
+	{
+		if ((int)ft_strlen(data->map->map[x]) <= data->map->max_lenght)
+		{
+			printf("avant #%d: %s\n",x, data->map->map[x]);
+			replace_voids(data, x);
+			fill_rest_of_line(data, x);
+			printf("apres #%d: %s\n", x, data->map->map[x]);
+		}
+		x++;
+	}
+}
+
+void	replace_voids(t_vault *data, int x)
+{
+	int	y;
+
+	y = 0;
+	while (data->map->map[x][y])
+	{
+		if (data->map->map[x][y] == ' ')
+			data->map->map[x][y] = '1';
+		y++;
+	}
+}
+
+void	fill_rest_of_line(t_vault *data, int x)
+{
+	int		y;
+	char	*temp;
+
+	y = 0;
+	temp = NULL;
+	temp = ft_calloc(data->map->max_lenght + 1, sizeof(char));
+	while (data->map->map[x][y])
+	{
+		temp[y] = data->map->map[x][y];
+		y++;
+	}
+	while (y < data->map->max_lenght)
+	{
+		temp[y] = '1';
+		y++;
+	}
+	data->map->map[x] = ft_strdup(temp);
+	free (temp);
+	temp = NULL;
 }
