@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:15:48 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/07 15:45:43 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/08 09:03:57 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ int	isinset(char *s1, char *set)
 	len = ft_strlen(s1);
 	while (i < len)
 	{
-		if (ft_char_isinset(set, s1[i]) == TRUE)
-			return (1);
+		if (ft_char_isinset(set, s1[i]) != TRUE)
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 void	check_valid_char(t_vault *data, int i)
