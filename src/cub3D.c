@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 10:56:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:27:58 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		quit_game(data);
 }
-
-// static mlx_image_t *minimap; // attention global variable
 
 // pour écran plus grand
 // data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true);

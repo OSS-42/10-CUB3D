@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:02:31 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 11:08:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:28:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	draw_minimap(t_vault *data)
 
 void	player_pixels(t_vault *data)
 {
-	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11, data->player->start_x * 11, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11 + 1, data->player->start_x * 11, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11, data->player->start_x * 11 + 1, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11 + 1, data->player->start_x * 11 + 1, 0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11 + 4, data->player->start_x * 11 + 4, 0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11 + 1 + 4, data->player->start_x * 11 + 4, 0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11 + 4, data->player->start_x * 11 + 1 + 4, 0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11 + 1 + 4, data->player->start_x * 11 + 1 + 4, 0x00FF00FF);
 }

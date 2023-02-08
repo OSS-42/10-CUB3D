@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 11:06:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:19:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
 
 # define TRUE 1
 # define FALSE 0
+# define PI 3.14159265
 
 /***** STRUCTURES *****/
 
@@ -38,6 +40,8 @@ typedef struct s_player
 	void	*p_left;
 	int		start_x;
 	int		start_y;
+	float	px;
+	float	py;
 }	t_player;
 
 typedef struct s_map
