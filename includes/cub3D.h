@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 09:02:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:06:42 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,16 @@ typedef struct s_map
 
 typedef struct s_minimap
 {
-	xpm_t	*wall;
-	xpm_t	*floor;
-	xpm_t	*player;
-	xpm_t	*floor_void;
-	void	*start;
-	int		x;
-	int		y;
-	int		img_x;
-	int		img_y;
+	xpm_t		*wall;
+	xpm_t		*floor;
+	xpm_t		*player;
+	xpm_t		*floor_void;
+	void		*start;
+	int			x;
+	int			y;
+	int			img_x;
+	int			img_y;
+	mlx_image_t	*minimap;
 }	t_minimap;
 
 
@@ -209,10 +210,11 @@ void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len);
 /***** init_assets_bonus.c *****/
 void	init_minimap(t_vault *data);
 
-/***** init_assets_bonus.c *****/
-void	draw_minimap(t_vault *data);
-
 /***** flood_fill *****/
 void	flood_fill(t_vault *data, int x, int y, char **temp);
+
+/***** draw_map.c *****/
+void	draw_minimap(t_vault *data);
+void	player_pixels(t_vault *data);
 
 #endif

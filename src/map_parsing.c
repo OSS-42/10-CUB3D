@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/08 09:07:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 10:39:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,8 @@ void	fill_map_void(t_vault *data)
 	{
 		if ((int)ft_strlen(data->map->map[x]) <= data->map->max_lenght)
 		{
-			printf("avant #%d: %s\n",x, data->map->map[x]);
 			replace_voids(data, x);
 			fill_rest_of_line(data, x);
-			printf("apres #%d: %s\n", x, data->map->map[x]);
 		}
 		x++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/07 22:11:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 10:56:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,23 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 		quit_game(data);
 }
 
-static mlx_image_t *minimap; // attention a global variable
+// static mlx_image_t *minimap; // attention global variable
 
+// pour écran plus grand
+// data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true);
 int	create_win(t_vault *data)
 {
-	// pour écran plus grand
-	// data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true);
 	data->mlx = mlx_init(1280, 720, "Une autre journée à 42 Québec !", true);
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
-	minimap = mlx_new_image(data->mlx, data->map->max_lenght, data->map->lines);   // Creates a new image.
+	data->minimap->minimap = mlx_new_image(data->mlx, data->map->max_lenght * 11, data->map->lines * 11);
 	init_minimap(data);
-	// mlx_image_to_window(data->mlx, minimap, 0, 0);   // Adds an image to the render queue.
-    // mlx_put_pixel(minimap, 64, 64, 0xFFFFFFFF); // Single white pixel in the middle.
+	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, 0);   // Adds an image to the render queue.
+    // mlx_put_pixel(minimap, data->player->start_x, data->player->start_y, 0xFFFFFFFF); // Single white pixel in the middle.
 	// mlx_hook(data->mlx_win, 02, 0, key_hook, data); // cliquer sur la croix
 	mlx_loop(data->mlx);
-	mlx_delete_image(data->mlx, minimap); // Once the application request an exit, cleanup.
+	mlx_delete_image(data->mlx, data->minimap->minimap); // Once the application request an exit, cleanup.
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
 }
