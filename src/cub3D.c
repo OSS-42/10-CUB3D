@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 13:27:58 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:46:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 	t_vault	*data;
 
 	data = (t_vault *) param;
-	// if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-	// 	forward(data);
-	// if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-	// 	backward(data);
-	// if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-	// 	straf_left(data);
-	// if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-	// 	straf_right(data);
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+		move_forward(data);
+	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+		move_backward(data);
+	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+		move_left(data);
+	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
+		move_right(data);
 	// if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
 	// 	rotate_left(data);
 	// if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
@@ -49,6 +49,8 @@ int	create_win(t_vault *data)
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	data->minimap->minimap = mlx_new_image(data->mlx, data->map->max_lenght * 11, data->map->lines * 11);
 	init_minimap(data);
+	init_player(data);
+	draw_minimap(data);
 	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, 0);   // Adds an image to the render queue.
     // mlx_put_pixel(minimap, data->player->start_x, data->player->start_y, 0xFFFFFFFF); // Single white pixel in the middle.
 	// mlx_hook(data->mlx_win, 02, 0, key_hook, data); // cliquer sur la croix
