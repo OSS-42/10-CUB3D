@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:02:31 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/07 22:09:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 08:59:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ void	draw_minimap(t_vault *data)
 			if (data->map->map[data->minimap->x][data->minimap->y] == '1')
 				mlx_image_to_window(data->mlx, data->lvl1->wall_img,
 					data->minimap->img_x, data->minimap->img_y);
-			else if (ft_char_isinset("0 ", data->map->map[data->minimap->x][data->minimap->y]) == TRUE)
+			else if (ft_char_isinset("0", data->map->map[data->minimap->x][data->minimap->y]) == TRUE)
 				mlx_image_to_window(data->mlx, data->lvl1->floor_img,
+					data->minimap->img_x, data->minimap->img_y);
+			else if (ft_char_isinset(" ", data->map->map[data->minimap->x][data->minimap->y]) == TRUE)
+				mlx_image_to_window(data->mlx, data->lvl1->void_img,
 					data->minimap->img_x, data->minimap->img_y);
 			else if (ft_char_isinset("NSEW", data->map->map[data->minimap->x][data->minimap->y]) == TRUE)
 			{

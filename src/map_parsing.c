@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/07 22:59:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 09:07:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	replace_voids(t_vault *data, int x)
 	while (data->map->map[x][y])
 	{
 		if (data->map->map[x][y] == ' ')
-			data->map->map[x][y] = '1';
+			data->map->map[x][y] = '2';
 		y++;
 	}
 }
@@ -99,7 +99,7 @@ void	fill_rest_of_line(t_vault *data, int x)
 	}
 	while (y < data->map->max_lenght)
 	{
-		temp[y] = '1';
+		temp[y] = '2';
 		y++;
 	}
 	data->map->map[x] = ft_strdup(temp);

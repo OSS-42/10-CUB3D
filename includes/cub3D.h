@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/07 22:59:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 09:02:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_minimap
 	xpm_t	*wall;
 	xpm_t	*floor;
 	xpm_t	*player;
+	xpm_t	*floor_void;
 	void	*start;
 	int		x;
 	int		y;
@@ -82,6 +83,7 @@ typedef struct s_level
 	mlx_image_t	*floor_img;
 	mlx_image_t	*wall_img;
 	mlx_image_t	*player_img;
+	mlx_image_t	*void_img;
 }	t_level;
 
 typedef struct s_param

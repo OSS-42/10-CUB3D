@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 14:25:27 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/07 22:07:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 09:06:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ void	init_minimap(t_vault *data)
 	data->minimap->player = mlx_load_xpm42("./assets/minimap_player_P.xpm42");
 	data->lvl1->player_img
 		= mlx_texture_to_image(data->mlx, &data->minimap->player->texture);
+	data->minimap->floor_void = mlx_load_xpm42("./assets/minimap_void.xpm42");
+	data->lvl1->void_img
+		= mlx_texture_to_image(data->mlx, &data->minimap->floor_void->texture);
 	draw_minimap(data);
 }
