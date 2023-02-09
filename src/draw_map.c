@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:02:31 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 09:05:38 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/09 09:29:36 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,19 @@ void	draw_minimap(t_vault *data)
 		data->minimap->x++;
 		data->minimap->img_y += 11;
 	}
+	param_to_window(data);
+}
+
+void	param_to_window(t_vault *data)
+{
+	// mlx_put_string(data->mlx, "Px = ", data->map->lines * 11 + 10, 10);
+	// // mlx_put_string(data->mlx, ftoa(data->player->px), data->map->lines * 11 + 10, 20);
+	// mlx_put_string(data->mlx, "Py = ", data->map->lines * 11 + 20, 10);
+	// // mlx_put_string(data->mlx, ftoa(data->player->py), data->map->lines * 11 + 10, 20);
+	// mlx_put_string(data->mlx, "Pa = ", data->map->lines * 11 + 30, 10);
+	// // mlx_put_string(data->mlx, ftoa(data->player->pa), data->map->lines * 11 + 10, 20);
+	// mlx_put_string(data->mlx, "PDx = ", data->map->lines * 11 + 40, 10);
+	// // mlx_put_string(data->mlx, ftoa(data->player->pdx), data->map->lines * 11 + 10, 20);
+	// mlx_put_string(data->mlx, "PDy = ", data->map->lines * 11 + 50, 10);
+	// mlx_put_string(data->mlx, ftoa(data->player->pdy), data->map->lines * 11 + 10, 20);
 }
