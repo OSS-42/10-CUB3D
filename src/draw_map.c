@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:02:31 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 09:27:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 10:12:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	draw_minimap(t_vault *data)
 		data->minimap->x++;
 		data->minimap->img_y += 11;
 	}
-	param_to_window(data);
+	// param_to_window(data);
 }
 
-void	param_to_window(t_vault *data)
-{
+// void	param_to_window(t_vault *data)
+// {
 	// mlx_put_string(data->mlx, "Px = ", data->map->lines * 11 + 10, 10);
 	// // mlx_put_string(data->mlx, ftoa(data->player->px), data->map->lines * 11 + 10, 20);
 	// mlx_put_string(data->mlx, "Py = ", data->map->lines * 11 + 20, 10);
@@ -60,4 +60,4 @@ void	param_to_window(t_vault *data)
 	// // mlx_put_string(data->mlx, ftoa(data->player->pdx), data->map->lines * 11 + 10, 20);
 	// mlx_put_string(data->mlx, "PDy = ", data->map->lines * 11 + 50, 10);
 	// mlx_put_string(data->mlx, ftoa(data->player->pdy), data->map->lines * 11 + 10, 20);
-}
+// }
