@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:02:31 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 13:28:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:28:35 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	draw_minimap(t_vault *data)
 			{
 				mlx_image_to_window(data->mlx, data->lvl1->floor_img,
 					data->minimap->img_x, data->minimap->img_y);
-				player_pixels(data);
+				player_pixels(data, data->map->map[data->minimap->x][data->minimap->y]);
 			}
 			data->minimap->y++;
 			data->minimap->img_x += 11;
@@ -47,10 +47,14 @@ void	draw_minimap(t_vault *data)
 	}
 }
 
-void	player_pixels(t_vault *data)
+void	player_pixels(t_vault *data, char direction)
 {
 	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11 + 4, data->player->start_x * 11 + 4, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11 + 1 + 4, data->player->start_x * 11 + 4, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11 + 4, data->player->start_x * 11 + 1 + 4, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap, data->player->start_y * 11 + 1 + 4, data->player->start_x * 11 + 1 + 4, 0x00FF00FF);
+	if (direction == 'N')
+	{
+
+	}
 }

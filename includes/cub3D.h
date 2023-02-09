@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 13:19:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:22:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,6 @@ void	flood_fill(t_vault *data, int x, int y, char **temp);
 
 /***** draw_map.c *****/
 void	draw_minimap(t_vault *data);
-void	player_pixels(t_vault *data);
+void	player_pixels(t_vault *data, char direction);
 
 #endif
