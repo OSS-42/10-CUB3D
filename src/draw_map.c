@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:02:31 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 10:28:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/09 11:42:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	draw_minimap(t_vault *data)
 		data->minimap->img_y += 11;
 	}
 	param_to_window(data);
-	dessine_la_canne(data);
 }
 
 void	param_to_window(t_vault *data)

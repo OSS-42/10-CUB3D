@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:11:48 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/09 11:04:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/09 11:31:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	dessine_la_canne(void *param)
 	int		len;
 
 	data = param;
-	len = 10;
-	x = data->player->px;
-	y = data->player->py;
+	len = 100;
+	x = data->player->px * 11 + 4;
+	y = data->player->py * 11 + 4;
 	while (len > 0)
 	{
-		mlx_put_pixel(data->minimap->minimap, y, x, 0x00FF00FF);
+		mlx_put_pixel(data->minimap->minimap, y, x, 0xFF00FFFF);
 		x += data->player->pdx;
 		y += data->player->pdy;
 		len--;

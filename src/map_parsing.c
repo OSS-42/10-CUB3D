@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/09 10:19:37 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/09 11:37:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_map(t_vault *data)
 	map_to_new_array(data, data->map_start);
 	check_valid_char(data, 0);
 	find_player_start(data);
-	find_orientation(data);
+	// find_orientation(data);
 	errors(data);
 	flood_fill(data, data->player->start_x, data->player->start_y,
 		ft_dbl_ptr_copy(data->map->map));
