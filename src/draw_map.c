@@ -6,7 +6,11 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:02:31 by ewurstei          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/09 10:12:16 by ewurstei         ###   ########.fr       */
+=======
+/*   Updated: 2023/02/09 11:42:43 by ewurstei         ###   ########.fr       */
+>>>>>>> mbertin
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +52,14 @@ void	draw_minimap(t_vault *data)
 	// param_to_window(data);
 }
 
+<<<<<<< HEAD
 // void	param_to_window(t_vault *data)
 // {
+=======
+void	param_to_window(t_vault *data)
+{
+	(void)data;
+>>>>>>> mbertin
 	// mlx_put_string(data->mlx, "Px = ", data->map->lines * 11 + 10, 10);
 	// // mlx_put_string(data->mlx, ftoa(data->player->px), data->map->lines * 11 + 10, 20);
 	// mlx_put_string(data->mlx, "Py = ", data->map->lines * 11 + 20, 10);

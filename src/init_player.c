@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 10:59:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 11:47:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_player(t_vault *data)
 		data->player->pa = data->player->pa + 3 * PI / 2;
 	data->player->pdy = cos(data->player->pa) * 0.1;
 	data->player->pdx = sin(data->player->pa) * 0.1;
+	dessine_la_canne(data);
 }
 
 void	player_pixels(t_vault *data, char direction)
@@ -65,7 +66,7 @@ void	player_pixels(t_vault *data, char direction)
 	}
 	else if (direction == 'A')
 	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 + data->player->pdy, data->player->px * 11 + 4 + data->player->pdx, 0xFF00FFFF);
+		dessine_la_canne((void *)data);
 	}
 }
 
@@ -82,19 +83,21 @@ void	reinit_minimap(t_vault *data)
 void	move_forward(t_vault *data)
 {
 	reinit_minimap(data);
-	data->player->px = data->player->px - data->player->pdx;
-	data->player->py = data->player->py - data->player->pdy;
+	data->player->px = data->player->px + data->player->pdx;
+	data->player->py = data->player->py + data->player->pdy;
 	printf("px :%f, py : %f, pa : %f\n", data->player->px, data->player->px, data->player->pa);
 	player_pixels(data, 'A');
+	dessine_la_canne(data);
 }
 
 void	move_backward(t_vault *data)
 {
 	reinit_minimap(data);
-	data->player->px = data->player->px + data->player->pdx;
-	data->player->py = data->player->py + data->player->pdy;
+	data->player->px = data->player->px - data->player->pdx;
+	data->player->py = data->player->py - data->player->pdy;
 	printf("px :%f, py : %f, pa : %f\n", data->player->px, data->player->px, data->player->pa);
 	player_pixels(data, 'A');
+	dessine_la_canne(data);
 }
 
 void	rotate_left(t_vault *data)
@@ -108,6 +111,7 @@ void	rotate_left(t_vault *data)
 	data->player->pdx = sin(data->player->pa) * 0.1;
 	// data->player->py = data->player->py - 0.3;
 	player_pixels(data, 'A');
+	dessine_la_canne(data);
 }
 
 void	rotate_right(t_vault *data)
@@ -121,4 +125,5 @@ void	rotate_right(t_vault *data)
 	data->player->pdx = sin(data->player->pa) * 0.1;
 	// data->player->py = data->player->py + 0.3;
 	player_pixels(data, 'A');
+	dessine_la_canne(data);
 }
