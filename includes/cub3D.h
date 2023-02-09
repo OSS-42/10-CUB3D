@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 14:22:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/09 09:05:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define TRUE 1
 # define FALSE 0
-# define PI 3.14159265
+# define PI 3.1415926535
 
 /***** STRUCTURES *****/
 
@@ -42,6 +42,9 @@ typedef struct s_player
 	int		start_y;
 	float	px;
 	float	py;
+	float	pdx;
+	float	pdy;
+	float	pa;
 }	t_player;
 
 typedef struct s_map
@@ -220,5 +223,13 @@ void	flood_fill(t_vault *data, int x, int y, char **temp);
 /***** draw_map.c *****/
 void	draw_minimap(t_vault *data);
 void	player_pixels(t_vault *data, char direction);
+
+/***** init_player.c *****/
+void	init_player(t_vault *data);
+void	reinit_minimap(t_vault *data);
+void	move_forward(t_vault *data);
+void	move_backward(t_vault *data);
+void	rotate_left(t_vault *data);
+void	rotate_right(t_vault *data);
 
 #endif
