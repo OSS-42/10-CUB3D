@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 10:55:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 10:59:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	player_pixels(t_vault *data, char direction)
 	}
 	else if (direction == 'A')
 	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 + data->player->pdy, data->player->px * 11 + 4 + data->player->pdx, 0x00FF00FF);
+		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 + data->player->pdy, data->player->px * 11 + 4 + data->player->pdx, 0xFF00FFFF);
 	}
 }
 
