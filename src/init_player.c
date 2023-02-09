@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 10:41:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 10:55:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	move_forward(t_vault *data)
 	reinit_minimap(data);
 	data->player->px = data->player->px - data->player->pdx;
 	data->player->py = data->player->py - data->player->pdy;
+	printf("px :%f, py : %f, pa : %f\n", data->player->px, data->player->px, data->player->pa);
 	player_pixels(data, 'A');
 }
 
@@ -92,6 +93,7 @@ void	move_backward(t_vault *data)
 	reinit_minimap(data);
 	data->player->px = data->player->px + data->player->pdx;
 	data->player->py = data->player->py + data->player->pdy;
+	printf("px :%f, py : %f, pa : %f\n", data->player->px, data->player->px, data->player->pa);
 	player_pixels(data, 'A');
 }
 
@@ -114,6 +116,7 @@ void	rotate_right(t_vault *data)
 	data->player->pa = data->player->pa + 0.1;
 	if (data->player->pa > 2 * PI)
 		data->player->pa = data->player->pa - 2 * PI;
+	printf("px :%f, py : %f, pa : %f\n", data->player->px, data->player->px, data->player->pa);
 	data->player->pdy = cos(data->player->pa) * 0.1;
 	data->player->pdx = sin(data->player->pa) * 0.1;
 	// data->player->py = data->player->py + 0.3;
