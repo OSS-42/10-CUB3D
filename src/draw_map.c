@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:02:31 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 15:48:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 20:42:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,38 +44,5 @@ void	draw_minimap(t_vault *data)
 		}
 		data->minimap->x++;
 		data->minimap->img_y += 11;
-	}
-}
-
-void	player_pixels(t_vault *data, char direction)
-{
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 + 4, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 1 + 4, data->player->px * 11 + 4, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 + 1 + 4, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 1 + 4, data->player->px * 11 + 1 + 4, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 - 1 + 4, data->player->px * 11 + 4, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 - 1 + 4, data->player->px * 11 + 1 + 4, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 1 + 4, data->player->px * 11 - 1 + 4, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 - 1 + 4, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 - 1 + 4, data->player->px * 11 - 1 + 4, 0x00FF00FF);
-	if (direction == 'N')
-	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 - 2 + 4, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 - 3 + 4, 0x00FF00FF);
-	}
-	else if (direction == 'S')
-	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 + 2 + 4, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 + 3 + 4, 0x00FF00FF);
-	}
-	else if (direction == 'W')
-	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 - 2 + 4, data->player->px * 11 + 4, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 - 3 + 4, data->player->px * 11 + 4, 0x00FF00FF);
-	}
-	else if (direction == 'E')
-	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 2 + 4, data->player->px * 11 + 4, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 3 + 4, data->player->px * 11 + 4, 0x00FF00FF);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 16:17:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/08 21:08:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,9 +226,10 @@ void	player_pixels(t_vault *data, char direction);
 
 /***** init_player.c *****/
 void	init_player(t_vault *data);
+void	reinit_minimap(t_vault *data);
 void	move_forward(t_vault *data);
 void	move_backward(t_vault *data);
-void	move_left(t_vault *data);
-void	move_right(t_vault *data);
+void	rotate_left(t_vault *data);
+void	rotate_right(t_vault *data);
 
 #endif
