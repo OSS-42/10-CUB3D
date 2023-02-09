@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 11:47:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 11:57:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ void	param_to_window(t_vault *data);
 
 /***** init_player.c *****/
 void	init_player(t_vault *data);
-void	player_pixels(t_vault *data, char direction);
+void	player_pixels(t_vault *data);
 void	reinit_minimap(t_vault *data);
 void	move_forward(t_vault *data);
 void	move_backward(t_vault *data);
@@ -235,7 +235,7 @@ void	rotate_left(t_vault *data);
 void	rotate_right(t_vault *data);
 
 /***** rotate.c *****/
-void	find_orientation(t_vault *data);
-void	dessine_la_canne(void *param);
+void	find_orientation(t_vault *data, char direction);
+void	dessine_la_canne(t_vault *data);
 
 #endif

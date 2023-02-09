@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 11:47:26 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 13:48:15 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,11 @@ void	init_player(t_vault *data)
 {
 	data->player->px = data->player->start_x;
 	data->player->py = data->player->start_y;
-	if (data->map->map[data->player->start_y][data->player->start_x] == 'N')
-		data->player->pa = data->player->pa + 0;
-	else if (data->map->map[data->player->start_y][data->player->start_x] == 'S')
-		data->player->pa = data->player->pa + PI;
-	else if (data->map->map[data->player->start_y][data->player->start_x] == 'E')
-		data->player->pa = data->player->pa + PI / 2;
-	else if (data->map->map[data->player->start_y][data->player->start_x] == 'W')
-		data->player->pa = data->player->pa + 3 * PI / 2;
-	data->player->pdy = cos(data->player->pa) * 0.1;
-	data->player->pdx = sin(data->player->pa) * 0.1;
-	dessine_la_canne(data);
 }
 
-void	player_pixels(t_vault *data, char direction)
+void	player_pixels(t_vault *data)
 {
+	printf("px= %.3f py= %.3f pa= %.3f pdx= %.3f pdy= %.3f\n", data->player->px, data->player->py, data->player->pa, data->player->pdx, data->player->pdy);
 	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4,     data->player->px * 11 + 4,     0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4,     data->player->px * 11 + 4 + 1, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4,     data->player->px * 11 + 4 - 1, 0x00FF00FF);
@@ -40,36 +30,11 @@ void	player_pixels(t_vault *data, char direction)
 	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 - 1, data->player->px * 11 + 4,     0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
-	if (direction == 'N')
-	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 + 4 - 2, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 + 4 - 3, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 + 4 - 4, 0x00FF00FF);
-	}
-	else if (direction == 'S')
-	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 + 4 + 2, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 + 4 + 3, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 + 4 + 4, 0x00FF00FF);
-	}
-	else if (direction == 'W')
-	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 - 2, data->player->px * 11 + 4, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 - 3, data->player->px * 11 + 4, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 - 4, data->player->px * 11 + 4, 0x00FF00FF);
-	}
-	else if (direction == 'E')
-	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 + 2, data->player->px * 11 + 4, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 + 3, data->player->px * 11 + 4, 0x00FF00FF);
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 + 4, data->player->px * 11 + 4, 0x00FF00FF);
-	}
-	else if (direction == 'A')
-	{
-		dessine_la_canne((void *)data);
-	}
+	dessine_la_canne(data);
+
 }
 
+//option MLX pour garder allocaiton a utiliser ?
 void	reinit_minimap(t_vault *data)
 {
 	mlx_delete_image(data->mlx, data->minimap->minimap);
@@ -85,9 +50,7 @@ void	move_forward(t_vault *data)
 	reinit_minimap(data);
 	data->player->px = data->player->px + data->player->pdx;
 	data->player->py = data->player->py + data->player->pdy;
-	printf("px :%f, py : %f, pa : %f\n", data->player->px, data->player->px, data->player->pa);
-	player_pixels(data, 'A');
-	dessine_la_canne(data);
+	player_pixels(data);
 }
 
 void	move_backward(t_vault *data)
@@ -95,9 +58,7 @@ void	move_backward(t_vault *data)
 	reinit_minimap(data);
 	data->player->px = data->player->px - data->player->pdx;
 	data->player->py = data->player->py - data->player->pdy;
-	printf("px :%f, py : %f, pa : %f\n", data->player->px, data->player->px, data->player->pa);
-	player_pixels(data, 'A');
-	dessine_la_canne(data);
+	player_pixels(data);
 }
 
 void	rotate_left(t_vault *data)
@@ -106,12 +67,9 @@ void	rotate_left(t_vault *data)
 	data->player->pa = data->player->pa - 0.1;
 	if (data->player->pa < 0)
 		data->player->pa = data->player->pa + 2 * PI;
-	printf("px :%f, py : %f, pa : %f\n", data->player->px, data->player->px, data->player->pa);
-	data->player->pdy = cos(data->player->pa) * 0.1;
-	data->player->pdx = sin(data->player->pa) * 0.1;
-	// data->player->py = data->player->py - 0.3;
-	player_pixels(data, 'A');
-	dessine_la_canne(data);
+	data->player->pdx = sin(data->player->pa) * 0.3;
+	data->player->pdy = cos(data->player->pa) * 0.3;
+	player_pixels(data);
 }
 
 void	rotate_right(t_vault *data)
@@ -120,10 +78,7 @@ void	rotate_right(t_vault *data)
 	data->player->pa = data->player->pa + 0.1;
 	if (data->player->pa > 2 * PI)
 		data->player->pa = data->player->pa - 2 * PI;
-	printf("px :%f, py : %f, pa : %f\n", data->player->px, data->player->px, data->player->pa);
-	data->player->pdy = cos(data->player->pa) * 0.1;
-	data->player->pdx = sin(data->player->pa) * 0.1;
-	// data->player->py = data->player->py + 0.3;
-	player_pixels(data, 'A');
-	dessine_la_canne(data);
+	data->player->pdx = sin(data->player->pa) * 0.3;
+	data->player->pdy = cos(data->player->pa) * 0.3;
+	player_pixels(data);
 }
