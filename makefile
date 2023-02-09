@@ -50,6 +50,7 @@ SRCS =	src/cub3D.c \
 		src/init_assets_bonus.c \
 		src/init_player.c \
 		src/rotate.c \
+		src/init_hud.c
 
 #HEADER_BONUS = includes/cub3D_bonus.h
 #D_SRC_BONUS = src_bonus/
@@ -95,10 +96,10 @@ $(D_OBJ):
 $(OBJS): $(D_OBJ)%.o : $(D_SRC)%.c $(HEADER)
 		@$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
 
-
 #norm a checker
 norm:
 	@includes/ norminette
+	@src/ norminette
 
 clean:
 	@$(call cleaning, $(RM) $(D_OBJ))

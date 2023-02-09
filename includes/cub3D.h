@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 11:57:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 17:20:41 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,15 @@ typedef struct s_minimap
 	mlx_image_t	*minimap;
 }	t_minimap;
 
+typedef struct s_hud
+{
+	mlx_image_t	*hud;
+	mlx_image_t	*px;
+	mlx_image_t	*py;
+	mlx_image_t	*pa;
+	mlx_image_t	*pdx;
+	mlx_image_t	*pdy;
+}	t_hud;
 
 typedef struct s_level
 {
@@ -145,7 +154,10 @@ typedef struct s_vault
 	t_point		*size;
 	t_point		*actual;
 	t_minimap	*minimap;
+	t_hud		*hud;
 }	t_vault;
+
+/***** FONCTIONS *****/
 
 /***** cub3D.c *****/
 int		create_win(t_vault *data);
@@ -223,7 +235,6 @@ void	flood_fill(t_vault *data, int x, int y, char **temp);
 
 /***** draw_map.c *****/
 void	draw_minimap(t_vault *data);
-void	param_to_window(t_vault *data);
 
 /***** init_player.c *****/
 void	init_player(t_vault *data);
@@ -237,5 +248,9 @@ void	rotate_right(t_vault *data);
 /***** rotate.c *****/
 void	find_orientation(t_vault *data, char direction);
 void	dessine_la_canne(t_vault *data);
+
+/***** init_hud.c *****/
+void	init_hud(t_vault *data);
+char	*ft_ftoa(float nbr, int sign);
 
 #endif

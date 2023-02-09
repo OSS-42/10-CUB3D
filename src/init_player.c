@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 13:48:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:39:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	reinit_minimap(t_vault *data)
 			data->map->max_lenght * 11, data->map->lines * 11);
 	init_minimap(data);
 	draw_minimap(data);
-	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, 0);
+	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, 320 - data->map->lines * 11);
 }
 
 void	move_forward(t_vault *data)
