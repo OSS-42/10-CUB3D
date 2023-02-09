@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 08:38:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 10:50:31 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	player_pixels(t_vault *data, char direction)
 	}
 	else if (direction == 'A')
 	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 + data->player->pdy, data->player->px * 11 + 4 + data->player->pdx, 0x00FF00FF);
+		dessine_la_canne((void *)data);
 	}
 }
 
@@ -84,7 +84,7 @@ void	move_forward(t_vault *data)
 	reinit_minimap(data);
 	data->player->px = data->player->px - data->player->pdx;
 	data->player->py = data->player->py - data->player->pdy;
-	player_pixels(data, 'A');
+	player_pixels(data, data->player->direction);
 }
 
 void	move_backward(t_vault *data)
@@ -92,7 +92,7 @@ void	move_backward(t_vault *data)
 	reinit_minimap(data);
 	data->player->px = data->player->px + data->player->pdx;
 	data->player->py = data->player->py + data->player->pdy;
-	player_pixels(data, 'A');
+	player_pixels(data, data->player->direction);
 }
 
 void	rotate_left(t_vault *data)
@@ -100,7 +100,7 @@ void	rotate_left(t_vault *data)
 	reinit_minimap(data);
 	data->player->pa = data->player->pa - 0.3;
 	if (data->player->pa < 0)
-		data->player->pa = data->player->pa + 2 * PI;
+		data->player->pa = data->player->pa + (2 * PI);
 	printf("%f\n", data->player->px);
 	data->player->pdy = cos(data->player->pa) * 0.1;
 	data->player->pdx = sin(data->player->pa) * 0.1;
