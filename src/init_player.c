@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 22:31:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 08:38:15 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ void	init_player(t_vault *data)
 {
 	data->player->px = data->player->start_x;
 	data->player->py = data->player->start_y;
+	if (data->map->map[data->player->start_y][data->player->start_x] == 'N')
+		data->player->pa = data->player->pa + 0;
+	else if (data->map->map[data->player->start_y][data->player->start_x] == 'S')
+		data->player->pa = data->player->pa + PI;
+	else if (data->map->map[data->player->start_y][data->player->start_x] == 'E')
+		data->player->pa = data->player->pa + PI / 2;
+	else if (data->map->map[data->player->start_y][data->player->start_x] == 'W')
+		data->player->pa = data->player->pa + 3 * PI / 2;
 	data->player->pdy = cos(data->player->pa) * 0.1;
 	data->player->pdx = sin(data->player->pa) * 0.1;
 }
@@ -57,7 +65,7 @@ void	player_pixels(t_vault *data, char direction)
 	}
 	else if (direction == 'A')
 	{
-		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4, data->player->px * 11 + 4, 0x00FF00FF);
+		mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 + data->player->pdy, data->player->px * 11 + 4 + data->player->pdx, 0x00FF00FF);
 	}
 }
 
