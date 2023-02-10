@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 17:20:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 00:33:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,10 @@ typedef struct s_minimap
 	mlx_image_t	*minimap;
 }	t_minimap;
 
-typedef struct s_hud
+typedef struct s_game
 {
-	mlx_image_t	*hud;
-	mlx_image_t	*px;
-	mlx_image_t	*py;
-	mlx_image_t	*pa;
-	mlx_image_t	*pdx;
-	mlx_image_t	*pdy;
-}	t_hud;
+	mlx_image_t	*ddd;
+}	t_game;
 
 typedef struct s_level
 {
@@ -154,7 +149,7 @@ typedef struct s_vault
 	t_point		*size;
 	t_point		*actual;
 	t_minimap	*minimap;
-	t_hud		*hud;
+	t_game		*game;
 }	t_vault;
 
 /***** FONCTIONS *****/
@@ -228,7 +223,7 @@ void	extract_g_floor(t_vault *data, char *rgb_code, int *i, int *len);
 void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len);
 
 /***** init_assets_bonus.c *****/
-void	init_minimap(t_vault *data);
+void	load_minimap_assets(t_vault *data);
 
 /***** flood_fill *****/
 void	flood_fill(t_vault *data, int x, int y, char **temp);
@@ -248,9 +243,14 @@ void	rotate_right(t_vault *data);
 /***** rotate.c *****/
 void	find_orientation(t_vault *data, char direction);
 void	dessine_la_canne(t_vault *data);
+void	dessine_une_ligne_hor(t_vault *data, int start, int end, int screen_x, long long color);
 
 /***** init_hud.c *****/
 void	init_hud(t_vault *data);
-char	*ft_ftoa(float nbr, int sign);
+// char	*ft_ftoa(float nbr, int sign);
+
+/***** raycasting.c *****/
+void	draw_rays(t_vault *data);
+void	dessine_le_ray(t_vault *data, float ray_x, float ray_y);
 
 #endif

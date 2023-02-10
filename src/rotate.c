@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:11:48 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/09 13:51:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 23:23:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,14 @@ void	dessine_la_canne(t_vault *data)
 		x += data->player->pdx;
 		y += data->player->pdy;
 		len--;
+	}
+}
+
+void	dessine_une_ligne_hor(t_vault *data, int start, int end, int screen_x, long long color)
+{
+	while (start < end)
+	{
+		mlx_put_pixel(data->minimap->minimap, start, screen_x, color);
+		start++;
 	}
 }

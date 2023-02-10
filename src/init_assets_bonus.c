@@ -6,13 +6,13 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 14:25:27 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/08 15:46:29 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 23:28:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	init_minimap(t_vault *data)
+void	load_minimap_assets(t_vault *data)
 {
 	if (!data->minimap)
 		return ;

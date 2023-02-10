@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:02:31 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 15:37:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 23:50:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	draw_minimap(t_vault *data)
 {
 	data->minimap->x = 0;
-	data->minimap->img_y = 320 - data->map->lines * 11;
+	data->minimap->img_y = data->height - data->map->lines * 11;
 	while (data->minimap->x < data->lines)
 	{
 		data->minimap->y = 0;

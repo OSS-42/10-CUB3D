@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 15:39:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 00:37:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ void	player_pixels(t_vault *data)
 	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
 	dessine_la_canne(data);
-
+	// draw_rays(data); // ca segfault :)
 }
 
-//option MLX pour garder allocaiton a utiliser ?
 void	reinit_minimap(t_vault *data)
 {
 	mlx_delete_image(data->mlx, data->minimap->minimap);
 	data->minimap->minimap = mlx_new_image(data->mlx,
-			data->map->max_lenght * 11, data->map->lines * 11);
-	init_minimap(data);
+			data->width, data->map->lines * 11);
+	load_minimap_assets(data);
+	init_hud(data);
 	draw_minimap(data);
-	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, 320 - data->map->lines * 11);
+	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, data->height - data->map->lines * 11);
 }
 
 void	move_forward(t_vault *data)

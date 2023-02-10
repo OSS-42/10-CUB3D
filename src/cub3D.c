@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/09 16:17:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/09 23:49:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,21 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 int	create_win(t_vault *data)
 {
 	data->width = 640;
-	data->height = 320;
+	data->height = 480;
 	data->mlx = mlx_init(data->width, data->height, "Une autre journée à 42 Québec !", true);
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
-	data->minimap->minimap = mlx_new_image(data->mlx, data->width, data->map->lines * 11);
-	// data->hud->hud = mlx_new_image(data->mlx, 60, 60);
-	init_minimap(data);
+	data->minimap->minimap = mlx_new_image(data->mlx, data->width, data->map->lines * 12);
+	load_minimap_assets(data);
+	init_hud(data);
 	init_player(data);
 	draw_minimap(data);
-	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, 320 - data->map->lines * 11);
-	init_hud(data);
+	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, data->height - data->map->lines * 11);
+	data->game->ddd = mlx_new_image(data->mlx, 0, 0);
 	mlx_loop(data->mlx);
 	mlx_delete_image(data->mlx, data->minimap->minimap);
-	mlx_delete_image(data->mlx, data->hud->hud);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
 }
@@ -81,7 +80,7 @@ void	init_data(t_vault *data, char **argv)
 	data->map = ft_calloc(1, sizeof(t_map));
 	data->size = ft_calloc(1, sizeof(t_point));
 	data->actual = ft_calloc(1, sizeof(t_point));
-	data->hud = ft_calloc(1, sizeof(t_hud));
+	data->game = ft_calloc(1, sizeof(t_game));
 	data->scene_param->r_ceiling = -1;
 	data->scene_param->g_ceiling = -1;
 	data->scene_param->b_ceiling = -1;
