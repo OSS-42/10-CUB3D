@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_hud.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:00:20 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 13:37:12 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/10 15:25:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init_hud(t_vault *data)
 {
 	dessine_une_ligne_hor(data, 0, data->width, 0, 0xFF00FFFF);
+	dessine_une_ligne_ver(data, 0, data->map->lines * 11, data->map->max_lenght * 11, 0xFF00FFFF);
 	// data->hud->px = mlx_put_string(data->mlx, "px  = ", data->map->max_lenght * 11 + 10, 320 - data->map->lines * 11 - 5);
 	// data->hud->px = mlx_put_string(data->mlx, value, data->map->max_lenght * 11 + 70, 320 - data->map->lines * 11 - 5);
 }

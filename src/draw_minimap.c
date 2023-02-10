@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:02:31 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 14:44:06 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/10 15:30:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	draw_minimap(t_vault *data)
 			< (int)ft_strlen(data->map->map[x]))
 		{
 			if (data->map->map[x][data->minimap->y] == '1')
-				draw_char(data, start_hori, 0xFFFFFFFF, x);
+				draw_tiles(data, start_hori, 0xFFFFFFFF, x);
 			else if (ft_char_isinset("0", data->map->map[x][data->minimap->y]) == TRUE)
-				draw_char(data, start_hori, 0x6E99FFFF, x);
+				draw_tiles(data, start_hori, 0x6E99FFFF, x);
 			else if (ft_char_isinset("NSEW", data->map->map[x][data->minimap->y]) == TRUE)
 			{
-				draw_char(data, start_hori, 0x6E99FFFF, x);
+				draw_tiles(data, start_hori, 0x6E99FFFF, x);
 				find_orientation(data, data->map->map[x][data->minimap->y]);
 				data->map->map[x][data->minimap->y] = '0';
 				player_pixels(data);
@@ -48,7 +48,7 @@ void	draw_minimap(t_vault *data)
 	}
 }
 
-void	draw_char(t_vault *data, int start, unsigned int rgb, int x)
+void	draw_tiles(t_vault *data, int start, unsigned int rgb, int x)
 {
 	int	i;
 	int	end;

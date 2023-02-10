@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 14:43:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/10 16:29:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ void	flood_fill(t_vault *data, int x, int y, char **temp);
 
 /***** draw_map.c *****/
 void	draw_minimap(t_vault *data);
-void	draw_char(t_vault *data, int start, unsigned int rgb, int x);
+void	draw_tiles(t_vault *data, int start, unsigned int rgb, int x);
 
 /***** init_player.c *****/
 void	init_player(t_vault *data);
@@ -245,7 +245,9 @@ void	rotate_right(t_vault *data);
 /***** rotate.c *****/
 void	find_orientation(t_vault *data, char direction);
 void	dessine_la_canne(t_vault *data);
-void	dessine_une_ligne_hor(t_vault *data, int start, int end, int screen_x, long long color);
+void	dessine_une_ligne_hor(t_vault *data, int start, int end, int screen_y, long long color);
+void	dessine_une_ligne_ver(t_vault *data, int start, int end, int screen_x, long long color);
+
 // void	dessine_la_canne(void *temp);
 void	keyhandler_test(mlx_key_data_t keydata, void *param);
 
@@ -259,6 +261,6 @@ void	dessine_le_ray(t_vault *data, float len);
 void	map_double_array_to_int(t_vault *data);
 float	degtorad(float angle);
 int		fix_angle(int angle);
-float	distance(float angle_x, float angle_y, float b_x, float b_y, int ang);
+// float	distance(float angle_x, float angle_y, float b_x, float b_y, int ang);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 14:43:56 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/10 15:31:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ int	create_win(t_vault *data)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
-	data->minimap->minimap = mlx_new_image(data->mlx, data->width, data->map->lines * 12);
+	data->minimap->minimap = mlx_new_image(data->mlx, data->width, data->map->lines * 11);
 	load_minimap_assets(data);
-	init_hud(data);
 	init_player(data);
 	draw_minimap(data);
+	init_hud(data);
 	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, data->height - data->map->lines * 11);
 	data->game->ddd = mlx_new_image(data->mlx, 0, 0);
 	mlx_loop(data->mlx);
