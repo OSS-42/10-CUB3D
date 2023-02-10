@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 11:50:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:10:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	create_win(t_vault *data)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
-	data->minimap->minimap = mlx_new_image(data->mlx, data->width, data->map->lines * 11);
+	data->minimap->minimap = mlx_new_image(data->mlx, data->width, data->map->lines * 12);
 	load_minimap_assets(data);
 	init_hud(data);
 	init_player(data);

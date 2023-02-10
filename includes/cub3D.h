@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 11:01:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:39:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,7 +252,7 @@ void	init_hud(t_vault *data);
 
 /***** raycasting.c *****/
 void	draw_rays(t_vault *data);
-void	dessine_le_ray(t_vault *data, float ray_x, float ray_y);
+void	dessine_le_ray(t_vault *data, float len);
 void	map_double_array_to_int(t_vault *data);
 float	degtorad(float angle);
 int		fix_angle(int angle);

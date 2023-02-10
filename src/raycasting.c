@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 11:07:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:41:09 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	draw_rays(t_vault *data)
 	int		mx;
 	int		my;
 	int		mp;
-	int		dof;
-	// float	disH;
+	int		depth_of_field;
+	float	disH;
 	float	ray_x;
 	float	ray_y;
 	float	ray_a;
@@ -31,7 +31,7 @@ void	draw_rays(t_vault *data)
 	float	y_offset;
 	float	atan;
 
-	// disH = 10000;
+	disH = 10000;
 	map_x_len = data->map->lines;
 	map_y_len = data->map->max_lenght;
 	// map_total_size = map_x_len * map_y_len;
@@ -40,7 +40,7 @@ void	draw_rays(t_vault *data)
 	while (raycast < 1)
 	{
 		// check horizontal lines
-		dof = 0;
+		depth_of_field = 0;
 		atan = -1 / tan(ray_a);
 		raycast++;
 		if (ray_a > PI) // is ray looking up
@@ -61,43 +61,42 @@ void	draw_rays(t_vault *data)
 		{
 			ray_y = data->player->py;
 			ray_x = data->player->px;
-			dof = 8;
+			depth_of_field = 8;
 		}
-		while (dof < 8)
+		while (depth_of_field < 8)
 		{
-			mx = (int)(ray_x) >> 6;
-			my = (int)(ray_y) >> 6;
+			mx = (int)(ray_x) / 64;
+			my = (int)(ray_y) / 64;
 			mp = my * map_x_len + mx;
 			if (mp > 0 && mp < map_x_len * map_y_len && data->map->map2d[mp] == 1)
 			{ 
-				dof = 8;
-				// disH = cos(degtorad(ray_a)) * (ray_x - data->player->px) - sin(degtorad(ray_a)) * (ray_y - data->player->py);
+				depth_of_field = 8;
+				disH = cos(degtorad(ray_a)) * (ray_x - data->player->px)
+					- sin(degtorad(ray_a)) * (ray_y - data->player->py);
 			} //hit         
 			else
 			{
 				ray_x = ray_x + x_offset;
 				ray_y = ray_y + y_offset;
-				dof = dof + 1;
+				depth_of_field = depth_of_field + 1;
 			} //check next horizontal
 		}
 	}
-	dessine_le_ray(data, ray_x, ray_y); // draw ray
+	dessine_le_ray(data, disH * 0.01); // draw ray
 }
 
-void	dessine_le_ray(t_vault *data, float ray_x, float ray_y)
+void	dessine_le_ray(t_vault *data, float len)
 {
-	int		len;
 	float	x;
 	float	y;
 
-	len = ray_y - ray_x;
 	x = data->player->px * 11 + 4;
 	y = data->player->py * 11 + 4;
 	while (len > 0)
 	{
 		mlx_put_pixel(data->minimap->minimap, y, x, 0x00FF00FF);
-		x += ray_x;
-		y += ray_y;
+		x += data->player->pdx;
+		y += data->player->pdy;
 		len--;
 	}
 }
