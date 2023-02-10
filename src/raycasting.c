@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 14:41:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:04:34 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	draw_rays(t_vault *data)
 			mx = (int)(ray_x) / 64;
 			my = (int)(ray_y) / 64;
 			mp = my * map_x_len + mx;
-			if (mp > 0 && mp < map_x_len * map_y_len && data->map->map2d[mp] == 1)
+			if (mp > 0 && mp < map_x_len * map_y_len)
 			{ 
 				depth_of_field = 8;
 				disH = cos(degtorad(ray_a)) * (ray_x - data->player->px)
@@ -82,7 +82,7 @@ void	draw_rays(t_vault *data)
 			} //check next horizontal
 		}
 	}
-	dessine_le_ray(data, disH * 0.01); // draw ray
+	dessine_le_ray(data, disH); // draw ray
 }
 
 void	dessine_le_ray(t_vault *data, float len)

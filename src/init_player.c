@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 14:44:12 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/10 15:29:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	reinit_minimap(t_vault *data)
 	mlx_delete_image(data->mlx, data->minimap->minimap);
 	data->minimap->minimap = mlx_new_image(data->mlx,
 			data->width, data->map->lines * 11);
-	load_minimap_assets(data);
-	init_hud(data);
+	// load_minimap_assets(data);
 	draw_minimap(data);
+	init_hud(data);
 	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, data->height - data->map->lines * 11);
 }
 

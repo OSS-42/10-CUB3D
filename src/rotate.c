@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:11:48 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/10 11:28:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/10 15:20:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	dessine_la_canne(t_vault *data)
 	y = data->player->py * 11 + 4;
 	while (len > 0)
 	{
-		printf("x = %f y = %f\n", x, y);
 		mlx_put_pixel(data->minimap->minimap, y, x, 0xFF00FFFF);
 		x += data->player->pdx;
 		y += data->player->pdy;
@@ -59,11 +58,20 @@ void	dessine_la_canne(t_vault *data)
 	}
 }
 
-void	dessine_une_ligne_hor(t_vault *data, int start, int end, int screen_x, long long color)
+void	dessine_une_ligne_hor(t_vault *data, int start, int end, int screen_y, long long color)
 {
 	while (start < end)
 	{
-		mlx_put_pixel(data->minimap->minimap, start, screen_x, color);
+		mlx_put_pixel(data->minimap->minimap, start, screen_y, color);
+		start++;
+	}
+}
+
+void	dessine_une_ligne_ver(t_vault *data, int start, int end, int screen_x, long long color)
+{
+	while (start < end)
+	{
+		mlx_put_pixel(data->minimap->minimap, screen_x, start, color);
 		start++;
 	}
 }
