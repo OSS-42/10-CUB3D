@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 15:04:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:28:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,41 +23,46 @@ void	draw_rays(t_vault *data)
 	int		my;
 	int		mp;
 	int		depth_of_field;
-	float	disH;
+	// int		side;
+	float	dish;
+	float	disv;
+	float	ver_x;
+	float	ver_y;
 	float	ray_x;
 	float	ray_y;
 	float	ray_a;
 	float	x_offset;
 	float	y_offset;
-	float	atan;
+	float	tan_a;
 
-	disH = 10000;
 	map_x_len = data->map->lines;
 	map_y_len = data->map->max_lenght;
 	// map_total_size = map_x_len * map_y_len;
-	ray_a = data->player->pa;
+	// ray_a = data->player->pa;
 	raycast = 0;
-	while (raycast < 1)
+	ray_a = fix_angle(data->player->pa + 30);
+	while (raycast < 60)
 	{
-		// check horizontal lines
+		// check vertical lines
+		// side = 0;
+		disv = 100000;
 		depth_of_field = 0;
-		atan = -1 / tan(ray_a);
-		raycast++;
-		if (ray_a > PI) // is ray looking up
+		tan_a = tan(degtorad(ray_a));
+		if (cos(degtorad(ray_a)) > 0.001) // is ray looking up
 		{
-			ray_y = (((int)data->player->py / 64) * 64) - 0.0001;
-			ray_x = (data->player->py - ray_y) * atan + data->player->px;
-			y_offset = -64;
-			x_offset = -y_offset * atan;
+			ray_x = (((int)data->player->px / 10) * 10) + 10;
+			ray_y = (data->player->px - ray_x) * tan_a + data->player->py;
+			x_offset = 10;
+			y_offset = -x_offset * tan_a;
 		}
-		else if (ray_a < PI) // is ray looking up
+		else if (cos(degtorad(ray_a)) < -0.001) // is ray looking down
 		{
-			ray_y = (((int)data->player->py / 64) * 64) + 64;
-			ray_x = (data->player->py - ray_y) * atan + data->player->px;
-			y_offset = 64;
-			x_offset = -y_offset * atan;
+			ray_x = (((int)data->player->px / 10) * 10) - 0.0001;
+			ray_y = (data->player->px - ray_x) * tan_a + data->player->py;
+			x_offset = -10;
+			y_offset = -x_offset * tan_a;
 		}
-		else if (ray_a == PI || ray_a == 0) // is ray looking left or right
+		else  // is ray looking left or right
 		{
 			ray_y = data->player->py;
 			ray_x = data->player->px;
@@ -65,13 +70,58 @@ void	draw_rays(t_vault *data)
 		}
 		while (depth_of_field < 8)
 		{
-			mx = (int)(ray_x) / 64;
-			my = (int)(ray_y) / 64;
+			mx = (int)(ray_x) / 10;
+			my = (int)(ray_y) / 10;
 			mp = my * map_x_len + mx;
-			if (mp > 0 && mp < map_x_len * map_y_len)
+			if (mp > 0 && mp < map_x_len * map_y_len && data->map->map2d[mp] == 1)
 			{ 
 				depth_of_field = 8;
-				disH = cos(degtorad(ray_a)) * (ray_x - data->player->px)
+				disv = cos(degtorad(ray_a)) * (ray_x - data->player->px)
+					- sin(degtorad(ray_a)) * (ray_y - data->player->py);
+			} //hit         
+			else
+			{
+				ray_x = ray_x + x_offset;
+				ray_y = ray_y + y_offset;
+				depth_of_field = depth_of_field + 1;
+			} //check next vertical
+		}
+		ver_x = ray_x;
+		ver_y = ray_y;
+		
+		// check horizontal lines
+		dish = 100000;
+		depth_of_field = 0;
+		tan_a = 1.0 / tan_a;
+		if (sin(degtorad(ray_a)) > 0.001) // is ray looking up
+		{
+			ray_y = (((int)data->player->py / 10) * 10) - 0.0001;
+			ray_x = (data->player->py - ray_y) * tan_a + data->player->px;
+			y_offset = -10;
+			x_offset = -y_offset * tan_a;
+		}
+		else if (sin(degtorad(ray_a)) < -0.001) // is ray looking down
+		{
+			ray_y = (((int)data->player->py / 10) * 10) + 10;
+			ray_x = (data->player->py - ray_y) * tan_a + data->player->px;
+			y_offset = 10;
+			x_offset = -y_offset * tan_a;
+		}
+		else  // is ray looking left or right
+		{
+			ray_y = data->player->py;
+			ray_x = data->player->px;
+			depth_of_field = 8;
+		}
+		while (depth_of_field < 8)
+		{
+			mx = (int)(ray_x) / 10;
+			my = (int)(ray_y) / 10;
+			mp = my * map_x_len + mx;
+			if (mp > 0 && mp < map_x_len * map_y_len && data->map->map2d[mp] == 1)
+			{ 
+				depth_of_field = 8;
+				dish = cos(degtorad(ray_a)) * (ray_x - data->player->px)
 					- sin(degtorad(ray_a)) * (ray_y - data->player->py);
 			} //hit         
 			else
@@ -81,8 +131,16 @@ void	draw_rays(t_vault *data)
 				depth_of_field = depth_of_field + 1;
 			} //check next horizontal
 		}
+		if (disv < dish)
+		{
+			ray_x = ver_x;
+			ray_y = ver_y;
+			dish = disv;
+		}
+		dessine_le_ray(data, dish); // draw ray
+		raycast++;
+		ray_a = fix_angle(ray_a - 1);
 	}
-	dessine_le_ray(data, disH); // draw ray
 }
 
 void	dessine_le_ray(t_vault *data, float len)
@@ -141,8 +199,8 @@ int	fix_angle(int angle)
 	return (angle);
 }
 
-float	distance(float angle_x, float angle_y, float b_x, float b_y, int ang)
-{
-	return (cos(degtorad(ang)) * (b_x - angle_x)
-		- sin(degtorad(ang)) * (b_y - angle_y));
-}
+// float	distance(float angle_x, float angle_y, float b_x, float b_y, int ang)
+// {
+// 	return (cos(degtorad(ang)) * (b_x - angle_x)
+// 		- sin(degtorad(ang)) * (b_y - angle_y));
+// }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 15:28:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:29:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,6 @@ void	dessine_le_ray(t_vault *data, float len);
 void	map_double_array_to_int(t_vault *data);
 float	degtorad(float angle);
 int		fix_angle(int angle);
-float	distance(float angle_x, float angle_y, float b_x, float b_y, int ang);
+// float	distance(float angle_x, float angle_y, float b_x, float b_y, int ang);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 15:29:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:35:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	init_player(t_vault *data)
 {
 	data->player->px = data->player->start_x;
 	data->player->py = data->player->start_y;
+	data->player->pdx = sin(data->player->pa) * 0.3;
+	data->player->pdy = cos(data->player->pa) * 0.3;
 }
 
 void	player_pixels(t_vault *data)
@@ -64,7 +66,7 @@ void	move_backward(t_vault *data)
 void	rotate_left(t_vault *data)
 {
 	reinit_minimap(data);
-	data->player->pa = data->player->pa - 0.1;
+	data->player->pa = data->player->pa - 0.05;
 	if (data->player->pa < 0)
 		data->player->pa = data->player->pa + 2 * PI;
 	data->player->pdx = sin(data->player->pa) * 0.3;
@@ -75,7 +77,7 @@ void	rotate_left(t_vault *data)
 void	rotate_right(t_vault *data)
 {
 	reinit_minimap(data);
-	data->player->pa = data->player->pa + 0.1;
+	data->player->pa = data->player->pa + 0.05;
 	if (data->player->pa > 2 * PI)
 		data->player->pa = data->player->pa - 2 * PI;
 	data->player->pdx = sin(data->player->pa) * 0.3;
