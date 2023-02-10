@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 14:39:26 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:43:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,7 @@ void	flood_fill(t_vault *data, int x, int y, char **temp);
 
 /***** draw_map.c *****/
 void	draw_minimap(t_vault *data);
+void	draw_char(t_vault *data, int start, unsigned int rgb, int x);
 
 /***** init_player.c *****/
 void	init_player(t_vault *data);
@@ -245,6 +246,8 @@ void	rotate_right(t_vault *data);
 void	find_orientation(t_vault *data, char direction);
 void	dessine_la_canne(t_vault *data);
 void	dessine_une_ligne_hor(t_vault *data, int start, int end, int screen_x, long long color);
+// void	dessine_la_canne(void *temp);
+void	keyhandler_test(mlx_key_data_t keydata, void *param);
 
 /***** init_hud.c *****/
 void	init_hud(t_vault *data);

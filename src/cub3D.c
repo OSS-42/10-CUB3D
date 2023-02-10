@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 12:10:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:43:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 	// if (keydata.key == MLX_KEY_A
 	//		&& (keydata.action == MLX_REPEAT  || keydata.action == MLX_PRESS))
 	// 	move_left(data);
-	// if (keydata.key == MLX_KEY_D 
+	// if (keydata.key == MLX_KEY_D
 	//		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 	// 	move_right(data);
 	if (keydata.key == MLX_KEY_LEFT
