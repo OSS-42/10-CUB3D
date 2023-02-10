@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/09 11:55:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 09:46:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	check_map(t_vault *data)
 		ft_dbl_ptr_copy(data->map->map));
 	errors(data);
 	fill_map_void(data);
+	map_double_array_to_int(data);
 }
 
 void	find_player_start(t_vault *data)
@@ -102,6 +103,7 @@ void	fill_rest_of_line(t_vault *data, int x)
 		y++;
 	}
 	data->map->map[x] = ft_strdup(temp);
+	printf("%s\n", data->map->map[x]);
 	free (temp);
 	temp = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 00:33:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 11:01:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_player
 typedef struct s_map
 {
 	char	**map;
+	int		*map2d;
 	int		lines;
 	int		max_lenght;
 }	t_map;
@@ -252,5 +253,9 @@ void	init_hud(t_vault *data);
 /***** raycasting.c *****/
 void	draw_rays(t_vault *data);
 void	dessine_le_ray(t_vault *data, float ray_x, float ray_y);
+void	map_double_array_to_int(t_vault *data);
+float	degtorad(float angle);
+int		fix_angle(int angle);
+float	distance(float angle_x, float angle_y, float b_x, float b_y, int ang);
 
 #endif

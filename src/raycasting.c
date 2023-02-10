@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 00:35:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/10 11:07:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 void	draw_rays(t_vault *data)
 {
-	int		ray;
+	int		map_x_len;
+	int		map_y_len;
+	// int		map_total_size;
+	// int		map;
+	int		raycast;
 	int		mx;
 	int		my;
 	int		mp;
 	int		dof;
+	// float	disH;
 	float	ray_x;
 	float	ray_y;
 	float	ray_a;
@@ -26,14 +31,18 @@ void	draw_rays(t_vault *data)
 	float	y_offset;
 	float	atan;
 
+	// disH = 10000;
+	map_x_len = data->map->lines;
+	map_y_len = data->map->max_lenght;
+	// map_total_size = map_x_len * map_y_len;
 	ray_a = data->player->pa;
-	ray = 0;
-	while (ray < 1)
+	raycast = 0;
+	while (raycast < 1)
 	{
 		// check horizontal lines
 		dof = 0;
 		atan = -1 / tan(ray_a);
-		ray++;
+		raycast++;
 		if (ray_a > PI) // is ray looking up
 		{
 			ray_y = (((int)data->player->py / 64) * 64) - 0.0001;
@@ -56,25 +65,28 @@ void	draw_rays(t_vault *data)
 		}
 		while (dof < 8)
 		{
-			mx = (int) (ray_x) / 64;
-			my = (int) (ray_y) / 64;
-			mp = my * data->map->lines + mx;
-			if (mp < data->map->lines * data->map->max_lenght && data->map->map[mp][mp] == 1)
-				dof = 8; // hit wall
-			else // nest horizontal line
+			mx = (int)(ray_x) >> 6;
+			my = (int)(ray_y) >> 6;
+			mp = my * map_x_len + mx;
+			if (mp > 0 && mp < map_x_len * map_y_len && data->map->map2d[mp] == 1)
+			{ 
+				dof = 8;
+				// disH = cos(degtorad(ray_a)) * (ray_x - data->player->px) - sin(degtorad(ray_a)) * (ray_y - data->player->py);
+			} //hit         
+			else
 			{
 				ray_x = ray_x + x_offset;
 				ray_y = ray_y + y_offset;
 				dof = dof + 1;
-			}
+			} //check next horizontal
 		}
-		dessine_le_ray(data, ray_x, ray_y);// draw ray
 	}
+	dessine_le_ray(data, ray_x, ray_y); // draw ray
 }
 
 void	dessine_le_ray(t_vault *data, float ray_x, float ray_y)
 {
-	int 	len;
+	int		len;
 	float	x;
 	float	y;
 
@@ -88,4 +100,50 @@ void	dessine_le_ray(t_vault *data, float ray_x, float ray_y)
 		y += ray_y;
 		len--;
 	}
+}
+
+void	map_double_array_to_int(t_vault *data)
+{
+	int		i;
+	int		j;
+	int		k;
+	int		*temp;
+
+	i = -1;
+	k = 0;
+	temp = ft_calloc((data->map->lines * data->map->max_lenght),
+			sizeof(int));
+	while (++i < data->map->lines)
+	{
+		j = 0;
+		while (j < data->map->max_lenght)
+		{
+			temp[k] = data->map->map[i][j] - 48;
+			k++;
+			j++;
+		}
+	}
+	data->map->map2d = temp;
+	free (temp);
+	temp = NULL;
+}
+
+float	degtorad(float angle)
+{
+	return (angle * PI / 180);
+}
+
+int	fix_angle(int angle)
+{
+	if (angle > 359)
+		angle = angle - 360;
+	if (angle < 0)
+		angle = angle + 360;
+	return (angle);
+}
+
+float	distance(float angle_x, float angle_y, float b_x, float b_y, int ang)
+{
+	return (cos(degtorad(ang)) * (b_x - angle_x)
+		- sin(degtorad(ang)) * (b_y - angle_y));
 }
