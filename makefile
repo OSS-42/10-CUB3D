@@ -46,12 +46,13 @@ SRCS =	src/cub3D.c \
 		src/flood_fill.c \
 		src/check_ceiling_rgb.c \
 		src/check_floor_rgb.c \
-		src/draw_minimap.c \
 		src/init_assets_bonus.c \
 		src/init_player.c \
-		src/rotate.c \
 		src/init_hud.c \
-		src/raycasting.c
+		src/raycasting.c \
+		src/init_minimap.c \
+		src/moves.c \
+		src/camera.c
 
 #HEADER_BONUS = includes/cub3D_bonus.h
 #D_SRC_BONUS = src_bonus/

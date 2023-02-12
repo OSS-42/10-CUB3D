@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 15:31:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:32:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 
 // pour écran plus grand
 // data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true);
-int	create_win(t_vault *data)
+int	create_game(t_vault *data)
 {
 	data->width = 640;
 	data->height = 480;
@@ -57,13 +57,10 @@ int	create_win(t_vault *data)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
-	data->minimap->minimap = mlx_new_image(data->mlx, data->width, data->map->lines * 11);
-	load_minimap_assets(data);
-	init_player(data);
-	draw_minimap(data);
-	init_hud(data);
-	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, data->height - data->map->lines * 11);
-	data->game->ddd = mlx_new_image(data->mlx, 0, 0);
+	load_hud(data);
+	load_minimap(data);
+	load_player(data);
+	// data->game->ddd = mlx_new_image(data->mlx, 0, 0);
 	mlx_loop(data->mlx);
 	mlx_delete_image(data->mlx, data->minimap->minimap);
 	mlx_terminate(data->mlx);
@@ -81,6 +78,7 @@ void	init_data(t_vault *data, char **argv)
 	data->size = ft_calloc(1, sizeof(t_point));
 	data->actual = ft_calloc(1, sizeof(t_point));
 	data->game = ft_calloc(1, sizeof(t_game));
+	data->hud = ft_calloc(1, sizeof(t_hud));
 	data->scene_param->r_ceiling = -1;
 	data->scene_param->g_ceiling = -1;
 	data->scene_param->b_ceiling = -1;
@@ -102,8 +100,7 @@ int	main(int argc, char **argv)
 	scene_to_array(&data);
 	check_scene_params(&data);
 	check_map(&data);
-	// errors(&data);
-	// newgame(&data);
-	create_win(&data);
+	errors(&data);
+	create_game(&data);
 	return (0);
 }
