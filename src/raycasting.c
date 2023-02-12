@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 16:28:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/11 10:29:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void	draw_rays(t_vault *data)
 	{
 		// check vertical lines
 		// side = 0;
-		disv = 100000;
+		disv = 100;
 		depth_of_field = 0;
+		dessine_le_ray(data, disv); // s'affiche....mais n'a pas le decalage de + 30
 		tan_a = tan(degtorad(ray_a));
 		if (cos(degtorad(ray_a)) > 0.001) // is ray looking up
 		{
@@ -123,7 +124,7 @@ void	draw_rays(t_vault *data)
 				depth_of_field = 8;
 				dish = cos(degtorad(ray_a)) * (ray_x - data->player->px)
 					- sin(degtorad(ray_a)) * (ray_y - data->player->py);
-			} //hit         
+			} //hit
 			else
 			{
 				ray_x = ray_x + x_offset;
@@ -137,7 +138,7 @@ void	draw_rays(t_vault *data)
 			ray_y = ver_y;
 			dish = disv;
 		}
-		dessine_le_ray(data, dish); // draw ray
+		// dessine_le_ray(data, dish); // ne s'affiche pas
 		raycast++;
 		ray_a = fix_angle(ray_a - 1);
 	}

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 16:29:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:45:46 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,15 @@ typedef struct s_game
 	mlx_image_t	*ddd;
 }	t_game;
 
+typedef struct s_hud
+{
+	int			lives_count;
+	int			collected;
+	int			total_c;
+	mlx_image_t	*lives;
+	mlx_image_t	*hud;
+}	t_hud;
+
 typedef struct s_level
 {
 	void		*corner_1;
@@ -140,8 +149,7 @@ typedef struct s_vault
 	int			height;
 	int			lines;
 	int			lenght;
-	int			collect;
-	int			total_c;
+
 	int			p_dir;
 	t_player	*player;
 	t_level		*lvl1;
@@ -151,12 +159,13 @@ typedef struct s_vault
 	t_point		*actual;
 	t_minimap	*minimap;
 	t_game		*game;
+	t_hud		*hud;
 }	t_vault;
 
 /***** FONCTIONS *****/
 
 /***** cub3D.c *****/
-int		create_win(t_vault *data);
+int		create_game(t_vault *data);
 void	keyhandler(mlx_key_data_t keydata, void *param);
 void	init_data(t_vault *data, char **argv);
 void	quit_game(t_vault *data);
@@ -229,31 +238,17 @@ void	load_minimap_assets(t_vault *data);
 /***** flood_fill *****/
 void	flood_fill(t_vault *data, int x, int y, char **temp);
 
-/***** draw_map.c *****/
-void	draw_minimap(t_vault *data);
-void	draw_tiles(t_vault *data, int start, unsigned int rgb, int x);
-
 /***** init_player.c *****/
+void	load_player(t_vault *data);
 void	init_player(t_vault *data);
-void	player_pixels(t_vault *data);
-void	reinit_minimap(t_vault *data);
-void	move_forward(t_vault *data);
-void	move_backward(t_vault *data);
-void	rotate_left(t_vault *data);
-void	rotate_right(t_vault *data);
-
-/***** rotate.c *****/
 void	find_orientation(t_vault *data, char direction);
-void	dessine_la_canne(t_vault *data);
-void	dessine_une_ligne_hor(t_vault *data, int start, int end, int screen_y, long long color);
-void	dessine_une_ligne_ver(t_vault *data, int start, int end, int screen_x, long long color);
-
-// void	dessine_la_canne(void *temp);
-void	keyhandler_test(mlx_key_data_t keydata, void *param);
+void	draw_player(t_vault *data);
 
 /***** init_hud.c *****/
-void	init_hud(t_vault *data);
-// char	*ft_ftoa(float nbr, int sign);
+void	load_hud(t_vault *data);
+void	draw_hud(t_vault *data);
+void	full_line_hud_hor(t_vault *data, int screen_y, unsigned int color);
+void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 
 /***** raycasting.c *****/
 void	draw_rays(t_vault *data);
@@ -262,5 +257,25 @@ void	map_double_array_to_int(t_vault *data);
 float	degtorad(float angle);
 int		fix_angle(int angle);
 // float	distance(float angle_x, float angle_y, float b_x, float b_y, int ang);
+
+/***** init_minimap.c *****/
+void	load_minimap(t_vault *data);
+void	draw_minimap(t_vault *data);
+void	draw_tiles(t_vault *data,
+			int screen_x, int screen_y, unsigned int color);
+void	full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color);
+void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
+
+/***** moves.c *****/
+void	reinit_minimap(t_vault *data);
+void	move_forward(t_vault *data);
+void	move_backward(t_vault *data);
+void	move_left(t_vault *data);
+void	move_right(t_vault *data);
+
+/***** camera.c *****/
+void	draw_pov(t_vault *data);
+void	rotate_left(t_vault *data);
+void	rotate_right(t_vault *data);
 
 #endif

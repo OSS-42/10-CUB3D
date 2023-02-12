@@ -6,11 +6,18 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/10 15:35:26 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:41:14 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+void	load_player(t_vault *data)
+{
+	init_player(data);
+	find_orientation(data, data->map->map[data->player->start_x][data->player->start_y]);
+	draw_player(data);
+}
 
 void	init_player(t_vault *data)
 {
@@ -20,67 +27,58 @@ void	init_player(t_vault *data)
 	data->player->pdy = cos(data->player->pa) * 0.3;
 }
 
-void	player_pixels(t_vault *data)
+void	find_orientation(t_vault *data, char direction)
 {
-	printf("px= %.3f py= %.3f pa= %.3f pdx= %.3f pdy= %.3f\n", data->player->px, data->player->py, data->player->pa, data->player->pdx, data->player->pdy);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4,     data->player->px * 11 + 4,     0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4,     data->player->px * 11 + 4 + 1, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4,     data->player->px * 11 + 4 - 1, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 + 1, data->player->px * 11 + 4,     0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 + 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 + 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 - 1, data->player->px * 11 + 4,     0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap, data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
-	dessine_la_canne(data);
-	draw_rays(data);
+	if (direction == 'N')
+	{
+		data->player->pdx = 0;
+		data->player->pdy = 0.1;
+		data->player->pa = 0;
+	}
+	else if (direction == 'S')
+	{
+		data->player->pdx = 0;
+		data->player->pdy = -0.1;
+		data->player->pa = PI;
+	}
+	else if (direction == 'E')
+	{
+		data->player->pdx = 0.1;
+		data->player->pdy = 0;
+		data->player->pa = PI / 2;
+	}
+	else if (direction == 'W')
+	{
+		data->player->pdx = -0.1;
+		data->player->pdy = 0;
+		data->player->pa = 3 * PI / 2;
+	}
 }
 
-void	reinit_minimap(t_vault *data)
+void	draw_player(t_vault *data)
 {
-	mlx_delete_image(data->mlx, data->minimap->minimap);
-	data->minimap->minimap = mlx_new_image(data->mlx,
-			data->width, data->map->lines * 11);
-	// load_minimap_assets(data);
-	draw_minimap(data);
-	init_hud(data);
-	mlx_image_to_window(data->mlx, data->minimap->minimap, 0, data->height - data->map->lines * 11);
+	printf("px= %.3f py= %.3f pa= %.3f pdx= %.3f pdy= %.3f\n",
+		data->player->px, data->player->py, data->player->pa,
+		data->player->pdx, data->player->pdy);
+	mlx_put_pixel(data->minimap->minimap,
+		data->player->py * 11 + 4,     data->player->px * 11 + 4,     0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap,
+		data->player->py * 11 + 4,     data->player->px * 11 + 4 + 1, 0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap,
+		data->player->py * 11 + 4,     data->player->px * 11 + 4 - 1, 0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap,
+		data->player->py * 11 + 4 + 1, data->player->px * 11 + 4,     0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap,
+		data->player->py * 11 + 4 + 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap,
+		data->player->py * 11 + 4 + 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap,
+		data->player->py * 11 + 4 - 1, data->player->px * 11 + 4,     0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap,
+		data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
+	mlx_put_pixel(data->minimap->minimap,
+		data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
+	draw_pov(data);
+	// draw_rays(data);
 }
 
-void	move_forward(t_vault *data)
-{
-	reinit_minimap(data);
-	data->player->px = data->player->px + data->player->pdx;
-	data->player->py = data->player->py + data->player->pdy;
-	player_pixels(data);
-}
-
-void	move_backward(t_vault *data)
-{
-	reinit_minimap(data);
-	data->player->px = data->player->px - data->player->pdx;
-	data->player->py = data->player->py - data->player->pdy;
-	player_pixels(data);
-}
-
-void	rotate_left(t_vault *data)
-{
-	reinit_minimap(data);
-	data->player->pa = data->player->pa - 0.05;
-	if (data->player->pa < 0)
-		data->player->pa = data->player->pa + 2 * PI;
-	data->player->pdx = sin(data->player->pa) * 0.3;
-	data->player->pdy = cos(data->player->pa) * 0.3;
-	player_pixels(data);
-}
-
-void	rotate_right(t_vault *data)
-{
-	reinit_minimap(data);
-	data->player->pa = data->player->pa + 0.05;
-	if (data->player->pa > 2 * PI)
-		data->player->pa = data->player->pa - 2 * PI;
-	data->player->pdx = sin(data->player->pa) * 0.3;
-	data->player->pdy = cos(data->player->pa) * 0.3;
-	player_pixels(data);
-}
