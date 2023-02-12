@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/11 22:41:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/11 23:06:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	load_player(t_vault *data)
 {
 	init_player(data);
 	find_orientation(data, data->map->map[data->player->start_x][data->player->start_y]);
+	data->map->map[data->player->start_x][data->player->start_y] = '0';
 	draw_player(data);
 }
 
@@ -23,35 +24,35 @@ void	init_player(t_vault *data)
 {
 	data->player->px = data->player->start_x;
 	data->player->py = data->player->start_y;
-	data->player->pdx = sin(data->player->pa) * 0.3;
-	data->player->pdy = cos(data->player->pa) * 0.3;
+	// data->player->pdx = sin(data->player->pa) * 0.3;
+	// data->player->pdy = cos(data->player->pa) * 0.3;
 }
 
 void	find_orientation(t_vault *data, char direction)
 {
 	if (direction == 'N')
 	{
-		data->player->pdx = 0;
-		data->player->pdy = 0.1;
-		data->player->pa = 0;
+		data->player->pa = 3 * PI / 2;
+		data->player->pdx = sin(data->player->pa) * 0.3;
+		data->player->pdy = 0;
 	}
 	else if (direction == 'S')
 	{
-		data->player->pdx = 0;
-		data->player->pdy = -0.1;
-		data->player->pa = PI;
+		data->player->pa = PI / 2;
+		data->player->pdx = sin(data->player->pa) * 0.3;
+		data->player->pdy = 0;
 	}
 	else if (direction == 'E')
 	{
-		data->player->pdx = 0.1;
-		data->player->pdy = 0;
-		data->player->pa = PI / 2;
+		data->player->pa = 0;
+		data->player->pdx = 0;
+		data->player->pdy = cos(data->player->pa) * 0.3;
 	}
 	else if (direction == 'W')
 	{
-		data->player->pdx = -0.1;
-		data->player->pdy = 0;
-		data->player->pa = 3 * PI / 2;
+		data->player->pa = PI;
+		data->player->pdx = 0;
+		data->player->pdy = cos(data->player->pa) * 0.3;
 	}
 }
 
