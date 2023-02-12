@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/11 22:32:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/11 23:12:37 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	create_game(t_vault *data)
 {
 	data->width = 640;
 	data->height = 480;
-	data->mlx = mlx_init(data->width, data->height, "Une autre journée à 42 Québec !", true);
+	data->mlx = mlx_init(data->width, data->height,
+			"Une autre journée à 42 Québec !", true);
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/11 23:06:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/11 23:14:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	load_player(t_vault *data)
 {
 	init_player(data);
-	find_orientation(data, data->map->map[data->player->start_x][data->player->start_y]);
+	find_orientation(data,
+		data->map->map[data->player->start_x][data->player->start_y]);
 	data->map->map[data->player->start_x][data->player->start_y] = '0';
 	draw_player(data);
 }
@@ -24,8 +25,6 @@ void	init_player(t_vault *data)
 {
 	data->player->px = data->player->start_x;
 	data->player->py = data->player->start_y;
-	// data->player->pdx = sin(data->player->pa) * 0.3;
-	// data->player->pdy = cos(data->player->pa) * 0.3;
 }
 
 void	find_orientation(t_vault *data, char direction)
@@ -62,23 +61,23 @@ void	draw_player(t_vault *data)
 		data->player->px, data->player->py, data->player->pa,
 		data->player->pdx, data->player->pdy);
 	mlx_put_pixel(data->minimap->minimap,
-		data->player->py * 11 + 4,     data->player->px * 11 + 4,     0x00FF00FF);
+		data->player->py * 11 + 4, data->player->px * 11 + 4, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap,
-		data->player->py * 11 + 4,     data->player->px * 11 + 4 + 1, 0x00FF00FF);
+		data->player->py * 11 + 4, data->player->px * 11 + 4 + 1, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap,
-		data->player->py * 11 + 4,     data->player->px * 11 + 4 - 1, 0x00FF00FF);
+		data->player->py * 11 + 4, data->player->px * 11 + 4 - 1, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap,
-		data->player->py * 11 + 4 + 1, data->player->px * 11 + 4,     0x00FF00FF);
+		data->player->py * 11 + 4 + 1, data->player->px * 11 + 4, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap,
-		data->player->py * 11 + 4 + 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap,
-		data->player->py * 11 + 4 + 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap,
-		data->player->py * 11 + 4 - 1, data->player->px * 11 + 4,     0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap,
-		data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
-	mlx_put_pixel(data->minimap->minimap,
-		data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
+		data->player->py * 11 + 4 - 1, data->player->px * 11 + 4, 0x00FF00FF);
+	// mlx_put_pixel(data->minimap->minimap,
+	// 	data->player->py * 11 + 4 + 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
+	// mlx_put_pixel(data->minimap->minimap,
+	// 	data->player->py * 11 + 4 + 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
+	// mlx_put_pixel(data->minimap->minimap,
+	// 	data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
+	// mlx_put_pixel(data->minimap->minimap,
+	// 	data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
 	draw_pov(data);
 	// draw_rays(data);
 }

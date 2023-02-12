@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:00:20 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/11 22:37:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/11 23:15:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	load_hud(t_vault *data)
 {
-	data->hud->hud = mlx_new_image(data->mlx, data->width - data->map->max_lenght * 11, data->map->lines * 11);
+	data->hud->hud = mlx_new_image(data->mlx,
+			data->width - data->map->max_lenght * 11, data->map->lines * 11);
 	draw_hud(data);
-	mlx_image_to_window(data->mlx, data->hud->hud, 0 + data->map->max_lenght * 11, data->height - data->map->lines * 11);
+	mlx_image_to_window(data->mlx, data->hud->hud,
+		0 + data->map->max_lenght * 11, data->height - data->map->lines * 11);
 }
 
 void	draw_hud(t_vault *data)
