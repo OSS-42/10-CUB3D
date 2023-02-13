@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/11 22:45:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:44:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ typedef struct s_player
 	int		start_y;
 	float	px;
 	float	py;
+	float	ppx;
+	float	ppy;
 	float	pdx;
 	float	pdy;
+	float	pdlen;
 	float	pa;
 	char	direction;
 }	t_player;
