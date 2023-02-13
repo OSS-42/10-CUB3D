@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 17:03:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:07:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	draw_pov(t_vault *data)
 	data->player->pdlen = 10;
 	while (len < data->player->pdlen)
 	{
-		printf("ppx= %.3f ppy= %.3f pa= %.3f x= %.3f y= %.3f\n",
-		data->player->ppx, data->player->ppy, data->player->pa, x, y);
 		mlx_put_pixel(data->minimap->minimap, x, y, 0xFF00FFFF);
 		x = x + data->player->pdx;
 		y = y + data->player->pdy;

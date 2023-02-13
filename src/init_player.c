@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 17:04:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:06:13 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,6 @@ void	find_orientation(t_vault *data, char direction)
 
 void	draw_player(t_vault *data)
 {
-	// printf("ppx= %.3f ppy= %.3f pa= %.3f pdx= %.3f pdy= %.3f\n",
-	// 	data->player->ppx, data->player->ppy, data->player->pa,
-	// 	data->player->pdx, data->player->pdy);
 	mlx_put_pixel(data->minimap->minimap,
 		data->player->ppx, data->player->ppy, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap,
@@ -71,14 +68,6 @@ void	draw_player(t_vault *data)
 		data->player->ppx + 1, data->player->ppy, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap,
 		data->player->ppx - 1, data->player->ppy, 0x00FF00FF);
-	// mlx_put_pixel(data->minimap->minimap,
-	// 	data->player->py * 11 + 4 + 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
-	// mlx_put_pixel(data->minimap->minimap,
-	// 	data->player->py * 11 + 4 + 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
-	// mlx_put_pixel(data->minimap->minimap,
-	// 	data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 + 1, 0x00FF00FF);
-	// mlx_put_pixel(data->minimap->minimap,
-	// 	data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
 	draw_pov(data);
 	raycaster(data);
 }
