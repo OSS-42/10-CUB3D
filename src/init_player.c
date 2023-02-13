@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 11:46:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:15:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	find_orientation(t_vault *data, char direction)
 
 	if (direction == 'N')
 	{
-		data->player->pa = 90;
+		data->player->pa = PI / 2;
 		data->player->pdx = 0;
 		data->player->pdy = -1;
 	}
 	else if (direction == 'S')
 	{
-		data->player->pa = 270;
+		data->player->pa = 3 * PI / 2;
 		data->player->pdx = 0;
 		data->player->pdy = 1;
 	}
@@ -51,7 +51,7 @@ void	find_orientation(t_vault *data, char direction)
 	}
 	else if (direction == 'W')
 	{
-		data->player->pa = 170;
+		data->player->pa = PI;
 		data->player->pdx = -1;
 		data->player->pdy = 0;
 	}
