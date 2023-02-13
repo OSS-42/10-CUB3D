@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 13:15:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:37:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	init_player(t_vault *data)
 
 void	find_orientation(t_vault *data, char direction)
 {
-
 	if (direction == 'N')
 	{
 		data->player->pa = PI / 2;

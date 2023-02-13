@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 10:44:26 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:41:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_player
 	float	pdy;
 	float	pdlen;
 	float	pa;
+	float	ray_one_a;
 	char	direction;
 }	t_player;
 
@@ -255,7 +256,7 @@ void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 
 /***** raycasting.c *****/
 void	draw_rays(t_vault *data);
-void	dessine_le_ray(t_vault *data, float len);
+void	dessine_le_ray(t_vault *data, float lenght);
 void	map_double_array_to_int(t_vault *data);
 float	degtorad(float angle);
 int		fix_angle(int angle);
