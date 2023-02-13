@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 16:46:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:52:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct s_rays
 {
 	float	pdx_ray;
 	float	pdy_ray;
+	float	dist_x;
+	float	dist_y;
 	float	ray_len;
 	float	ray_one_a;
 	int		ray_count;

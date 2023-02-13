@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 16:46:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:59:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,37 @@ void	raycaster(t_vault *data)
 	// while(data->raycaster->ray_count < 60)
 	// {
 	find_ray_angle(data);
+	// distance ppx <--> next entier x dans la direction de pa (attention facteur de 11px + 4)
+	// valider si next entier x (valeur/11 - 4) correspond a un '1' dans la map
+	// si oui, calculer longueur hypothenuse, break;
+	// si non, ajouter la longueur d'une case a la distance en cours et refaire validation
+	// distance ppy <--> next entier y dans la direction de pa (attention facteur de 11px + 4)
+	// valider si next entier y (valeur/11 - 4) correspond a un '1' dans la map
+	// si oui, calculer longueur hypothenuse, break;
+	// si non, ajouter la longueur d'une case a la distance en cours et refaire validation
+	// distance_x = 1 - ((data->player->ppx - 4) / 11) - (int)((data->player->ppx - 4) / 11);
+	// distance_y = 1 - ((data->player->ppy - 4) / 11) - (int)((data->player->ppy - 4) / 11);
+	// next_case_x = data->player->ppx + distance_x;
+	// next_case_y = data->player->ppy + distance_y;
+	// if (data->map->map[next_case_y][next_case_x] == '1')
+	//	 if (distance_x < distance_y)
+	//	 	ray_len = (degtorad(90) - cos(data->raycaster->ray_one_a)) * distance_x;
+	//	 else
+	//	 	ray_len = (degtorad(90) - sin(data->raycaster->ray_one_a)) * distance_y;
+			
+	// lorsque les 2 distances sont trouvees, la plus courte sera a dessiner.
+	// draw_ray(data-, ray_len);
+	
+	// attention au fish eye effect ensuite.
+	
 	
 
-		
+
+
+
+
 	
-
-
-
-
-
-		
-		draw_ray(data, 50);
+	draw_ray(data, 50);
 	//	dessine_le_ray(data);
 	// 	data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
 	// 	data->raycaster->ray_count++;
