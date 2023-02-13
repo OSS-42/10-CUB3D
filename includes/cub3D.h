@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 15:47:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:46:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,17 @@ typedef struct s_player
 	float	pdy;
 	float	pdlen;
 	float	pa;
-	float	pdx_ray;
-	float	pdy_ray;
-	float	ray_one_a;
 	char	direction;
 }	t_player;
+
+typedef struct s_rays
+{
+	float	pdx_ray;
+	float	pdy_ray;
+	float	ray_len;
+	float	ray_one_a;
+	int		ray_count;
+}	t_rays;
 
 typedef struct s_map
 {
@@ -155,7 +161,6 @@ typedef struct s_vault
 	int			height;
 	int			lines;
 	int			lenght;
-
 	int			p_dir;
 	t_player	*player;
 	t_level		*lvl1;
@@ -166,6 +171,7 @@ typedef struct s_vault
 	t_minimap	*minimap;
 	t_game		*game;
 	t_hud		*hud;
+	t_rays		*raycaster;
 }	t_vault;
 
 /***** FONCTIONS *****/
@@ -257,12 +263,10 @@ void	full_line_hud_hor(t_vault *data, int screen_y, unsigned int color);
 void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 
 /***** raycasting.c *****/
-void	draw_rays(t_vault *data);
-void	dessine_le_ray(t_vault *data, float lenght);
+void	raycaster(t_vault *data);
+void	draw_ray(t_vault *data, float ray_len);
+void	find_ray_angle(t_vault *data);
 void	map_double_array_to_int(t_vault *data);
-float	degtorad(float angle);
-int		fix_angle(int angle);
-// float	distance(float angle_x, float angle_y, float b_x, float b_y, int ang);
 
 /***** init_minimap.c *****/
 void	load_minimap(t_vault *data);
@@ -283,5 +287,9 @@ void	move_right(t_vault *data);
 void	draw_pov(t_vault *data);
 void	rotate_left(t_vault *data);
 void	rotate_right(t_vault *data);
+
+/***** raycasting_utils.c *****/
+float	degtorad(float angle);
+int		fix_angle(int angle);
 
 #endif

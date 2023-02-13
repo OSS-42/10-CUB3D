@@ -6,46 +6,65 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 15:52:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:46:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	draw_rays(t_vault *data)
+void	raycaster(t_vault *data)
 {
-	data->player->ray_one_a = data->player->pa - degtorad(30);
-	if (data->player->ray_one_a < 0)
-		data->player->ray_one_a = data->player->ray_one_a + 2 * PI;
-	else if (data->player->ray_one_a > 2 * PI)
-		data->player->ray_one_a = data->player->ray_one_a - 2 * PI;
-	data->player->pdx_ray = -1 * cos(data->player->ray_one_a);
-	data->player->pdy_ray = -1 * sin(data->player->ray_one_a);
-	dessine_le_ray(data, 50);
+	data->raycaster->ray_count = 0;
+	data->raycaster->ray_one_a = data->player->pa - degtorad(30);
+	// while(data->raycaster->ray_count < 60)
+	// {
+	find_ray_angle(data);
+	
+
+		
+	
+
+
+
+
+
+		
+		draw_ray(data, 50);
+	//	dessine_le_ray(data);
+	// 	data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
+	// 	data->raycaster->ray_count++;
+	// }
 }
 
-void	dessine_le_ray(t_vault *data, float lenght)
+void	draw_ray(t_vault *data, float ray_len)
 {
 	float	x;
 	float	y;
 	int		len;
-	(void)	lenght;
+	(void)	ray_len;
 
 	len = 0;
 	x = data->player->ppx;
 	y = data->player->ppy;
-	data->player->pdlen = 50;
-	while (len < data->player->pdlen)
+	ray_len = 50;
+	while (len < ray_len)
 	{
-		printf("ppx= %.3f ppy= %.3f pa= %.3f x= %.3f y= %.3f\n",
-		data->player->ppx, data->player->ppy, data->player->pa, x, y);
 		mlx_put_pixel(data->minimap->minimap, x, y, 0x00FF00FF);
-		x = x + data->player->pdx_ray;
-		y = y + data->player->pdy_ray;
+		x = x + data->raycaster->pdx_ray;
+		y = y + data->raycaster->pdy_ray;
 		len++;
 	}
 }
 
+void	find_ray_angle(t_vault *data)
+{
+	if (data->raycaster->ray_one_a < 0)
+		data->raycaster->ray_one_a = data->raycaster->ray_one_a + 2 * PI;
+	else if (data->raycaster->ray_one_a > 2 * PI)
+		data->raycaster->ray_one_a = data->raycaster->ray_one_a - 2 * PI;
+	data->raycaster->pdx_ray = -1 * cos(data->raycaster->ray_one_a);
+	data->raycaster->pdy_ray = -1 * sin(data->raycaster->ray_one_a);
+}
 
 // void	draw_rays(t_vault *data)
 // {
@@ -203,20 +222,6 @@ void	map_double_array_to_int(t_vault *data)
 	data->map->map2d = temp;
 	free (temp);
 	temp = NULL;
-}
-
-float	degtorad(float angle)
-{
-	return (angle * PI / 180);
-}
-
-int	fix_angle(int angle)
-{
-	if (angle > 359)
-		angle = angle - 360;
-	if (angle < 0)
-		angle = angle + 360;
-	return (angle);
 }
 
 // float	distance(float angle_x, float angle_y, float b_x, float b_y, int ang)

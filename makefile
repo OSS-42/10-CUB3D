@@ -52,7 +52,8 @@ SRCS =	src/cub3D.c \
 		src/raycasting.c \
 		src/init_minimap.c \
 		src/moves.c \
-		src/camera.c
+		src/camera.c \
+		src/raycasting_utils.c
 
 #HEADER_BONUS = includes/cub3D_bonus.h
 #D_SRC_BONUS = src_bonus/

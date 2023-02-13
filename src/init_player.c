@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 15:45:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:04:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	find_orientation(t_vault *data, char direction)
 	}
 	else if (direction == 'E')
 	{
-		data->player->pa = 0;
+		data->player->pa = PI;
 		data->player->pdx = 1;
 		data->player->pdy = 0;
 	}
 	else if (direction == 'W')
 	{
-		data->player->pa = PI;
+		data->player->pa = 0;
 		data->player->pdx = -1;
 		data->player->pdy = 0;
 	}
@@ -80,5 +80,5 @@ void	draw_player(t_vault *data)
 	// mlx_put_pixel(data->minimap->minimap,
 	// 	data->player->py * 11 + 4 - 1, data->player->px * 11 + 4 - 1, 0x00FF00FF);
 	draw_pov(data);
-	draw_rays(data);
+	raycaster(data);
 }
