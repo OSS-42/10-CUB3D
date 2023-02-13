@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 15:41:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:52:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,36 @@
 void	draw_rays(t_vault *data)
 {
 	data->player->ray_one_a = data->player->pa - degtorad(30);
+	if (data->player->ray_one_a < 0)
+		data->player->ray_one_a = data->player->ray_one_a + 2 * PI;
+	else if (data->player->ray_one_a > 2 * PI)
+		data->player->ray_one_a = data->player->ray_one_a - 2 * PI;
+	data->player->pdx_ray = -1 * cos(data->player->ray_one_a);
+	data->player->pdy_ray = -1 * sin(data->player->ray_one_a);
 	dessine_le_ray(data, 50);
 }
 
+void	dessine_le_ray(t_vault *data, float lenght)
+{
+	float	x;
+	float	y;
+	int		len;
+	(void)	lenght;
+
+	len = 0;
+	x = data->player->ppx;
+	y = data->player->ppy;
+	data->player->pdlen = 50;
+	while (len < data->player->pdlen)
+	{
+		printf("ppx= %.3f ppy= %.3f pa= %.3f x= %.3f y= %.3f\n",
+		data->player->ppx, data->player->ppy, data->player->pa, x, y);
+		mlx_put_pixel(data->minimap->minimap, x, y, 0x00FF00FF);
+		x = x + data->player->pdx_ray;
+		y = y + data->player->pdy_ray;
+		len++;
+	}
+}
 
 
 // void	draw_rays(t_vault *data)
@@ -151,28 +178,6 @@ void	draw_rays(t_vault *data)
 // 		ray_a = fix_angle(ray_a - 1);
 // 	}
 // }
-
-void	dessine_le_ray(t_vault *data, float lenght)
-{
-	float	x;
-	float	y;
-	int		len;
-	(void)	lenght;
-
-	len = 0;
-	x = data->player->ppx;
-	y = data->player->ppy;
-	data->player->pdlen = 50;
-	while (len < data->player->pdlen)
-	{
-		printf("ppx= %.3f ppy= %.3f pa= %.3f x= %.3f y= %.3f\n",
-		data->player->ppx, data->player->ppy, data->player->pa, x, y);
-		mlx_put_pixel(data->minimap->minimap, x, y, 0x00FF00FF);
-		x = x + data->player->pdx;
-		y = y + data->player->pdy;
-		len++;
-	}
-}
 
 void	map_double_array_to_int(t_vault *data)
 {
