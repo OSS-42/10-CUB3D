@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 13:20:20 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:25:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	rotate_left(t_vault *data)
 	data->player->pa = data->player->pa - 0.1;
 	if (data->player->pa < 0)
 		data->player->pa = data->player->pa + 2 * PI;
-	data->player->pdx = data->player->pdx + cos(data->player->pa);
-	data->player->pdy = data->player->pdx + sin(data->player->pa);
+	data->player->pdx = cos(data->player->pa);
+	data->player->pdy = sin(data->player->pa);
 	draw_player(data);
 }
 
@@ -63,30 +63,10 @@ void	rotate_right(t_vault *data)
 	reinit_minimap(data);
 	data->player->pa = data->player->pa + 0.1;
 	printf("avant : pdx= %.3f pdy= %.3f\n", data->player->pdx, data->player->pdy);
-	if (data->player->pa < PI / 2 && data->player->pa >= 0)
-	{
-		data->player->pdx = data->player->pdx + cos(data->player->pa);
-		data->player->pdy = data->player->pdy - sin(data->player->pa);
-	}
-	else if (data->player->pa < 0 && data->player->pa >= 3 * PI / 2)
-	{
-		data->player->pdx = data->player->pdx + cos(data->player->pa);
-		data->player->pdy = data->player->pdy + sin(data->player->pa);
-	}
-	else if (data->player->pa < 3 * PI / 2 && data->player->pa >= PI)
-	{
-		data->player->pdx = data->player->pdx - cos(data->player->pa);
-		data->player->pdy = data->player->pdy + sin(data->player->pa);
-	}
-	else if (data->player->pa < PI && data->player->pa >= PI / 2)
-	{
-		data->player->pdx = data->player->pdx - cos(data->player->pa);
-		data->player->pdy = data->player->pdy -= sin(data->player->pa);
-	}
-	printf("apres : pdx= %.3f pdy= %.3f\n", data->player->pdx, data->player->pdy);
 	if (data->player->pa > 2 * PI)
 		data->player->pa = data->player->pa - 2 * PI;
-
-	
+	data->player->pdx = cos(data->player->pa);
+	data->player->pdy = sin(data->player->pa);
+	printf("apres : pdx= %.3f pdy= %.3f\n", data->player->pdx, data->player->pdy);
 	draw_player(data);
 }
