@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 22:25:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:00:55 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,28 @@
 
 void	raycaster(t_vault *data)
 {
-	float	distance_x;
-	float	distance_y;
+	int	distance_x;
+	int	distance_y;
+	// float	distance_x;
+	// float	distance_y;
 
-	distance_x = 0;
-	distance_y = 0;
 	data->raycaster->ray_count = 0;
 	data->raycaster->ray_one_a = data->player->pa - degtorad(30);
 	// while(data->raycaster->ray_count < 60)
 	// {
 	find_ray_angle(data);
+	distance_x = pix_to_intersection_x(data);
+	distance_y = pix_to_intersection_y(data);
+	ray_len_calculator_x(data, distance_x);
+	ray_len_calculator_y(data, distance_y);
+	if (distance_x <= distance_y)
+	{
+
+	}
+	else if (distance_y < distance_x)
+	{
+		//On commence à y
+	}
 	// distance ppx <--> next entier x dans la direction de pa (attention facteur de 11px + 4)
 	// valider si next entier x (valeur/11 - 4) correspond a un '1' dans la map
 	// si oui, calculer longueur hypothenuse, break;
@@ -39,23 +51,23 @@ void	raycaster(t_vault *data)
 	// next_case_x = data->player->ppx + distance_x;
 	// next_case_y = data->player->ppy + distance_y;
 	// if (data->map->map[next_case_y][next_case_x] == '1')
-	//	 if (distance_x < distance_y)
-	//	 	ray_len = (degtorad(90) - cos(data->raycaster->ray_one_a)) * distance_x;
-	//	 else
-	//	 	ray_len = (degtorad(90) - sin(data->raycaster->ray_one_a)) * distance_y;
-			
+	// 	 if (distance_x < distance_y)
+	// 	 	ray_len = (degtorad(90) - cos(data->raycaster->ray_one_a)) * distance_x;
+	// 	 else
+	// 	 	ray_len = (degtorad(90) - sin(data->raycaster->ray_one_a)) * distance_y;
+
 	// lorsque les 2 distances sont trouvees, la plus courte sera a dessiner.
 	// draw_ray(data-, ray_len);
-	
+
 	// attention au fish eye effect ensuite.
-	
+
 	// hypothenuse = adj_x / cos(alpha)
 	// hypothenuse = sin(alpha) / adj_y
 
 
 
 
-	
+
 	draw_ray(data, 50);
 	//	dessine_le_ray(data);
 	// 	data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
@@ -156,11 +168,11 @@ void	find_ray_angle(t_vault *data)
 // 			my = (int)(ray_y) / 10;
 // 			mp = my * map_x_len + mx;
 // 			if (mp > 0 && mp < map_x_len * map_y_len && data->map->map2d[mp] == 1)
-// 			{ 
+// 			{
 // 				depth_of_field = 8;
 // 				disv = cos(degtorad(ray_a)) * (ray_x - data->player->px)
 // 					- sin(degtorad(ray_a)) * (ray_y - data->player->py);
-// 			} //hit         
+// 			} //hit
 // 			else
 // 			{
 // 				ray_x = ray_x + x_offset;
@@ -170,7 +182,7 @@ void	find_ray_angle(t_vault *data)
 // 		}
 // 		ver_x = ray_x;
 // 		ver_y = ray_y;
-		
+
 // 		// check horizontal lines
 // 		dish = 100000;
 // 		depth_of_field = 0;
@@ -201,7 +213,7 @@ void	find_ray_angle(t_vault *data)
 // 			my = (int)(ray_y) / 10;
 // 			mp = my * map_x_len + mx;
 // 			if (mp > 0 && mp < map_x_len * map_y_len && data->map->map2d[mp] == 1)
-// 			{ 
+// 			{
 // 				depth_of_field = 8;
 // 				dish = cos(degtorad(ray_a)) * (ray_x - data->player->px)
 // 					- sin(degtorad(ray_a)) * (ray_y - data->player->py);

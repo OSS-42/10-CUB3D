@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 17:52:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:00:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,5 +293,9 @@ void	rotate_right(t_vault *data);
 /***** raycasting_utils.c *****/
 float	degtorad(float angle);
 int		fix_angle(int angle);
+int		pix_to_intersection_x(t_vault *data);
+int		pix_to_intersection_y(t_vault *data);
+void	ray_len_calculator_x(t_vault *data, int distance_x);
+void	ray_len_calculator_y(t_vault *data, int distance_y);
 
 #endif
