@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 17:59:40 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/13 22:25:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	raycaster(t_vault *data)
 {
+	float	distance_x;
+	float	distance_y;
+
+	distance_x = 0;
+	distance_y = 0;
 	data->raycaster->ray_count = 0;
 	data->raycaster->ray_one_a = data->player->pa - degtorad(30);
 	// while(data->raycaster->ray_count < 60)
@@ -27,8 +32,10 @@ void	raycaster(t_vault *data)
 	// valider si next entier y (valeur/11 - 4) correspond a un '1' dans la map
 	// si oui, calculer longueur hypothenuse, break;
 	// si non, ajouter la longueur d'une case a la distance en cours et refaire validation
-	// distance_x = 1 - ((data->player->ppx - 4) / 11) - (int)((data->player->ppx - 4) / 11);
-	// distance_y = 1 - ((data->player->ppy - 4) / 11) - (int)((data->player->ppy - 4) / 11);
+	// distance_x = 11 - ((data->player->ppx - 4) / 11);
+	// printf("distance_x : %f\n", distance_x);
+	// distance_y = 11 - ((data->player->ppy - 4) / 11);
+	// printf("distance_y : %f\n", distance_y);
 	// next_case_x = data->player->ppx + distance_x;
 	// next_case_y = data->player->ppy + distance_y;
 	// if (data->map->map[next_case_y][next_case_x] == '1')
@@ -42,8 +49,8 @@ void	raycaster(t_vault *data)
 	
 	// attention au fish eye effect ensuite.
 	
-	
-
+	// hypothenuse = adj_x / cos(alpha)
+	// hypothenuse = sin(alpha) / adj_y
 
 
 
