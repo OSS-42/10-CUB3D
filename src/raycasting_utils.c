@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/14 14:27:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/14 16:04:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,6 @@ float	ray_len_calculator_x(t_vault *data, int distance_x)
 		y = data->player->py;
 	data->raycaster->next_x = x;
 	data->raycaster->next_y = y;
-	// printf("%d\n", distance_x);
-	// printf("Dans ray_len_calculator_x : \n");
-	// printf("ray_len : %f\n", ray_len);
-	// printf("position x du joueur = %.3f\n", data->player->px);
-	// printf("position y du joueur = %.3f\n", data->player->py);
-	// printf("prochaine case x = %d\n", x);
-	// printf("prochaine case y = %d\n", y);
 	return (ray_len);
 }
 
@@ -115,22 +108,13 @@ float	ray_len_calculator_y(t_vault *data, int distance_y)
 		y = data->player->py;
 	data->raycaster->next_x = x;
 	data->raycaster->next_y = y;
-	// printf("%d\n", distance_x);
-	// printf("Dans ray_len_calculator_y : \n");
-	// printf("ray_len : %f\n", ray_len);
-	// printf("position x du joueur = %.3f\n", data->player->px);
-	// printf("position y du joueur = %.3f\n", data->player->py);
-	// printf("prochaine case x = %d\n", x);
-	// printf("prochaine case y = %d\n", y);
 	return (ray_len);
 }
 
 int	wall_in_next_case(t_vault *data)
 {
+	printf("x = %d y = %d\n", data->raycaster->next_y, data->raycaster->next_x);
 	if (data->map->map[data->raycaster->next_y][data->raycaster->next_x] == '1')
-	{
-		printf("Dans wall_in_array : map[x][y] = %c", data->map->map[data->raycaster->next_y][data->raycaster->next_x]);
 		return(TRUE);
-	}
 	return (FALSE);
 }

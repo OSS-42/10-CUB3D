@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/14 14:39:43 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/14 16:17:06 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	raycaster(t_vault *data)
 {
 	int		distance_x;
 	int		distance_y;
+	char	to_compare;
 	float	ray_len_x;
 	float	ray_len_y;
 	float	ray_len;
 
 	ray_len = 0;
+	to_compare = 0;
 	data->raycaster->ray_one_a = data->player->pa - degtorad(30);
 	// while(data->raycaster->ray_count < 60)
 	// {
@@ -30,21 +32,45 @@ void	raycaster(t_vault *data)
 		ray_len_x = -1 * ray_len_calculator_x(data, distance_x);
 		ray_len_y = -1 * ray_len_calculator_y(data, distance_y);
 		if (ray_len_x <= ray_len_y)
-			ray_len = -1 * ray_len_calculator_x(data, distance_x); //Je rappel la fonction pour mettre a jour data->raysacter->next_x/y
+		{
+			printf("COMPARE = X\n");
+			ray_len = -1 * ray_len_calculator_x(data, distance_x);
+			to_compare = 'Y';
+		}
 		else if (ray_len_x > ray_len_y)
+		{
+			printf("COMPARE = Y\n");
 			ray_len = -1 * ray_len_calculator_y(data, distance_y);
-		// while(1)
+			to_compare = 'X';
+		}
+		// while(wall_in_next_case(data) == FALSE)
 		// {
-		// 	if (wall_in_next_case(data) == FALSE)
-				//Continue de déterminer la taille du rayon
-		// 	else
-		// 		break;
+			// if (to_compare == 'X')
+			// {
+			// 	printf("COMPARE = X\n");
+			// 	to_compare = 'Y';
+			// 	ray_len = -1 * ray_len_calculator_x(data, distance_x);
+			// }
+			// else if (to_compare == 'Y')
+			// {
+			// 	printf("COMPARE = Y\n");
+			// 	to_compare = 'X';
+			// 	ray_len = -1 * ray_len_calculator_y(data, distance_y);
+			// }
+			// if (data->raycaster->pdx_ray < 0)
+			// 	distance_x -= 11;
+			// else if (data->raycaster->pdx_ray > 0)
+			// 	distance_x += 11;
+			// if (data->raycaster->pdy_ray < 0)
+			// 	distance_y -= 11;
+			// else if (data->raycaster->pdy_ray > 0)
+			// 	distance_y += 11;
 		// }
-		printf("coucou\n");
 		draw_ray(data, ray_len);
-		// 	data->raycaster->ray_count++;
+		// data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
+		// data->raycaster->ray_count++;
 	// }
-	data->raycaster->ray_count = 0;
+	// data->raycaster->ray_count = 0;
 }
 
 void	draw_ray(t_vault *data, float ray_len)
@@ -56,7 +82,6 @@ void	draw_ray(t_vault *data, float ray_len)
 	len = 0;
 	x = data->player->ppx;
 	y = data->player->ppy;
-	printf("ray_len = %f", ray_len);
 	while (len < ray_len)
 	{
 		mlx_put_pixel(data->minimap->minimap, x, y, 0x00FF00FF);
