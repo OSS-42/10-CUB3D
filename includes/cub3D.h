@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/14 12:58:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/14 14:28:08 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_rays
 	float	ray_len;
 	float	ray_one_a;
 	int		ray_count;
+	int		next_x;
+	int		next_y;
 }	t_rays;
 
 typedef struct s_map
@@ -297,5 +299,6 @@ int		pix_to_intersection_x(t_vault *data);
 int		pix_to_intersection_y(t_vault *data);
 float	ray_len_calculator_x(t_vault *data, int distance_x);
 float	ray_len_calculator_y(t_vault *data, int distance_y);
+int		wall_in_next_case(t_vault *data);
 
 #endif
