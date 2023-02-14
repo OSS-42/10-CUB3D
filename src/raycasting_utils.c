@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/14 11:51:51 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/14 13:06:37 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	pix_to_intersection_y(t_vault *data)
 	return (temp);
 }
 
-void	ray_len_calculator_x(t_vault *data, int distance_x)
+float	ray_len_calculator_x(t_vault *data, int distance_x)
 {
 	int		next_case_x;
 	int		next_case_y;
@@ -86,16 +86,17 @@ void	ray_len_calculator_x(t_vault *data, int distance_x)
 	printf("position y du joueur = %.3f\n", data->player->py);
 	printf("prochaine case x = %d\n", next_case_x);
 	printf("prochaine case y = %d\n", next_case_y);
+	return (ray_len);
 }
 
-void	ray_len_calculator_y(t_vault *data, int distance_y)
+float	ray_len_calculator_y(t_vault *data, int distance_y)
 {
 	int		next_case_x;
 	int		next_case_y;
 	float	opp_side_x;
 	float	ray_len;
 
-	ray_len = sin(data->raycaster->ray_one_a) / distance_y;
+	ray_len = 1 / (sin(data->raycaster->ray_one_a) / distance_y);
 	opp_side_x = ray_len * sin(data->raycaster->ray_one_a);
 	if (data->raycaster->pdx_ray == 0)
 		next_case_x = data->player->px;
@@ -116,4 +117,5 @@ void	ray_len_calculator_y(t_vault *data, int distance_y)
 	printf("position y du joueur = %.3f\n", data->player->py);
 	printf("prochaine case x = %d\n", next_case_x);
 	printf("prochaine case y = %d\n", next_case_y);
+	return (ray_len);
 }

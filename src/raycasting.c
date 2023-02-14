@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/14 11:00:55 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/14 12:58:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	raycaster(t_vault *data)
 {
-	int	distance_x;
-	int	distance_y;
-	// float	distance_x;
-	// float	distance_y;
+	int		distance_x;
+	int		distance_y;
+	float	ray_len_x;
+	float	ray_len_y;
 
 	data->raycaster->ray_count = 0;
 	data->raycaster->ray_one_a = data->player->pa - degtorad(30);
@@ -26,8 +26,8 @@ void	raycaster(t_vault *data)
 	find_ray_angle(data);
 	distance_x = pix_to_intersection_x(data);
 	distance_y = pix_to_intersection_y(data);
-	ray_len_calculator_x(data, distance_x);
-	ray_len_calculator_y(data, distance_y);
+	ray_len_x = ray_len_calculator_x(data, distance_x);
+	ray_len_y = ray_len_calculator_y(data, distance_y);
 	if (distance_x <= distance_y)
 	{
 
