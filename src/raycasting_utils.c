@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/14 16:04:07 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/14 22:42:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,13 @@ int	pix_to_intersection_y(t_vault *data)
 	return (temp);
 }
 
-float	ray_len_calculator_x(t_vault *data, int distance_x)
+void	find_next_case_x(t_vault *data, float ray_len_x, int distance_x)
 {
 	int		x;
 	int		y;
 	float	opp_side_y;
-	float	ray_len;
 
-	ray_len = distance_x / cos(data->raycaster->ray_one_a);
-	opp_side_y = ray_len * sin(data->raycaster->ray_one_a);
+	opp_side_y = ray_len_x * sin(data->raycaster->ray_one_a);
 	if (data->raycaster->pdx_ray == 0)
 		x = data->player->px;
 	else
@@ -77,22 +75,20 @@ float	ray_len_calculator_x(t_vault *data, int distance_x)
 		y = (data->player->ppy + opp_side_y - 4) / 11;
 	if (x < 0 || x > data->map->max_lenght * 11)
 		x = data->player->px;
-	if (y < 0 || y > data->map->lines * 11 || opp_side_y < 11 || opp_side_y > data->map->lines * 11)
+	if (y < 0 || y > data->map->lines * 11 || opp_side_y < 11
+		|| opp_side_y > data->map->lines * 11)
 		y = data->player->py;
 	data->raycaster->next_x = x;
 	data->raycaster->next_y = y;
-	return (ray_len);
 }
 
-float	ray_len_calculator_y(t_vault *data, int distance_y)
+void	find_next_case_y(t_vault *data, float ray_len_y, int distance_y)
 {
 	int		x;
 	int		y;
 	float	opp_side_x;
-	float	ray_len;
 
-	ray_len = 1 / (sin(data->raycaster->ray_one_a) / distance_y);
-	opp_side_x = ray_len * sin(data->raycaster->ray_one_a);
+	opp_side_x = ray_len_y * sin(data->raycaster->ray_one_a);
 	if (data->raycaster->pdx_ray == 0)
 		x = data->player->px;
 	else
@@ -108,7 +104,6 @@ float	ray_len_calculator_y(t_vault *data, int distance_y)
 		y = data->player->py;
 	data->raycaster->next_x = x;
 	data->raycaster->next_y = y;
-	return (ray_len);
 }
 
 int	wall_in_next_case(t_vault *data)

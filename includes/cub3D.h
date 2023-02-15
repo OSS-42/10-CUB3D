@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/14 14:28:08 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/14 22:39:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,8 +297,8 @@ float	degtorad(float angle);
 int		fix_angle(int angle);
 int		pix_to_intersection_x(t_vault *data);
 int		pix_to_intersection_y(t_vault *data);
-float	ray_len_calculator_x(t_vault *data, int distance_x);
-float	ray_len_calculator_y(t_vault *data, int distance_y);
+void	find_next_case_x(t_vault *data, float ray_len_x, int distance_x);
+void	find_next_case_y(t_vault *data, float ray_len_y, int distance_y);
 int		wall_in_next_case(t_vault *data);
 
 #endif
