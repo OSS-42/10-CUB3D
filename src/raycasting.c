@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/15 11:54:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:02:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	raycaster(t_vault *data)
 		find_ray_angle(data);
 		distance_x = pix_to_intersection_x(data);
 		distance_y = pix_to_intersection_y(data);
+		data->raycaster->next_y = data->player->start_x;
+		data->raycaster->next_x = data->player->start_y;
 		ray_len_x = distance_x / cos(data->raycaster->ray_one_a);
 		if (ray_len_x < 0)
 			ray_len_x = -1 * ray_len_x;
 		ray_len_y = distance_y / cos(degtorad(90) - data->raycaster->ray_one_a);
-		if (ray_len_y < 0)
 			ray_len_y = -1 * ray_len_y;
-		data->raycaster->next_y = data->player->start_x;
-		data->raycaster->next_x = data->player->start_y;
+		if (ray_len_y < 0)
 		printf("ray_len_x : %f\n", ray_len_x);
 		printf("ray_len_y : %f\n", ray_len_y);
 		printf("distance_x : %d\n", distance_x);
