@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/15 12:02:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:03:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	raycaster(t_vault *data)
 
 	ray_len = 0;
 	data->raycaster->ray_one_a = data->player->pa - degtorad(30);
+	data->raycaster->next_y = data->player->start_x;
+	data->raycaster->next_x = data->player->start_y;
 	// while(data->raycaster->ray_count < 60)
 	// {
 		find_ray_angle(data);
 		distance_x = pix_to_intersection_x(data);
 		distance_y = pix_to_intersection_y(data);
-		data->raycaster->next_y = data->player->start_x;
-		data->raycaster->next_x = data->player->start_y;
 		ray_len_x = distance_x / cos(data->raycaster->ray_one_a);
 		if (ray_len_x < 0)
 			ray_len_x = -1 * ray_len_x;
