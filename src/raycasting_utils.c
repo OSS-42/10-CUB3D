@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/14 22:42:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:52:53 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,17 @@ int	pix_to_intersection_x(t_vault *data)
 	temp = (int)data->player->ppx;
 	while (temp % 11 != 0)
 	{
+		printf("pdx_ray : %f\n", data->raycaster->pdx_ray);
 		if (data->raycaster->pdx_ray < 0)
 			temp--;
 		else if (data->raycaster->pdx_ray > 0)
 			temp++;
+		else if (data->raycaster->pdx_ray == 0)
+			temp = (int)data->player->ppx;
 	}
 	temp = temp - (int)data->player->ppx;
+	// if (temp < 0)
+	// 	temp = -1 * temp;
 	return (temp);
 }
 
@@ -49,12 +54,17 @@ int	pix_to_intersection_y(t_vault *data)
 	temp = (int)data->player->ppy;
 	while (temp % 11 != 0)
 	{
+		printf("pdy_ray : %f\n", data->raycaster->pdy_ray);
 		if (data->raycaster->pdy_ray < 0)
 			temp--;
 		else if (data->raycaster->pdy_ray > 0)
 			temp++;
+		else if (data->raycaster->pdy_ray == 0)
+			temp = (int)data->player->ppy;
 	}
 	temp = temp - (int)data->player->ppy;
+	// if (temp < 0)
+	// 	temp = -1 * temp;
 	return (temp);
 }
 
@@ -88,7 +98,7 @@ void	find_next_case_y(t_vault *data, float ray_len_y, int distance_y)
 	int		y;
 	float	opp_side_x;
 
-	opp_side_x = ray_len_y * sin(data->raycaster->ray_one_a);
+	opp_side_x = ray_len_y * sin(degtorad(90) - data->raycaster->ray_one_a);
 	if (data->raycaster->pdx_ray == 0)
 		x = data->player->px;
 	else
@@ -108,8 +118,12 @@ void	find_next_case_y(t_vault *data, float ray_len_y, int distance_y)
 
 int	wall_in_next_case(t_vault *data)
 {
-	printf("x = %d y = %d\n", data->raycaster->next_y, data->raycaster->next_x);
-	if (data->map->map[data->raycaster->next_y][data->raycaster->next_x] == '1')
-		return(TRUE);
+	printf("map_x = %d map_y = %d\n", data->raycaster->next_y, data->raycaster->next_x);
+	if (data->map->map[data->raycaster->next_y][data->raycaster->next_x] == '1'
+		|| data->raycaster->next_y > data->map->lines
+		|| data->raycaster->next_y < 0
+		|| data->raycaster->next_x > data->map->max_lenght
+		|| data->raycaster->next_x < 0)
+		return (TRUE);
 	return (FALSE);
 }
