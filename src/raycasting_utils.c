@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/15 22:27:55 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:15:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void	find_next_case(t_vault *data, int distance_x, int distance_y)
 	if (data->raycaster->pdx_ray == 0)
 		col = data->player->px;
 	else
-		col = (data->player->ppx + distance_x) / 11;
+		col = (distance_x) / 11;
 	if (data->raycaster->pdy_ray == 0)
 		row = data->player->py;
 	else
-		row = (data->player->ppy + distance_y) / 11;
+		row = (distance_y) / 11;
 	// if (x < 0 || x > data->map->max_lenght * 11)
 	// 	x = data->player->px;
 	// if (y < 0 || y > data->map->lines * 11)
@@ -116,7 +116,7 @@ void	find_next_case(t_vault *data, int distance_x, int distance_y)
 int	wall_in_next_case(t_vault *data)
 {
 	printf("map_next_x = %d map_next_y = %d\n", data->raycaster->next_x, data->raycaster->next_y);
-	if (data->map->map[data->raycaster->next_y][data->raycaster->next_x] == '1')
+	if (data->map->map[data->raycaster->next_x][data->raycaster->next_y] == '1')
 		return (TRUE);
 	return (FALSE);
 }
