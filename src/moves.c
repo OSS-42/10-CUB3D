@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 11:08:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:18:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	reinit_minimap(t_vault *data)
 void	move_forward(t_vault *data)
 {
 	reinit_minimap(data);
-	data->player->ppx = data->player->ppx + data->player->pdx;
-	data->player->ppy = data->player->ppy + data->player->pdy;
+	data->player->ppx = data->player->ppx + data->player->pdx * 5;
+	data->player->ppy = data->player->ppy + data->player->pdy * 5;
 	draw_player(data);
 }
 
 void	move_backward(t_vault *data)
 {
 	reinit_minimap(data);
-	data->player->ppx = data->player->ppx - data->player->pdx;
-	data->player->ppy = data->player->ppy - data->player->pdy;
+	data->player->ppx = data->player->ppx - data->player->pdx * 5;
+	data->player->ppy = data->player->ppy - data->player->pdy * 5;
 	draw_player(data);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/16 11:21:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:52:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	raycaster(t_vault *data)
 	float	opp_side;
 
 	ray_len = 0;
-	data->raycaster->ray_one_a = data->player->pa - degtorad(30);
-	// while(data->raycaster->ray_count < 60)
-	// {
+	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
+	while(data->raycaster->ray_count < 64)
+	{
 		data->raycaster->next_x = data->player->start_y;
 		data->raycaster->next_y = data->player->start_x;
 		printf("########### NOUVEAU RAYON ###########\n");
@@ -57,7 +57,7 @@ void	raycaster(t_vault *data)
 				{
 					printf("coordonnees d'intersection : x_pxl = %f, y_pxl = %f\n",
 					 data->player->ppx + distance_x, data->player->ppy + opp_side);
-					find_next_case(data, data->player->ppx + distance_x - 11, data->player->ppy + opp_side);
+					find_next_case(data, data->player->ppx + distance_x - 65, data->player->ppy + opp_side);
 					ray_len = ray_len + 1;
 				}
 				else
@@ -68,9 +68,9 @@ void	raycaster(t_vault *data)
 					ray_len = ray_len - 1;
 				}
 				if (data->raycaster->pdx_ray < 0)
-					distance_x -= 11;
+					distance_x -= 65;
 				else if (data->raycaster->pdx_ray > 0)
-					distance_x += 11;
+					distance_x += 65;
 			}
 			else if (ray_len_x > ray_len_y)
 			{
@@ -82,7 +82,7 @@ void	raycaster(t_vault *data)
 				{
 					printf("coordonnees d'intersection : x_pxl = %f, y_pxl = %f\n",
 					 data->player->ppx + opp_side, data->player->ppy + distance_y);
-					find_next_case(data, data->player->ppx + opp_side, data->player->ppy + distance_y - 11);
+					find_next_case(data, data->player->ppx + opp_side, data->player->ppy + distance_y - 65);
 					ray_len = ray_len + 1;
 				}
 				else
@@ -93,16 +93,16 @@ void	raycaster(t_vault *data)
 					ray_len = ray_len - 1;
 				}
 				if (data->raycaster->pdy_ray < 0)
-					distance_y -= 11;
+					distance_y -= 65;
 				else if (data->raycaster->pdy_ray > 0)
-					distance_y += 11;
+					distance_y += 65;
 			}
 		}
 		draw_ray(data, ray_len);
-	// 	data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
-	// 	data->raycaster->ray_count++;
-	// }
-	// data->raycaster->ray_count = 0;
+		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
+		data->raycaster->ray_count++;
+	}
+	data->raycaster->ray_count = 0;
 }
 
 void	draw_ray(t_vault *data, float ray_len)
