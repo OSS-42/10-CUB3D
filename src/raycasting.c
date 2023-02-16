@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/15 22:24:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/16 09:49:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	raycaster(t_vault *data)
 	// {
 		printf("########### NOUVEAU RAYON ###########\n");
 		find_ray_angle(data);
+		printf("angle pa : %f\n", data->player->pa * 57.29578);
+		printf("ray_one_a: %f\n", data->raycaster->ray_one_a * 57.29578);
 		distance_x = pix_to_intersection_x(data);
 		distance_y = pix_to_intersection_y(data);
 		printf("coordonnees depart: ppx = %f, ppy = %f\n", data->player->ppx, data->player->ppy);
@@ -121,8 +123,8 @@ void	find_ray_angle(t_vault *data)
 		data->raycaster->ray_one_a = data->raycaster->ray_one_a + 2 * PI;
 	else if (data->raycaster->ray_one_a > 2 * PI)
 		data->raycaster->ray_one_a = data->raycaster->ray_one_a - 2 * PI;
-	data->raycaster->pdx_ray = -1 * cos(data->raycaster->ray_one_a);
-	data->raycaster->pdy_ray = -1 * sin(data->raycaster->ray_one_a);
+	data->raycaster->pdx_ray = cos(data->raycaster->ray_one_a);
+	data->raycaster->pdy_ray = sin(data->raycaster->ray_one_a);
 }
 
 void	map_double_array_to_int(t_vault *data)

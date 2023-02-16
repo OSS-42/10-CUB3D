@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/13 17:07:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/16 09:34:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	rotate_left(t_vault *data)
 	data->player->pa = data->player->pa - degtorad(5);
 	if (data->player->pa < 0)
 		data->player->pa = data->player->pa + 2 * PI;
-	data->player->pdx = -1 * cos(data->player->pa);
-	data->player->pdy = -1 * sin(data->player->pa);
+	data->player->pdx = cos(data->player->pa);
+	data->player->pdy = sin(data->player->pa);
 	draw_player(data);
 }
 
@@ -48,7 +48,7 @@ void	rotate_right(t_vault *data)
 	data->player->pa = data->player->pa + degtorad(5);
 	if (data->player->pa > 2 * PI)
 		data->player->pa = data->player->pa - 2 * PI;
-	data->player->pdx = -1 * cos(data->player->pa);
-	data->player->pdy = -1 * sin(data->player->pa);
+	data->player->pdx = cos(data->player->pa);
+	data->player->pdy = sin(data->player->pa);
 	draw_player(data);
 }
