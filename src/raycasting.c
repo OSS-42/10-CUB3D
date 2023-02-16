@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/16 09:49:01 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:00:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	raycaster(t_vault *data)
 				if (data->raycaster->pdx_ray < 0)
 				{
 					printf("coordonnees d'intersection : x_pxl = %f, y_pxl = %f\n",
-					 data->player->ppx + distance_x, data->player->ppy + (-1 * opp_side));
-					find_next_case(data, -1 * opp_side, distance_x - 11);
+					 data->player->ppx + distance_x, data->player->ppy + opp_side);
+					find_next_case(data, opp_side, distance_x - 11);
 				}
 				else
 				{
@@ -77,14 +77,14 @@ void	raycaster(t_vault *data)
 				if (data->raycaster->pdy_ray < 0)
 				{
 					printf("coordonnees d'intersection : x_pxl = %f, y_pxl = %f\n",
-					 data->player->ppx + (-1 * opp_side), data->player->ppy + distance_y);
-					find_next_case(data, distance_y - 11, -1 * opp_side);
+					 data->player->ppx + opp_side, data->player->ppy + distance_y);
+					find_next_case(data, opp_side, distance_y - 11);
 				}
 				else
 				{
 					printf("coordonnees d'intersection : x_pxl = %f, y_pxl = %f\n",
 					 data->player->ppx + opp_side, data->player->ppy + distance_y);
-					find_next_case(data, distance_y, opp_side);
+					find_next_case(data, opp_side, distance_y);
 				}
 				if (data->raycaster->pdy_ray < 0)
 					distance_y -= 11;
