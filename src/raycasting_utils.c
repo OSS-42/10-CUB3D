@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/17 10:43:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:28:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,30 +90,6 @@ void	find_next_case(t_vault *data, int distance_x, int distance_y)
 	printf("nouvelles coordonnees case 2D a verifier:\nmap_x =	%d\nmap_y =	%d\n", data->raycaster->next_x, data->raycaster->next_y);
 	printf("valeur case : %c\n", data->map->map[row][col]);
 }
-
-// void	find_next_case_y(t_vault *data, float ray_len_y, int distance_y)
-// {
-// 	int		x;
-// 	int		y;
-// 	float	opp_side_x;
-
-// 	opp_side_x = ray_len_y * sin(degtorad(90) - data->raycaster->ray_one_a);
-// 	if (data->raycaster->pdx_ray == 0)
-// 		x = data->player->px;
-// 	else
-// 		x = (data->player->ppx + distance_y) / 11;
-// 	if (data->raycaster->pdy_ray == 0)
-// 		y = data->player->py;
-// 	else
-// 		y = (data->player->ppy + opp_side_x) / 11;
-// 	if (x < 0 || x > data->map->max_lenght * 11 || opp_side_x < 11
-// 		|| opp_side_x > data->map->lines * 11)
-// 		x = data->player->px;
-// 	if (y < 0 || y > data->map->lines * 11)
-// 		y = data->player->py;
-// 	data->raycaster->next_x = x;
-// 	data->raycaster->next_y = y;
-// }
 
 int	wall_in_next_case(t_vault *data, int x, int y)
 {

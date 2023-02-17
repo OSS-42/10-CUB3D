@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/17 10:39:40 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:28:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,30 +140,4 @@ void	find_ray_angle(t_vault *data)
 		data->raycaster->ray_one_a = data->raycaster->ray_one_a - 2 * PI;
 	data->raycaster->pdx_ray = cos(data->raycaster->ray_one_a);
 	data->raycaster->pdy_ray = sin(data->raycaster->ray_one_a);
-}
-
-void	map_double_array_to_int(t_vault *data)
-{
-	int		i;
-	int		j;
-	int		k;
-	int		*temp;
-
-	i = -1;
-	k = 0;
-	temp = ft_calloc((data->map->lines * data->map->max_lenght),
-			sizeof(int));
-	while (++i < data->map->lines)
-	{
-		j = 0;
-		while (j < data->map->max_lenght)
-		{
-			temp[k] = data->map->map[i][j] - 48;
-			k++;
-			j++;
-		}
-	}
-	data->map->map2d = temp;
-	free (temp);
-	temp = NULL;
 }
