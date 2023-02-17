@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/16 22:33:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/17 10:39:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	raycaster(t_vault *data)
 		distance_y = pix_to_intersection_y(data);
 		printf("\ncoordonnees depart:\nppx =	%f\nppy =	%f\n", data->player->ppx, data->player->ppy);
 		printf("\ncoordonnees depart:\npx =	%d\npy =	%d\n", data->raycaster->next_x, data->raycaster->next_y);
-		while (wall_in_next_case(data) == FALSE)
+		while (wall_in_next_case(data, data->raycaster->next_x, data->raycaster->next_y) == FALSE)
 		{
 			printf("\33[1;96m");
 			printf("\n--------- NOUVELLE COMPARAISON ---------\n");
@@ -52,7 +52,7 @@ void	raycaster(t_vault *data)
 				ray_len_y = -1 * ray_len_y;
 			printf("ray_len_x =	%f pixels\n", ray_len_x);
 			printf("ray_len_y =	%f pixels\n", ray_len_y);
-			if (ray_len_x <= ray_len_y)
+			if (ray_len_x < ray_len_y)
 			{
 				printf("\033[1;93m");
 				printf("\nINTERCEPTION EN X -> RAY_LEN_X est le plus court\n");
@@ -79,7 +79,7 @@ void	raycaster(t_vault *data)
 				else if (data->raycaster->pdx_ray > 0)
 					distance_x += 65;
 			}
-			else if (ray_len_x > ray_len_y)
+			else
 			{
 				printf("\033[1;93m");
 				printf("\nINTERCEPTION EN Y -> RAY_LEN_Y est le plus court\n");

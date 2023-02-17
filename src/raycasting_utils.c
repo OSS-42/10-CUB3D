@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/16 22:17:06 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/17 10:43:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,13 @@ void	find_next_case(t_vault *data, int distance_x, int distance_y)
 	int		row;
 
 	if (data->raycaster->pdx_ray == 0)
-		col = data->player->px;
+		col = data->raycaster->next_y;
 	else
 		col = distance_x / 65;
 	if (data->raycaster->pdy_ray == 0)
-		row = data->player->py;
+		row = data->raycaster->next_x;
 	else
 		row = distance_y / 65;
-	// if (x < 0 || x > data->map->max_lenght * 11)
-	// 	x = data->player->px;
-	// if (y < 0 || y > data->map->lines * 11)
-	// 	y = data->player->py;
 	if (col > data->map->max_lenght)
 		col = col - 1;
 	else if (col < 0)
@@ -88,30 +84,9 @@ void	find_next_case(t_vault *data, int distance_x, int distance_y)
 	else if (row < 0)
 		row = row + 1;
 	printf("coordonnees case 2D a verifier:\nmap_x =	%d\nmap_y =	%d\n", row, col);
-	if (data->raycaster->next_x != row && data->raycaster->next_y != col
-		&& row >= 1 && col >= 1)
-	{
-		printf("\n GROS PRINTF \n");
-		printf("pdx_ray :	%f\npdy_ray :	%f\n", data->raycaster->pdx_ray, data->raycaster->pdy_ray);
-		if (data->raycaster->pdx_ray < data->raycaster->pdy_ray)
-		{
-			printf("\n GROS coucou \n");
-			data->raycaster->next_x = row;
-			data->raycaster->next_y = col - 1;
-		}
-		else
-		{
-			printf("\n GROS ciao \n");
-			data->raycaster->next_x = row - 1;
-			data->raycaster->next_y = col;
-		}
-	}
-	else
-	{
-		printf("\n GROS normal \n");
-		data->raycaster->next_x = row;
-		data->raycaster->next_y = col;
-	}
+	printf("\n GROS normal \n");
+	data->raycaster->next_x = row;
+	data->raycaster->next_y = col;
 	printf("nouvelles coordonnees case 2D a verifier:\nmap_x =	%d\nmap_y =	%d\n", data->raycaster->next_x, data->raycaster->next_y);
 	printf("valeur case : %c\n", data->map->map[row][col]);
 }
@@ -140,9 +115,9 @@ void	find_next_case(t_vault *data, int distance_x, int distance_y)
 // 	data->raycaster->next_y = y;
 // }
 
-int	wall_in_next_case(t_vault *data)
+int	wall_in_next_case(t_vault *data, int x, int y)
 {
-	if (data->map->map[data->raycaster->next_x][data->raycaster->next_y] == '1')
+	if (data->map->map[x][y] == '1')
 	{
 		printf("Suis-je un mur ? ... ");
 		printf("\033[1;32m");

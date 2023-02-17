@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/15 12:33:37 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/17 08:58:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,6 +299,6 @@ int		pix_to_intersection_x(t_vault *data);
 int		pix_to_intersection_y(t_vault *data);
 void	find_next_case(t_vault *data, int distance_x, int distance_y);
 // void	find_next_case_y(t_vault *data, float ray_len_y, int distance_y);
-int		wall_in_next_case(t_vault *data);
+int		wall_in_next_case(t_vault *data, int x, int y);
 
 #endif
