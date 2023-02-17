@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/17 12:28:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/17 16:33:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ void	find_next_case(t_vault *data, int distance_x, int distance_y)
 	int		col;
 	int		row;
 
+	// si rayons regardent en arriere, decaler le check de la case de -1
+	// if (data->raycaster->pdx_ray < 0)
+	// 	distance_x = distance_x - 65;
+	// if (data->raycaster->pdy_ray < 0)
+	// 	distance_y = distance_y - 65;
+
+	// si rayons verticaux ou horizontaux parfaitement
 	if (data->raycaster->pdx_ray == 0)
 		col = data->raycaster->next_y;
 	else
@@ -75,6 +82,8 @@ void	find_next_case(t_vault *data, int distance_x, int distance_y)
 		row = data->raycaster->next_x;
 	else
 		row = distance_y / 65;
+
+	// si rayon out of bounds
 	if (col > data->map->max_lenght)
 		col = col - 1;
 	else if (col < 0)

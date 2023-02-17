@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/17 14:40:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/17 16:03:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,26 @@ typedef struct s_player
 	void	*p_left;
 	int		start_x;
 	int		start_y;
-	float	px;
-	float	py;
-	float	ppx;
-	float	ppy;
-	float	pdx;
-	float	pdy;
-	float	pdlen;
-	float	pa;
+	int		px;
+	int		py;
+	int		ppx;
+	int		ppy;
+	double	pdx;
+	double	pdy;
+	double	pdlen;
+	double	pa;
 	char	direction;
 }	t_player;
 
 typedef struct s_rays
 {
-	float	pdx_ray;
-	float	pdy_ray;
-	float	dist_x;
-	float	dist_y;
-	float	ray_len;
-	float	ray_one_a;
+	double	pdx_ray;
+	double	pdy_ray;
+	int		dist_x;
+	int		dist_y;
+	double	ray_len;
+	double	last_ray_len;
+	double	ray_one_a;
 	int		ray_count;
 	int		next_x;
 	int		next_y;
