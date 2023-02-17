@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/17 08:58:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/17 14:40:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,6 @@ void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 void	raycaster(t_vault *data);
 void	draw_ray(t_vault *data, float ray_len);
 void	find_ray_angle(t_vault *data);
-void	map_double_array_to_int(t_vault *data);
 
 /***** init_minimap.c *****/
 void	load_minimap(t_vault *data);
@@ -298,7 +297,6 @@ int		fix_angle(int angle);
 int		pix_to_intersection_x(t_vault *data);
 int		pix_to_intersection_y(t_vault *data);
 void	find_next_case(t_vault *data, int distance_x, int distance_y);
-// void	find_next_case_y(t_vault *data, float ray_len_y, int distance_y);
 int		wall_in_next_case(t_vault *data, int x, int y);
 
 #endif

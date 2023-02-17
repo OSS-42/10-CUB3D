@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/13 11:14:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/17 14:40:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	check_map(t_vault *data)
 		ft_dbl_ptr_copy(data->map->map));
 	errors(data);
 	fill_map_void(data);
-	map_double_array_to_int(data);
 }
 
 void	find_player_start(t_vault *data)
