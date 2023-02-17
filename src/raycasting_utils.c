@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/16 16:51:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/16 22:17:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,20 @@ void	find_next_case(t_vault *data, int distance_x, int distance_y)
 	// 	x = data->player->px;
 	// if (y < 0 || y > data->map->lines * 11)
 	// 	y = data->player->py;
-	if (col > data->map->max_lenght || col < 0)
+	if (col > data->map->max_lenght)
 		col = col - 1;
-	else if (row > data->map->lines || row < 0)
+	else if (col < 0)
+		col = col + 1;
+	else if (row > data->map->lines)
 		row = row - 1;
-	printf("coordonnees case 2D a verifier: map_x = %d, map_y = %d\n", row, col);
-	if (data->raycaster->next_x != row && data->raycaster->next_y != col)
+	else if (row < 0)
+		row = row + 1;
+	printf("coordonnees case 2D a verifier:\nmap_x =	%d\nmap_y =	%d\n", row, col);
+	if (data->raycaster->next_x != row && data->raycaster->next_y != col
+		&& row >= 1 && col >= 1)
 	{
 		printf("\n GROS PRINTF \n");
-		printf("pdx_ray : %f, pdy_ray : %f\n", data->raycaster->pdx_ray, data->raycaster->pdy_ray);
+		printf("pdx_ray :	%f\npdy_ray :	%f\n", data->raycaster->pdx_ray, data->raycaster->pdy_ray);
 		if (data->raycaster->pdx_ray < data->raycaster->pdy_ray)
 		{
 			printf("\n GROS coucou \n");
@@ -107,7 +112,7 @@ void	find_next_case(t_vault *data, int distance_x, int distance_y)
 		data->raycaster->next_x = row;
 		data->raycaster->next_y = col;
 	}
-	printf("nouvelles coordonnees case 2D a verifier: map_x = %d, map_y = %d\n", data->raycaster->next_x, data->raycaster->next_y);
+	printf("nouvelles coordonnees case 2D a verifier:\nmap_x =	%d\nmap_y =	%d\n", data->raycaster->next_x, data->raycaster->next_y);
 	printf("valeur case : %c\n", data->map->map[row][col]);
 }
 
@@ -137,8 +142,17 @@ void	find_next_case(t_vault *data, int distance_x, int distance_y)
 
 int	wall_in_next_case(t_vault *data)
 {
-	printf("map_next_x = %d map_next_y = %d\n", data->raycaster->next_x, data->raycaster->next_y);
 	if (data->map->map[data->raycaster->next_x][data->raycaster->next_y] == '1')
+	{
+		printf("Suis-je un mur ? ... ");
+		printf("\033[1;32m");
+		printf("OUI\n");
+		printf("\033[1;0m");
 		return (TRUE);
+	}
+	printf("Suis-je un mur ? ... ");
+	printf("\033[1;91m");
+	printf("NON\n");
+	printf("\033[1;0m");
 	return (FALSE);
 }
