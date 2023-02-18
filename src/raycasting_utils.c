@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/17 16:33:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/18 00:16:41 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,36 +62,42 @@ int	pix_to_intersection_y(t_vault *data)
 	return (temp);
 }
 
-void	find_next_case(t_vault *data, int distance_x, int distance_y)
+void	find_next_case(t_vault *data, int intersec_x, int intersec_y, char flag)
 {
 	int		col;
 	int		row;
-
-	// si rayons regardent en arriere, decaler le check de la case de -1
-	// if (data->raycaster->pdx_ray < 0)
-	// 	distance_x = distance_x - 65;
-	// if (data->raycaster->pdy_ray < 0)
-	// 	distance_y = distance_y - 65;
 
 	// si rayons verticaux ou horizontaux parfaitement
 	if (data->raycaster->pdx_ray == 0)
 		col = data->raycaster->next_y;
 	else
-		col = distance_x / 65;
+		col = intersec_x / 65;
 	if (data->raycaster->pdy_ray == 0)
 		row = data->raycaster->next_x;
 	else
-		row = distance_y / 65;
+		row = intersec_y / 65;
 
 	// si rayon out of bounds
-	if (col > data->map->max_lenght)
-		col = col - 1;
-	else if (col < 0)
-		col = col + 1;
-	else if (row > data->map->lines)
-		row = row - 1;
-	else if (row < 0)
-		row = row + 1;
+	// if (col > data->map->max_lenght)
+	// 	col = col - 1;
+	// else if (col < 0)
+	// 	col = col + 1;
+	// else if (row > data->map->lines)
+	// 	row = row - 1;
+	// else if (row < 0)
+	// 	row = row + 1;
+
+	// si rayons regardent en arriere, decaler le check de la case de -1
+	(void)flag;
+	// if (data->raycaster->pdy_ray < 0 && flag == 'X')
+	// 	col = col + 1;
+	// else if (data->raycaster->pdy_ray < 0 && flag == 'Y')
+	// 	row = row - 1;
+	// else if (data->raycaster->pdx_ray < 0 && flag == 'X')
+	// 	col = col - 1;
+	// else if (data->raycaster->pdx_ray < 0 && flag == 'Y')
+		
+		
 	printf("coordonnees case 2D a verifier:\nmap_x =	%d\nmap_y =	%d\n", row, col);
 	printf("\n GROS normal \n");
 	data->raycaster->next_x = row;

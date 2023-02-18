@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/17 16:33:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/17 23:59:20 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	raycaster(t_vault *data)
 				printf("\033[1;93m");
 				printf("\nINTERCEPTION EN X -> RAY_LEN_X est le plus court\n");
 				printf("\033[1;0m");
+				data->raycaster->last_ray_len = ray_len;
 				ray_len = ray_len_x;
 				printf("ray_len :			%f pixels\n", ray_len);
 				opp_side = ray_len * sin(data->raycaster->ray_one_a);
@@ -60,13 +61,13 @@ void	raycaster(t_vault *data)
 				{
 					printf("coordonnees d'intersection :\nsur les x =			%d\nsur les y =			%d\n",
 					 data->player->ppx + distance_x, data->player->ppy + opp_side);
-					find_next_case(data, data->player->ppx + distance_x - 65, data->player->ppy + opp_side);
+					find_next_case(data, data->player->ppx + distance_x, data->player->ppy + opp_side, 'X');
 				}
 				else
 				{
 					printf("coordonnees d'intersection :\nsur les x =			%d\nsur les y =			%d\n",
 					 data->player->ppx + distance_x, data->player->ppy + opp_side);
-					find_next_case(data, data->player->ppx + distance_x, data->player->ppy + opp_side);
+					find_next_case(data, data->player->ppx + distance_x, data->player->ppy + opp_side, 'X');
 				}
 				if (data->raycaster->pdx_ray < 0)
 					distance_x -= 65;
@@ -78,6 +79,7 @@ void	raycaster(t_vault *data)
 				printf("\033[1;93m");
 				printf("\nINTERCEPTION EN Y -> RAY_LEN_Y est le plus court\n");
 				printf("\033[1;0m");
+				data->raycaster->last_ray_len = ray_len;
 				ray_len = ray_len_y;
 				printf("ray_len :			%f pixels\n", ray_len);
 				opp_side = ray_len * sin(degtorad(90) - data->raycaster->ray_one_a);
@@ -85,13 +87,13 @@ void	raycaster(t_vault *data)
 				{
 					printf("coordonnees d'intersection :\nsur les x =			%d\nsur les y =			%d\n",
 					 data->player->ppx + opp_side, data->player->ppy + distance_y);
-					find_next_case(data, data->player->ppx + opp_side, data->player->ppy + distance_y - 65);
+					find_next_case(data, data->player->ppx + opp_side, data->player->ppy + distance_y, 'Y');
 				}
 				else
 				{
 					printf("coordonnees d'intersection :\nsur les x =			%d\nsur les y =			%d\n",
 					 data->player->ppx + opp_side, data->player->ppy + distance_y);
-					find_next_case(data, data->player->ppx + opp_side, data->player->ppy + distance_y);
+					find_next_case(data, data->player->ppx + opp_side, data->player->ppy + distance_y, 'Y');
 				}
 				if (data->raycaster->pdy_ray < 0)
 					distance_y -= 65;
