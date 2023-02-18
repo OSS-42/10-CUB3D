@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/18 09:36:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/18 10:53:42 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,12 @@ void	find_next_case(t_vault *data, int intersec_x, int intersec_y, char flag)
 {
 	int		col;
 	int		row;
+	int		previous_col;
+	int		previous_row;
 
+	previous_col = data->raycaster->next_y;
+	previous_row = data->raycaster->next_x;
+	printf("coordonnees precedentes :\nmap_x =	%d\nmap_y =	%d\n", previous_row, previous_col);
 	// si rayons verticaux ou horizontaux parfaitement
 	if (data->raycaster->pdx_ray == 0)
 		col = data->raycaster->next_y;
@@ -76,6 +81,7 @@ void	find_next_case(t_vault *data, int intersec_x, int intersec_y, char flag)
 		row = data->raycaster->next_x;
 	else
 		row = intersec_y / 65;
+printf("coordonnees prevues :\nmap_x =	%d\nmap_y =	%d\n", row, col);
 
 	// si rayon out of bounds
 	// if (col > data->map->max_lenght)
@@ -88,15 +94,50 @@ void	find_next_case(t_vault *data, int intersec_x, int intersec_y, char flag)
 	// 	row = row + 1;
 
 	// si rayons regardent en arriere, decaler le check de la case de -1
-	// (void)flag;
 	if (data->raycaster->pdy_ray < 0 && flag == 'Y')
 		row = row - 1;
 	if (data->raycaster->pdx_ray < 0 && flag == 'X')
 		col = col - 1;
-	// else if (data->raycaster->pdx_ray < 0 && flag == 'X')
-	// 	col = col - 1;
-	// else if (data->raycaster->pdx_ray < 0 && flag == 'Y')
-		
+	if (previous_row != row && previous_col != col)
+	{
+		printf("\n GROS CHECK\n");
+		if (data->raycaster->pdx_ray < 0 && flag == 'X')
+		{
+			printf("\n GROS check #1\n");
+			if (wall_in_next_case(data, previous_row - 1, previous_col) == TRUE)
+			{
+				row = previous_row - 1;
+				col = previous_col;
+			}
+		}
+		else if (data->raycaster->pdx_ray < 0 && flag == 'Y')
+		{
+			printf("\n GROS check #2\n");
+			if (wall_in_next_case(data, previous_row, previous_col - 1) == TRUE)
+			{
+				row = previous_row;
+				col = previous_col - 1;
+			}
+		}
+		if (data->raycaster->pdy_ray < 0 && flag == 'X')
+		{
+			printf("\n GROS check #3\n");
+			if (wall_in_next_case(data, previous_row, previous_col + 1) == TRUE)
+			{
+				row = previous_row;
+				col = previous_col + 1;
+			}
+		}
+		else if (data->raycaster->pdy_ray < 0 && flag == 'Y')
+		{
+			printf("\n GROS check #4\n");
+			if (wall_in_next_case(data, previous_row + 1, previous_col) == TRUE)
+			{
+				row = previous_row + 1;
+				col = previous_col;
+			}
+		}
+	}		
 		
 	printf("coordonnees case 2D a verifier:\nmap_x =	%d\nmap_y =	%d\n", row, col);
 	printf("\n GROS normal \n");
