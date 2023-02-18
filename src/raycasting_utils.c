@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/18 00:16:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/18 09:36:41 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	find_next_case(t_vault *data, int intersec_x, int intersec_y, char flag)
 	// 	row = row + 1;
 
 	// si rayons regardent en arriere, decaler le check de la case de -1
-	(void)flag;
-	// if (data->raycaster->pdy_ray < 0 && flag == 'X')
-	// 	col = col + 1;
-	// else if (data->raycaster->pdy_ray < 0 && flag == 'Y')
-	// 	row = row - 1;
+	// (void)flag;
+	if (data->raycaster->pdy_ray < 0 && flag == 'Y')
+		row = row - 1;
+	if (data->raycaster->pdx_ray < 0 && flag == 'X')
+		col = col - 1;
 	// else if (data->raycaster->pdx_ray < 0 && flag == 'X')
 	// 	col = col - 1;
 	// else if (data->raycaster->pdx_ray < 0 && flag == 'Y')
