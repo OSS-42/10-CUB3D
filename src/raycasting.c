@@ -6,11 +6,11 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/18 19:49:39 by maison           ###   ########.fr       */
+/*   Updated: 2023/02/19 11:32:43 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+
 
 void	raycaster(t_vault *data)
 {

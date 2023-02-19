@@ -81,19 +81,21 @@ int main(int /*argc*/, char */*argv*/[])
   screen(screenWidth, screenHeight, 0, "Raycaster");
   while(!done())
   {
+    //	while(data->raycaster->ray_count < 64)
     for(int x = 0; x < w; x++)
     {
       //calculate ray position and direction
-      double cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space
+      double cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space. --Momo : 	data->raycaster->ray_one_a = data->player->pa - degtorad(32); ligne 25
       double rayDirX = dirX + planeX * cameraX;
-      double rayDirY = dirY + planeY * cameraX;
+      double rayDirY = dirY + planeY * cameraX; // 		Momo : find_ray_angle(data); ligne 33
+
       //which box of the map we're in
-      int mapX = int(posX);
-      int mapY = int(posY);
+      int mapX = int(posX); // Momo : ligne 31
+      int mapY = int(posY); // Momo : ligne 32
 
       //length of ray from current position to next x or y-side
-      double sideDistX; //Distance x
-      double sideDistY; // Distance Y
+      double sideDistX; // Ray_len_x ligne 47
+      double sideDistY; // Ray_len_Y ligne 48
 
       //length of ray from one x or y-side to next x or y-side
       //these are derived as:
