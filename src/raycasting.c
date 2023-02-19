@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/18 10:41:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:49:39 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	raycaster(t_vault *data)
 
 	ray_len = 0;
 	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
-	while(data->raycaster->ray_count < 64)
-	{
+//	while(data->raycaster->ray_count < 64)
+//	{
 		printf("\033[1;91m");
 		printf("\n\n########### NOUVEAU RAYON #%d ###########\n\n", data->raycaster->ray_count);
 		printf("\033[1;0m");
@@ -102,9 +102,9 @@ void	raycaster(t_vault *data)
 			}
 		}
 		draw_ray(data, ray_len);
-		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
-		data->raycaster->ray_count++;
-	}
+//		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
+//		data->raycaster->ray_count++;
+//	}
 	data->raycaster->ray_count = 0;
 }
 

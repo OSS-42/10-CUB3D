@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/18 10:53:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:34:51 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ printf("coordonnees prevues :\nmap_x =	%d\nmap_y =	%d\n", row, col);
 		row = row - 1;
 	if (data->raycaster->pdx_ray < 0 && flag == 'X')
 		col = col - 1;
+	data->raycaster->suposed_last_col = col;
+	data->raycaster->suposed_last_row = row;
 	if (previous_row != row && previous_col != col)
 	{
 		printf("\n GROS CHECK\n");
@@ -137,12 +139,13 @@ printf("coordonnees prevues :\nmap_x =	%d\nmap_y =	%d\n", row, col);
 				col = previous_col;
 			}
 		}
-	}		
-		
+	}
+
 	printf("coordonnees case 2D a verifier:\nmap_x =	%d\nmap_y =	%d\n", row, col);
 	printf("\n GROS normal \n");
 	data->raycaster->next_x = row;
 	data->raycaster->next_y = col;
+	printf("coordonnees supposé case 2D a verifier:\nmap_x =	%d\nmap_y =	%d\n", data->raycaster->suposed_last_row, data->raycaster->suposed_last_col);
 	printf("nouvelles coordonnees case 2D a verifier:\nmap_x =	%d\nmap_y =	%d\n", data->raycaster->next_x, data->raycaster->next_y);
 	printf("valeur case : %c\n", data->map->map[row][col]);
 }
