@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/18 20:22:54 by maison           ###   ########.fr       */
+/*   Updated: 2023/02/20 10:00:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,8 +297,8 @@ void	rotate_right(t_vault *data);
 /***** raycasting_utils.c *****/
 float	degtorad(float angle);
 int		fix_angle(int angle);
-int		pix_to_intersection_x(t_vault *data);
-int		pix_to_intersection_y(t_vault *data);
+int		ray_seg_len_x(t_vault *data, int start_x, char flag);
+int		ray_seg_len_y(t_vault *data, int start_y, char flag);
 void	find_next_case(t_vault *data, int intersec_x, int intersec_y, char flag);
 int		wall_in_next_case(t_vault *data, int x, int y);
 

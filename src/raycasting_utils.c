@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/18 20:34:51 by maison           ###   ########.fr       */
+/*   Updated: 2023/02/20 09:59:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,40 +26,46 @@ int	fix_angle(int angle)
 	return (angle);
 }
 
-int	pix_to_intersection_x(t_vault *data)
+int	ray_seg_len_x(t_vault *data, int start_x, char flag)
 {
-	int	temp;
+	int ray_len_x;
 
-	temp = (int)data->player->ppx;
-	while (temp % 65 != 0)
+	while (start_x % 65 != 0)
 	{
 		if (data->raycaster->pdx_ray < 0)
-			temp--;
+			start_x--;
 		else if (data->raycaster->pdx_ray > 0)
-			temp++;
+			start_x++;
 		else if (data->raycaster->pdx_ray == 0)
-			temp = (int)data->player->ppx;
+			start_x = (int)data->player->ppx;
 	}
-	temp = temp - (int)data->player->ppx;
-	return (temp);
+	if (flag == 'P')
+		start_x = start_x - (int)data->player->ppx;
+	else if (flag == 'R')
+		start_x = start_x - 65;
+	ray_len_x = fabs(start_x / cos(data->raycaster->ray_one_a));
+	return (ray_len_x);
 }
 
-int	pix_to_intersection_y(t_vault *data)
+int	ray_seg_len_y(t_vault *data, int start_y, char flag)
 {
-	int	temp;
+	int	ray_len_y;
 
-	temp = (int)data->player->ppy;
-	while (temp % 65 != 0)
+	while (start_y % 65 != 0)
 	{
 		if (data->raycaster->pdy_ray < 0)
-			temp--;
+			start_y--;
 		else if (data->raycaster->pdy_ray > 0)
-			temp++;
+			start_y++;
 		else if (data->raycaster->pdy_ray == 0)
-			temp = (int)data->player->ppy;
+			start_y = (int)data->player->ppy;
 	}
-	temp = temp - (int)data->player->ppy;
-	return (temp);
+	if (flag == 'P')
+		start_y = start_y - (int)data->player->ppy;
+	else if (flag == 'R')
+		start_y = start_y - 65;
+	ray_len_y = fabs(start_y / cos(degtorad(90) - data->raycaster->ray_one_a));
+	return (ray_len_y);
 }
 
 void	find_next_case(t_vault *data, int intersec_x, int intersec_y, char flag)

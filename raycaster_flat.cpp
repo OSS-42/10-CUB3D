@@ -85,7 +85,7 @@ int main(int /*argc*/, char */*argv*/[])
     for(int x = 0; x < w; x++)
     {
       //calculate ray position and direction
-      double cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space. --Momo : 	data->raycaster->ray_one_a = data->player->pa - degtorad(32); ligne 25
+      double cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space.
       double rayDirX = dirX + planeX * cameraX;
       double rayDirY = dirY + planeY * cameraX; // 		Momo : find_ray_angle(data); ligne 33
 

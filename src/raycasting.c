@@ -3,25 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/19 11:32:43 by maison           ###   ########.fr       */
+/*   Updated: 2023/02/20 10:56:21 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "../includes/cub3D.h"
 
 void	raycaster(t_vault *data)
 {
-	int		distance_x;
-	int		distance_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
 	double	ray_len_x;
 	double	ray_len_y;
 	double	ray_len;
-	int		opp_side;
+	int		opp_side_x;
+	int		opp_side_y;
+	int		map_2d_col;
+	int		map_2d_row;
+	int		col;
+	int		row;
+	int		side;
 
 	ray_len = 0;
+	side = 0;
+	col = data->player->px;
+	row = data->player->py;
 	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
 //	while(data->raycaster->ray_count < 64)
 //	{
@@ -33,72 +42,56 @@ void	raycaster(t_vault *data)
 		find_ray_angle(data);
 		printf("angle pa : %f°\n", data->player->pa * 57.29578);
 		printf("ray_one_a: %f°\n", data->raycaster->ray_one_a * 57.29578);
-		distance_x = pix_to_intersection_x(data);
-		distance_y = pix_to_intersection_y(data);
+		ray_len_x = ray_seg_len_x(data, data->player->ppx, 'P');
+		ray_len_y = ray_seg_len_y(data, data->player->ppy, 'P');
+		opp_side_x = ray_len_x * sin(data->raycaster->ray_one_a);
+		opp_side_y = ray_len_y * sin(degtorad(90) - data->raycaster->ray_one_a);
+		if (data->raycaster->pdx_ray < 0)
+		{
+			map_2d_col = -1;
+			delta_dist_x = ray_seg_len_x(data, data->player->ppx - opp_side_x, 'R');
+		}
+		else if (data->raycaster->pdx_ray > 0)
+		{
+			map_2d_col = 1;
+			delta_dist_x = ray_seg_len_x(data, data->player->ppx + opp_side_x, 'R');
+		}
+		if (data->raycaster->pdy_ray < 0)
+		{
+			map_2d_row = -1;
+			delta_dist_y = ray_seg_len_x(data, data->player->ppy - opp_side_y, 'R');
+		}
+		else if (data->raycaster->pdy_ray > 0)
+		{
+			map_2d_row = 1;
+			delta_dist_y = ray_seg_len_x(data, data->player->ppy + opp_side_y, 'R');
+		}
 		printf("\ncoordonnees depart:\nppx =	%d\nppy =	%d\n", data->player->ppx, data->player->ppy);
 		printf("\ncoordonnees depart:\npx =	%d\npy =	%d\n", data->raycaster->next_x, data->raycaster->next_y);
-		while (wall_in_next_case(data, data->raycaster->next_x, data->raycaster->next_y) == FALSE)
+		while (wall_in_next_case(data, row, col) == FALSE)
 		{
 			printf("\33[1;96m");
 			printf("\n--------- NOUVELLE COMPARAISON ---------\n");
 			printf("\033[1;0m");
-			printf("dist & orient to x gridline:	%d pixels\n", distance_x);
-			printf("dist & orient to y gridline:	%d pixels\n", distance_y);
-			ray_len_x = fabs(distance_x / cos(data->raycaster->ray_one_a));
-			ray_len_y = fabs(distance_y / cos(degtorad(90) - data->raycaster->ray_one_a));
-			printf("ray_len_x =			%f pixels\n", ray_len_x);
-			printf("ray_len_y =			%f pixels\n", ray_len_y);
 			if (ray_len_x < ray_len_y)
 			{
 				printf("\033[1;93m");
 				printf("\nINTERCEPTION EN X -> RAY_LEN_X est le plus court\n");
 				printf("\033[1;0m");
-				data->raycaster->last_ray_len = ray_len;
+				ray_len_x += delta_dist_x;
+				col += map_2d_col;
+				side = 0;
 				ray_len = ray_len_x;
-				printf("ray_len :			%f pixels\n", ray_len);
-				opp_side = ray_len * sin(data->raycaster->ray_one_a);
-				if (data->raycaster->pdx_ray < 0)
-				{
-					printf("coordonnees d'intersection :\nsur les x =			%d\nsur les y =			%d\n",
-					 data->player->ppx + distance_x, data->player->ppy + opp_side);
-					find_next_case(data, data->player->ppx + distance_x, data->player->ppy + opp_side, 'X');
-				}
-				else
-				{
-					printf("coordonnees d'intersection :\nsur les x =			%d\nsur les y =			%d\n",
-					 data->player->ppx + distance_x, data->player->ppy + opp_side);
-					find_next_case(data, data->player->ppx + distance_x, data->player->ppy + opp_side, 'X');
-				}
-				if (data->raycaster->pdx_ray < 0)
-					distance_x -= 65;
-				else
-					distance_x += 65;
 			}
 			else
 			{
 				printf("\033[1;93m");
 				printf("\nINTERCEPTION EN Y -> RAY_LEN_Y est le plus court\n");
 				printf("\033[1;0m");
-				data->raycaster->last_ray_len = ray_len;
+				ray_len_y += delta_dist_y;
+				row += map_2d_row;
+				side = 1;
 				ray_len = ray_len_y;
-				printf("ray_len :			%f pixels\n", ray_len);
-				opp_side = ray_len * sin(degtorad(90) - data->raycaster->ray_one_a);
-				if (data->raycaster->pdy_ray < 0)
-				{
-					printf("coordonnees d'intersection :\nsur les x =			%d\nsur les y =			%d\n",
-					 data->player->ppx + opp_side, data->player->ppy + distance_y);
-					find_next_case(data, data->player->ppx + opp_side, data->player->ppy + distance_y, 'Y');
-				}
-				else
-				{
-					printf("coordonnees d'intersection :\nsur les x =			%d\nsur les y =			%d\n",
-					 data->player->ppx + opp_side, data->player->ppy + distance_y);
-					find_next_case(data, data->player->ppx + opp_side, data->player->ppy + distance_y, 'Y');
-				}
-				if (data->raycaster->pdy_ray < 0)
-					distance_y -= 65;
-				else
-					distance_y += 65;
 			}
 		}
 		draw_ray(data, ray_len);
