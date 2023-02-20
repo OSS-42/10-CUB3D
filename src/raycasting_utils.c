@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/20 11:43:24 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/20 14:42:51 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ int	fix_angle(int angle)
 int	ray_seg_len_x(t_vault *data, int start_x, char flag)
 {
 	int ray_len_x;
+	int	temp;
 
+	temp = start_x;
 	while (start_x % 65 != 0)
 	{
 		if (data->raycaster->pdx_ray < 0)
@@ -42,7 +44,7 @@ int	ray_seg_len_x(t_vault *data, int start_x, char flag)
 	if (flag == 'P')
 		start_x = start_x - (int)data->player->ppx;
 	else if (flag == 'R')
-		start_x = start_x - 65;
+		start_x = start_x - temp;
 	ray_len_x = fabs(start_x / cos(data->raycaster->ray_one_a));
 	return (ray_len_x);
 }
@@ -50,7 +52,9 @@ int	ray_seg_len_x(t_vault *data, int start_x, char flag)
 int	ray_seg_len_y(t_vault *data, int start_y, char flag)
 {
 	int	ray_len_y;
+	int	temp;
 
+	temp = start_y;
 	while (start_y % 65 != 0)
 	{
 		if (data->raycaster->pdy_ray < 0)
@@ -63,8 +67,9 @@ int	ray_seg_len_y(t_vault *data, int start_y, char flag)
 	if (flag == 'P')
 		start_y = start_y - (int)data->player->ppy;
 	else if (flag == 'R')
-		start_y = start_y - 65;
+		start_y = start_y - temp;
 	ray_len_y = fabs(start_y / cos(degtorad(90) - data->raycaster->ray_one_a));
+	// ray_len_y = sqrt(1 + ())
 	return (ray_len_y);
 }
 
