@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/20 13:36:07 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/20 15:15:42 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void	raycaster(t_vault *data)
 				printf("\033[1;93m");
 				printf("\nINTERCEPTION EN X -> RAY_LEN_X est le plus court\n");
 				printf("\033[1;0m");
-				printf("ray_len_x dans la boucle = %f\n", ray_len_x);
 				ray_len_x += delta_dist_x;
+				printf("ray_len_x dans la boucle = %f\n", ray_len_x);
 				col += map_2d_col;
 				side = 0;
 				ray_len = ray_len_x;
@@ -97,8 +97,8 @@ void	raycaster(t_vault *data)
 				printf("\033[1;93m");
 				printf("\nINTERCEPTION EN Y -> RAY_LEN_Y est le plus court\n");
 				printf("\033[1;0m");
-				printf("ray_len_y dans la boucle = %f\n", ray_len_y);
 				ray_len_y += delta_dist_y;
+				printf("ray_len_y dans la boucle = %f\n", ray_len_y);
 				row += map_2d_row;
 				side = 1;
 				ray_len = ray_len_y;
@@ -141,160 +141,160 @@ void	find_ray_angle(t_vault *data)
 }
 
 
-void	raycaster(t_vault *data)
-{
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	ray_len_x;
-	double	ray_len_y;
-	double	ray_len;
-	int		opp_side_x;
-	int		opp_side_y;
-	int		map_2d_col;
-	int		map_2d_row;
-	int		col;
-	int		row;
-	int		side;
+// void	raycaster(t_vault *data)
+// {
+// 	double	delta_dist_x;
+// 	double	delta_dist_y;
+// 	double	ray_len_x;
+// 	double	ray_len_y;
+// 	double	ray_len;
+// 	int		opp_side_x;
+// 	int		opp_side_y;
+// 	int		map_2d_col;
+// 	int		map_2d_row;
+// 	int		col;
+// 	int		row;
+// 	int		side;
 
-	ray_len = 0;
-	side = 0;
-	col = data->player->px;
-	row = data->player->py;
-	delta_dist_x = 0;
-	delta_dist_y = 0;
-	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
-//	while(data->raycaster->ray_count < 64)
-//	{
-		data->raycaster->next_x = data->player->ppy / 65;
-		data->raycaster->next_y = data->player->ppx / 65;
-		find_ray_angle(data);
-		ray_len_x = ray_seg_len_x(data, data->player->ppx, 'P');
-		ray_len_y = ray_seg_len_y(data, data->player->ppy, 'P');
-		opp_side_x = ray_len_x * sin(degtorad(90) - data->raycaster->ray_one_a);
-		opp_side_y = ray_len_y * sin(data->raycaster->ray_one_a);
-		if (data->raycaster->pdx_ray < 0)
-		{
-			map_2d_col = -1;
-			delta_dist_x = ray_seg_len_x(data, data->player->ppx - opp_side_x, 'R');
-		}
-		else if (data->raycaster->pdx_ray > 0)
-		{
-			map_2d_col = 1;
-			delta_dist_x = ray_seg_len_x(data, data->player->ppx + opp_side_x, 'R');
-		}
-		if (data->raycaster->pdy_ray < 0)
-		{
-			map_2d_row = -1;
-			delta_dist_y = ray_seg_len_y(data, data->player->ppy - opp_side_y, 'R');
-		}
-		else if (data->raycaster->pdy_ray > 0)
-		{
-			map_2d_row = 1;
-			delta_dist_y = ray_seg_len_y(data, data->player->ppy + opp_side_y, 'R');
-		}
-		while (wall_in_next_case(data, row, col) == FALSE)
-		{
-			if (ray_len_x < ray_len_y)
-			{
-				ray_len_x += delta_dist_x;
-				col += map_2d_col;
-				side = 0;
-				ray_len = ray_len_x;
-			}
-			else
-			{
-				ray_len_y += delta_dist_y;
-				row += map_2d_row;
-				side = 1;
-				ray_len = ray_len_y;
-			}
-		}
-		draw_ray(data, ray_len);
-//		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
-//		data->raycaster->ray_count++;
-//	}
-	data->raycaster->ray_count = 0;
-}
+// 	ray_len = 0;
+// 	side = 0;
+// 	col = data->player->px;
+// 	row = data->player->py;
+// 	delta_dist_x = 0;
+// 	delta_dist_y = 0;
+// 	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
+// //	while(data->raycaster->ray_count < 64)
+// //	{
+// 		data->raycaster->next_x = data->player->ppy / 65;
+// 		data->raycaster->next_y = data->player->ppx / 65;
+// 		find_ray_angle(data);
+// 		ray_len_x = ray_seg_len_x(data, data->player->ppx, 'P');
+// 		ray_len_y = ray_seg_len_y(data, data->player->ppy, 'P');
+// 		opp_side_x = ray_len_x * sin(degtorad(90) - data->raycaster->ray_one_a);
+// 		opp_side_y = ray_len_y * sin(data->raycaster->ray_one_a);
+// 		if (data->raycaster->pdx_ray < 0)
+// 		{
+// 			map_2d_col = -1;
+// 			delta_dist_x = ray_seg_len_x(data, data->player->ppx - opp_side_x, 'R');
+// 		}
+// 		else if (data->raycaster->pdx_ray > 0)
+// 		{
+// 			map_2d_col = 1;
+// 			delta_dist_x = ray_seg_len_x(data, data->player->ppx + opp_side_x, 'R');
+// 		}
+// 		if (data->raycaster->pdy_ray < 0)
+// 		{
+// 			map_2d_row = -1;
+// 			delta_dist_y = ray_seg_len_y(data, data->player->ppy - opp_side_y, 'R');
+// 		}
+// 		else if (data->raycaster->pdy_ray > 0)
+// 		{
+// 			map_2d_row = 1;
+// 			delta_dist_y = ray_seg_len_y(data, data->player->ppy + opp_side_y, 'R');
+// 		}
+// 		while (wall_in_next_case(data, row, col) == FALSE)
+// 		{
+// 			if (ray_len_x < ray_len_y)
+// 			{
+// 				ray_len_x += delta_dist_x;
+// 				col += map_2d_col;
+// 				side = 0;
+// 				ray_len = ray_len_x;
+// 			}
+// 			else
+// 			{
+// 				ray_len_y += delta_dist_y;
+// 				row += map_2d_row;
+// 				side = 1;
+// 				ray_len = ray_len_y;
+// 			}
+// 		}
+// 		draw_ray(data, ray_len);
+// //		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
+// //		data->raycaster->ray_count++;
+// //	}
+// 	data->raycaster->ray_count = 0;
+// }
 
 
-void	raycaster(t_vault *data)
-{
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	ray_len_x;
-	double	ray_len_y;
-	double	ray_len;
-	// int		opp_side_x;
-	// int		opp_side_y;
-	int		map_2d_col;
-	int		map_2d_row;
-	int		col;
-	int		row;
-	int		side;
-	int		pp_seg_y;
-	int		pp_seg_x;
-	int		adj_x;
-	int		adj_y;
+// void	raycaster(t_vault *data)
+// {
+// 	double	delta_dist_x;
+// 	double	delta_dist_y;
+// 	double	ray_len_x;
+// 	double	ray_len_y;
+// 	double	ray_len;
+// 	// int		opp_side_x;
+// 	// int		opp_side_y;
+// 	int		map_2d_col;
+// 	int		map_2d_row;
+// 	int		col;
+// 	int		row;
+// 	int		side;
+// 	int		pp_seg_y;
+// 	int		pp_seg_x;
+// 	int		adj_x;
+// 	int		adj_y;
 
-	ray_len = 0;
-	side = 0;
-	col = data->player->px;
-	row = data->player->py;
-	delta_dist_x = 0;
-	delta_dist_y = 0;
-	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
-	pp_seg_x = data->player->ppx % 65;
-	pp_seg_y = data->player->ppy % 65;
-//	while(data->raycaster->ray_count < 64)
-//	{
-		data->raycaster->next_x = data->player->ppy / 65;
-		data->raycaster->next_y = data->player->ppx / 65;
-		find_ray_angle(data);
-		ray_len_x = ray_seg_len_x(data, data->player->ppx, 'P');
-		ray_len_y = ray_seg_len_y(data, data->player->ppy, 'P');
-		// opp_side_x = ray_len_x * sin(degtorad(90) - data->raycaster->ray_one_a);
-		// opp_side_y = ray_len_y * sin(data->raycaster->ray_one_a);
-		if (data->raycaster->pdx_ray < 0)
-		{
-			map_2d_col = -1;
+// 	ray_len = 0;
+// 	side = 0;
+// 	col = data->player->px;
+// 	row = data->player->py;
+// 	delta_dist_x = 0;
+// 	delta_dist_y = 0;
+// 	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
+// 	pp_seg_x = data->player->ppx % 65;
+// 	pp_seg_y = data->player->ppy % 65;
+// //	while(data->raycaster->ray_count < 64)
+// //	{
+// 		data->raycaster->next_x = data->player->ppy / 65;
+// 		data->raycaster->next_y = data->player->ppx / 65;
+// 		find_ray_angle(data);
+// 		ray_len_x = ray_seg_len_x(data, data->player->ppx, 'P');
+// 		ray_len_y = ray_seg_len_y(data, data->player->ppy, 'P');
+// 		// opp_side_x = ray_len_x * sin(degtorad(90) - data->raycaster->ray_one_a);
+// 		// opp_side_y = ray_len_y * sin(data->raycaster->ray_one_a);
+// 		if (data->raycaster->pdx_ray < 0)
+// 		{
+// 			map_2d_col = -1;
 
-			delta_dist_x = ray_seg_len_x(data, data->player->ppx - opp_side_x, 'R');
-		}
-		else if (data->raycaster->pdx_ray > 0)
-		{
-			map_2d_col = 1;
-			delta_dist_x = ray_seg_len_x(data, data->player->ppx + opp_side_x, 'R');
-		}
-		if (data->raycaster->pdy_ray < 0)
-		{
-			map_2d_row = -1;
-			delta_dist_y = ray_seg_len_y(data, data->player->ppy - opp_side_y, 'R');
-		}
-		else if (data->raycaster->pdy_ray > 0)
-		{
-			map_2d_row = 1;
-			delta_dist_y = ray_seg_len_y(data, data->player->ppy + opp_side_y, 'R');
-		}
-		while (wall_in_next_case(data, row, col) == FALSE)
-		{
-			if (ray_len_x < ray_len_y)
-			{
-				ray_len_x += delta_dist_x;
-				col += map_2d_col;
-				side = 0;
-				ray_len = ray_len_x;
-			}
-			else
-			{
-				ray_len_y += delta_dist_y;
-				row += map_2d_row;
-				side = 1;
-				ray_len = ray_len_y;
-			}
-		}
-		draw_ray(data, ray_len);
-//		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
-//		data->raycaster->ray_count++;
-//	}
-	data->raycaster->ray_count = 0;
-}
+// 			delta_dist_x = ray_seg_len_x(data, data->player->ppx - opp_side_x, 'R');
+// 		}
+// 		else if (data->raycaster->pdx_ray > 0)
+// 		{
+// 			map_2d_col = 1;
+// 			delta_dist_x = ray_seg_len_x(data, data->player->ppx + opp_side_x, 'R');
+// 		}
+// 		if (data->raycaster->pdy_ray < 0)
+// 		{
+// 			map_2d_row = -1;
+// 			delta_dist_y = ray_seg_len_y(data, data->player->ppy - opp_side_y, 'R');
+// 		}
+// 		else if (data->raycaster->pdy_ray > 0)
+// 		{
+// 			map_2d_row = 1;
+// 			delta_dist_y = ray_seg_len_y(data, data->player->ppy + opp_side_y, 'R');
+// 		}
+// 		while (wall_in_next_case(data, row, col) == FALSE)
+// 		{
+// 			if (ray_len_x < ray_len_y)
+// 			{
+// 				ray_len_x += delta_dist_x;
+// 				col += map_2d_col;
+// 				side = 0;
+// 				ray_len = ray_len_x;
+// 			}
+// 			else
+// 			{
+// 				ray_len_y += delta_dist_y;
+// 				row += map_2d_row;
+// 				side = 1;
+// 				ray_len = ray_len_y;
+// 			}
+// 		}
+// 		draw_ray(data, ray_len);
+// //		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
+// //		data->raycaster->ray_count++;
+// //	}
+// 	data->raycaster->ray_count = 0;
+// }
