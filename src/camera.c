@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/16 09:34:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:17:31 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	rotate_left(t_vault *data)
 	data->player->pdx = cos(data->player->pa);
 	data->player->pdy = sin(data->player->pa);
 	draw_player(data);
+	raycaster(data);
 }
 
 void	rotate_right(t_vault *data)
@@ -51,4 +52,5 @@ void	rotate_right(t_vault *data)
 	data->player->pdx = cos(data->player->pa);
 	data->player->pdy = sin(data->player->pa);
 	draw_player(data);
+	raycaster(data);
 }

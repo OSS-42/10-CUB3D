@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 14:05:40 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/21 14:34:37 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ void	raycaster(t_vault *data)
 	int				pixels_2d; // compteur pour le plan largeur de la fenetre
 	int				impact; // equivaut a 'hit'
 	int				side; // quel coté du mur est touché
-	// int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
-	// int				wall_start; // pixel de depart du dessin du mur
-	// int				wall_end; // pixel de fin du dessin du mur
-	// unsigned int	wall_color; // couleur du mur
+	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
+	int				wall_start; // pixel de depart du dessin du mur
+	int				wall_end; // pixel de fin du dessin du mur
+	unsigned int	wall_color; // couleur du mur
 
 	pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
 	impact = 0;
 	ray_len = 0;
 	side = 0;
-	// while (pixels_2d < WIDTH)
-	// {
+	while (pixels_2d < WIDTH)
+	{
 		printf("\033[1;91m");
 		printf("\n\n########### NOUVEAU RAYON ###########\n\n");
 		printf("\033[1;0m");
@@ -55,8 +55,8 @@ void	raycaster(t_vault *data)
 		// est commenté car repris en dessous dans des if pour eviter division par 0
 
 		// map position
-		col = data->player->py;
-		row = data->player->px;
+		col = data->player->px;
+		row = data->player->py;
 		printf("\nposition map 2D:\n");
 		printf("row (x) : %d\n", row);
 		printf("col (y) : %d\n", col);
@@ -109,7 +109,8 @@ void	raycaster(t_vault *data)
 			if (ray_len_x < ray_len_y)
 			{
 				ray_len_x = ray_len_x + delta_dist_x;
-				row = row + map_2d_row;
+				// row = row + map_2d_row;
+				col = col + map_2d_col;
 				if (data->raycaster->pdx_ray < 0) // quel cote de mur touche ? EST --> 0, OUEST --> 1
 					side = 1;
 				else
@@ -118,14 +119,15 @@ void	raycaster(t_vault *data)
 			else
 			{
 				ray_len_y = ray_len_y + delta_dist_y;
-				col = col + map_2d_col;
+				// col = col + map_2d_col;
+				row = row + map_2d_row;
 				if (data->raycaster->pdy_ray < 0) // quel cote de mur touche ? NORD --> 3, SUD --> 2
 					side = 2;
 				else
 					side = 3;
 			}
 			//Check if ray has hit a wall
-			if (data->map->map[row][col] > 0)
+			if (data->map->map[row][col] == '1')
 			{
 				printf("\nSuis-je un mur ? ... \n");
 				printf("row (x) : %d\n", row);
@@ -157,17 +159,17 @@ void	raycaster(t_vault *data)
 		draw_ray_minimap(data, ray_len); // pour la minimap
 
 		// //Calculate height of line to draw on screen
-		// wall_height = (int)(HEIGHT / ray_len);
+		wall_height = (int)(HEIGHT / ray_len);
 
-		// //calculate lowest and highest pixel to fill in current stripe
-		// wall_start = -wall_height / 2 + HEIGHT / 2;
-		// if (wall_start < 0)
-		// 	wall_start = 0;
-		// wall_end = wall_height / 2 + HEIGHT / 2;
-		// if (wall_end >= HEIGHT)
-		// 	wall_end = HEIGHT - 1;
+		//calculate lowest and highest pixel to fill in current stripe
+		wall_start = -wall_height / 2 + HEIGHT / 2;
+		if (wall_start < 0)
+			wall_start = 0;
+		wall_end = wall_height / 2 + HEIGHT / 2;
+		if (wall_end >= HEIGHT)
+			wall_end = HEIGHT - 1;
 
-		//choose wall color
+		// choose wall color
 		// ColorRGB color;
 		// switch(worldMap[mapX][mapY])
 		// {
@@ -178,21 +180,21 @@ void	raycaster(t_vault *data)
 		// 	default: color = RGB_Yellow; break; //yellow
 		// }
 
-		//give x and y sides different brightness
-		// if (side == 1)
-		// 	wall_color = YELLOW;
-		// else if (side == 2)
-		// 	wall_color = GREEN;
-		// else if (side == 3)
-		// 	wall_color = BLUE;
-		// else if (side == 4)
-		// 	wall_color = RED;
+		// give x and y sides different brightness
+		if (side == 1)
+			wall_color = YELLOW;
+		else if (side == 2)
+			wall_color = GREEN;
+		else if (side == 3)
+			wall_color = BLUE;
+		else if (side == 4)
+			wall_color = RED;
 
-		//draw the pixels of the stripe as a vertical line
-		// draw_wall_3d(data, wall_start, wall_end, screen_2d_x, wall_color);
+		// draw the pixels of the stripe as a vertical line
+		draw_wall_3d(data, wall_start, wall_end, screen_2d_x, wall_color);
 
-		// pixels_2d++;
-	// }
+		pixels_2d++;
+	}
 }
 
 void	draw_wall_3d(t_vault *data, int wall_start, int wall_end, int  screen_2d_x, unsigned int wall_color)
