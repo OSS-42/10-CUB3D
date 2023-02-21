@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:26:47 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/07 22:12:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/21 10:09:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	map_to_new_array(t_vault *data, int i)
 		i++;
 	}
 	map_max_lenght(data);
+	data->map->temp_map = ft_dbl_ptr_copy(data->map->map);
 	data->map->lines = line;
 	data->lines = line;
 }

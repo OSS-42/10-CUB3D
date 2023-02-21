@@ -1,0 +1,30 @@
+
+
+WE       assets/tile_wall_window_left.xpm
+
+     NO assets/tile_wall_window_bottom.xpm
+
+F 220,100,10
+
+SO assets/tile_wall_window_right.xpm
+
+EA assets/tile_wall_window_top.xpm
+
+
+
+
+
+C     225,30,0
+
+
+
+
+111111111
+100000001
+101000101
+100000001  111
+1000N0001  101
+100000001  111
+101000101
+100000001
+111111111

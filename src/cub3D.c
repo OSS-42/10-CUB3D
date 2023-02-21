@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/16 15:07:54 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/21 10:13:53 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 // data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true);
 int	create_game(t_vault *data)
 {
-	data->width = 1920;
-	data->height = 1080;
+	data->width = 1020;
+	data->height = 780;
 	data->mlx = mlx_init(data->width, data->height,
-			"Une autre journée à 42 Québec !", true);
+			"Une autre journée à 42 Québec !", false);
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
@@ -104,5 +104,6 @@ int	main(int argc, char **argv)
 	check_map(&data);
 	errors(&data);
 	create_game(&data);
+	system("leaks cub3D");
 	return (0);
 }

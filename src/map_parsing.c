@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/17 14:40:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/21 10:32:19 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	check_map(t_vault *data)
 	find_player_start(data);
 	errors(data);
 	flood_fill(data, data->player->start_x, data->player->start_y,
-		ft_dbl_ptr_copy(data->map->map));
+		data->map->temp_map);
+	ft_dbl_ptr_free((void **)data->map->temp_map);
 	errors(data);
 	fill_map_void(data);
 }
@@ -101,6 +102,7 @@ void	fill_rest_of_line(t_vault *data, int x)
 		temp[y] = '2';
 		y++;
 	}
+	free(data->map->map[x]);
 	data->map->map[x] = ft_strdup(temp);
 	printf("%s\n", data->map->map[x]);
 	free (temp);
