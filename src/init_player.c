@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/20 22:51:13 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/20 23:06:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,4 @@ void	draw_player(t_vault *data)
 	mlx_put_pixel(data->minimap->minimap,
 		data->player->ppx - 1, data->player->ppy, 0x00FF00FF);
 	draw_pov(data);
-	raycaster(data);
 }

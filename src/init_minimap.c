@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/20 22:24:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/20 23:08:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	draw_tiles(t_vault *data,
 	int	end_y;
 
 	rows = screen_y;
-	end_x = screen_x + 64;
-	end_y = screen_y + 64;
+	end_x = screen_x + TILE - 1;
+	end_y = screen_y + TILE - 1;
 	while (rows < end_y)
 	{
 		cols = screen_x;

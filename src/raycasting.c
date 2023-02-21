@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/20 23:00:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/20 23:26:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,21 @@ void	raycaster(t_vault *data)
 	plane_x = 0;
 	plane_y = 0.66;
 	impact = 0;
+	ray_len = 0;
 	side = 0;
 	while (pixels_2d < WIDTH)
 	{
+		printf("\033[1;91m");
+		printf("\n\n########### NOUVEAU RAYON #%d ###########\n\n", data->raycaster->ray_count);
+		printf("\033[1;0m");
 		//calculate ray position and direction
 		screen_2d_x = 2 * data->player->ppx / WIDTH - 1; // de -1 a +1
 		data->raycaster->pdx_ray = data->player->pdx + plane_x * screen_2d_x;
 		data->raycaster->pdy_ray = data->player->pdy + plane_y * screen_2d_x;
-
+		printf("\nposition x sur plan camera : %f\n", screen_2d_x);
+		printf("rayDirX : %f\n", data->raycaster->pdx_ray);
+		printf("rayDirY : %f\n", data->raycaster->pdy_ray);
+		
 		// from sqrt formula to....
 		// delta_dist_x = abs(1 / data->raycaster->pdx_ray);
 		// delta_dist_y = abs(1 / data->raycaster->pdy_ray);
@@ -54,6 +61,9 @@ void	raycaster(t_vault *data)
 		// map position
 		col = data->player->py;
 		row = data->player->px;
+		printf("\nposition map 2D:\n");
+		printf("row (x) : %d\n", row);
+		printf("col (y) : %d\n", col);
 
 		// distance entre les cases de la grille (la longueur ne compte pas encore, seulement le ratio)
 		if (data->raycaster->pdx_ray == 0)
@@ -65,6 +75,9 @@ void	raycaster(t_vault *data)
 			delta_dist_y = 1e30;
 		else
 			delta_dist_y = fabs(1 / data->raycaster->pdy_ray);
+		printf("\nMesure segment suivant :\n");
+		printf("deltaDistX : %f\n", delta_dist_x);
+		printf("deltaDistY : %f\n", delta_dist_y);
 
 		// calcul des mouvemements dans la carte 2D et distance entre le joueur et la 1ere intersection
 		if (data->raycaster->pdx_ray < 0)
@@ -87,6 +100,9 @@ void	raycaster(t_vault *data)
 			map_2d_col = 1;
 			ray_len_y = (col + 1.0 - data->player->px) * delta_dist_y;
 		}
+		printf("\nLongueur rayon initial :\n");
+		printf("sideDistX (ray_len_x) : %f\n", ray_len_x);
+		printf("sideDistY (ray_len_y) : %f\n", ray_len_y);
 
 		// perform DDA (calcul longueur total du rayon)
 		while (impact == 0)
@@ -112,7 +128,25 @@ void	raycaster(t_vault *data)
 			}
 			//Check if ray has hit a wall
 			if (data->map->map[row][col] > 0)
+			{
+				printf("\nSuis-je un mur ? ... \n");
+				printf("row (x) : %d\n", row);
+				printf("col (y) : %d\n", col);
+				printf("\033[1;32m");
+				printf("OUI\n");
+				printf("\033[1;0m");
 				impact = 1;
+			}
+			else
+			{
+				printf("\nSuis-je un mur ? ... \n");
+				printf("row (x) : %d\n", row);
+				printf("col (y) : %d\n", col);
+				printf("\033[1;91m");
+				printf("NON\n");
+				printf("\033[1;0m");
+				impact = 0;
+			}
 		} 			
 
 		draw_ray_minimap(data, ray_len); // pour la minimap
@@ -124,10 +158,10 @@ void	raycaster(t_vault *data)
 		else
 			ray_len = (ray_len_y - delta_dist_y);
 
-		//Calculate height of line to draw on screen
+		// //Calculate height of line to draw on screen
 		wall_height = (int)(HEIGHT / ray_len);
 
-		//calculate lowest and highest pixel to fill in current stripe
+		// //calculate lowest and highest pixel to fill in current stripe
 		wall_start = -wall_height / 2 + HEIGHT / 2;
 		if (wall_start < 0)
 			wall_start = 0;
@@ -165,14 +199,11 @@ void	raycaster(t_vault *data)
 
 void	draw_wall_3d(t_vault *data, int wall_start, int wall_end, int  screen_2d_x, unsigned int wall_color)
 {
-	int	start;
-
-	start = wall_start;
-	while (start < wall_end)
+	while (wall_start < wall_end)
 	{
-		printf("coucou #%d\n", start);
-		mlx_put_pixel(data->game->ddd, start, screen_2d_x, wall_color);
-		start++;
+		printf("coucou #%d\n", wall_start);
+		mlx_put_pixel(data->game->ddd, screen_2d_x, wall_start, wall_color);
+		wall_start++;
 	}
 }
 

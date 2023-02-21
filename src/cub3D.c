@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/20 22:53:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/20 23:06:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	create_game(t_vault *data)
 	load_hud(data);
 	load_minimap(data);
 	load_player(data);
+	raycaster(data);
 	mlx_loop(data->mlx);
 	mlx_delete_image(data->mlx, data->minimap->minimap);
 	mlx_terminate(data->mlx);
