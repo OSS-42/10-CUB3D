@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/20 10:00:56 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/21 09:32:27 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_rays
 typedef struct s_map
 {
 	char	**map;
+	char	**temp_map;
 	int		*map2d;
 	int		lines;
 	int		max_lenght;

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/20 15:28:13 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/21 10:13:53 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ int	main(int argc, char **argv)
 	check_map(&data);
 	errors(&data);
 	create_game(&data);
+	system("leaks cub3D");
 	return (0);
 }
