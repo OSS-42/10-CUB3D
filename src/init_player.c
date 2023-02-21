@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 13:21:33 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/21 16:16:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,16 @@ void	load_player(t_vault *data)
 
 void	init_player(t_vault *data)
 {
-	data->player->px = data->player->start_x;
-	data->player->py = data->player->start_y;
-	data->player->ppx = data->player->px * TILE + P_OFFSET;
-	data->player->ppy = data->player->py * TILE + P_OFFSET;
+	data->player->row = data->player->start_x + 0.5;
+	data->player->col = data->player->start_y + 0.5;
+	data->player->ppx = data->player->row * TILE;
+	data->player->ppy = data->player->col * TILE;
 }
 
 void	find_orientation(t_vault *data, char direction)
 {
 	if (direction == 'N')
 	{
-		data->player->pa = 3 * PI / 2;
 		data->player->pdx = 0;
 		data->player->pdy = -1;
 		data->raycaster->plane_x = 0.66;
@@ -40,7 +39,6 @@ void	find_orientation(t_vault *data, char direction)
 	}
 	else if (direction == 'S')
 	{
-		data->player->pa = PI / 2;
 		data->player->pdx = 0;
 		data->player->pdy = 1;
 		data->raycaster->plane_x = -0.66;
@@ -48,7 +46,6 @@ void	find_orientation(t_vault *data, char direction)
 	}
 	else if (direction == 'E')
 	{
-		data->player->pa = 0;
 		data->player->pdx = 1;
 		data->player->pdy = 0;
 		data->raycaster->plane_x = 0;
@@ -56,7 +53,6 @@ void	find_orientation(t_vault *data, char direction)
 	}
 	else if (direction == 'W')
 	{
-		data->player->pa = PI;
 		data->player->pdx = -1;
 		data->player->pdy = 0;
 		data->raycaster->plane_x = -0.66;
@@ -66,6 +62,8 @@ void	find_orientation(t_vault *data, char direction)
 
 void	draw_player(t_vault *data)
 {
+	data->player->ppx = data->player->row * TILE;
+	data->player->ppy = data->player->col * TILE;
 	mlx_put_pixel(data->minimap->minimap,
 		data->player->ppx, data->player->ppy, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap,

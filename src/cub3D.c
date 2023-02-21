@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 14:15:57 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/21 16:24:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_S
 		&& (keydata.action == MLX_REPEAT  || keydata.action == MLX_PRESS))
 		move_backward(data);
-	// if (keydata.key == MLX_KEY_A
-	//		&& (keydata.action == MLX_REPEAT  || keydata.action == MLX_PRESS))
-	// 	move_left(data);
-	// if (keydata.key == MLX_KEY_D
-	//		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-	// 	move_right(data);
+	if (keydata.key == MLX_KEY_A
+			&& (keydata.action == MLX_REPEAT  || keydata.action == MLX_PRESS))
+		move_left(data);
+	if (keydata.key == MLX_KEY_D
+			&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+		move_right(data);
 	if (keydata.key == MLX_KEY_LEFT
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		rotate_left(data);
@@ -71,7 +71,7 @@ void	init_data(t_vault *data, char **argv)
 {
 	data->argv = argv[1];
 	data->player = ft_calloc(1, sizeof(t_player));
-	data->lvl1 = ft_calloc(1, sizeof(t_level));
+	// data->lvl1 = ft_calloc(1, sizeof(t_level));
 	data->minimap = ft_calloc(1, sizeof(t_minimap));
 	data->scene_param = ft_calloc(1, sizeof(t_param));
 	data->map = ft_calloc(1, sizeof(t_map));
@@ -86,6 +86,8 @@ void	init_data(t_vault *data, char **argv)
 	data->scene_param->r_floor = -1;
 	data->scene_param->g_floor = -1;
 	data->scene_param->b_floor = -1;
+	data->raycaster->mov_speed = 0.15;
+	data->raycaster->rot_speed = 0.15;
 }
 
 int	main(int argc, char **argv)

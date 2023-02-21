@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 14:17:31 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/21 15:50:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	draw_pov(t_vault *data)
 	len = 0;
 	x = data->player->ppx;
 	y = data->player->ppy;
-	data->player->pdlen = 10;
-	while (len < data->player->pdlen)
+	while (len < 10)
 	{
 		mlx_put_pixel(data->minimap->minimap, x, y, 0xFF00FFFF);
 		x = x + data->player->pdx;
@@ -33,24 +32,35 @@ void	draw_pov(t_vault *data)
 
 void	rotate_left(t_vault *data)
 {
+	double	old_player_pdx;
+	double	old_plane_x;
+	
+	old_player_pdx = data->player->pdx;
+	data->player->pdx = data->player->pdx * cos(-data->raycaster->rot_speed) - data->player->pdy * sin(-data->raycaster->rot_speed);
+	data->player->pdy = old_player_pdx * sin(-data->raycaster->rot_speed) + data->player->pdy * cos(-data->raycaster->rot_speed);
+	old_plane_x = data->raycaster->plane_x;
+	data->raycaster->plane_x = data->raycaster->plane_x * cos(-data->raycaster->rot_speed) - data->raycaster->plane_y * sin(-data->raycaster->rot_speed);
+	data->raycaster->plane_y = old_plane_x * sin(-data->raycaster->rot_speed) + data->raycaster->plane_y * cos(-data->raycaster->rot_speed);
+	
 	reinit_minimap(data);
-	data->player->pa = data->player->pa - degtorad(5);
-	if (data->player->pa < 0)
-		data->player->pa = data->player->pa + 2 * PI;
-	data->player->pdx = cos(data->player->pa);
-	data->player->pdy = sin(data->player->pa);
 	draw_player(data);
 	raycaster(data);
 }
 
 void	rotate_right(t_vault *data)
 {
+	double	old_player_pdx;
+	double	old_plane_x;
+	
 	reinit_minimap(data);
-	data->player->pa = data->player->pa + degtorad(5);
-	if (data->player->pa > 2 * PI)
-		data->player->pa = data->player->pa - 2 * PI;
-	data->player->pdx = cos(data->player->pa);
-	data->player->pdy = sin(data->player->pa);
+	
+	old_player_pdx = data->player->pdx;
+	data->player->pdx = data->player->pdx * cos(data->raycaster->rot_speed) - data->player->pdy * sin(data->raycaster->rot_speed);
+	data->player->pdy = old_player_pdx * sin(data->raycaster->rot_speed) + data->player->pdy * cos(data->raycaster->rot_speed);
+	old_plane_x = data->raycaster->plane_x;
+	data->raycaster->plane_x = data->raycaster->plane_x * cos(data->raycaster->rot_speed) - data->raycaster->plane_y * sin(data->raycaster->rot_speed);
+	data->raycaster->plane_y = old_plane_x * sin(data->raycaster->rot_speed) + data->raycaster->plane_y * cos(data->raycaster->rot_speed);
+	
 	draw_player(data);
 	raycaster(data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 14:15:52 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/21 16:05:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # define WIDTH 1020
 # define HEIGHT 780
 # define TILE 11
-# define P_OFFSET 4
 # define RED 0xFF0000FF
 # define YELLOW 0xFFFF00FF
 # define GREEN 0x00FF00FF
@@ -50,28 +49,33 @@ typedef struct s_player
 	void	*p_left;
 	int		start_x;
 	int		start_y;
-	double	px;
-	double	py;
+	double	row;
+	double	col;
 	int		ppx;
 	int		ppy;
 	double	pdx;
 	double	pdy;
-	double	pdlen;
-	double	pa;
+	// double	pdlen;
+	// double	pa;
 	char	direction;
 }	t_player;
 
+// plane_x du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
+// plane_y du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
 typedef struct s_rays
 {
 	double	pdx_ray;
 	double	pdy_ray;
-	int		dist_x;
-	int		dist_y;
+	// int		dist_x;
+	// int		dist_y;
 	double	ray_len;
 	double	last_ray_len;
-	double	ray_one_a;
-	double	plane_x; // y du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
-	double	plane_y; // x du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
+	// double	ray_one_a;
+	double	plane_x;
+	double	plane_y;
+	double	rot_speed;
+	double	mov_speed;
+	double	height_3d;
 }	t_rays;
 
 typedef struct s_map
@@ -111,30 +115,30 @@ typedef struct s_hud
 	mlx_image_t	*hud;
 }	t_hud;
 
-typedef struct s_level
-{
-	void		*corner_1;
-	void		*corner_2;
-	void		*corner_3;
-	void		*corner_4;
-	void		*wall_left;
-	void		*wall_right;
-	void		*wall_top;
-	void		*wall_bottom;
-	void		*floor;
-	void		*pilar;
-	void		*collect;
-	void		*start;
-	void		*exit;
-	int			x;
-	int			y;
-	int			img_x;
-	int			img_y;
-	mlx_image_t	*floor_img;
-	mlx_image_t	*wall_img;
-	mlx_image_t	*player_img;
-	mlx_image_t	*void_img;
-}	t_level;
+// typedef struct s_level
+// {
+// 	void		*corner_1;
+// 	void		*corner_2;
+// 	void		*corner_3;
+// 	void		*corner_4;
+// 	void		*wall_left;
+// 	void		*wall_right;
+// 	void		*wall_top;
+// 	void		*wall_bottom;
+// 	void		*floor;
+// 	void		*pilar;
+// 	void		*collect;
+// 	void		*start;
+// 	void		*exit;
+// 	int			x;
+// 	int			y;
+// 	int			img_x;
+// 	int			img_y;
+// 	mlx_image_t	*floor_img;
+// 	mlx_image_t	*wall_img;
+// 	mlx_image_t	*player_img;
+// 	mlx_image_t	*void_img;
+// }	t_level;
 
 typedef struct s_param
 {
@@ -178,7 +182,7 @@ typedef struct s_vault
 	int			lenght;
 	int			p_dir;
 	t_player	*player;
-	t_level		*lvl1;
+	// t_level		*lvl1;
 	t_param		*scene_param;
 	t_map		*map;
 	t_point		*size;
@@ -280,7 +284,7 @@ void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);
 void	draw_ray_minimap(t_vault *data, float ray_len);
-void	find_ray_angle(t_vault *data);
+// void	find_ray_angle(t_vault *data);
 void	draw_wall_3d(t_vault *data, int wall_start, int wall_end, int  screen_2d_x, unsigned int wall_color);
 
 /***** init_minimap.c *****/
