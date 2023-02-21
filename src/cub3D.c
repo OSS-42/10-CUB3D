@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 10:13:53 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/21 14:15:57 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,17 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 // data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true);
 int	create_game(t_vault *data)
 {
-	data->width = 1020;
-	data->height = 780;
-	data->mlx = mlx_init(data->width, data->height,
+	data->mlx = mlx_init(WIDTH, HEIGHT,
 			"Une autre journée à 42 Québec !", false);
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
+	load_3d(data);
 	load_hud(data);
 	load_minimap(data);
 	load_player(data);
-	// data->game->ddd = mlx_new_image(data->mlx, 0, 0);
+	raycaster(data);
 	mlx_loop(data->mlx);
 	mlx_delete_image(data->mlx, data->minimap->minimap);
 	mlx_terminate(data->mlx);
