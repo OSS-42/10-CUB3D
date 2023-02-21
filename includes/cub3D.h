@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/20 22:48:10 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:01:42 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_player
 	void	*p_left;
 	int		start_x;
 	int		start_y;
-	int		px;
-	int		py;
+	double	px;
+	double	py;
 	int		ppx;
 	int		ppy;
 	double	pdx;
@@ -70,11 +70,8 @@ typedef struct s_rays
 	double	ray_len;
 	double	last_ray_len;
 	double	ray_one_a;
-	int		ray_count;
-	int		next_x;
-	int		next_y;
-	int		suposed_last_col;
-	int		suposed_last_row;
+	double	plane_x; // y du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
+	double	plane_y; // x du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
 }	t_rays;
 
 typedef struct s_map
