@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/16 16:27:01 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/20 22:51:13 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	init_player(t_vault *data)
 {
 	data->player->px = data->player->start_x;
 	data->player->py = data->player->start_y;
-	data->player->ppx = data->player->px * 65 + 32;
-	data->player->ppy = data->player->py * 65 + 32;
+	data->player->ppx = data->player->px * TILE + P_OFFSET;
+	data->player->ppy = data->player->py * TILE + P_OFFSET;
 }
 
 void	find_orientation(t_vault *data, char direction)
 {
 	if (direction == 'N')
 	{
-		data->player->pa = 3 *PI / 2;
+		data->player->pa = 3 * PI / 2;
 		data->player->pdx = 0;
 		data->player->pdy = -1;
 	}

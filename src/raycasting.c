@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/20 15:15:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/20 23:00:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,105 +14,169 @@
 
 void	raycaster(t_vault *data)
 {
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	ray_len_x;
-	double	ray_len_y;
-	double	ray_len;
-	int		opp_side_x;
-	int		opp_side_y;
-	int		map_2d_col;
-	int		map_2d_row;
-	int		col;
-	int		row;
-	int		side;
-
-	ray_len = 0;
+	double			delta_dist_x; // distance entre segments de grille verticaux (intersections en x)
+	double			delta_dist_y; // distance entre segments de grille horizontaux (intersections en y)
+	double			screen_2d_x; // x sur le plan de la largeur de la fenetre
+	double			plane_x; // x du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
+	double			plane_y; // y du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
+	double			ray_len_x; // longueur du rayon initial (dans la case du joueur)
+	double			ray_len_y; // longueur du rayon initial (dans la case du joueur)
+	double			ray_len; // longueur du rayon
+	int				map_2d_col; // mouvements dans la carte 2D sur les colonnes (y)
+	int				map_2d_row; // mouvements dans la carte 2D sur les colonnes (x)
+	int				col; // coordonnees map 2D (y)
+	int				row; // coordonnees map 2D (x)
+	int				pixels_2d; // compteur pour le plan largeur de la fenetre
+	int				impact; // equivaut a 'hit'
+	int				side; // quel coté du mur est touché
+	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
+	int				wall_start; // pixel de depart du dessin du mur
+	int				wall_end; // pixel de fin du dessin du mur
+	unsigned int	wall_color; // couleur du mur
+	
+	pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
+	plane_x = 0;
+	plane_y = 0.66;
+	impact = 0;
 	side = 0;
-	col = data->player->px;
-	row = data->player->py;
-	delta_dist_x = 0;
-	delta_dist_y = 0;
-	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
-//	while(data->raycaster->ray_count < 64)
-//	{
-		printf("\033[1;91m");
-		printf("\n\n########### NOUVEAU RAYON #%d ###########\n\n", data->raycaster->ray_count);
-		printf("\033[1;0m");
-		data->raycaster->next_x = data->player->ppy / 65;
-		data->raycaster->next_y = data->player->ppx / 65;
-		find_ray_angle(data);
-		printf("angle pa : %f°\n", data->player->pa * 57.29578);
-		printf("ray_one_a: %f°\n", data->raycaster->ray_one_a * 57.29578);
-		ray_len_x = ray_seg_len_x(data, data->player->ppx, 'P');
-		ray_len_y = ray_seg_len_y(data, data->player->ppy, 'P');
-		printf("longueur du rayon x la premiere fois : %f\n", ray_len_x);
-		printf("longueur du rayon y la premiere fois : %f\n", ray_len_y);
-		opp_side_x = ray_len_x * sin(degtorad(90) - data->raycaster->ray_one_a);
-		opp_side_y = ray_len_y * sin(data->raycaster->ray_one_a);
-		printf("ppx : %d\n", data->player->ppx);
-		printf("ppy : %d\n", data->player->ppy);
+	while (pixels_2d < WIDTH)
+	{
+		//calculate ray position and direction
+		screen_2d_x = 2 * data->player->ppx / WIDTH - 1; // de -1 a +1
+		data->raycaster->pdx_ray = data->player->pdx + plane_x * screen_2d_x;
+		data->raycaster->pdy_ray = data->player->pdy + plane_y * screen_2d_x;
+
+		// from sqrt formula to....
+		// delta_dist_x = abs(1 / data->raycaster->pdx_ray);
+		// delta_dist_y = abs(1 / data->raycaster->pdy_ray);
+		// est commenté car repris en dessous dans des if pour eviter division par 0
+		
+		// map position
+		col = data->player->py;
+		row = data->player->px;
+
+		// distance entre les cases de la grille (la longueur ne compte pas encore, seulement le ratio)
+		if (data->raycaster->pdx_ray == 0)
+			delta_dist_x = 1e30;
+		else
+			delta_dist_x = fabs(1 / data->raycaster->pdx_ray);
+			
+		if (data->raycaster->pdy_ray == 0)
+			delta_dist_y = 1e30;
+		else
+			delta_dist_y = fabs(1 / data->raycaster->pdy_ray);
+
+		// calcul des mouvemements dans la carte 2D et distance entre le joueur et la 1ere intersection
 		if (data->raycaster->pdx_ray < 0)
 		{
-			map_2d_col = -1;
-			delta_dist_x = ray_seg_len_x(data, data->player->ppx - opp_side_x, 'R');
+			map_2d_row = -1;
+			ray_len_x = (data->player->py - row) * delta_dist_x;
 		}
-		else if (data->raycaster->pdx_ray > 0)
+		else
 		{
-			map_2d_col = 1;
-			delta_dist_x = ray_seg_len_x(data, data->player->ppx + opp_side_x, 'R');
+			map_2d_row = 1;
+			ray_len_x = (row + 1.0 - data->player->py) * delta_dist_x;
 		}
 		if (data->raycaster->pdy_ray < 0)
 		{
-			map_2d_row = -1;
-			delta_dist_y = ray_seg_len_y(data, data->player->ppy - opp_side_y, 'R');
+			map_2d_col = -1;
+			ray_len_y = (data->player->px - col) * delta_dist_y;
 		}
-		else if (data->raycaster->pdy_ray > 0)
+		else
 		{
-			map_2d_row = 1;
-			delta_dist_y = ray_seg_len_y(data, data->player->ppy + opp_side_y, 'R');
+			map_2d_col = 1;
+			ray_len_y = (col + 1.0 - data->player->px) * delta_dist_y;
 		}
-		printf("longueur de delta x la premiere fois : %f\n", delta_dist_x);
-		printf("longueur de delta y la premiere fois : %f\n", delta_dist_y);
-		printf("\ncoordonnees depart:\nppx =	%d\nppy =	%d\n", data->player->ppx, data->player->ppy);
-		printf("\ncoordonnees depart:\npx =	%d\npy =	%d\n", data->raycaster->next_x, data->raycaster->next_y);
-		while (wall_in_next_case(data, row, col) == FALSE)
+
+		// perform DDA (calcul longueur total du rayon)
+		while (impact == 0)
 		{
-			printf("\33[1;96m");
-			printf("\n--------- NOUVELLE COMPARAISON ---------\n");
-			printf("\033[1;0m");
+			//jump to next map square, either in x-direction, or in y-direction
 			if (ray_len_x < ray_len_y)
 			{
-				printf("\033[1;93m");
-				printf("\nINTERCEPTION EN X -> RAY_LEN_X est le plus court\n");
-				printf("\033[1;0m");
-				ray_len_x += delta_dist_x;
-				printf("ray_len_x dans la boucle = %f\n", ray_len_x);
-				col += map_2d_col;
-				side = 0;
-				ray_len = ray_len_x;
+				ray_len_x = ray_len_x + delta_dist_x;
+				row = row + map_2d_row;
+				if (data->raycaster->pdx_ray < 0) // quel cote de mur touche ? EST --> 0, OUEST --> 1
+					side = 1;
+				else
+					side = 0;
 			}
 			else
 			{
-				printf("\033[1;93m");
-				printf("\nINTERCEPTION EN Y -> RAY_LEN_Y est le plus court\n");
-				printf("\033[1;0m");
-				ray_len_y += delta_dist_y;
-				printf("ray_len_y dans la boucle = %f\n", ray_len_y);
-				row += map_2d_row;
-				side = 1;
-				ray_len = ray_len_y;
+				ray_len_y = ray_len_y + delta_dist_y;
+				col = col + map_2d_col;
+				if (data->raycaster->pdy_ray < 0) // quel cote de mur touche ? NORD --> 3, SUD --> 2
+					side = 2;
+				else
+					side = 3;
 			}
-		}
-		printf("Valeur final de ray_len : %f\n", ray_len);
-		draw_ray(data, ray_len);
-//		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
-//		data->raycaster->ray_count++;
-//	}
-	data->raycaster->ray_count = 0;
+			//Check if ray has hit a wall
+			if (data->map->map[row][col] > 0)
+				impact = 1;
+		} 			
+
+		draw_ray_minimap(data, ray_len); // pour la minimap
+
+		//pour la vue 3D
+		//Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
+		if (side == 0 || side == 1)
+			ray_len = (ray_len_x - delta_dist_x);
+		else
+			ray_len = (ray_len_y - delta_dist_y);
+
+		//Calculate height of line to draw on screen
+		wall_height = (int)(HEIGHT / ray_len);
+
+		//calculate lowest and highest pixel to fill in current stripe
+		wall_start = -wall_height / 2 + HEIGHT / 2;
+		if (wall_start < 0)
+			wall_start = 0;
+		wall_end = wall_height / 2 + HEIGHT / 2;
+		if (wall_end >= HEIGHT)
+			wall_end = HEIGHT - 1;
+
+		//choose wall color
+		// ColorRGB color;
+		// switch(worldMap[mapX][mapY])
+		// {
+		// 	case 1:  color = RGB_Red;  break; //red
+		// 	case 2:  color = RGB_Green;  break; //green
+		// 	case 3:  color = RGB_Blue;   break; //blue
+		// 	case 4:  color = RGB_White;  break; //white
+		// 	default: color = RGB_Yellow; break; //yellow
+		// }
+
+		//give x and y sides different brightness
+		if (side == 1)
+			wall_color = YELLOW;
+		else if (side == 2)
+			wall_color = GREEN;
+		else if (side == 3)
+			wall_color = BLUE;
+		else if (side == 4)
+			wall_color = RED;
+
+		//draw the pixels of the stripe as a vertical line
+		draw_wall_3d(data, wall_start, wall_end, screen_2d_x, wall_color);
+
+		pixels_2d++;
+	}
 }
 
-void	draw_ray(t_vault *data, float ray_len)
+void	draw_wall_3d(t_vault *data, int wall_start, int wall_end, int  screen_2d_x, unsigned int wall_color)
+{
+	int	start;
+
+	start = wall_start;
+	while (start < wall_end)
+	{
+		printf("coucou #%d\n", start);
+		mlx_put_pixel(data->game->ddd, start, screen_2d_x, wall_color);
+		start++;
+	}
+}
+
+void	draw_ray_minimap(t_vault *data, float ray_len)
 {
 	float	x;
 	float	y;
@@ -139,162 +203,3 @@ void	find_ray_angle(t_vault *data)
 	data->raycaster->pdx_ray = cos(data->raycaster->ray_one_a);
 	data->raycaster->pdy_ray = sin(data->raycaster->ray_one_a);
 }
-
-
-// void	raycaster(t_vault *data)
-// {
-// 	double	delta_dist_x;
-// 	double	delta_dist_y;
-// 	double	ray_len_x;
-// 	double	ray_len_y;
-// 	double	ray_len;
-// 	int		opp_side_x;
-// 	int		opp_side_y;
-// 	int		map_2d_col;
-// 	int		map_2d_row;
-// 	int		col;
-// 	int		row;
-// 	int		side;
-
-// 	ray_len = 0;
-// 	side = 0;
-// 	col = data->player->px;
-// 	row = data->player->py;
-// 	delta_dist_x = 0;
-// 	delta_dist_y = 0;
-// 	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
-// //	while(data->raycaster->ray_count < 64)
-// //	{
-// 		data->raycaster->next_x = data->player->ppy / 65;
-// 		data->raycaster->next_y = data->player->ppx / 65;
-// 		find_ray_angle(data);
-// 		ray_len_x = ray_seg_len_x(data, data->player->ppx, 'P');
-// 		ray_len_y = ray_seg_len_y(data, data->player->ppy, 'P');
-// 		opp_side_x = ray_len_x * sin(degtorad(90) - data->raycaster->ray_one_a);
-// 		opp_side_y = ray_len_y * sin(data->raycaster->ray_one_a);
-// 		if (data->raycaster->pdx_ray < 0)
-// 		{
-// 			map_2d_col = -1;
-// 			delta_dist_x = ray_seg_len_x(data, data->player->ppx - opp_side_x, 'R');
-// 		}
-// 		else if (data->raycaster->pdx_ray > 0)
-// 		{
-// 			map_2d_col = 1;
-// 			delta_dist_x = ray_seg_len_x(data, data->player->ppx + opp_side_x, 'R');
-// 		}
-// 		if (data->raycaster->pdy_ray < 0)
-// 		{
-// 			map_2d_row = -1;
-// 			delta_dist_y = ray_seg_len_y(data, data->player->ppy - opp_side_y, 'R');
-// 		}
-// 		else if (data->raycaster->pdy_ray > 0)
-// 		{
-// 			map_2d_row = 1;
-// 			delta_dist_y = ray_seg_len_y(data, data->player->ppy + opp_side_y, 'R');
-// 		}
-// 		while (wall_in_next_case(data, row, col) == FALSE)
-// 		{
-// 			if (ray_len_x < ray_len_y)
-// 			{
-// 				ray_len_x += delta_dist_x;
-// 				col += map_2d_col;
-// 				side = 0;
-// 				ray_len = ray_len_x;
-// 			}
-// 			else
-// 			{
-// 				ray_len_y += delta_dist_y;
-// 				row += map_2d_row;
-// 				side = 1;
-// 				ray_len = ray_len_y;
-// 			}
-// 		}
-// 		draw_ray(data, ray_len);
-// //		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
-// //		data->raycaster->ray_count++;
-// //	}
-// 	data->raycaster->ray_count = 0;
-// }
-
-
-// void	raycaster(t_vault *data)
-// {
-// 	double	delta_dist_x;
-// 	double	delta_dist_y;
-// 	double	ray_len_x;
-// 	double	ray_len_y;
-// 	double	ray_len;
-// 	// int		opp_side_x;
-// 	// int		opp_side_y;
-// 	int		map_2d_col;
-// 	int		map_2d_row;
-// 	int		col;
-// 	int		row;
-// 	int		side;
-// 	int		pp_seg_y;
-// 	int		pp_seg_x;
-// 	int		adj_x;
-// 	int		adj_y;
-
-// 	ray_len = 0;
-// 	side = 0;
-// 	col = data->player->px;
-// 	row = data->player->py;
-// 	delta_dist_x = 0;
-// 	delta_dist_y = 0;
-// 	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
-// 	pp_seg_x = data->player->ppx % 65;
-// 	pp_seg_y = data->player->ppy % 65;
-// //	while(data->raycaster->ray_count < 64)
-// //	{
-// 		data->raycaster->next_x = data->player->ppy / 65;
-// 		data->raycaster->next_y = data->player->ppx / 65;
-// 		find_ray_angle(data);
-// 		ray_len_x = ray_seg_len_x(data, data->player->ppx, 'P');
-// 		ray_len_y = ray_seg_len_y(data, data->player->ppy, 'P');
-// 		// opp_side_x = ray_len_x * sin(degtorad(90) - data->raycaster->ray_one_a);
-// 		// opp_side_y = ray_len_y * sin(data->raycaster->ray_one_a);
-// 		if (data->raycaster->pdx_ray < 0)
-// 		{
-// 			map_2d_col = -1;
-
-// 			delta_dist_x = ray_seg_len_x(data, data->player->ppx - opp_side_x, 'R');
-// 		}
-// 		else if (data->raycaster->pdx_ray > 0)
-// 		{
-// 			map_2d_col = 1;
-// 			delta_dist_x = ray_seg_len_x(data, data->player->ppx + opp_side_x, 'R');
-// 		}
-// 		if (data->raycaster->pdy_ray < 0)
-// 		{
-// 			map_2d_row = -1;
-// 			delta_dist_y = ray_seg_len_y(data, data->player->ppy - opp_side_y, 'R');
-// 		}
-// 		else if (data->raycaster->pdy_ray > 0)
-// 		{
-// 			map_2d_row = 1;
-// 			delta_dist_y = ray_seg_len_y(data, data->player->ppy + opp_side_y, 'R');
-// 		}
-// 		while (wall_in_next_case(data, row, col) == FALSE)
-// 		{
-// 			if (ray_len_x < ray_len_y)
-// 			{
-// 				ray_len_x += delta_dist_x;
-// 				col += map_2d_col;
-// 				side = 0;
-// 				ray_len = ray_len_x;
-// 			}
-// 			else
-// 			{
-// 				ray_len_y += delta_dist_y;
-// 				row += map_2d_row;
-// 				side = 1;
-// 				ray_len = ray_len_y;
-// 			}
-// 		}
-// 		draw_ray(data, ray_len);
-// //		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
-// //		data->raycaster->ray_count++;
-// //	}
-// 	data->raycaster->ray_count = 0;
-// }

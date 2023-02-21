@@ -15,8 +15,8 @@ void	raycaster(t_vault *data)
 	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
 //	while(data->raycaster->ray_count < 64)
 //	{
-		data->raycaster->next_x = data->player->ppy / 65;
-		data->raycaster->next_y = data->player->ppx / 65;
+		data->raycaster->next_x = data->player->ppy / TILE;
+		data->raycaster->next_y = data->player->ppx / TILE;
 		find_ray_angle(data);
 		distance_x = pix_to_intersection_x(data, data->player->ppx, 'P');
 		distance_y = pix_to_intersection_y(data, data->player->ppy, 'P');
@@ -34,9 +34,9 @@ void	raycaster(t_vault *data)
 				else
 					find_next_case(data, data->player->ppx + distance_x, data->player->ppy + opp_side, 'X');
 				if (data->raycaster->pdx_ray < 0)
-					distance_x -= 65;
+					distance_x -= TILE;
 				else
-					distance_x += 65;
+					distance_x += TILE;
 			}
 			else
 			{
@@ -48,9 +48,9 @@ void	raycaster(t_vault *data)
 				else
 					find_next_case(data, data->player->ppx + opp_side, data->player->ppy + distance_y, 'Y');
 				if (data->raycaster->pdy_ray < 0)
-					distance_y -= 65;
+					distance_y -= TILE;
 				else
-					distance_y += 65;
+					distance_y += TILE;
 			}
 		}
 		draw_ray(data, ray_len);
