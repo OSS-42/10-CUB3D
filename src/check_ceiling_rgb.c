@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:11:11 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/07 21:14:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:47:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	extract_r_ceiling(t_vault *data, char *rgb_code, int *i, int *len)
 	temp = NULL;
 	while (rgb_code && rgb_code[*i] && rgb_code[*i] != ',')
 	{
-		if (ft_isdigit(rgb_code[*i]) == 1)
+		if (ft_isdigit(rgb_code[*i]) == 1 || check_white_spaces(rgb_code[*i]) == 0)
 			(*i)++;
 	}
 	temp = ft_substr(rgb_code, *len, *i - *len);
@@ -30,6 +30,8 @@ void	extract_r_ceiling(t_vault *data, char *rgb_code, int *i, int *len)
 	*len = *i;
 	if (data->scene_param->r_ceiling > 255 || data->scene_param->r_ceiling < 0)
 		data->error_code = 16;
+	errors(data);
+	// printf("C Red : %d\n", data->scene_param->r_ceiling);
 	extract_g_ceiling(data, rgb_code, i, len);
 }
 
@@ -40,7 +42,7 @@ void	extract_g_ceiling(t_vault *data, char *rgb_code, int *i, int *len)
 	temp = NULL;
 	while (rgb_code && rgb_code[*i] && rgb_code[*i] != ',')
 	{
-		if (ft_isdigit(rgb_code[*i]) == 1)
+		if (ft_isdigit(rgb_code[*i]) == 1 || check_white_spaces(rgb_code[*i]) == 0)
 			(*i)++;
 	}
 	temp = ft_substr(rgb_code, *len, *i - *len);
@@ -51,6 +53,8 @@ void	extract_g_ceiling(t_vault *data, char *rgb_code, int *i, int *len)
 	*len = *i;
 	if (data->scene_param->g_ceiling > 255 || data->scene_param->g_ceiling < 0)
 		data->error_code = 16;
+	errors(data);
+	// printf("C Green : %d\n", data->scene_param->g_ceiling);
 	extract_b_ceiling(data, rgb_code, i, len);
 }
 
@@ -61,7 +65,7 @@ void	extract_b_ceiling(t_vault *data, char *rgb_code, int *i, int *len)
 	temp = NULL;
 	while (rgb_code && rgb_code[*i] && rgb_code[*i] != ',')
 	{
-		if (ft_isdigit(rgb_code[*i]) == 1)
+		if (ft_isdigit(rgb_code[*i]) == 1 || check_white_spaces(rgb_code[*i]) == 0)
 			(*i)++;
 	}
 	temp = ft_substr(rgb_code, *len, *i - *len);
@@ -71,4 +75,6 @@ void	extract_b_ceiling(t_vault *data, char *rgb_code, int *i, int *len)
 	temp = NULL;
 	if (data->scene_param->b_ceiling > 255 || data->scene_param->b_ceiling < 0)
 		data->error_code = 16;
+	errors(data);
+	// printf("C Blue : %d\n", data->scene_param->b_ceiling);
 }
