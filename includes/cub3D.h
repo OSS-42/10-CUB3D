@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 16:05:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:27:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define PI 3.1415926535
 # define WIDTH 1020
 # define HEIGHT 780
-# define TILE 11
+# define TILE 32
 # define RED 0xFF0000FF
 # define YELLOW 0xFFFF00FF
 # define GREEN 0x00FF00FF

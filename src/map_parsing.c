@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/21 10:32:19 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/21 22:27:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	find_player_start(t_vault *data)
 				|| data->map->map[x][y] == 'E' || data->map->map[x][y] == 'W')
 			{
 				data->player->direction = data->map->map[x][y];
-				data->player->start_x = y;
-				data->player->start_y = x;
+				data->player->start_x = x;
+				data->player->start_y = y;
 				flag++;
 			}
 			y++;

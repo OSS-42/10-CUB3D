@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 21:07:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:39:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	raycaster(t_vault *data)
 	int				row; // coordonnees map 2D (x)
 	int				impact; // equivaut a 'hit'
 	int				side; // quel coté du mur est touché
-	// int				pixels_2d; // compteur pour le plan largeur de la fenetre
+	double			pixels_2d; // compteur pour le plan largeur de la fenetre
 	// int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
 	// int				wall_start; // pixel de depart du dessin du mur
 	// int				wall_end; // pixel de fin du dessin du mur
@@ -35,7 +35,7 @@ void	raycaster(t_vault *data)
 	impact = 0;
 	ray_len = 0;
 	side = 0;
-	// pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
+	pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
 	// wall_color = 0;
 	// while (pixels_2d < WIDTH)
 	// {
@@ -43,7 +43,7 @@ void	raycaster(t_vault *data)
 		printf("\n\n########### NOUVEAU RAYON ###########\n\n");
 		printf("\033[1;0m");
 		//calculate ray position and direction
-		screen_2d_x = 2 * data->player->ppx / WIDTH - 1; // de -1 a +1
+		screen_2d_x = 2 * pixels_2d / WIDTH - 1; // de -1 a +1
 		data->raycaster->pdx_ray = data->player->pdx + data->raycaster->plane_x * screen_2d_x;
 		data->raycaster->pdy_ray = data->player->pdy + data->raycaster->plane_y * screen_2d_x;
 		printf("\nposition x sur plan camera : %f\n", screen_2d_x);
@@ -56,8 +56,8 @@ void	raycaster(t_vault *data)
 		// est commenté car repris en dessous dans des if pour eviter division par 0
 
 		// map position
-		col = data->player->row;
-		row = data->player->col;
+		col = data->player->col;
+		row = data->player->row;
 		printf("\nposition map 2D:\n");
 		printf("row (x) : %d (%f)\n", row, data->player->col);
 		printf("col (y) : %d (%f)\n", col, data->player->row);
@@ -158,8 +158,6 @@ void	raycaster(t_vault *data)
 
 		draw_ray_minimap(data, ray_len); // pour la minimap
 
-	// 	pixels_2d++;
-	// }
 	/*
 		// //Calculate height of line to draw on screen
 		wall_height = (int)(data->raycaster->height_3d / ray_len);
@@ -183,18 +181,18 @@ void	raycaster(t_vault *data)
 			wall_color = RED;
 
 		// draw the pixels of the stripe as a vertical line
-		draw_wall_3d(data, wall_start, wall_end, pixels_2d, wall_color);
+		draw_wall_3d(data, wall_start, wall_end, screen_2d_x, wall_color);
 	*/
 
 	// 	pixels_2d++;
 	// }
 }
 
-void	draw_wall_3d(t_vault *data, int wall_start, int wall_end, int  pixels_2d, unsigned int wall_color)
+void	draw_wall_3d(t_vault *data, int wall_start, int wall_end, int  screen_2d_x, unsigned int wall_color)
 {
 	while (wall_start < wall_end)
 	{
-		mlx_put_pixel(data->game->ddd, pixels_2d, wall_start, wall_color);
+		mlx_put_pixel(data->game->ddd, screen_2d_x, wall_start, wall_color);
 		wall_start++;
 	}
 }

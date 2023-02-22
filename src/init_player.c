@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 16:16:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:38:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	find_orientation(t_vault *data, char direction)
 
 void	draw_player(t_vault *data)
 {
-	data->player->ppx = data->player->row * TILE;
-	data->player->ppy = data->player->col * TILE;
+	data->player->ppx = data->player->col * TILE;
+	data->player->ppy = data->player->row * TILE;
 	mlx_put_pixel(data->minimap->minimap,
 		data->player->ppx, data->player->ppy, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap,
