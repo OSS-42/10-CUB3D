@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"libart.h": "c",
-		"cub3d.h": "c"
+		"cub3d.h": "c",
+		"cub3d_bonus.h": "c"
 	}
 }
