@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 16:11:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/21 21:07:14 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ void	raycaster(t_vault *data)
 	int				map_2d_row; // mouvements dans la carte 2D sur les colonnes (x)
 	int				col; // coordonnees map 2D (y)
 	int				row; // coordonnees map 2D (x)
-	int				pixels_2d; // compteur pour le plan largeur de la fenetre
 	int				impact; // equivaut a 'hit'
 	int				side; // quel coté du mur est touché
+	// int				pixels_2d; // compteur pour le plan largeur de la fenetre
 	// int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
 	// int				wall_start; // pixel de depart du dessin du mur
 	// int				wall_end; // pixel de fin du dessin du mur
 	// unsigned int	wall_color; // couleur du mur
 
-	pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
 	impact = 0;
 	ray_len = 0;
 	side = 0;
+	// pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
 	// wall_color = 0;
 	// while (pixels_2d < WIDTH)
 	// {
