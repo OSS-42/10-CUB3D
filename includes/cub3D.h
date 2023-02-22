@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 10:16:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:42:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,7 @@ void	load_minimap(t_vault *data);
 void	draw_minimap(t_vault *data);
 void	draw_tiles(t_vault *data,
 			int screen_x, int screen_y, unsigned int color);
+void	minimap_background(t_vault *data);
 void	full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color);
 void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
 

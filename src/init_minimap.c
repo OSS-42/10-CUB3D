@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 10:37:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:59:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,8 @@ void	load_minimap(t_vault *data)
 
 void	draw_minimap(t_vault *data)
 {
-	//contours MINIMAP
-	full_line_minimap_hor(data, 0, 0xFF00FFFF);
-	full_line_minimap_ver(data, 0, 0xFF00FFFF);
-	full_line_minimap_ver(data, data->map->max_lenght * TILE - 1, 0xFF00FFFF);
-	full_line_minimap_hor(data, data->map->lines * TILE - 1, 0xFF00FFFF);
+	//background minimap
+	minimap_background(data);
 	data->minimap->x = 0;
 	while (data->minimap->x < data->map->lines)
 	{
@@ -78,7 +75,25 @@ void	draw_minimap(t_vault *data)
 		}
 		data->minimap->x++;
 	}
+	//contours MINIMAP
+	full_line_minimap_hor(data, 0, 0xFF00FFFF);
+	full_line_minimap_ver(data, 0, 0xFF00FFFF);
+	full_line_minimap_ver(data, data->map->max_lenght * TILE - 1, 0xFF00FFFF);
+	full_line_minimap_hor(data, data->map->lines * TILE - 1, 0xFF00FFFF);
 }
+
+void	minimap_background(t_vault *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->map->lines * TILE)
+	{
+		full_line_minimap_hor(data, i, DGRAY);
+		i++;
+	}
+}
+
 
 void	draw_tiles(t_vault *data,
 			int screen_x, int screen_y, unsigned int color)

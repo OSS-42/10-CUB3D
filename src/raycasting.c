@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 10:39:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:26:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	raycaster(t_vault *data)
 		col = data->player->col;
 		row = data->player->row;
 		printf("\nposition map 2D:\n");
-		printf("row (x) : %d (%f)\n", row, data->player->col);
-		printf("col (y) : %d (%f)\n", col, data->player->row);
+		printf("row (x) : %d (%f)\n", row, data->player->row);
+		printf("col (y) : %d (%f)\n", col, data->player->col);
 
 		// distance entre les cases de la grille (la longueur ne compte pas encore, seulement le ratio)
 		if (data->raycaster->pdx_ray == 0)
