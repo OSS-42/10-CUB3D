@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 09:06:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 09:40:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,23 @@ void	raycaster(t_vault *data)
 		// calcul des mouvemements dans la carte 2D et distance entre le joueur et la 1ere intersection
 		if (data->raycaster->pdx_ray < 0)
 		{
-			map_2d_row = -1;
-			ray_len_x = (data->player->col - row) * delta_dist_x;
-		}
-		else
-		{
-			map_2d_row = 1;
-			ray_len_x = (row + 1.0 - data->player->col) * delta_dist_x;
-		}
-		if (data->raycaster->pdy_ray < 0)
-		{
 			map_2d_col = -1;
-			ray_len_y = (data->player->row - col) * delta_dist_y;
+			ray_len_x = (data->player->col - col) * delta_dist_x;
 		}
 		else
 		{
 			map_2d_col = 1;
-			ray_len_y = (col + 1.0 - data->player->row) * delta_dist_y;
+			ray_len_x = (col + 1.0 - data->player->col) * delta_dist_x;
+		}
+		if (data->raycaster->pdy_ray < 0)
+		{
+			map_2d_row = -1;
+			ray_len_y = (data->player->row - row) * delta_dist_y;
+		}
+		else
+		{
+			map_2d_row = 1;
+			ray_len_y = (row + 1.0 - data->player->row) * delta_dist_y;
 		}
 		printf("\nLongueur rayon initial :\n");
 		printf("sideDistX (ray_len_x) : %f\n", ray_len_x);
@@ -111,9 +111,9 @@ void	raycaster(t_vault *data)
 				// row = row + map_2d_row;
 				col = col + map_2d_col;
 				if (data->raycaster->pdx_ray < 0) // quel cote de mur touche ? EST --> 0, OUEST --> 1
-					side = 1;
-				else
 					side = 0;
+				else
+					side = 1;
 			}
 			else
 			{
