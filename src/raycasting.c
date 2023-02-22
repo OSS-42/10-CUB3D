@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 11:26:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:47:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ void	raycaster(t_vault *data)
 		impact = 0;
 		ray_len = 0;
 		side = 0;
-		printf("\033[1;91m");
-		printf("\n\n########### NOUVEAU RAYON ###########\n\n");
-		printf("\033[1;0m");
+		// printf("\033[1;91m");
+		// printf("\n\n########### NOUVEAU RAYON ###########\n\n");
+		// printf("\033[1;0m");
 		//calculate ray position and direction
 		screen_2d_x = 2 * pixels_2d / WIDTH - 1; // de -1 a +1
 		data->raycaster->pdx_ray = data->player->pdx + data->raycaster->plane_x * screen_2d_x;
 		data->raycaster->pdy_ray = data->player->pdy + data->raycaster->plane_y * screen_2d_x;
-		printf("\nposition x sur plan camera : %f\n", screen_2d_x);
-		printf("rayDirX : %f\n", data->raycaster->pdx_ray);
-		printf("rayDirY : %f\n", data->raycaster->pdy_ray);
+		// printf("\nposition x sur plan camera : %f\n", screen_2d_x);
+		// printf("rayDirX : %f\n", data->raycaster->pdx_ray);
+		// printf("rayDirY : %f\n", data->raycaster->pdy_ray);
 
 		// from sqrt formula to....
 		// delta_dist_x = abs(1 / data->raycaster->pdx_ray);
@@ -58,9 +58,9 @@ void	raycaster(t_vault *data)
 		// map position
 		col = data->player->col;
 		row = data->player->row;
-		printf("\nposition map 2D:\n");
-		printf("row (x) : %d (%f)\n", row, data->player->row);
-		printf("col (y) : %d (%f)\n", col, data->player->col);
+		// printf("\nposition map 2D:\n");
+		// printf("row (x) : %d (%f)\n", row, data->player->row);
+		// printf("col (y) : %d (%f)\n", col, data->player->col);
 
 		// distance entre les cases de la grille (la longueur ne compte pas encore, seulement le ratio)
 		if (data->raycaster->pdx_ray == 0)
@@ -72,9 +72,9 @@ void	raycaster(t_vault *data)
 			delta_dist_y = 1e30;
 		else
 			delta_dist_y = fabs(1 / data->raycaster->pdy_ray);
-		printf("\nMesure segment suivant :\n");
-		printf("deltaDistX : %f\n", delta_dist_x);
-		printf("deltaDistY : %f\n", delta_dist_y);
+		// printf("\nMesure segment suivant :\n");
+		// printf("deltaDistX : %f\n", delta_dist_x);
+		// printf("deltaDistY : %f\n", delta_dist_y);
 
 		// calcul des mouvemements dans la carte 2D et distance entre le joueur et la 1ere intersection
 		if (data->raycaster->pdx_ray < 0)
@@ -97,9 +97,9 @@ void	raycaster(t_vault *data)
 			map_2d_row = 1;
 			ray_len_y = (row + 1.0 - data->player->row) * delta_dist_y;
 		}
-		printf("\nLongueur rayon initial :\n");
-		printf("sideDistX (ray_len_x) : %f\n", ray_len_x);
-		printf("sideDistY (ray_len_y) : %f\n", ray_len_y);
+		// printf("\nLongueur rayon initial :\n");
+		// printf("sideDistX (ray_len_x) : %f\n", ray_len_x);
+		// printf("sideDistY (ray_len_y) : %f\n", ray_len_y);
 
 		// perform DDA (calcul longueur total du rayon)
 		while (impact == 0)
@@ -129,22 +129,22 @@ void	raycaster(t_vault *data)
 			//Check if ray has hit a wall
 			if (data->map->map[row][col] == '1')
 			{
-				printf("\nSuis-je un mur ? ... \n");
-				printf("row (x) : %d\n", row);
-				printf("col (y) : %d\n", col);
-				printf("\033[1;32m");
-				printf("OUI\n");
-				printf("\033[1;0m");
+				// printf("\nSuis-je un mur ? ... \n");
+				// printf("row (x) : %d\n", row);
+				// printf("col (y) : %d\n", col);
+				// printf("\033[1;32m");
+				// printf("OUI\n");
+				// printf("\033[1;0m");
 				impact = 1;
 			}
 			else
 			{
-				printf("\nSuis-je un mur ? ... \n");
-				printf("row (x) : %d\n", row);
-				printf("col (y) : %d\n", col);
-				printf("\033[1;91m");
-				printf("NON\n");
-				printf("\033[1;0m");
+				// printf("\nSuis-je un mur ? ... \n");
+				// printf("row (x) : %d\n", row);
+				// printf("col (y) : %d\n", col);
+				// printf("\033[1;91m");
+				// printf("NON\n");
+				// printf("\033[1;0m");
 				impact = 0;
 			}
 		}
@@ -172,27 +172,27 @@ void	raycaster(t_vault *data)
 			wall_end = data->raycaster->height_3d - 1;
 
 		// give x and y sides different brightness
-		printf("\nCote de mur touché : %d\n", side);
+		// printf("\nCote de mur touché : %d\n", side);
 		
 		if (side == 0)
 		{
 			wall_color = YELLOW;
-			printf("couleur du mur : JAUNE (EST)\n");
+			// printf("couleur du mur : JAUNE (EST)\n");
 		}
 		else if (side == 1)
 		{
 			wall_color = GREEN;
-			printf("couleur du mur : VERT (OUEST)\n");
+			// printf("couleur du mur : VERT (OUEST)\n");
 		}
 		else if (side == 2)
 		{
 			wall_color = BLUE;
-			printf("couleur du mur : BLEU (SUD)\n");
+			// printf("couleur du mur : BLEU (SUD)\n");
 		}
 		else if (side == 3)
 		{
 			wall_color = RED;
-			printf("couleur du mur : ROUGE (NORD)\n");
+			// printf("couleur du mur : ROUGE (NORD)\n");
 		}
 		
 
@@ -207,10 +207,10 @@ void	raycaster(t_vault *data)
 
 void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color)
 {
-	printf("\nParametre dessin 3d\n");
-	printf("wall_start : %f\n", wall_start);
-	printf("wall_end : %f\n", wall_end);
-	printf("x sur plan fenetre : %f\n", screen_2d_x);
+	// printf("\nParametre dessin 3d\n");
+	// printf("wall_start : %f\n", wall_start);
+	// printf("wall_end : %f\n", wall_end);
+	// printf("x sur plan fenetre : %f\n", screen_2d_x);
 	while (wall_start < wall_end)
 	{
 		mlx_put_pixel(data->game->ddd, screen_2d_x, wall_start, wall_color);
