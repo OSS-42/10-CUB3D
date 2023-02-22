@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 22:39:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 09:06:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ void	raycaster(t_vault *data)
 	int				impact; // equivaut a 'hit'
 	int				side; // quel coté du mur est touché
 	double			pixels_2d; // compteur pour le plan largeur de la fenetre
-	// int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
-	// int				wall_start; // pixel de depart du dessin du mur
-	// int				wall_end; // pixel de fin du dessin du mur
-	// unsigned int	wall_color; // couleur du mur
+	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
+	int				wall_start; // pixel de depart du dessin du mur
+	int				wall_end; // pixel de fin du dessin du mur
+	unsigned int	wall_color; // couleur du mur
 
-	impact = 0;
-	ray_len = 0;
-	side = 0;
 	pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
-	// wall_color = 0;
-	// while (pixels_2d < WIDTH)
-	// {
+	while (pixels_2d < WIDTH)
+	{
+		wall_color = 0;
+		impact = 0;
+		ray_len = 0;
+		side = 0;
 		printf("\033[1;91m");
 		printf("\n\n########### NOUVEAU RAYON ###########\n\n");
 		printf("\033[1;0m");
@@ -125,6 +125,7 @@ void	raycaster(t_vault *data)
 				else
 					side = 3;
 			}
+			
 			//Check if ray has hit a wall
 			if (data->map->map[row][col] == '1')
 			{
@@ -158,7 +159,6 @@ void	raycaster(t_vault *data)
 
 		draw_ray_minimap(data, ray_len); // pour la minimap
 
-	/*
 		// //Calculate height of line to draw on screen
 		wall_height = (int)(data->raycaster->height_3d / ray_len);
 
@@ -171,25 +171,45 @@ void	raycaster(t_vault *data)
 			wall_end = data->raycaster->height_3d - 1;
 
 		// give x and y sides different brightness
-		if (side == 1)
+		printf("\nCote de mur touché : %d\n", side);
+		
+		if (side == 0)
+		{
 			wall_color = YELLOW;
-		else if (side == 2)
+			printf("couleur du mur : JAUNE (EST)\n");
+		}
+		else if (side == 1)
+		{
 			wall_color = GREEN;
-		else if (side == 3)
+			printf("couleur du mur : VERT (OUEST)\n");
+		}
+		else if (side == 2)
+		{
 			wall_color = BLUE;
-		else if (side == 4)
+			printf("couleur du mur : BLEU (SUD)\n");
+		}
+		else if (side == 3)
+		{
 			wall_color = RED;
+			printf("couleur du mur : ROUGE (NORD)\n");
+		}
+		
 
 		// draw the pixels of the stripe as a vertical line
-		draw_wall_3d(data, wall_start, wall_end, screen_2d_x, wall_color);
-	*/
+		// draw_wall_3d(data, wall_start, wall_end, screen_2d_x, wall_color);
+		draw_wall_3d(data, wall_start, wall_end, pixels_2d, wall_color);
 
-	// 	pixels_2d++;
-	// }
+
+		pixels_2d++;
+	}
 }
 
-void	draw_wall_3d(t_vault *data, int wall_start, int wall_end, int  screen_2d_x, unsigned int wall_color)
+void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color)
 {
+	printf("\nParametre dessin 3d\n");
+	printf("wall_start : %f\n", wall_start);
+	printf("wall_end : %f\n", wall_end);
+	printf("x sur plan fenetre : %f\n", screen_2d_x);
 	while (wall_start < wall_end)
 	{
 		mlx_put_pixel(data->game->ddd, screen_2d_x, wall_start, wall_color);
