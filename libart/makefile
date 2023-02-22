@@ -97,12 +97,12 @@ intro_cub3D:
 
 bonus: all
 	@printf " \n \
-		    ${NC} ╔══  $(LCYAN)  ══  $(LRED) ╔   ╦ $(LYELLOW) ╦  ╦ $(LMAGENTA) ╔══╗ \n \
-		    ${NC} ║  ║ $(LCYAN) ║  ║ $(LRED) ║\  ║ $(LYELLOW) ║  ║ $(LMAGENTA) ║   \n \
-		    ${NC} ╠══  $(LCYAN) ║  ║ $(LRED) ║ \ ║ $(LYELLOW) ║  ║ $(LMAGENTA) ╚══╗\n \
-		    ${NC} ║  ║ $(LCYAN) ║  ║ $(LRED) ║  \║ $(LYELLOW) ║  ║ $(LMAGENTA)    ║\n \
-		    ${NC} ╚══  $(LCYAN)  ══  $(LRED) ╩   ╝ $(LYELLOW)  ══  $(LMAGENTA) ╚══╝\n \
-		    ${NC}_______________________________\n \
+		    	${NC} ╔══  $(LCYAN)  ══  $(LRED) ╔   ╦ $(LYELLOW) ╦  ╦ $(LMAGENTA) ╔══╗ \n \
+		    	${NC} ║  ║ $(LCYAN) ║  ║ $(LRED) ║\  ║ $(LYELLOW) ║  ║ $(LMAGENTA) ║   \n \
+		    	${NC} ╠══  $(LCYAN) ║  ║ $(LRED) ║ \ ║ $(LYELLOW) ║  ║ $(LMAGENTA) ╚══╗\n \
+		    	${NC} ║  ║ $(LCYAN) ║  ║ $(LRED) ║  \║ $(LYELLOW) ║  ║ $(LMAGENTA)    ║\n \
+		    	${NC} ╚══  $(LCYAN)  ══  $(LRED) ╩   ╝ $(LYELLOW)  ══  $(LMAGENTA) ╚══╝\n \
+		    	${NC}_______________________________\n \
 		\n"
 
 clean:

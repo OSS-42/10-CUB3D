@@ -56,11 +56,6 @@ SRCS =	src/cub3D.c \
 		src/raycasting_utils.c \
 		src/init_3d.c
 
-HEADER_BONUS = bonus/includes/cub3D_bonus.h
-D_SRC_BONUS = bonus/src/
-D_OBJ_BONUS = bonus/obj_bonus/
-OBJS_BONUS = $(patsubst $(D_SRC_BONUS)%.c,$(D_OBJ_BONUS)%.o,$(SRCS_BONUS))
-
 #------------------------------------------------------------------------------#
 #									 RULES									   #
 #------------------------------------------------------------------------------#
@@ -71,10 +66,10 @@ $(NAME):	$(LIBFT) $(LIBART) $(MLX42) $(OBJS)
 # Ubuntu
 # @$(call creating, $(CC) $(CFLAGS) $(OBJS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
 # MacOS 42
-	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+#	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 # Apple M2
-# @$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
-# @echo "$(LGREEN)Software Compilation completed ...!$(NC)"
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
 #	@sleep 2
 #	@clear
 
@@ -119,7 +114,6 @@ lclean: fclean
 	@$(call lcleaning)
 	@$(MAKE) -s --no-print-directory -C $(D_LIBFT) fclean
 	@$(MAKE) -s --no-print-directory -C $(D_LIBART) fclean
-# @$(MAKE) cmake -s --no-print-directory -C $(D_MLX42) fclean
 
 re:	fclean all
 
@@ -128,8 +122,12 @@ re:	fclean all
 #------------------------------------------------------------------------------#
 #									IF BONUS								   #
 #------------------------------------------------------------------------------#
-
-SRCS_BONUS =	bonus/src/error_management.c \
+HEADER_BONUS = includes/cub3D_bonus.h
+D_SRC_BONUS = bonus/src/
+D_OBJ_BONUS = bonus/obj_bonus/
+OBJS_BONUS = $(patsubst $(D_SRC_BONUS)%.c,$(D_OBJ_BONUS)%.o,$(SRCS_BONUS))
+SRCS_BONUS =	bonus/src/cub3D.c \
+				bonus/src/error_management.c \
 				bonus/src/scene_parsing.c \
 				bonus/src/scene_parsing_utils.c \
 				bonus/src/cub3d_utils.c \
@@ -152,19 +150,24 @@ SRCS_BONUS =	bonus/src/error_management.c \
 				bonus/src/init_3d.c \
 				bonus/src/audio.c
 
-daftpunk_bonus:
-	@$(call intro_bonus)
+intro_bonus:
+	@$(MAKE) bonus -C $(D_LIBART)
 
-$(NAME_BONUS): daftpunk_bonus $(OBJS_BONUS)
-	@$(CC) $(CFLAGS) -o $@ $(OBJS_BONUS) $(D_LIBFT)$(LIBFT) $(D_LIBRL)$(LIBRL)
-	@printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(NC)\r"
+$(NAME_BONUS): art_intro $(LIBFT) $(LIBART) $(MLX42) $(OBJS_BONUS)
+# Ubuntu
+#	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
+# MacOS 42
+#	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+# Apple M2
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 	@echo "$(LGREEN)Software Compilation completed !$(NC)"
+
 
 $(OBJS_BONUS): $(D_OBJ_BONUS)%.o : $(D_SRC_BONUS)%.c $(HEADER_BONUS)
 		@mkdir -p $(D_OBJ_BONUS)
 		@$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
 
-bonus: daftpunk_bonus $(NAME_BONUS)
+bonus: intro_bonus $(NAME_BONUS)
 
 #------------------------------------------------------------------------------#
 #								  MAKEUP RULES								   #
