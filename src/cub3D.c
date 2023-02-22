@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 14:44:56 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/22 15:17:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	quit_game(t_vault *data)
 {
 	printf("%s\n", "Au revoir !");
+	system("killall afplay");
 	free_all(data);
 }
 
@@ -92,8 +93,6 @@ void	init_data(t_vault *data, char **argv)
 	data->scene_param->b_floor = -1;
 	data->raycaster->mov_speed = 0.15;
 	data->raycaster->rot_speed = 0.15;
-	data->hud->hud_height = HEIGHT / 5;
-	data->audio = 0;
 }
 
 int	main(int argc, char **argv)

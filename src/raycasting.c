@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 11:47:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:35:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,14 @@ void	raycaster(t_vault *data)
 	int				wall_start; // pixel de depart du dessin du mur
 	int				wall_end; // pixel de fin du dessin du mur
 	unsigned int	wall_color; // couleur du mur
+	// double			time;
+	// double			old_time;
+	// double			frame_time;
+	
 
 	pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
+	// time = mlx_get_time();
+	// old_time = 0;
 	while (pixels_2d < WIDTH)
 	{
 		wall_color = 0;
@@ -161,15 +167,15 @@ void	raycaster(t_vault *data)
 			draw_ray_minimap(data, ray_len); // pour la minimap
 
 		// //Calculate height of line to draw on screen
-		wall_height = (int)(data->raycaster->height_3d / ray_len);
+		wall_height = (int)(HEIGHT_3D / ray_len);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		wall_start = -wall_height / 2 + data->raycaster->height_3d / 2;
+		wall_start = -wall_height / 2 + HEIGHT_3D / 2;
 		if (wall_start < 0)
 			wall_start = 0;
-		wall_end = wall_height / 2 + data->raycaster->height_3d / 2;
-		if (wall_end >= data->raycaster->height_3d)
-			wall_end = data->raycaster->height_3d - 1;
+		wall_end = wall_height / 2 + HEIGHT_3D / 2;
+		if (wall_end >= HEIGHT_3D)
+			wall_end = HEIGHT_3D - 1;
 
 		// give x and y sides different brightness
 		// printf("\nCote de mur touché : %d\n", side);
@@ -198,12 +204,21 @@ void	raycaster(t_vault *data)
 
 		// draw the pixels of the stripe as a vertical line
 		// draw_wall_3d(data, wall_start, wall_end, screen_2d_x, wall_color);
+		
 		draw_wall_3d(data, wall_start, wall_end, pixels_2d, wall_color);
-
 
 		pixels_2d++;
 	}
 }
+
+//essai FPS et changement vitesse d'affichage non concluant:
+// old_time = time;
+// 	time = mlx_get_time();
+// 	frame_time = (time - old_time) / 1.0;
+// 	printf("FPS: %f\n", 1.0 / frame_time);
+
+// 	data->raycaster->mov_speed = frame_time * 50.0;
+// 	data->raycaster->rot_speed = frame_time * 35.0;
 
 void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color)
 {

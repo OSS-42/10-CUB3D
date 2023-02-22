@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 14:25:56 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/22 15:15:59 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@
 # define TRUE 1
 # define FALSE 0
 # define PI 3.1415926535
-# define WIDTH 1020
-# define HEIGHT 780
-# define TILE 32
+# define WIDTH 1024
+# define HEIGHT 768
+# define HUD_HEIGHT (HEIGHT / 6)
+# define HEIGHT_3D (HEIGHT - HUD_HEIGHT - 1)
+# define TILE (WIDTH / 32)
 # define RED 0xFF0000FF
 # define YELLOW 0xFFFF00FF
 # define GREEN 0x00FF00FF
@@ -144,26 +146,28 @@ typedef struct s_hud
 
 typedef struct s_param
 {
-	char	*no_wall_path;
-	int		no_exist;
-	int		r_ceiling;
-	int		g_ceiling;
-	int		b_ceiling;
-	int		r_floor;
-	int		g_floor;
-	int		b_floor;
-	char	*so_wall_path;
-	int		so_exist;
-	char	*we_wall_path;
-	int		we_exist;
-	char	*ea_wall_path;
-	int		ea_exist;
-	char	*f_color;
-	int		f_exist;
-	char	*c_color;
-	int		c_exist;
-	int		a_ceiling;
-	int		a_floor;
+	char			*no_wall_path;
+	int				no_exist;
+	int				r_ceiling;
+	int				g_ceiling;
+	int				b_ceiling;
+	int				r_floor;
+	int				g_floor;
+	int				b_floor;
+	unsigned int	hex_floor;
+	unsigned int	hex_ceiling;
+	char			*so_wall_path;
+	int				so_exist;
+	char			*we_wall_path;
+	int				we_exist;
+	char			*ea_wall_path;
+	int				ea_exist;
+	char			*f_color;
+	int				f_exist;
+	char			*c_color;
+	int				c_exist;
+	int				a_ceiling;
+	int				a_floor;
 }	t_param;
 
 typedef struct s_vault
@@ -238,6 +242,7 @@ void	check_c_params(t_vault *data, int x, int y, int slen);
 void	check_color_code(t_vault *data);
 int		correct_rgb_char(char *rgb_code);
 void	correct_rgb_range(t_vault *data, char *rgb_code, char c);
+void	rgb_to_hex(t_vault *data, int r, int g, int b, char flag);
 
 /***** cub3d_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
@@ -324,5 +329,6 @@ int		fix_angle(int angle);
 
 /***** init_3d.c *****/
 void	load_3d(t_vault *data);
+void	background_3d(t_vault *data);
 
 #endif
