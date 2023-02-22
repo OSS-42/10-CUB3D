@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:24:44 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/22 15:10:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:07:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	play_song(t_vault *data)
 {
 	if (data->audio == 0)
-		system("afplay ./audio/work_it.mp3&");
+		system("afplay ./assets/audio/work_it.mp3&");
 }

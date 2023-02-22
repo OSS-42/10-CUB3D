@@ -7,7 +7,7 @@ NAME_BONUS = cub3D_bonus
 CC = gcc
 #CC = gcc-11
 CFLAGS = -g -Wall -Werror -Wextra
-# CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+#CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 RM = rm -rf
 
 #LSAN_OPTIONS=detect_leaks=1 ./cub3D
@@ -126,29 +126,31 @@ HEADER_BONUS = includes/cub3D_bonus.h
 D_SRC_BONUS = bonus/src/
 D_OBJ_BONUS = bonus/obj_bonus/
 OBJS_BONUS = $(patsubst $(D_SRC_BONUS)%.c,$(D_OBJ_BONUS)%.o,$(SRCS_BONUS))
-SRCS_BONUS =	bonus/src/cub3D.c \
-				bonus/src/error_management.c \
-				bonus/src/scene_parsing.c \
-				bonus/src/scene_parsing_utils.c \
-				bonus/src/cub3d_utils.c \
-				bonus/src/check_orientation_params.c \
-				bonus/src/check_fc_params.c \
-				bonus/src/map_parsing.c \
-				bonus/src/map_parsing_utils.c \
-				bonus/src/error_utils.c \
-				bonus/src/flood_fill.c \
-				bonus/src/check_ceiling_rgb.c \
-				bonus/src/check_floor_rgb.c \
-				bonus/src/init_assets_bonus.c \
-				bonus/src/init_player.c \
-				bonus/src/init_hud.c \
-				bonus/src/raycasting.c \
-				bonus/src/init_minimap.c \
-				bonus/src/moves.c \
-				bonus/src/camera.c \
-				bonus/src/raycasting_utils.c \
-				bonus/src/init_3d.c \
-				bonus/src/audio.c
+SRCS_BONUS =	bonus/src/cub3D_bonus.c \
+				bonus/src/error_management_bonus.c \
+				bonus/src/scene_parsing_bonus.c \
+				bonus/src/scene_parsing_utils_bonus.c \
+				bonus/src/cub3d_utils_bonus.c \
+				bonus/src/check_orientation_params_bonus.c \
+				bonus/src/check_fc_params_bonus.c \
+				bonus/src/map_parsing_bonus.c \
+				bonus/src/map_parsing_utils_bonus.c \
+				bonus/src/error_utils_bonus.c \
+				bonus/src/flood_fill_bonus.c \
+				bonus/src/check_ceiling_rgb_bonus.c \
+				bonus/src/check_floor_rgb_bonus.c \
+				bonus/src/init_assets_bonus_bonus.c \
+				bonus/src/init_player_bonus.c \
+				bonus/src/init_hud_bonus.c \
+				bonus/src/raycasting_bonus.c \
+				bonus/src/init_minimap_bonus.c \
+				bonus/src/moves_bonus.c \
+				bonus/src/camera_bonus.c \
+				bonus/src/raycasting_utils_bonus.c \
+				bonus/src/init_3d_bonus.c \
+				bonus/src/audio_bonus.c
+
+bonus: intro_bonus $(NAME_BONUS)
 
 intro_bonus:
 	@$(MAKE) bonus -C $(D_LIBART)
@@ -162,12 +164,10 @@ $(NAME_BONUS): art_intro $(LIBFT) $(LIBART) $(MLX42) $(OBJS_BONUS)
 	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 	@echo "$(LGREEN)Software Compilation completed !$(NC)"
 
-
 $(OBJS_BONUS): $(D_OBJ_BONUS)%.o : $(D_SRC_BONUS)%.c $(HEADER_BONUS)
 		@mkdir -p $(D_OBJ_BONUS)
 		@$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
 
-bonus: intro_bonus $(NAME_BONUS)
 
 #------------------------------------------------------------------------------#
 #								  MAKEUP RULES								   #

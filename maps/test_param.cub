@@ -1,14 +1,14 @@
 
 
-WE       assets/tile_wall_window_left.xpm
+WE       assets/textures/tile_wall_window_left.xpm
 
-     NO assets/tile_wall_window_bottom.xpm
+     NO assets/textures/tile_wall_window_bottom.xpm
 
 F 119, 119, 119
 
-SO assets/tile_wall_window_right.xpm
+SO assets/textures/tile_wall_window_right.xpm
 
-EA assets/tile_wall_window_top.xpm
+EA assets/textures/tile_wall_window_top.xpm
 
 
 
