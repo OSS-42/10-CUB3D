@@ -13,8 +13,8 @@ void	raycaster(t_vault *data)
 
 	ray_len = 0;
 	data->raycaster->ray_one_a = data->player->pa - degtorad(32);
-//	while(data->raycaster->ray_count < 64)
-//	{
+	while(data->raycaster->ray_count < 64)
+	{
 		data->raycaster->next_x = data->player->ppy / TILE;
 		data->raycaster->next_y = data->player->ppx / TILE;
 		find_ray_angle(data);
@@ -54,8 +54,8 @@ void	raycaster(t_vault *data)
 			}
 		}
 		draw_ray(data, ray_len);
-//		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
-//		data->raycaster->ray_count++;
-//	}
+		data->raycaster->ray_one_a = data->raycaster->ray_one_a + degtorad(1);
+		data->raycaster->ray_count++;
+	}
 	data->raycaster->ray_count = 0;
 }

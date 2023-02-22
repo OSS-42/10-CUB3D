@@ -2,7 +2,7 @@
 #								   GENERAL									   #
 #------------------------------------------------------------------------------#
 NAME = cub3D
-#NAME_BONUS = cub3D_bonus
+NAME_BONUS = cub3D_bonus
 
 CC = gcc
 #CC = gcc-11
@@ -56,10 +56,10 @@ SRCS =	src/cub3D.c \
 		src/raycasting_utils.c \
 		src/init_3d.c
 
-#HEADER_BONUS = includes/cub3D_bonus.h
-#D_SRC_BONUS = src_bonus/
-#D_OBJ_BONUS = obj_bonus/
-#OBJS_BONUS = $(patsubst $(D_SRC_BONUS)%.c,$(D_OBJ_BONUS)%.o,$(SRCS_BONUS))
+HEADER_BONUS = bonus/includes/cub3D_bonus.h
+D_SRC_BONUS = bonus/src/
+D_OBJ_BONUS = bonus/obj_bonus/
+OBJS_BONUS = $(patsubst $(D_SRC_BONUS)%.c,$(D_OBJ_BONUS)%.o,$(SRCS_BONUS))
 
 #------------------------------------------------------------------------------#
 #									 RULES									   #
@@ -109,11 +109,11 @@ norm:
 
 clean:
 	@$(call cleaning, $(RM) $(D_OBJ))
-#	@$(RM) $(D_OBJ_BONUS)
+	@$(RM) $(D_OBJ_BONUS)
 
 fclean:	clean
 	@$(call fcleaning, $(RM) $(NAME))
-#	@$(RM) $(NAME_BONUS)
+	@$(RM) $(NAME_BONUS)
 
 lclean: fclean
 	@$(call lcleaning)
@@ -129,21 +129,42 @@ re:	fclean all
 #									IF BONUS								   #
 #------------------------------------------------------------------------------#
 
-#SRCS_BONUS = src_bonus/...
+SRCS_BONUS =	bonus/src/error_management.c \
+				bonus/src/scene_parsing.c \
+				bonus/src/scene_parsing_utils.c \
+				bonus/src/cub3d_utils.c \
+				bonus/src/check_orientation_params.c \
+				bonus/src/check_fc_params.c \
+				bonus/src/map_parsing.c \
+				bonus/src/map_parsing_utils.c \
+				bonus/src/error_utils.c \
+				bonus/src/flood_fill.c \
+				bonus/src/check_ceiling_rgb.c \
+				bonus/src/check_floor_rgb.c \
+				bonus/src/init_assets_bonus.c \
+				bonus/src/init_player.c \
+				bonus/src/init_hud.c \
+				bonus/src/raycasting.c \
+				bonus/src/init_minimap.c \
+				bonus/src/moves.c \
+				bonus/src/camera.c \
+				bonus/src/raycasting_utils.c \
+				bonus/src/init_3d.c \
+				bonus/src/audio.c
 
-#daftpunk_bonus:
-#	@$(call intro_bonus)
+daftpunk_bonus:
+	@$(call intro_bonus)
 
-#$(NAME_BONUS): daftpunk_bonus $(OBJS_BONUS)
-#	@$(CC) $(CFLAGS) -o $@ $(OBJS_BONUS) $(D_LIBFT)$(LIBFT) $(D_LIBRL)$(LIBRL)
-#	@printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(NC)\r"
-#	@echo "$(LGREEN)Software Compilation completed !$(NC)"
+$(NAME_BONUS): daftpunk_bonus $(OBJS_BONUS)
+	@$(CC) $(CFLAGS) -o $@ $(OBJS_BONUS) $(D_LIBFT)$(LIBFT) $(D_LIBRL)$(LIBRL)
+	@printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(NC)\r"
+	@echo "$(LGREEN)Software Compilation completed !$(NC)"
 
-#$(OBJS_BONUS): $(D_OBJ_BONUS)%.o : $(D_SRC_BONUS)%.c $(HEADER_BONUS)
-#		@mkdir -p $(D_OBJ_BONUS)
-#		@$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
+$(OBJS_BONUS): $(D_OBJ_BONUS)%.o : $(D_SRC_BONUS)%.c $(HEADER_BONUS)
+		@mkdir -p $(D_OBJ_BONUS)
+		@$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
 
-#bonus: daftpunk_bonus do_libft $(NAME_BONUS)
+bonus: daftpunk_bonus $(NAME_BONUS)
 
 #------------------------------------------------------------------------------#
 #								  MAKEUP RULES								   #
