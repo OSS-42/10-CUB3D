@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 14:57:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 15:02:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	quit_game(t_vault *data)
 {
 	printf("%s\n", "Au revoir !");
+	system("killall afplay");
 	free_all(data);
 }
 
