@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 15:24:24 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/22 17:04:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		quit_game(data);
-	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
-		show_minimap(data);
 }
 
 // pour écran plus grand
@@ -59,13 +57,9 @@ int	create_game(t_vault *data)
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
 	load_3d(data);
-	load_hud(data);
-	load_minimap(data);
 	load_player(data);
 	raycaster(data);
 	mlx_loop(data->mlx);
-	mlx_delete_image(data->mlx, data->minimap->minimap);
-	mlx_delete_image(data->mlx, data->hud->hud);
 	mlx_delete_image(data->mlx, data->game->ddd);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
@@ -75,14 +69,11 @@ void	init_data(t_vault *data, char **argv)
 {
 	data->argv = argv[1];
 	data->player = ft_calloc(1, sizeof(t_player));
-	// data->lvl1 = ft_calloc(1, sizeof(t_level));
-	data->minimap = ft_calloc(1, sizeof(t_minimap));
 	data->scene_param = ft_calloc(1, sizeof(t_param));
 	data->map = ft_calloc(1, sizeof(t_map));
 	data->size = ft_calloc(1, sizeof(t_point));
 	data->actual = ft_calloc(1, sizeof(t_point));
 	data->game = ft_calloc(1, sizeof(t_game));
-	data->hud = ft_calloc(1, sizeof(t_hud));
 	data->raycaster = ft_calloc(1, sizeof(t_rays));
 	data->scene_param->r_ceiling = -1;
 	data->scene_param->g_ceiling = -1;

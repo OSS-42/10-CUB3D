@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:37:22 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/22 14:51:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:14:09 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,8 @@ void	rgb_to_hex(t_vault *data, int r, int g, int b, char flag)
 
 	a = 0xff;
 	if (flag == 'C')
-	{
 		data->scene_param->hex_ceiling = (r << 24) | (g << 16) | (b << 8) | a;
-		printf("C Hex : %x\n\n", data->scene_param->hex_ceiling);
-	}
 		
 	else if (flag == 'F')
-	{
 		data->scene_param->hex_floor = (r << 24) | (g << 16) | (b << 8) | a;
-		printf("F Hex : %x\n\n", data->scene_param->hex_floor);
-	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 15:15:59 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/22 17:03:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # define PI 3.1415926535
 # define WIDTH 1024
 # define HEIGHT 768
-# define HUD_HEIGHT (HEIGHT / 6)
+# define HUD_HEIGHT 0
 # define HEIGHT_3D (HEIGHT - HUD_HEIGHT - 1)
-# define TILE (WIDTH / 32)
+# define TILE 0
 # define RED 0xFF0000FF
 # define YELLOW 0xFFFF00FF
 # define GREEN 0x00FF00FF
@@ -53,26 +53,16 @@ typedef struct s_player
 	int		start_y;
 	double	row;
 	double	col;
-	int		ppx;
-	int		ppy;
 	double	pdx;
 	double	pdy;
-	// double	pdlen;
-	// double	pa;
 	char	direction;
 }	t_player;
 
-// plane_x du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
-// plane_y du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
 typedef struct s_rays
 {
 	double	pdx_ray;
 	double	pdy_ray;
-	// int		dist_x;
-	// int		dist_y;
 	double	ray_len;
-	double	last_ray_len;
-	// double	ray_one_a;
 	double	plane_x;
 	double	plane_y;
 	double	rot_speed;
@@ -84,65 +74,24 @@ typedef struct s_map
 {
 	char	**map;
 	char	**temp_map;
-	int		*map2d;
 	int		lines;
 	int		max_lenght;
 }	t_map;
 
 typedef struct s_minimap
 {
-	xpm_t		*wall;
+	xpm_t		*wall_N;
+	xpm_t		*wall_S;
+	xpm_t		*wall_E;
+	xpm_t		*wall_W;
 	xpm_t		*floor;
-	xpm_t		*player;
-	xpm_t		*floor_void;
-	void		*start;
-	int			x;
-	int			y;
-	int			img_x;
-	int			img_y;
-	int			on_screen;
-	mlx_image_t	*minimap;
+	xpm_t		*ceiling;
 }	t_minimap;
 
 typedef struct s_game
 {
 	mlx_image_t	*ddd;
 }	t_game;
-
-typedef struct s_hud
-{
-	int			lives_count;
-	int			collected;
-	int			total_c;
-	int			hud_height;
-	mlx_image_t	*lives;
-	mlx_image_t	*hud;
-}	t_hud;
-
-// typedef struct s_level
-// {
-// 	void		*corner_1;
-// 	void		*corner_2;
-// 	void		*corner_3;
-// 	void		*corner_4;
-// 	void		*wall_left;
-// 	void		*wall_right;
-// 	void		*wall_top;
-// 	void		*wall_bottom;
-// 	void		*floor;
-// 	void		*pilar;
-// 	void		*collect;
-// 	void		*start;
-// 	void		*exit;
-// 	int			x;
-// 	int			y;
-// 	int			img_x;
-// 	int			img_y;
-// 	mlx_image_t	*floor_img;
-// 	mlx_image_t	*wall_img;
-// 	mlx_image_t	*player_img;
-// 	mlx_image_t	*void_img;
-// }	t_level;
 
 typedef struct s_param
 {
@@ -174,29 +123,18 @@ typedef struct s_vault
 {
 	void		*img;
 	void		*mlx;
-	void		*mlx_win;
 	char		**scene;
 	char		*argv;
 	int			map_start;
 	int			error_code;
-	int			char_check;
-	int			char_p;
-	int			char_e;
-	int			width;
-	int			height;
 	int			lines;
-	int			lenght;
-	int			p_dir;
-	int			audio;
 	t_player	*player;
-	// t_level		*lvl1;
 	t_param		*scene_param;
 	t_map		*map;
 	t_point		*size;
 	t_point		*actual;
 	t_minimap	*minimap;
 	t_game		*game;
-	t_hud		*hud;
 	t_rays		*raycaster;
 }	t_vault;
 
@@ -271,9 +209,6 @@ void	extract_r_floor(t_vault *data, char *rgb_code, int *i, int *len);
 void	extract_g_floor(t_vault *data, char *rgb_code, int *i, int *len);
 void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len);
 
-/***** init_assets_bonus.c *****/
-void	load_minimap_assets(t_vault *data);
-
 /***** flood_fill *****/
 void	flood_fill(t_vault *data, int x, int y, char **temp);
 
@@ -281,32 +216,12 @@ void	flood_fill(t_vault *data, int x, int y, char **temp);
 void	load_player(t_vault *data);
 void	init_player(t_vault *data);
 void	find_orientation(t_vault *data, char direction);
-void	draw_player(t_vault *data);
-
-/***** init_hud.c *****/
-void	load_hud(t_vault *data);
-void	draw_hud(t_vault *data);
-void	full_line_hud_hor(t_vault *data, int screen_y, unsigned int color);
-void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);
-void	draw_ray_minimap(t_vault *data, float ray_len);
-// void	find_ray_angle(t_vault *data);
 void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color);
 
-/***** init_minimap.c *****/
-void	show_minimap(t_vault *data);
-void	load_minimap(t_vault *data);
-void	draw_minimap(t_vault *data);
-void	draw_tiles(t_vault *data,
-			int screen_x, int screen_y, unsigned int color);
-void	minimap_background(t_vault *data);
-void	full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color);
-void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
-
 /***** moves.c *****/
-void	reinit_minimap(t_vault *data);
 void	move_forward(t_vault *data);
 void	move_backward(t_vault *data);
 void	move_left(t_vault *data);
@@ -314,18 +229,12 @@ void	move_right(t_vault *data);
 
 /***** camera.c *****/
 void	reinit_3d(t_vault *data);
-void	reinit_hud(t_vault *data);
-void	draw_pov(t_vault *data);
 void	rotate_left(t_vault *data);
 void	rotate_right(t_vault *data);
 
 /***** raycasting_utils.c *****/
 float	degtorad(float angle);
 int		fix_angle(int angle);
-// int		ray_seg_len_x(t_vault *data, int start_x, char flag);
-// int		ray_seg_len_y(t_vault *data, int start_y, char flag);
-// void	find_next_case(t_vault *data, int intersec_x, int intersec_y, char flag);
-// int		wall_in_next_case(t_vault *data, int x, int y);
 
 /***** init_3d.c *****/
 void	load_3d(t_vault *data);

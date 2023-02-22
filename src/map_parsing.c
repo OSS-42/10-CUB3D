@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/21 22:27:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:16:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	fill_rest_of_line(t_vault *data, int x)
 	}
 	free(data->map->map[x]);
 	data->map->map[x] = ft_strdup(temp);
-	printf("%s\n", data->map->map[x]);
 	free (temp);
 	temp = NULL;
 }

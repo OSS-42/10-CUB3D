@@ -46,11 +46,9 @@ SRCS =	src/cub3D.c \
 		src/flood_fill.c \
 		src/check_ceiling_rgb.c \
 		src/check_floor_rgb.c \
-		src/init_assets_bonus.c \
+		src/init_textures.c \
 		src/init_player.c \
-		src/init_hud.c \
 		src/raycasting.c \
-		src/init_minimap.c \
 		src/moves.c \
 		src/camera.c \
 		src/raycasting_utils.c \

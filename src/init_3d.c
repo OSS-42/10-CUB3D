@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:12:30 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 14:48:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:13:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,10 @@ void	background_3d(t_vault *data)
 		}
 		i++;
 	}
+}
+
+void	reinit_3d(t_vault *data)
+{
+	mlx_delete_image(data->mlx, data->game->ddd);
+	load_3d(data);
 }
