@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:00:20 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 10:03:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:32:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	load_hud(t_vault *data)
 {
-	data->hud->hud = mlx_new_image(data->mlx, WIDTH, data->hud->hud_height);
+	data->hud->hud = mlx_new_image(data->mlx, WIDTH, HUD_HEIGHT);
 	draw_hud(data);
-	mlx_image_to_window(data->mlx, data->hud->hud, 0, HEIGHT - data->hud->hud_height);
+	mlx_image_to_window(data->mlx, data->hud->hud, 0, HEIGHT - HUD_HEIGHT);
 }
 
 void	draw_hud(t_vault *data)
@@ -28,7 +28,7 @@ void	draw_hud(t_vault *data)
 	full_line_hud_hor(data, 0, 0x00FF00FF);
 	full_line_hud_ver(data, 0, 0x00FF00FF);
 	full_line_hud_ver(data, WIDTH - 1, 0x00FF00FF);
-	full_line_hud_hor(data, data->hud->hud_height - 1, 0x00FF00FF);
+	full_line_hud_hor(data, HUD_HEIGHT - 1, 0x00FF00FF);
 
 	//separations dans HUD
 	// mlx_put_string(data->mlx, "Bottles", data->map->max_lenght * 11 + 40, HEIGHT - data->map->lines * 10);
@@ -63,7 +63,7 @@ void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color)
 	int	len;
 
 	start = 0;
-	len = data->hud->hud_height - 1;
+	len = HUD_HEIGHT - 1;
 	while (start < len)
 	{
 		mlx_put_pixel(data->hud->hud, screen_x, start, color);
