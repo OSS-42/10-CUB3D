@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/21 16:24:10 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:27:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		quit_game(data);
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
+		show_minimap(data);
 }
 
 // pour écran plus grand
@@ -63,6 +65,8 @@ int	create_game(t_vault *data)
 	raycaster(data);
 	mlx_loop(data->mlx);
 	mlx_delete_image(data->mlx, data->minimap->minimap);
+	mlx_delete_image(data->mlx, data->hud->hud);
+	mlx_delete_image(data->mlx, data->game->ddd);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
 }
@@ -88,6 +92,7 @@ void	init_data(t_vault *data, char **argv)
 	data->scene_param->b_floor = -1;
 	data->raycaster->mov_speed = 0.15;
 	data->raycaster->rot_speed = 0.15;
+	data->hud->hud_height = HEIGHT / 5;
 }
 
 int	main(int argc, char **argv)

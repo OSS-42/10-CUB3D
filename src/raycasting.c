@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 09:40:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:39:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,8 @@ void	raycaster(t_vault *data)
 		else
 			ray_len = (ray_len_y - delta_dist_y);
 
-		draw_ray_minimap(data, ray_len); // pour la minimap
+		if (data->minimap->on_screen == 1)
+			draw_ray_minimap(data, ray_len); // pour la minimap
 
 		// //Calculate height of line to draw on screen
 		wall_height = (int)(data->raycaster->height_3d / ray_len);

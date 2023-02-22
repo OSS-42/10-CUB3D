@@ -6,28 +6,55 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/20 23:08:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:37:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
+void	reinit_minimap(t_vault *data)
+{
+	mlx_delete_image(data->mlx, data->minimap->minimap);
+	if (data->minimap->on_screen == 1)
+		load_minimap(data);
+}
+
+void	show_minimap(t_vault *data)
+{
+	if (data->minimap->on_screen == 1)
+	{
+		data->minimap->on_screen = 0;
+		mlx_delete_image(data->mlx, data->minimap->minimap);
+	}
+	else
+	{
+		data->minimap->on_screen = 1;
+		load_minimap(data);
+		draw_player(data);
+	}
+}
+
 void	load_minimap(t_vault *data)
 {
 	data->minimap->minimap = mlx_new_image(data->mlx,
 			data->map->max_lenght * TILE, data->map->lines * TILE);
-	draw_minimap(data);
+	if (data->minimap->on_screen == 1)
+	{
+		draw_minimap(data);
+		draw_player(data);
+	}
+	
+	mlx_image_to_window(data->mlx,
+		data->minimap->minimap, (WIDTH / 2) - (data->map->max_lenght * TILE / 2), (HEIGHT / 2) - (data->map->lines * TILE / 2));
+}
+
+void	draw_minimap(t_vault *data)
+{
 	//contours MINIMAP
 	full_line_minimap_hor(data, 0, 0xFF00FFFF);
 	full_line_minimap_ver(data, 0, 0xFF00FFFF);
 	full_line_minimap_ver(data, data->map->max_lenght * TILE - 1, 0xFF00FFFF);
 	full_line_minimap_hor(data, data->map->lines * TILE - 1, 0xFF00FFFF);
-	mlx_image_to_window(data->mlx,
-		data->minimap->minimap, 0, HEIGHT - data->map->lines * TILE);
-}
-
-void	draw_minimap(t_vault *data)
-{
 	data->minimap->x = 0;
 	while (data->minimap->x < data->map->lines)
 	{

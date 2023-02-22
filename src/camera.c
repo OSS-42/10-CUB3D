@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 09:30:59 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:45:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	rotate_left(t_vault *data)
 	data->raycaster->plane_x = data->raycaster->plane_x * cos(-data->raycaster->rot_speed) - data->raycaster->plane_y * sin(-data->raycaster->rot_speed);
 	data->raycaster->plane_y = old_plane_x * sin(-data->raycaster->rot_speed) + data->raycaster->plane_y * cos(-data->raycaster->rot_speed);
 	
-	reinit_minimap(data);
 	reinit_hud(data);
 	reinit_3d(data);
-	draw_player(data);
+	reinit_minimap(data);
+	// draw_player(data);
 	raycaster(data);
 }
 
@@ -73,9 +73,9 @@ void	rotate_right(t_vault *data)
 	data->raycaster->plane_x = data->raycaster->plane_x * cos(data->raycaster->rot_speed) - data->raycaster->plane_y * sin(data->raycaster->rot_speed);
 	data->raycaster->plane_y = old_plane_x * sin(data->raycaster->rot_speed) + data->raycaster->plane_y * cos(data->raycaster->rot_speed);
 	
-	reinit_minimap(data);
 	reinit_hud(data);
 	reinit_3d(data);
-	draw_player(data);
+	reinit_minimap(data);
+	// draw_player(data);
 	raycaster(data);
 }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 09:14:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:16:45 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_minimap
 	int			y;
 	int			img_x;
 	int			img_y;
+	int			on_screen;
 	mlx_image_t	*minimap;
 }	t_minimap;
 
@@ -111,6 +112,7 @@ typedef struct s_hud
 	int			lives_count;
 	int			collected;
 	int			total_c;
+	int			hud_height;
 	mlx_image_t	*lives;
 	mlx_image_t	*hud;
 }	t_hud;
@@ -288,6 +290,7 @@ void	draw_ray_minimap(t_vault *data, float ray_len);
 void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color);
 
 /***** init_minimap.c *****/
+void	show_minimap(t_vault *data);
 void	load_minimap(t_vault *data);
 void	draw_minimap(t_vault *data);
 void	draw_tiles(t_vault *data,
