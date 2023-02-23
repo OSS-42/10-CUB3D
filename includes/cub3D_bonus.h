@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 16:10:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:32:41 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,6 @@ void	check_f_params(t_vault *data, int x, int y, int slen);
 void	check_c_params(t_vault *data, int x, int y, int slen);
 void	check_color_code(t_vault *data);
 int		correct_rgb_char(char *rgb_code);
-int		rgb_to_hex2(int r, int g, int b, int a);
 void	rgb_to_hex(t_vault *data, char flag);
 
 /***** cub3d_utils.c *****/
@@ -344,6 +343,7 @@ void	rotate_right(t_vault *data);
 /***** raycasting_utils.c *****/
 float	degtorad(float angle);
 int		fix_angle(int angle);
+unsigned int	rgb_to_hex2(int r, int g, int b, int a);
 
 /***** init_3d.c *****/
 void	load_3d(t_vault *data);

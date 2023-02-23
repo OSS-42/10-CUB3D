@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 16:06:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:52:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	raycaster(t_vault *data)
 			data->game->wall_end = HEIGHT_3D - 1;
 
 		// draw the pixels of the stripe as a vertical line
-		texture_picker(data, pixels_2d, side, ray_len);
+		// texture_picker(data, pixels_2d, side, ray_len);
 		draw_wall_3d(data, data->game->wall_start, data->game->wall_end, pixels_2d, data->game->wall_color);
 
 		pixels_2d++;
@@ -212,21 +212,34 @@ int	**fill_texture(xpm_t *tex)
 
 void	create_texture(t_vault *data)
 {
-	data->tex = ft_calloc(1, sizeof(t_tex));
-	if (!data->tex)
-		quit_game(data);
-	data->tex->tex_n = mlx_load_xpm42(data->game->wall_n);
+	printf("NO : %s\n", data->scene_param->no_wall_path);
+	printf("SO : %s\n", data->scene_param->so_wall_path);
+	printf("EA : %s\n", data->scene_param->ea_wall_path);
+	printf("WE : %s\n", data->scene_param->we_wall_path);
+	data->tex->tex_n = mlx_load_xpm42(data->scene_param->no_wall_path);
 	if (!data->tex->tex_n)
+	{
+		printf("coucou\n");
 		quit_game(data);
-	data->tex->tex_s = mlx_load_xpm42(data->game->wall_s);
+	}
+	data->tex->tex_s = mlx_load_xpm42(data->scene_param->so_wall_path);
 	if (!data->tex->tex_s)
+	{
+		printf("coucou2\n");
 		quit_game(data);
-	data->tex->tex_e = mlx_load_xpm42(data->game->wall_e);
+	}
+	data->tex->tex_e = mlx_load_xpm42(data->scene_param->ea_wall_path);
 	if (!data->tex->tex_e)
+	{
+		printf("coucou3\n");
 		quit_game(data);
-	data->tex->tex_w = mlx_load_xpm42(data->game->wall_w);
+	}
+	data->tex->tex_w = mlx_load_xpm42(data->scene_param->we_wall_path);
 	if (!data->tex->tex_w)
+	{
+		printf("coucou4\n");
 		quit_game(data);
+	}
 	data->tex->north = fill_texture(data->tex->tex_n);
 	data->tex->south = fill_texture(data->tex->tex_s);
 	data->tex->east = fill_texture(data->tex->tex_e);

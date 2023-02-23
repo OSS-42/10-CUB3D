@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 15:08:16 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 16:42:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	move_forward(t_vault *data)
 		data->player->col = data->player->col + data->player->pdx
 			* data->raycaster->mov_speed;
 	reinit_3d(data);
+	reinit_hud(data);
+	reinit_minimap(data);
 	raycaster(data);
 }
 
@@ -37,6 +39,8 @@ void	move_backward(t_vault *data)
 		data->player->col = data->player->col - data->player->pdx
 			* data->raycaster->mov_speed;
 	reinit_3d(data);
+	reinit_hud(data);
+	reinit_minimap(data);
 	raycaster(data);
 }
 
@@ -51,6 +55,8 @@ void	move_left(t_vault *data)
 		data->player->col = data->player->col - data->raycaster->plane_x
 			* data->raycaster->mov_speed;
 	reinit_3d(data);
+	reinit_hud(data);
+	reinit_minimap(data);
 	raycaster(data);
 }
 
@@ -65,6 +71,8 @@ void	move_right(t_vault *data)
 		data->player->col = data->player->col + data->raycaster->plane_x
 			* data->raycaster->mov_speed;
 	reinit_3d(data);
+	reinit_hud(data);
+	reinit_minimap(data);
 	raycaster(data);
 }
 
@@ -94,5 +102,7 @@ void	move_mouse(double xpos, double ypos, void *temp)
 	data->old_x_cursor = xpos;
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	reinit_3d(data);
+	reinit_hud(data);
+	reinit_minimap(data);
 	raycaster(data);
 }
