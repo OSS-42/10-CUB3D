@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 17:20:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:34:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	raycaster(t_vault *data)
 	int				wall_start; // pixel de depart du dessin du mur
 	int				wall_end; // pixel de fin du dessin du mur
 	unsigned int	wall_color; // couleur du mur
-	
+
 	pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
 	while (pixels_2d < WIDTH)
 	{
@@ -39,7 +39,7 @@ void	raycaster(t_vault *data)
 		impact = 0;
 		ray_len = 0;
 		side = 0;
-		
+
 		screen_2d_x = 2 * pixels_2d / WIDTH - 1; // de -1 a +1
 		data->raycaster->pdx_ray = data->player->pdx + data->raycaster->plane_x * screen_2d_x;
 		data->raycaster->pdy_ray = data->player->pdy + data->raycaster->plane_y * screen_2d_x;
@@ -98,7 +98,7 @@ void	raycaster(t_vault *data)
 				else
 					side = 3;
 			}
-			
+
 			if (data->map->map[row][col] == '1')
 				impact = 1;
 			else
@@ -108,15 +108,15 @@ void	raycaster(t_vault *data)
 			ray_len = (ray_len_x - delta_dist_x);
 		else
 			ray_len = (ray_len_y - delta_dist_y);
-		wall_height = (int)(HEIGHT_3D / ray_len);
+		wall_height = (int)(data->raycaster->height_3d / ray_len);
 
-		wall_start = -wall_height / 2 + HEIGHT_3D / 2;
+		wall_start = -wall_height / 2 + data->raycaster->height_3d / 2;
 		if (wall_start < 0)
 			wall_start = 0;
-		wall_end = wall_height / 2 + HEIGHT_3D / 2;
-		if (wall_end >= HEIGHT_3D)
-			wall_end = HEIGHT_3D - 1;
-		
+		wall_end = wall_height / 2 + data->raycaster->height_3d / 2;
+		if (wall_end >= data->raycaster->height_3d)
+			wall_end = data->raycaster->height_3d - 1;
+
 		if (side == 0)
 			wall_color = YELLOW;
 		else if (side == 1)
@@ -125,7 +125,7 @@ void	raycaster(t_vault *data)
 			wall_color = BLUE;
 		else if (side == 3)
 			wall_color = RED;
-		
+
 		draw_wall_3d(data, wall_start, wall_end, pixels_2d, wall_color);
 
 		pixels_2d++;

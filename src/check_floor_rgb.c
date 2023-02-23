@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_floor_rgb.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:58:58 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 17:12:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:03:34 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	extract_r_floor(t_vault *data, char *rgb_code, int *i, int *len)
 	temp = NULL;
 	while (rgb_code && rgb_code[*i] && rgb_code[*i] != ',')
 	{
-		if (ft_isdigit(rgb_code[*i]) == 1 || check_white_spaces(rgb_code[*i]) == 0)
+		if (ft_isdigit(rgb_code[*i]) == 1
+			|| check_white_spaces(rgb_code[*i]) == 0)
 			(*i)++;
 	}
 	temp = ft_substr(rgb_code, *len, *i - *len);
@@ -41,7 +42,8 @@ void	extract_g_floor(t_vault *data, char *rgb_code, int *i, int *len)
 	temp = NULL;
 	while (rgb_code && rgb_code[*i] && rgb_code[*i] != ',')
 	{
-		if (ft_isdigit(rgb_code[*i]) == 1 || check_white_spaces(rgb_code[*i]) == 0)
+		if (ft_isdigit(rgb_code[*i]) == 1
+			|| check_white_spaces(rgb_code[*i]) == 0)
 			(*i)++;
 	}
 	temp = ft_substr(rgb_code, *len, *i - *len);
@@ -63,7 +65,8 @@ void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len)
 	temp = NULL;
 	while (rgb_code && rgb_code[*i] && rgb_code[*i] != ',')
 	{
-		if (ft_isdigit(rgb_code[*i]) == 1 || check_white_spaces(rgb_code[*i]) == 0)
+		if (ft_isdigit(rgb_code[*i]) == 1
+			|| check_white_spaces(rgb_code[*i]) == 0)
 			(*i)++;
 	}
 	temp = ft_substr(rgb_code, *len, *i - *len);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 20:45:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:10:22 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,6 @@ void	errors(t_vault *data);
 void	errors_2(t_vault *data);
 void	free_map(t_vault *data);
 void	destroy_and_free_level(t_vault *data);
-void	destroy_and_free_player(t_vault *data);
 void	free_all(t_vault *data);
 
 /***** scene_parsing.c *****/

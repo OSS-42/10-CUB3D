@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 17:15:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:18:51 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	free_map(t_vault *data)
 	exit (0);
 }
 
-void	destroy_and_free_player(t_vault *data)
+void	free_all(t_vault *data)
 {
-	// mlx_delete_image(data->mlx, data->player->p_right);
-	// mlx_delete_image(data->mlx, data->player->p_left);
+	mlx_terminate(data->mlx);
 	free (data->player);
+	free_map(data);
 }

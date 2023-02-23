@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 17:03:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:40:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@
 # define PI 3.1415926535
 # define WIDTH 1024
 # define HEIGHT 768
-# define HUD_HEIGHT 0
-# define HEIGHT_3D (HEIGHT - HUD_HEIGHT - 1)
-# define TILE 0
 # define RED 0xFF0000FF
 # define YELLOW 0xFFFF00FF
 # define GREEN 0x00FF00FF
@@ -78,19 +75,13 @@ typedef struct s_map
 	int		max_lenght;
 }	t_map;
 
-typedef struct s_minimap
-{
-	xpm_t		*wall_N;
-	xpm_t		*wall_S;
-	xpm_t		*wall_E;
-	xpm_t		*wall_W;
-	xpm_t		*floor;
-	xpm_t		*ceiling;
-}	t_minimap;
-
 typedef struct s_game
 {
 	mlx_image_t	*ddd;
+	xpm_t		*wall_n;
+	xpm_t		*wall_s;
+	xpm_t		*wall_e;
+	xpm_t		*wall_w;
 }	t_game;
 
 typedef struct s_param
@@ -115,13 +106,11 @@ typedef struct s_param
 	int				f_exist;
 	char			*c_color;
 	int				c_exist;
-	int				a_ceiling;
-	int				a_floor;
 }	t_param;
 
 typedef struct s_vault
 {
-	void		*img;
+	void		*img; //à supprimer ?
 	void		*mlx;
 	char		**scene;
 	char		*argv;
@@ -133,7 +122,6 @@ typedef struct s_vault
 	t_map		*map;
 	t_point		*size;
 	t_point		*actual;
-	t_minimap	*minimap;
 	t_game		*game;
 	t_rays		*raycaster;
 }	t_vault;
@@ -151,7 +139,6 @@ void	errors(t_vault *data);
 void	errors_2(t_vault *data);
 void	free_map(t_vault *data);
 void	destroy_and_free_level(t_vault *data);
-void	destroy_and_free_player(t_vault *data);
 void	free_all(t_vault *data);
 
 /***** scene_parsing.c *****/
@@ -180,7 +167,7 @@ void	check_c_params(t_vault *data, int x, int y, int slen);
 void	check_color_code(t_vault *data);
 int		correct_rgb_char(char *rgb_code);
 void	correct_rgb_range(t_vault *data, char *rgb_code, char c);
-void	rgb_to_hex(t_vault *data, int r, int g, int b, char flag);
+void	rgb_to_hex(t_vault *data, char flag);
 
 /***** cub3d_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
@@ -216,6 +203,7 @@ void	flood_fill(t_vault *data, int x, int y, char **temp);
 void	load_player(t_vault *data);
 void	init_player(t_vault *data);
 void	find_orientation(t_vault *data, char direction);
+void	find_orientation_2(t_vault *data, char direction);
 
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);

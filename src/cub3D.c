@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 17:04:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:32:14 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		move_forward(data);
 	if (keydata.key == MLX_KEY_S
-		&& (keydata.action == MLX_REPEAT  || keydata.action == MLX_PRESS))
+		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		move_backward(data);
 	if (keydata.key == MLX_KEY_A
-			&& (keydata.action == MLX_REPEAT  || keydata.action == MLX_PRESS))
+		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		move_left(data);
 	if (keydata.key == MLX_KEY_D
-			&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		move_right(data);
 	if (keydata.key == MLX_KEY_LEFT
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
@@ -83,6 +83,7 @@ void	init_data(t_vault *data, char **argv)
 	data->scene_param->b_floor = -1;
 	data->raycaster->mov_speed = 0.15;
 	data->raycaster->rot_speed = 0.15;
+	data->raycaster->height_3d = HEIGHT - 1;
 }
 
 int	main(int argc, char **argv)

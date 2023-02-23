@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:21:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 17:05:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:02:16 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	correct_rgb_range(t_vault *data, char *rgb_code, char c)
 	if (c == 'C')
 	{
 		extract_r_ceiling(data, rgb_code, &i, &len);
-		rgb_to_hex(data, data->scene_param->r_ceiling, data->scene_param->g_ceiling, data->scene_param->b_ceiling, 'C');
+		rgb_to_hex(data, 'C');
 	}
 	else if (c == 'F')
 	{
 		extract_r_floor(data, rgb_code, &i, &len);
-		rgb_to_hex(data, data->scene_param->r_floor, data->scene_param->g_floor, data->scene_param->b_floor, 'F');
+		rgb_to_hex(data, 'F');
 	}
 }
 

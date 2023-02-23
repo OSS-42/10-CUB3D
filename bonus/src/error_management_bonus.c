@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_management.c                                 :+:      :+:    :+:   */
+/*   error_management_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 15:13:30 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 09:10:54 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,3 @@ void	free_map(t_vault *data)
 // 	mlx_delete_image(data->mlx, data->lvl1->wall_top);
 // 	free (data->lvl1);
 // }
-
-void	destroy_and_free_player(t_vault *data)
-{
-	mlx_delete_image(data->mlx, data->player->p_right);
-	mlx_delete_image(data->mlx, data->player->p_left);
-	free (data->player);
-}
