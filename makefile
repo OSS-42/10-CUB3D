@@ -60,7 +60,7 @@ SRCS =	src/cub3D.c \
 
 all:	art_intro $(NAME)
 
-$(NAME):	$(LIBFT) $(LIBART) $(MLX42) $(OBJS)
+$(NAME):	$(D_OBJ) $(LIBFT) $(LIBART) $(MLX42) $(OBJS)
 # Ubuntu
 # @$(call creating, $(CC) $(CFLAGS) $(OBJS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
 # MacOS 42
@@ -74,10 +74,10 @@ $(NAME):	$(LIBFT) $(LIBART) $(MLX42) $(OBJS)
 art_intro:
 	@$(MAKE) intro_cub3D -C $(D_LIBART)
 
-$(LIBFT): $(D_OBJ) $(D_LIBFTHEAD)
+$(LIBFT):	$(D_LIBFTHEAD)
 	@$(MAKE) -C $(D_LIBFT)
 
-$(LIBART): $(D_OBJ) $(D_LIBARTHEAD)
+$(LIBART):	$(D_LIBARTHEAD)
 	@$(MAKE) -C $(D_LIBART)
 
 $(MLX42):
@@ -85,9 +85,6 @@ $(MLX42):
 	@brew update --quiet
 	@brew install glfw --quiet
 	@echo "$(LGREEN)MLX42 Configuration completed ...$(NC)"
-# @echo "$(LGREEN)MLX42 Compilation started ...$(NC)"
-# @$(MAKE) cmake -s --no-print-directory -C $(D_MLX42)
-# @echo "$(LGREEN)MLX42 Compilation completed ...$(NC)"
 
 $(D_OBJ):
 	@mkdir -p $(D_OBJ)
@@ -102,7 +99,6 @@ norm:
 
 clean:
 	@$(call cleaning, $(RM) $(D_OBJ))
-	@$(RM) $(D_OBJ_BONUS)
 
 fclean:	clean
 	@$(call fcleaning, $(RM) $(NAME))
@@ -122,7 +118,7 @@ re:	fclean all
 #------------------------------------------------------------------------------#
 HEADER_BONUS = includes/cub3D_bonus.h
 D_SRC_BONUS = bonus/src/
-D_OBJ_BONUS = bonus/obj_bonus/
+D_OBJ_BONUS = bonus/obj/
 OBJS_BONUS = $(patsubst $(D_SRC_BONUS)%.c,$(D_OBJ_BONUS)%.o,$(SRCS_BONUS))
 SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/error_management_bonus.c \
@@ -137,7 +133,7 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/flood_fill_bonus.c \
 				bonus/src/check_ceiling_rgb_bonus.c \
 				bonus/src/check_floor_rgb_bonus.c \
-				bonus/src/init_assets_bonus_bonus.c \
+				bonus/src/init_textures_bonus.c \
 				bonus/src/init_player_bonus.c \
 				bonus/src/init_hud_bonus.c \
 				bonus/src/raycasting_bonus.c \
@@ -148,12 +144,12 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/init_3d_bonus.c \
 				bonus/src/audio_bonus.c
 
-bonus: intro_bonus $(NAME_BONUS)
+bonus: intro_bonus art_intro $(NAME_BONUS)
 
 intro_bonus:
 	@$(MAKE) bonus -C $(D_LIBART)
 
-$(NAME_BONUS): art_intro $(LIBFT) $(LIBART) $(MLX42) $(OBJS_BONUS)
+$(NAME_BONUS):	$(D_OBJ_BONUS) $(LIBFT) $(LIBART) $(MLX42) $(OBJS_BONUS)
 # Ubuntu
 #	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
 # MacOS 42
@@ -162,19 +158,26 @@ $(NAME_BONUS): art_intro $(LIBFT) $(LIBART) $(MLX42) $(OBJS_BONUS)
 	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 	@echo "$(LGREEN)Software Compilation completed !$(NC)"
 
-$(OBJS_BONUS): $(D_OBJ_BONUS)%.o : $(D_SRC_BONUS)%.c $(HEADER_BONUS)
-		@mkdir -p $(D_OBJ_BONUS)
+$(D_OBJ_BONUS):
+	@mkdir -p $(D_OBJ_BONUS)
+
+$(OBJS_BONUS):	$(D_OBJ_BONUS)%.o : $(D_SRC_BONUS)%.c $(HEADER_BONUS)
 		@$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
 
+clean_bonus:
+	@$(call cleaning, $(RM) $(D_OBJ_BONUS))
+
+fclean_bonus: clean_bonus
+	@$(call fcleaning, $(RM) $(NAME_BONUS))
+
+lclean_bonus: fclean_bonus
+	@$(call lcleaning)
+	@$(MAKE) -s --no-print-directory -C $(D_LIBFT) fclean
+	@$(MAKE) -s --no-print-directory -C $(D_LIBART) fclean
 
 #------------------------------------------------------------------------------#
 #								  MAKEUP RULES								   #
 #------------------------------------------------------------------------------#
-
-#----------------------------------- SOURCE -----------------------------------#
-#D_PRETTY = pretty/
-
-#----------------------------------- INTROS -----------------------------------#
 
 #----------------------------------- COLORS -----------------------------------#
 LRED = \033[91m

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_fc_params.c                                  :+:      :+:    :+:   */
+/*   check_fc_params_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:37:22 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/22 15:10:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/22 20:37:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	check_color_code(t_vault *data)
 		data->error_code = 15;
 	errors(data);
 	correct_rgb_range(data, data->scene_param->c_color, 'C');
-	correct_rgb_range(data, data->scene_param->c_color, 'F');
+	correct_rgb_range(data, data->scene_param->f_color, 'F');
 	errors(data);
 }
 
@@ -92,4 +92,16 @@ int	correct_rgb_char(char *rgb_code)
 			return (0);
 	}
 	return (1);
+}
+
+void	rgb_to_hex(t_vault *data, int r, int g, int b, char flag)
+{
+	unsigned int	a;
+
+	a = 0xff;
+	if (flag == 'C')
+		data->scene_param->hex_ceiling = (r << 24) | (g << 16) | (b << 8) | a;
+		
+	else if (flag == 'F')
+		data->scene_param->hex_floor = (r << 24) | (g << 16) | (b << 8) | a;
 }

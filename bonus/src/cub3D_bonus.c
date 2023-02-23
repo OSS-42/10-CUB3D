@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 16:29:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:32:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	main(int argc, char **argv)
 	check_scene_name(&data);
 	scene_to_array(&data);
 	check_scene_params(&data);
+	printf("coucou\n");
 	check_map(&data);
 	errors(&data);
 	create_game(&data);

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 14:25:56 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/22 20:45:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "../libart/includes/libart.h"
 # include "../libft/includes/libft.h"
@@ -55,22 +55,14 @@ typedef struct s_player
 	int		ppy;
 	double	pdx;
 	double	pdy;
-	// double	pdlen;
-	// double	pa;
 	char	direction;
 }	t_player;
 
-// plane_x du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
-// plane_y du plan 'FOV' du joueur --> va etre modifie avec le deplacement du joueur.
 typedef struct s_rays
 {
 	double	pdx_ray;
 	double	pdy_ray;
-	// int		dist_x;
-	// int		dist_y;
 	double	ray_len;
-	double	last_ray_len;
-	// double	ray_one_a;
 	double	plane_x;
 	double	plane_y;
 	double	rot_speed;
@@ -144,26 +136,28 @@ typedef struct s_hud
 
 typedef struct s_param
 {
-	char	*no_wall_path;
-	int		no_exist;
-	int		r_ceiling;
-	int		g_ceiling;
-	int		b_ceiling;
-	int		r_floor;
-	int		g_floor;
-	int		b_floor;
-	char	*so_wall_path;
-	int		so_exist;
-	char	*we_wall_path;
-	int		we_exist;
-	char	*ea_wall_path;
-	int		ea_exist;
-	char	*f_color;
-	int		f_exist;
-	char	*c_color;
-	int		c_exist;
-	int		a_ceiling;
-	int		a_floor;
+	char			*no_wall_path;
+	int				no_exist;
+	int				r_ceiling;
+	int				g_ceiling;
+	int				b_ceiling;
+	int				r_floor;
+	int				g_floor;
+	int				b_floor;
+	unsigned int	hex_ceiling;
+	unsigned int	hex_floor;
+	char			*so_wall_path;
+	int				so_exist;
+	char			*we_wall_path;
+	int				we_exist;
+	char			*ea_wall_path;
+	int				ea_exist;
+	char			*f_color;
+	int				f_exist;
+	char			*c_color;
+	int				c_exist;
+	int				a_ceiling;
+	int				a_floor;
 }	t_param;
 
 typedef struct s_vault
@@ -237,12 +231,13 @@ void	check_f_params(t_vault *data, int x, int y, int slen);
 void	check_c_params(t_vault *data, int x, int y, int slen);
 void	check_color_code(t_vault *data);
 int		correct_rgb_char(char *rgb_code);
-void	correct_rgb_range(t_vault *data, char *rgb_code, char c);
+void	rgb_to_hex(t_vault *data, int r, int g, int b, char flag);
 
 /***** cub3d_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
 int		check_white_spaces(char c);
 int		ft_find_char(char *src, char c);
+void	correct_rgb_range(t_vault *data, char *rgb_code, char c);
 
 /***** map_parsing.c *****/
 void	check_map(t_vault *data);
@@ -287,7 +282,6 @@ void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);
 void	draw_ray_minimap(t_vault *data, float ray_len);
-// void	find_ray_angle(t_vault *data);
 void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color);
 
 /***** init_minimap.c *****/
@@ -317,12 +311,11 @@ void	rotate_right(t_vault *data);
 /***** raycasting_utils.c *****/
 float	degtorad(float angle);
 int		fix_angle(int angle);
-// int		ray_seg_len_x(t_vault *data, int start_x, char flag);
-// int		ray_seg_len_y(t_vault *data, int start_y, char flag);
-// void	find_next_case(t_vault *data, int intersec_x, int intersec_y, char flag);
-// int		wall_in_next_case(t_vault *data, int x, int y);
 
 /***** init_3d.c *****/
 void	load_3d(t_vault *data);
+
+/***** audio.c *****/
+void	play_song(t_vault *data);
 
 #endif
