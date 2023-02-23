@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 15:10:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/22 23:18:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,52 @@ void	raycaster(t_vault *data)
 	int				wall_end; // pixel de fin du dessin du mur
 	unsigned int	wall_color; // couleur du mur
 
+	//------------- textures ---------------------
+	unsigned int	buffer[HEIGHT_3D][WIDTH];
+	unsigned int	texture[8][TEXWIDTH * TEXHEIGHT];
+	int				i;
+	size_t			j;
+	int				y;
+	int				x;
+	unsigned int	*tex;
+	size_t			tex_size;
+	int				tex_num;
+	double			wall_x; //where exactly the wall was hit
+	int				tex_x; // is the x-coordinate of the texture
+	int				tex_y;
+	double			tex_pos;
+	double			step;
+	
+	i = 0;
+	while (i < 8)
+	{
+		tex = texture[i];
+		tex_size = TEXWIDTH * TEXHEIGHT;
+		j = 0;
+		while (j < tex_size)
+		{
+			tex[j] = 0;
+			j++;
+		}
+		i++;
+	}
+	//assignees dans la scene...
+	// unsigned long tw, th;
+	// loadImage(texture[0], tw, th, "./bonus/asset/textures/eagle.png");
+	// loadImage(texture[1], tw, th, "./bonus/asset/textures/redbrick.png");
+	// loadImage(texture[2], tw, th, "./bonus/asset/textures/purplestone.png");
+	// loadImage(texture[3], tw, th, "./bonus/asset/textures/greystone.png");
+	// loadImage(texture[4], tw, th, "./bonus/asset/textures/bluestone.png");
+	// loadImage(texture[5], tw, th, "./bonus/asset/textures/mossy.png");
+	// loadImage(texture[6], tw, th, "./bonus/asset/textures/wood.png");
+	// loadImage(texture[7], tw, th, "./bonus/asset/textures/colorstone.png");
+	//----------------------------------------------	
+
+	
 	pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
 	while (pixels_2d < WIDTH)
 	{
-		wall_color = 0;
+		wall_color = DGRAY;
 		impact = 0;
 		ray_len = 0;
 		side = 0;
@@ -164,36 +206,84 @@ void	raycaster(t_vault *data)
 		wall_height = (int)(data->raycaster->height_3d / ray_len);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		wall_start = -wall_height / 2 + data->raycaster->height_3d / 2;
+		wall_start = -wall_height / 2 + HEIGHT_3D / 2;
 		if (wall_start < 0)
 			wall_start = 0;
-		wall_end = wall_height / 2 + data->raycaster->height_3d / 2;
-		if (wall_end >= data->raycaster->height_3d)
-			wall_end = data->raycaster->height_3d - 1;
+		wall_end = wall_height / 2 + HEIGHT_3D / 2;
+		if (wall_end >= HEIGHT_3D)
+			wall_end = HEIGHT_3D - 1;
 
 		// give x and y sides different brightness
 		// printf("\nCote de mur touché : %d\n", side);
 
-		if (side == 0)
-		{
-			wall_color = YELLOW;
-			// printf("couleur du mur : JAUNE (EST)\n");
+		//-------------- textures -------------------
+		tex_num = data->map->map[row][col] - 1;
+		//calculate value of wallX
+		if (side == 0 || side == 1) 
+			wall_x = data->player->row + ray_len * data->raycaster->pdy_ray;
+		else
+			wall_x = data->player->col + ray_len * data->raycaster->pdx_ray;
+		wall_x = wall_x - (int)(wall_x);
+
+		//x coordinate on the texture
+		tex_x = (int)(wall_x * (double)(TEXWIDTH));
+		if((side == 0 || side == 1) && data->raycaster->pdx_ray > 0) 
+			tex_x = TEXWIDTH - tex_x - 1;
+		if((side == 2 || side == 3) && data->raycaster->pdy_ray < 0)
+			tex_x = TEXWIDTH - tex_x - 1;
+
+		// How much to increase the texture coordinate per screen pixel
+      	step = 1.0 * TEXHEIGHT / wall_height;
+      	// Starting texture coordinate
+      	tex_pos = (wall_start - HEIGHT_3D / 2 + wall_height / 2) * step;
+		int y = wall_start;
+      	while (y < wall_end)
+      	{
+			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+			tex_y = (int)tex_pos & (TEXHEIGHT - 1);
+			tex_pos = tex_pos + step;
+			wall_color = texture[tex_num][TEXHEIGHT * tex_y + tex_x];
+			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+			if (side == 1)
+				wall_color = (wall_color >> 1) & 8355711;
+			buffer[y][x] = wall_color;
+			y++;
 		}
-		else if (side == 1)
+		draw_buffer_tex(data, buffer);
+		y = 0;
+    	while (y < HEIGHT_3D)
 		{
-			wall_color = GREEN;
-			// printf("couleur du mur : VERT (OUEST)\n");
-		}
-		else if (side == 2)
-		{
-			wall_color = BLUE;
-			// printf("couleur du mur : BLEU (SUD)\n");
-		}
-		else if (side == 3)
-		{
-			wall_color = RED;
-			// printf("couleur du mur : ROUGE (NORD)\n");
-		}
+			x = 0;
+			while (x < WIDTH)
+			{
+				buffer[y][x] = 0; //clear the buffer instead of cls()
+				x++;
+			} 
+			y++;
+		} 
+			
+		//----------------------------------------
+
+		// if (side == 0)
+		// {
+		// 	wall_color = YELLOW;
+		// 	// printf("couleur du mur : JAUNE (EST)\n");
+		// }
+		// else if (side == 1)
+		// {
+		// 	wall_color = GREEN;
+		// 	// printf("couleur du mur : VERT (OUEST)\n");
+		// }
+		// else if (side == 2)
+		// {
+		// 	wall_color = BLUE;
+		// 	// printf("couleur du mur : BLEU (SUD)\n");
+		// }
+		// else if (side == 3)
+		// {
+		// 	wall_color = RED;
+		// 	// printf("couleur du mur : ROUGE (NORD)\n");
+		// }
 
 
 		// draw the pixels of the stripe as a vertical line
@@ -204,6 +294,13 @@ void	raycaster(t_vault *data)
 		pixels_2d++;
 	}
 }
+
+void	draw_buffer_tex(t_vault * data, unsigned int buffer)
+{
+	
+}
+
+
 
 void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color)
 {

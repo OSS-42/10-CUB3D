@@ -1,14 +1,14 @@
 
 
-WE       bonus/assets/textures/tile_wall_window_left.xpm
+WE       bonus/asset/textures/eagle.xpm
 
-     NO bonus/assets/textures/tile_wall_window_bottom.xpm
+     NO ./bonus/asset/textures/redbrick.xpm
 
 F 119, 119, 119
 
-SO bonus/assets/textures/tile_wall_window_right.xpm
+SO bonus/asset/textures/greystone.xpm
 
-EA bonus/assets/textures/tile_wall_window_top.xpm
+EA bonus/asset/textures/wood.xpm
 
 
 
