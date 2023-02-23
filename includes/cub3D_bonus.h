@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 22:08:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:56:37 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ typedef struct s_map
 
 typedef struct s_minimap
 {
-	xpm_t		*wall;
-	xpm_t		*floor;
-	xpm_t		*player;
-	xpm_t		*floor_void;
+	// xpm_t		*wall;
+	// xpm_t		*floor;
+	// xpm_t		*player;
+	// xpm_t		*floor_void;
 	void		*start;
 	int			x;
 	int			y;
@@ -100,8 +100,29 @@ typedef struct s_minimap
 
 typedef struct s_game
 {
-	mlx_image_t	*ddd;
+	mlx_image_t		*ddd;
+	char			*wall_n;
+	char			*wall_s;
+	char			*wall_e;
+	char			*wall_w;
+	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
+	int				wall_start; // pixel de depart du dessin du mur
+	int				wall_end; // pixel de fin du dessin du mur
+	unsigned int	wall_color; // couleur du mur
+	int				tex_x; // is the x-coordinate of the texture
 }	t_game;
+
+typedef struct s_tex
+{
+	xpm_t	*tex_n;
+	xpm_t	*tex_s;
+	xpm_t	*tex_e;
+	xpm_t	*tex_w;
+	int		**north;
+	int		**south;
+	int		**east;
+	int		**west;
+} t_tex;
 
 typedef struct s_hud
 {
@@ -192,6 +213,7 @@ typedef struct s_vault
 	t_game		*game;
 	t_hud		*hud;
 	t_rays		*raycaster;
+	t_tex		*tex;
 }	t_vault;
 
 /***** FONCTIONS *****/
@@ -236,6 +258,7 @@ void	check_c_params(t_vault *data, int x, int y, int slen);
 void	check_color_code(t_vault *data);
 int		correct_rgb_char(char *rgb_code);
 void	rgb_to_hex(t_vault *data, int r, int g, int b, char flag);
+int		rgb_to_hex2(int r, int g, int b, int a);
 
 /***** cub3d_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
@@ -287,6 +310,11 @@ void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 void	raycaster(t_vault *data);
 void	draw_ray_minimap(t_vault *data, float ray_len);
 void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color);
+void	texture_picker(t_vault *data, int i, int side, double raylen);
+void	create_texture(t_vault *data);
+int		**fill_texture(xpm_t *tex);
+void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int i);
+int		find_tex_hit(t_vault *data, xpm_t *texture, int side, double ray_len);
 
 /***** init_minimap.c *****/
 void	show_minimap(t_vault *data);

@@ -1,14 +1,14 @@
 
 
-WE       bonus/asset/textures/eagle.xpm
+WE       ./bonus/assets/textures/eagle.xpm
 
-     NO ./bonus/asset/textures/redbrick.xpm
+     NO ./bonus/assets/textures/redbrick.xpm
 
 F 119, 119, 119
 
-SO bonus/asset/textures/greystone.xpm
+SO ./bonus/assets/textures/greystone.xpm
 
-EA bonus/asset/textures/wood.xpm
+EA ./bonus/assets/textures/wood.xpm
 
 
 

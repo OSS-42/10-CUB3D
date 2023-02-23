@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 20:32:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:51:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	init_data(t_vault *data, char **argv)
 	data->actual = ft_calloc(1, sizeof(t_point));
 	data->game = ft_calloc(1, sizeof(t_game));
 	data->hud = ft_calloc(1, sizeof(t_hud));
+	data->tex = ft_calloc(1, sizeof(t_tex));
 	data->raycaster = ft_calloc(1, sizeof(t_rays));
 	data->scene_param->r_ceiling = -1;
 	data->scene_param->g_ceiling = -1;
@@ -94,7 +95,8 @@ void	init_data(t_vault *data, char **argv)
 	data->scene_param->b_floor = -1;
 	data->raycaster->mov_speed = 0.15;
 	data->raycaster->rot_speed = 0.15;
-	data->hud->hud_height = HEIGHT / 5;
+	data->hud->hud_height = HEIGHT / 6;
+	data->raycaster->height_3d = HEIGHT - data->hud->hud_height - 1;
 	data->audio = 0;
 }
 
@@ -110,7 +112,6 @@ int	main(int argc, char **argv)
 	check_scene_name(&data);
 	scene_to_array(&data);
 	check_scene_params(&data);
-	printf("coucou\n");
 	check_map(&data);
 	errors(&data);
 	create_game(&data);

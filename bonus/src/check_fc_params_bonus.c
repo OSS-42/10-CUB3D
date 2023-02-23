@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:37:22 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/22 20:37:29 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:04:15 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,9 @@ void	rgb_to_hex(t_vault *data, int r, int g, int b, char flag)
 		
 	else if (flag == 'F')
 		data->scene_param->hex_floor = (r << 24) | (g << 16) | (b << 8) | a;
+}
+
+int	rgb_to_hex2(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
 }
