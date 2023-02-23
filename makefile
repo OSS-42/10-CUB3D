@@ -141,7 +141,8 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/camera_bonus.c \
 				bonus/src/raycasting_utils_bonus.c \
 				bonus/src/init_3d_bonus.c \
-				bonus/src/audio_bonus.c
+				bonus/src/audio_bonus.c \
+				bonus/src/keyhandler_bonus.c
 
 bonus: intro_bonus art_intro $(NAME_BONUS)
 

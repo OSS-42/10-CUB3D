@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 12:15:47 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 14:45:57 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,6 @@ void	quit_game(t_vault *data)
 	printf("%s\n", "Au revoir !");
 	system("killall afplay");
 	free_all(data);
-}
-
-void	keyhandler(mlx_key_data_t keydata, void *param)
-{
-	t_vault	*data;
-
-	data = (t_vault *) param;
-	if (keydata.key == MLX_KEY_W
-		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		move_forward(data);
-	if (keydata.key == MLX_KEY_S
-		&& (keydata.action == MLX_REPEAT  || keydata.action == MLX_PRESS))
-		move_backward(data);
-	if (keydata.key == MLX_KEY_A
-			&& (keydata.action == MLX_REPEAT  || keydata.action == MLX_PRESS))
-		move_left(data);
-	if (keydata.key == MLX_KEY_D
-			&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		move_right(data);
-	if (keydata.key == MLX_KEY_LEFT
-		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		rotate_left(data);
-	if (keydata.key == MLX_KEY_RIGHT
-		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		rotate_right(data);
-	if (keydata.key == MLX_KEY_ESCAPE
-		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		quit_game(data);
-	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
-		show_minimap(data);
 }
 
 // pour écran plus grand
@@ -112,7 +82,6 @@ int	main(int argc, char **argv)
 	check_scene_name(&data);
 	scene_to_array(&data);
 	check_scene_params(&data);
-	printf("coucou\n");
 	check_map(&data);
 	errors(&data);
 	create_game(&data);

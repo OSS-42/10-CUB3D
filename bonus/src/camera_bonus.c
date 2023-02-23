@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
+/*   camera_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 15:10:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 14:44:23 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
-
-void	reinit_3d(t_vault *data)
-{
-	mlx_delete_image(data->mlx, data->game->ddd);
-	load_3d(data);
-}
 
 void	reinit_hud(t_vault *data)
 {
@@ -48,15 +42,17 @@ void	rotate_left(t_vault *data)
 	double	old_plane_x;
 
 	old_player_pdx = data->player->pdx;
-	data->player->pdx = data->player->pdx * cos(-data->raycaster->rot_speed) - data->player->pdy * sin(-data->raycaster->rot_speed);
-	data->player->pdy = old_player_pdx * sin(-data->raycaster->rot_speed) + data->player->pdy * cos(-data->raycaster->rot_speed);
+	data->player->pdx = data->player->pdx * cos(-data->raycaster->rot_speed)
+		- data->player->pdy * sin(-data->raycaster->rot_speed);
+	data->player->pdy = old_player_pdx * sin(-data->raycaster->rot_speed)
+		+ data->player->pdy * cos(-data->raycaster->rot_speed);
 	old_plane_x = data->raycaster->plane_x;
-	data->raycaster->plane_x = data->raycaster->plane_x * cos(-data->raycaster->rot_speed) - data->raycaster->plane_y * sin(-data->raycaster->rot_speed);
-	data->raycaster->plane_y = old_plane_x * sin(-data->raycaster->rot_speed) + data->raycaster->plane_y * cos(-data->raycaster->rot_speed);
-
-	reinit_hud(data);
+	data->raycaster->plane_x = data->raycaster->plane_x
+		* cos(-data->raycaster->rot_speed) - data->raycaster->plane_y
+		* sin(-data->raycaster->rot_speed);
+	data->raycaster->plane_y = old_plane_x * sin(-data->raycaster->rot_speed)
+		+ data->raycaster->plane_y * cos(-data->raycaster->rot_speed);
 	reinit_3d(data);
-	reinit_minimap(data);
 	raycaster(data);
 }
 
@@ -66,14 +62,16 @@ void	rotate_right(t_vault *data)
 	double	old_plane_x;
 
 	old_player_pdx = data->player->pdx;
-	data->player->pdx = data->player->pdx * cos(data->raycaster->rot_speed) - data->player->pdy * sin(data->raycaster->rot_speed);
-	data->player->pdy = old_player_pdx * sin(data->raycaster->rot_speed) + data->player->pdy * cos(data->raycaster->rot_speed);
+	data->player->pdx = data->player->pdx * cos(data->raycaster->rot_speed)
+		- data->player->pdy * sin(data->raycaster->rot_speed);
+	data->player->pdy = old_player_pdx * sin(data->raycaster->rot_speed)
+		+ data->player->pdy * cos(data->raycaster->rot_speed);
 	old_plane_x = data->raycaster->plane_x;
-	data->raycaster->plane_x = data->raycaster->plane_x * cos(data->raycaster->rot_speed) - data->raycaster->plane_y * sin(data->raycaster->rot_speed);
-	data->raycaster->plane_y = old_plane_x * sin(data->raycaster->rot_speed) + data->raycaster->plane_y * cos(data->raycaster->rot_speed);
-
-	reinit_hud(data);
+	data->raycaster->plane_x = data->raycaster->plane_x
+		* cos(data->raycaster->rot_speed) - data->raycaster->plane_y
+		* sin(data->raycaster->rot_speed);
+	data->raycaster->plane_y = old_plane_x * sin(data->raycaster->rot_speed)
+		+ data->raycaster->plane_y * cos(data->raycaster->rot_speed);
 	reinit_3d(data);
-	reinit_minimap(data);
 	raycaster(data);
 }

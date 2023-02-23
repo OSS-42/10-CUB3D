@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 11:54:37 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 14:43:50 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,7 @@ void	check_f_params(t_vault *data, int x, int y, int slen);
 void	check_c_params(t_vault *data, int x, int y, int slen);
 void	check_color_code(t_vault *data);
 int		correct_rgb_char(char *rgb_code);
-void	rgb_to_hex(t_vault *data, int r, int g, int b, char flag);
+void	rgb_to_hex(t_vault *data, char flag);
 
 /***** cub3d_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
@@ -304,7 +304,6 @@ void	move_right(t_vault *data);
 void	move_mouse(double x, double y, void *temp);
 
 /***** camera.c *****/
-void	reinit_3d(t_vault *data);
 void	reinit_hud(t_vault *data);
 void	draw_pov(t_vault *data);
 void	rotate_left(t_vault *data);
@@ -316,8 +315,13 @@ int		fix_angle(int angle);
 
 /***** init_3d.c *****/
 void	load_3d(t_vault *data);
+void	reinit_3d(t_vault *data);
+void	background_3d(t_vault *data);
 
 /***** audio.c *****/
 void	play_song(t_vault *data);
+
+/***** keyhandler.c *****/
+void	keyhandler_2(mlx_key_data_t keydata, t_vault *data);
 
 #endif
