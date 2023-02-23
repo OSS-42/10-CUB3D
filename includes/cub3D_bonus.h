@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 09:10:22 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 11:54:37 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ typedef struct s_vault
 	int			lenght;
 	int			p_dir;
 	int			audio;
+	int			old_x_cursor;
 	t_player	*player;
 	// t_level		*lvl1;
 	t_param		*scene_param;
@@ -188,6 +189,7 @@ typedef struct s_vault
 	t_game		*game;
 	t_hud		*hud;
 	t_rays		*raycaster;
+	mlx_image_t	*cursor;
 }	t_vault;
 
 /***** FONCTIONS *****/
@@ -292,13 +294,14 @@ void	draw_tiles(t_vault *data,
 void	minimap_background(t_vault *data);
 void	full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color);
 void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
+void	reinit_minimap(t_vault *data);
 
 /***** moves.c *****/
-void	reinit_minimap(t_vault *data);
 void	move_forward(t_vault *data);
 void	move_backward(t_vault *data);
 void	move_left(t_vault *data);
 void	move_right(t_vault *data);
+void	move_mouse(double x, double y, void *temp);
 
 /***** camera.c *****/
 void	reinit_3d(t_vault *data);
