@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:37:22 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/23 15:04:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:09:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,31 @@ int	correct_rgb_char(char *rgb_code)
 	return (1);
 }
 
-void	rgb_to_hex(t_vault *data, int r, int g, int b, char flag)
+void	rgb_to_hex(t_vault *data, char flag)
 {
 	unsigned int	a;
+	int				r;
+	int				g;
+	int				b;
 
+	r = 0;
+	g = 0;
+	b = 0;
 	a = 0xff;
 	if (flag == 'C')
+	{
+		r = data->scene_param->r_ceiling;
+		g = data->scene_param->g_ceiling;
+		b = data->scene_param->b_ceiling;
 		data->scene_param->hex_ceiling = (r << 24) | (g << 16) | (b << 8) | a;
-		
+	}
 	else if (flag == 'F')
+	{
+		r = data->scene_param->r_floor;
+		g = data->scene_param->g_floor;
+		b = data->scene_param->b_floor;
 		data->scene_param->hex_floor = (r << 24) | (g << 16) | (b << 8) | a;
+	}
 }
 
 int	rgb_to_hex2(int r, int g, int b, int a)

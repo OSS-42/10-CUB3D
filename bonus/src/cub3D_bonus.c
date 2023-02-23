@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 15:51:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:09:34 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,6 @@ void	quit_game(t_vault *data)
 	free_all(data);
 }
 
-void	keyhandler(mlx_key_data_t keydata, void *param)
-{
-	t_vault	*data;
-
-	data = (t_vault *) param;
-	if (keydata.key == MLX_KEY_W
-		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		move_forward(data);
-	if (keydata.key == MLX_KEY_S
-		&& (keydata.action == MLX_REPEAT  || keydata.action == MLX_PRESS))
-		move_backward(data);
-	if (keydata.key == MLX_KEY_A
-			&& (keydata.action == MLX_REPEAT  || keydata.action == MLX_PRESS))
-		move_left(data);
-	if (keydata.key == MLX_KEY_D
-			&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		move_right(data);
-	if (keydata.key == MLX_KEY_LEFT
-		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		rotate_left(data);
-	if (keydata.key == MLX_KEY_RIGHT
-		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		rotate_right(data);
-	if (keydata.key == MLX_KEY_ESCAPE
-		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		quit_game(data);
-	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
-		show_minimap(data);
-}
-
 // pour écran plus grand
 // data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true);
 int	create_game(t_vault *data)
@@ -59,6 +29,7 @@ int	create_game(t_vault *data)
 		exit (EXIT_FAILURE);
 	play_song(data);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
+	mlx_cursor_hook(data->mlx, &move_mouse, (void *)data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
 	load_3d(data);
 	load_hud(data);
@@ -98,6 +69,7 @@ void	init_data(t_vault *data, char **argv)
 	data->hud->hud_height = HEIGHT / 6;
 	data->raycaster->height_3d = HEIGHT - data->hud->hud_height - 1;
 	data->audio = 0;
+	data->old_x_cursor = 0;
 }
 
 int	main(int argc, char **argv)

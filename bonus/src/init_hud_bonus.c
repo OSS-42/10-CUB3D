@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_hud.c                                         :+:      :+:    :+:   */
+/*   init_hud_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:00:20 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 15:10:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 15:03:47 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	load_hud(t_vault *data)
 {
 	data->hud->hud = mlx_new_image(data->mlx, WIDTH, data->hud->hud_height);
 	draw_hud(data);
-	mlx_image_to_window(data->mlx, data->hud->hud, 0, HEIGHT - data->hud->hud_height);
+	mlx_image_to_window(data->mlx, data->hud->hud,
+		0, HEIGHT - data->hud->hud_height);
 }
 
 void	draw_hud(t_vault *data)

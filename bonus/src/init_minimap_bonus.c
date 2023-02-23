@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_minimap.c                                     :+:      :+:    :+:   */
+/*   init_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 15:10:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 15:05:38 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ void	load_minimap(t_vault *data)
 		draw_minimap(data);
 		draw_player(data);
 	}
-
 	mlx_image_to_window(data->mlx,
-		data->minimap->minimap, (WIDTH / 2) - (data->map->max_lenght * TILE / 2), (HEIGHT / 2) - (data->map->lines * TILE / 2));
+		data->minimap->minimap,
+		(WIDTH / 2) - (data->map->max_lenght * TILE / 2),
+		(HEIGHT / 2) - (data->map->lines * TILE / 2));
 }
 
 void	draw_minimap(t_vault *data)

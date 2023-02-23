@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 15:56:37 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:10:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ typedef struct s_vault
 	int			lenght;
 	int			p_dir;
 	int			audio;
+	int			old_x_cursor;
 	t_player	*player;
 	// t_level		*lvl1;
 	t_param		*scene_param;
@@ -214,6 +215,7 @@ typedef struct s_vault
 	t_hud		*hud;
 	t_rays		*raycaster;
 	t_tex		*tex;
+	mlx_image_t	*cursor;
 }	t_vault;
 
 /***** FONCTIONS *****/
@@ -229,7 +231,6 @@ void	errors(t_vault *data);
 void	errors_2(t_vault *data);
 void	free_map(t_vault *data);
 void	destroy_and_free_level(t_vault *data);
-void	destroy_and_free_player(t_vault *data);
 void	free_all(t_vault *data);
 
 /***** scene_parsing.c *****/
@@ -257,8 +258,8 @@ void	check_f_params(t_vault *data, int x, int y, int slen);
 void	check_c_params(t_vault *data, int x, int y, int slen);
 void	check_color_code(t_vault *data);
 int		correct_rgb_char(char *rgb_code);
-void	rgb_to_hex(t_vault *data, int r, int g, int b, char flag);
 int		rgb_to_hex2(int r, int g, int b, int a);
+void	rgb_to_hex(t_vault *data, char flag);
 
 /***** cub3d_utils.c *****/
 void	map_to_new_array(t_vault *data, int x);
@@ -325,16 +326,16 @@ void	draw_tiles(t_vault *data,
 void	minimap_background(t_vault *data);
 void	full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color);
 void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
+void	reinit_minimap(t_vault *data);
 
 /***** moves.c *****/
-void	reinit_minimap(t_vault *data);
 void	move_forward(t_vault *data);
 void	move_backward(t_vault *data);
 void	move_left(t_vault *data);
 void	move_right(t_vault *data);
+void	move_mouse(double x, double y, void *temp);
 
 /***** camera.c *****/
-void	reinit_3d(t_vault *data);
 void	reinit_hud(t_vault *data);
 void	draw_pov(t_vault *data);
 void	rotate_left(t_vault *data);
@@ -346,8 +347,13 @@ int		fix_angle(int angle);
 
 /***** init_3d.c *****/
 void	load_3d(t_vault *data);
+void	reinit_3d(t_vault *data);
+void	background_3d(t_vault *data);
 
 /***** audio.c *****/
 void	play_song(t_vault *data);
+
+/***** keyhandler.c *****/
+void	keyhandler_2(mlx_key_data_t keydata, t_vault *data);
 
 #endif

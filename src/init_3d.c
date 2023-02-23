@@ -1,20 +1,21 @@
-/* ************************************************************************** */
+	/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   init_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:12:30 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 17:13:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:34:13 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void load_3d(t_vault *data)
+void	load_3d(t_vault *data)
 {
-	data->game->ddd = mlx_new_image(data->mlx, WIDTH, HEIGHT_3D);
+	data->game->ddd = mlx_new_image(data->mlx, WIDTH,
+			data->raycaster->height_3d);
 	mlx_image_to_window(data->mlx, data->game->ddd, 0, 0);
 	background_3d(data);
 }
@@ -25,24 +26,20 @@ void	background_3d(t_vault *data)
 	int	start;
 
 	i = 0;
-	while (i < HEIGHT_3D / 2)
+	while (i < data->raycaster->height_3d / 2)
 	{
-		start = 0;
-		while (start < WIDTH)
-		{
-			mlx_put_pixel(data->game->ddd, start, i, data->scene_param->hex_ceiling);
-			start++;
-		}
+		start = -1;
+		while (++start < WIDTH)
+			mlx_put_pixel(data->game->ddd, start,
+				i, data->scene_param->hex_ceiling);
 		i++;
 	}
-	while (i < HEIGHT_3D)
+	while (i < data->raycaster->height_3d)
 	{
-		start = 0;
-		while (start < WIDTH)
-		{
-			mlx_put_pixel(data->game->ddd, start, i, data->scene_param->hex_floor);
-			start++;
-		}
+		start = -1;
+		while (++start < WIDTH)
+			mlx_put_pixel(data->game->ddd, start,
+				i, data->scene_param->hex_floor);
 		i++;
 	}
 }
