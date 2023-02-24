@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 15:42:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:14:09 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_game
 	char			*wall_s;
 	char			*wall_e;
 	char			*wall_w;
+	char			*wall_nw;
 	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
 	int				wall_start; // pixel de depart du dessin du mur
 	int				wall_end; // pixel de fin du dessin du mur
@@ -126,10 +127,12 @@ typedef struct s_tex
 	xpm_t	*tex_s;
 	xpm_t	*tex_e;
 	xpm_t	*tex_w;
+	xpm_t	*tex_nw;
 	int		**north;
 	int		**south;
 	int		**east;
 	int		**west;
+	int		**neutral_wall;
 } t_tex;
 
 typedef struct s_hud
@@ -171,26 +174,28 @@ typedef struct s_param
 {
 	char			*no_wall_path;
 	int				no_exist;
-	int				r_ceiling;
-	int				g_ceiling;
-	int				b_ceiling;
-	int				r_floor;
-	int				g_floor;
-	int				b_floor;
-	unsigned int	hex_ceiling;
-	unsigned int	hex_floor;
 	char			*so_wall_path;
 	int				so_exist;
 	char			*we_wall_path;
 	int				we_exist;
 	char			*ea_wall_path;
 	int				ea_exist;
-	char			*f_color;
+	char			*nw_wall_path;
+	int				nw_exist;
 	int				f_exist;
-	char			*c_color;
 	int				c_exist;
+	char			*f_color;
+	char			*c_color;
+	int				r_ceiling;
+	int				g_ceiling;
+	int				b_ceiling;
 	int				a_ceiling;
+	int				r_floor;
+	int				g_floor;
+	int				b_floor;
 	int				a_floor;
+	unsigned int	hex_ceiling;
+	unsigned int	hex_floor;
 }	t_param;
 
 typedef struct s_vault
@@ -259,6 +264,7 @@ void	check_no_params(t_vault *data, int x, int y, int slen);
 void	check_so_params(t_vault *data, int x, int y, int slen);
 void	check_we_params(t_vault *data, int x, int y, int slen);
 void	check_ea_params(t_vault *data, int x, int y, int slen);
+void	check_nw_params(t_vault *data, int i, int j, int slen);
 void	check_wall_path(t_vault *data);
 
 /***** check_fc_params.c *****/
@@ -324,6 +330,9 @@ void	load_textures(t_vault *data);
 int		**get_texture(xpm_t *tex);
 void	find_tex_hit(t_vault *data, xpm_t *texture);
 void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
+
+/***** extra_textures.c *****/
+void	load_extra_textures(t_vault *data);
 
 /***** init_minimap.c *****/
 void	reinit_minimap(t_vault *data);

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 20:36:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:26:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	check_scene_syntax(t_vault *data, int *i)
 			check_we_params(data, *i, y, slen);
 		else if (ft_strncmp(data->scene[*i], "EA", 2) == 0)
 			check_ea_params(data, *i, y, slen);
+		else if (ft_strncmp(data->scene[*i], "NW", 2) == 0)
+			check_nw_params(data, *i, y, slen);
 		else if (ft_strncmp(data->scene[*i], "F", 1) == 0)
 			check_f_params(data, *i, y, slen);
 		else if (ft_strncmp(data->scene[*i], "C", 1) == 0)

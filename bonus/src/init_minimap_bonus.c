@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 15:21:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:55:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void	draw_minimap(t_vault *data)
 			if (data->map->map[data->minimap->x][data->minimap->y] == '0')
 				draw_tiles(data, data->minimap->x * data->minimap->tile_size, data->minimap->y * data->minimap->tile_size,
 					0x6E99FFFF);
-			else if (data->map->map[data->minimap->x][data->minimap->y] == '1')
+			else if (data->map->map[data->minimap->x][data->minimap->y] == '1' || data->map->map[data->minimap->x][data->minimap->y] == '2')
 				draw_tiles(data, data->minimap->x * data->minimap->tile_size, data->minimap->y * data->minimap->tile_size,
 					0xFFFFFFFF);
-			else if (data->map->map[data->minimap->x][data->minimap->y] == '2')
+			else if (data->map->map[data->minimap->x][data->minimap->y] == '.')
 				draw_tiles(data, data->minimap->x * data->minimap->tile_size, data->minimap->y * data->minimap->tile_size,
 					0x000000FF);
 			else if (ft_char_isinset("NSEW", data->map->map[data->minimap->x]

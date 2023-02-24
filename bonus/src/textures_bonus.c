@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 15:42:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:19:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	load_textures(t_vault *data)
 	data->tex->south = get_texture(data->tex->tex_s);
 	data->tex->east = get_texture(data->tex->tex_e);
 	data->tex->west = get_texture(data->tex->tex_w);
+	load_extra_textures(data);
 }
 
 int	**get_texture(xpm_t *tex)
@@ -67,7 +68,7 @@ void	find_tex_hit(t_vault *data, xpm_t *texture)
 {
 	double	wall_x; //where exactly the wall was hit
 
-	if (data->raycaster->side == 0 || data->raycaster->side == 1) 
+	if (data->raycaster->side == 0 || data->raycaster->side == 1 || data->raycaster->side == 4 || data->raycaster->side == 5) 
 		wall_x = data->player->row + data->raycaster->ray_len * data->raycaster->pdy_ray;
 	else
 		wall_x = data->player->col + data->raycaster->ray_len * data->raycaster->pdx_ray;
@@ -75,9 +76,9 @@ void	find_tex_hit(t_vault *data, xpm_t *texture)
 
 	//x coordinate on the texture
 	data->game->tex_x = (int)(wall_x * (double)(texture->texture.width));
-	if ((data->raycaster->side == 0 || data->raycaster->side == 1) && data->raycaster->pdx_ray > 0) 
+	if ((data->raycaster->side == 0 || data->raycaster->side == 1 || data->raycaster->side == 4  || data->raycaster->side == 5) && data->raycaster->pdx_ray > 0) 
 		data->game->tex_x = texture->texture.width - data->game->tex_x - 1;
-	if ((data->raycaster->side == 2 || data->raycaster->side == 3) && data->raycaster->pdy_ray < 0)
+	if ((data->raycaster->side == 2 || data->raycaster->side == 3 || data->raycaster->side == 6 || data->raycaster->side == 7) && data->raycaster->pdy_ray < 0)
 		data->game->tex_x = texture->texture.width - data->game->tex_x - 1;
 }
 

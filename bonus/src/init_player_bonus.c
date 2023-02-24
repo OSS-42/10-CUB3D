@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 15:22:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:22:13 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	load_player(t_vault *data)
 	init_player(data);
 	find_orientation(data, data->player->direction);
 	data->map->map[data->player->start_x][data->player->start_y] = '0';
-	// draw_player(data);
 }
 
 void	init_player(t_vault *data)

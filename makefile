@@ -140,6 +140,7 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/moves_bonus.c \
 				bonus/src/camera_bonus.c \
 				bonus/src/textures_bonus.c \
+				bonus/src/extra_textures_bonus.c \
 				bonus/src/init_3d_bonus.c \
 				bonus/src/audio_bonus.c \
 				bonus/src/keyhandler_bonus.c \

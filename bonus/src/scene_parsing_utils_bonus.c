@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_parsing_utils.c                              :+:      :+:    :+:   */
+/*   scene_parsing_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:15:48 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/22 15:10:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:54:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	check_valid_char(t_vault *data, int i)
 {
 	while (data->map->map[i])
 	{
-		if (isinset(data->map->map[i], " 01NSEW") == FALSE)
+		if (isinset(data->map->map[i], " 012NSEW") == FALSE)
 		{
 			data->error_code = 3;
 			errors(data);
