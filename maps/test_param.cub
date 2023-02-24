@@ -1,14 +1,14 @@
 
 
-WE       ./bonus/assets/textures/window.xpm42
+WE       ./bonus/assets/textures/window42_HD.xpm42
 
-     NO ./bonus/assets/textures/blue.xpm42
+     NO ./bonus/assets/textures/blue42_HD.xpm42
 
-F 106, 106, 106
+F 106,106, 106
 
-SO ./bonus/assets/textures/green.xpm42
+SO ./bonus/assets/textures/green42_HD.xpm42
 
-EA ./bonus/assets/textures/wood42.xpm42
+EA ./bonus/assets/textures/wood42_HD.xpm42
 
 
 
