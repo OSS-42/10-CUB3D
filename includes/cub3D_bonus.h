@@ -6,11 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/02/24 11:23:57 by mbertin          ###   ########.fr       */
-=======
-/*   Updated: 2023/02/24 12:11:13 by ewurstei         ###   ########.fr       */
->>>>>>> c5f8f9f (fix .h bonus et probeleme avec texture blue42_HD)
+/*   Updated: 2023/02/24 12:17:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
