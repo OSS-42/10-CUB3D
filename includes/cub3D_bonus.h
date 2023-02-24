@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 16:32:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:22:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,11 +310,11 @@ void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 void	raycaster(t_vault *data);
 void	draw_ray_minimap(t_vault *data, float ray_len);
 void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color);
-void	texture_picker(t_vault *data, int i, int side, double raylen);
+void	draw_tex_wall(t_vault *data, int pixels_2d, int side, double raylen);
 void	create_texture(t_vault *data);
 int		**fill_texture(xpm_t *tex);
-void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int i);
-int		find_tex_hit(t_vault *data, xpm_t *texture, int side, double ray_len);
+void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
+void	find_tex_hit(t_vault *data, xpm_t *texture, int side, double ray_len);
 
 /***** init_minimap.c *****/
 void	show_minimap(t_vault *data);

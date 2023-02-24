@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 16:52:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:28:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,22 +129,18 @@ void	raycaster(t_vault *data)
 		data->game->wall_end = data->game->wall_height / 2 + HEIGHT_3D / 2;
 		if (data->game->wall_end >= HEIGHT_3D)
 			data->game->wall_end = HEIGHT_3D - 1;
-
 		// draw the pixels of the stripe as a vertical line
-		// texture_picker(data, pixels_2d, side, ray_len);
-		draw_wall_3d(data, data->game->wall_start, data->game->wall_end, pixels_2d, data->game->wall_color);
+		draw_tex_wall(data, pixels_2d, side, ray_len);
+		// draw_wall_3d(data, data->game->wall_start, data->game->wall_end, pixels_2d, data->game->wall_color);
 
 		pixels_2d++;
 	}
 }
 
-int	find_tex_hit(t_vault *data, xpm_t *texture, int side, double ray_len)
+void	find_tex_hit(t_vault *data, xpm_t *texture, int side, double ray_len)
 {
-	double	hit;
 	double	wall_x; //where exactly the wall was hit
-	int		tex_x;
 
-	hit = 0;
 	if (side == 0 || side == 1) 
 		wall_x = data->player->row + ray_len * data->raycaster->pdy_ray;
 	else
@@ -152,35 +148,35 @@ int	find_tex_hit(t_vault *data, xpm_t *texture, int side, double ray_len)
 	wall_x = wall_x - (int)(wall_x);
 
 	//x coordinate on the texture
-	tex_x = (int)(wall_x * (double)(texture->texture.width));
-	if((side == 0 || side == 1) && data->raycaster->pdx_ray > 0) 
-		tex_x = texture->texture.width - tex_x - 1;
-	if((side == 2 || side == 3) && data->raycaster->pdy_ray < 0)
-		tex_x = texture->texture.width - tex_x - 1;
-	return (tex_x);
+	data->game->tex_x = (int)(wall_x * (double)(texture->texture.width));
+	if ((side == 0 || side == 1) && data->raycaster->pdx_ray > 0) 
+		data->game->tex_x = texture->texture.width - data->game->tex_x - 1;
+	if ((side == 2 || side == 3) && data->raycaster->pdy_ray < 0)
+		data->game->tex_x = texture->texture.width - data->game->tex_x - 1;
 }
 
-void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int i)
+void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 {
 	int				tex_y;
 	double			tex_pos;
 	double			step;
+	int 			screen_y;
 	
 	step = 1.0 * texture->texture.height / data->game->wall_height;
 	// Starting texture coordinate
 	tex_pos = ((double)data->game->wall_start - (double)HEIGHT_3D / 2 + (double)data->game->wall_height / 2) * step;
 	if (tex_pos < 0)
 		tex_pos = 0;
-	int y = data->game->wall_start;
-	while (y < data->game->wall_end)
+	screen_y = data->game->wall_start;
+	while (screen_y < data->game->wall_end)
 	{
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 		tex_y = (int)tex_pos;
 		if (tex_pos > texture->texture.height - 1)
 			tex_pos = texture->texture.height - 1;
 		tex_pos = tex_pos + step;
-		mlx_put_pixel(data->game->ddd, i, y, tex_buff[tex_y][data->game->tex_x]);
-		y++;
+		mlx_put_pixel(data->game->ddd, pixels_2d, screen_y, tex_buff[tex_y][data->game->tex_x]);
+		screen_y++;
 	}
 }
 
@@ -191,12 +187,12 @@ int	**fill_texture(xpm_t *tex)
 	int	j;
 	
 	tex_buff = ft_calloc(sizeof(int *), tex->texture.height + 1);
-	i = 4;
-	while (i < (int)tex->texture.height + 4)
+	i = 3;
+	while (++i < (int)tex->texture.height + 4)
 	{
-		j = 4;
+		j = 3;
 		tex_buff[i - 4] = ft_calloc(sizeof(int), tex->texture.width);
-		while (j < (int)tex->texture.width + 4)
+		while (++j < (int)tex->texture.width + 4)
 			tex_buff[i - 4][j - 4]
 				= rgb_to_hex2(tex->texture.pixels[(tex->texture.width * 4
 						* (i - 4)) + (4 * (j - 4)) + 0],
@@ -246,38 +242,38 @@ void	create_texture(t_vault *data)
 	data->tex->west = fill_texture(data->tex->tex_w);
 }
 
-void	texture_picker(t_vault *data, int i, int side, double raylen)
+void	draw_tex_wall(t_vault *data, int pixels_2d, int side, double raylen)
 {
 	if (side == 0)
 	{
 		find_tex_hit(data, data->tex->tex_e, side, raylen);
-		draw_line(data, data->tex->tex_e, data->tex->east, i);
+		draw_line(data, data->tex->tex_e, data->tex->east, pixels_2d);
 	}
 	if (side == 1)
 	{
 		find_tex_hit(data, data->tex->tex_w, side, raylen);
-		draw_line(data, data->tex->tex_w, data->tex->west, i);
+		draw_line(data, data->tex->tex_w, data->tex->west, pixels_2d);
 	}
 	if (side == 2)
 	{
 		find_tex_hit(data, data->tex->tex_s, side, raylen);
-		draw_line(data, data->tex->tex_s, data->tex->south, i);
+		draw_line(data, data->tex->tex_s, data->tex->south, pixels_2d);
 	}
 	if (side == 3)
 	{
 		find_tex_hit(data, data->tex->tex_n, side, raylen);
-		draw_line(data, data->tex->tex_n, data->tex->north, i);
+		draw_line(data, data->tex->tex_n, data->tex->north, pixels_2d);
 	}
 }
 
-void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color)
-{
-	while (wall_start < wall_end)
-	{
-		mlx_put_pixel(data->game->ddd, screen_2d_x, wall_start, wall_color);
-		wall_start++;
-	}
-}
+// void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color)
+// {
+// 	while (wall_start < wall_end)
+// 	{
+// 		mlx_put_pixel(data->game->ddd, screen_2d_x, wall_start, wall_color);
+// 		wall_start++;
+// 	}
+// }
 
 void	draw_ray_minimap(t_vault *data, float ray_len)
 {

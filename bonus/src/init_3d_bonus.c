@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_3d_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:12:30 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 14:48:48 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 22:48:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	load_3d(t_vault *data)
 {
-	data->raycaster->height_3d = HEIGHT - data->hud->hud_height - 1;
 	data->game->ddd = mlx_new_image(data->mlx, WIDTH,
 			data->raycaster->height_3d);
 	mlx_image_to_window(data->mlx, data->game->ddd, 0, 0);
+	background_3d(data);
 }
 
 void	background_3d(t_vault *data)
