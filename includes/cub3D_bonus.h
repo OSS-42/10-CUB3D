@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 10:33:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:14:09 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,87 +231,96 @@ typedef struct s_vault
 /***** FONCTIONS *****/
 
 /***** cub3D.c *****/
-int		create_game(t_vault *data);
-void	keyhandler(mlx_key_data_t keydata, void *param);
-void	init_data(t_vault *data, char **argv);
-void	quit_game(t_vault *data);
+int				create_game(t_vault *data);
+void			keyhandler(mlx_key_data_t keydata, void *param);
+void			init_data(t_vault *data, char **argv);
+void			quit_game(t_vault *data);
 
 /***** error_management.c *****/
-void	errors(t_vault *data);
-void	errors_2(t_vault *data);
-void	free_map(t_vault *data);
-void	destroy_and_free_level(t_vault *data);
-void	free_all(t_vault *data);
+void			errors(t_vault *data);
+void			errors_2(t_vault *data);
+void			free_map(t_vault *data);
+void			destroy_and_free_level(t_vault *data);
+void			free_all(t_vault *data);
 
 /***** scene_parsing.c *****/
-void	check_scene_name(t_vault *data);
-void	scene_to_array(t_vault *data);
-void	check_scene_params(t_vault *data);
-void	check_scene_syntax(t_vault *data, int *x);
+void			check_scene_name(t_vault *data);
+void			scene_to_array(t_vault *data);
+void			check_scene_params(t_vault *data);
+void			check_scene_syntax(t_vault *data, int *x);
 
 /***** scene_parsing_utils.c *****/
-void	check_fd(t_vault *data, int fd);
-int		check_param_existence(t_vault *data);
-void	skip_white_space(t_vault *data, int x, int y, int *slen);
-int		isinset(char *s1, char *set);
-void	check_valid_char(t_vault *data, int x);
+void			check_fd(t_vault *data, int fd);
+int				check_param_existence(t_vault *data);
+void			skip_white_space(t_vault *data, int x, int y, int *slen);
+int				isinset(char *s1, char *set);
+void			check_valid_char(t_vault *data, int x);
 
 /***** check_orientation_params.c *****/
-void	check_no_params(t_vault *data, int x, int y, int slen);
-void	check_so_params(t_vault *data, int x, int y, int slen);
-void	check_we_params(t_vault *data, int x, int y, int slen);
-void	check_ea_params(t_vault *data, int x, int y, int slen);
-void	check_wall_path(t_vault *data);
+void			check_no_params(t_vault *data, int x, int y, int slen);
+void			check_so_params(t_vault *data, int x, int y, int slen);
+void			check_we_params(t_vault *data, int x, int y, int slen);
+void			check_ea_params(t_vault *data, int x, int y, int slen);
+void			check_wall_path(t_vault *data);
 
 /***** check_fc_params.c *****/
-void	check_f_params(t_vault *data, int x, int y, int slen);
-void	check_c_params(t_vault *data, int x, int y, int slen);
-void	check_color_code(t_vault *data);
-int		correct_rgb_char(char *rgb_code);
-void	rgb_to_hex(t_vault *data, char flag);
+void			check_f_params(t_vault *data, int x, int y, int slen);
+void			check_c_params(t_vault *data, int x, int y, int slen);
+void			check_color_code(t_vault *data);
+int				correct_rgb_char(char *rgb_code);
+void			rgb_to_hex(t_vault *data, char flag);
 
 /***** cub3d_utils.c *****/
-void	map_to_new_array(t_vault *data, int x);
-int		check_white_spaces(char c);
-int		ft_find_char(char *src, char c);
-void	correct_rgb_range(t_vault *data, char *rgb_code, char c);
+void			map_to_new_array(t_vault *data, int x);
+int				check_white_spaces(char c);
+int				ft_find_char(char *src, char c);
+void			correct_rgb_range(t_vault *data, char *rgb_code, char c);
 
 /***** map_parsing.c *****/
-void	check_map(t_vault *data);
-void	find_player_start(t_vault *data);
-void	fill_map_void(t_vault *data);
-void	replace_voids(t_vault *data, int x);
-void	fill_rest_of_line(t_vault *data, int x);
+void			check_map(t_vault *data);
+void			find_player_start(t_vault *data);
+void			fill_map_void(t_vault *data);
+void			replace_voids(t_vault *data, int x);
+void			fill_rest_of_line(t_vault *data, int x);
 
 /***** map_parsing_utils.c *****/
-void	map_to_new_array(t_vault *data, int x);
-void	find_map_start(t_vault *data);
-void	map_max_lenght(t_vault *data);
+void			map_to_new_array(t_vault *data, int x);
+void			find_map_start(t_vault *data);
+void			map_max_lenght(t_vault *data);
 
 /***** check_ceiling_rgb.c *****/
-void	extract_r_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
-void	extract_g_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
-void	extract_b_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
+void			extract_r_ceiling(t_vault *data, char *rgb_code,
+					int *i, int *len);
+void			extract_g_ceiling(t_vault *data, char *rgb_code,
+					int *i, int *len);
+void			extract_b_ceiling(t_vault *data, char *rgb_code,
+					int *i, int *len);
 
 /***** check_floor_rbg.c *****/
-void	extract_r_floor(t_vault *data, char *rgb_code, int *i, int *len);
-void	extract_g_floor(t_vault *data, char *rgb_code, int *i, int *len);
-void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len);
+void			extract_r_floor(t_vault *data, char *rgb_code,
+					int *i, int *len);
+void			extract_g_floor(t_vault *data, char *rgb_code,
+					int *i, int *len);
+void			extract_b_floor(t_vault *data, char *rgb_code,
+					int *i, int *len);
+
+/***** init_assets_bonus.c *****/
+void			load_minimap_assets(t_vault *data);
 
 /***** flood_fill *****/
-void	flood_fill(t_vault *data, int x, int y, char **temp);
+void			flood_fill(t_vault *data, int x, int y, char **temp);
 
 /***** init_player.c *****/
-void	load_player(t_vault *data);
-void	init_player(t_vault *data);
-void	find_orientation(t_vault *data, char direction);
-void	draw_player(t_vault *data);
+void			load_player(t_vault *data);
+void			init_player(t_vault *data);
+void			find_orientation(t_vault *data, char direction);
+void			draw_player(t_vault *data);
 
 /***** init_hud.c *****/
-void	load_hud(t_vault *data);
-void	draw_hud(t_vault *data);
-void	full_line_hud_hor(t_vault *data, int screen_y, unsigned int color);
-void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
+void			load_hud(t_vault *data);
+void			draw_hud(t_vault *data);
+void			full_line_hud_hor(t_vault *data, int screen_y, unsigned int color);
+void			full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);
@@ -340,29 +349,54 @@ void	draw_tiles(t_vault *data,
 void	full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color);
 void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
 void	draw_ray_minimap(t_vault *data);
+void			raycaster(t_vault *data);
+void			draw_ray_minimap(t_vault *data, float ray_len);
+void			draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color);
+void			draw_tex_wall(t_vault *data, int pixels_2d, int side, double raylen);
+void			create_texture(t_vault *data);
+int				**fill_texture(xpm_t *tex);
+void			draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
+void			find_tex_hit(t_vault *data, xpm_t *texture, int side, double ray_len);
+
+/***** init_minimap.c *****/
+void			show_minimap(t_vault *data);
+void			load_minimap(t_vault *data);
+void			draw_minimap(t_vault *data);
+void			draw_tiles(t_vault *data,
+					int screen_x, int screen_y, unsigned int color);
+void			minimap_background(t_vault *data);
+void			full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color);
+void			full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
+void			reinit_minimap(t_vault *data);
 
 /***** moves.c *****/
-void	move_forward(t_vault *data);
-void	move_backward(t_vault *data);
-void	move_left(t_vault *data);
-void	move_right(t_vault *data);
-void	move_mouse(double x, double y, void *temp);
+void			move_forward(t_vault *data);
+void			move_backward(t_vault *data);
+void			move_left(t_vault *data);
+void			move_right(t_vault *data);
+void			move_mouse(double x, double y, void *temp);
+void			reinit_cursor(t_vault *data);
 
 /***** camera.c *****/
-void	reinit_hud(t_vault *data);
-void	draw_pov(t_vault *data);
-void	rotate_left(t_vault *data);
-void	rotate_right(t_vault *data);
+void			reinit_hud(t_vault *data);
+void			draw_pov(t_vault *data);
+void			rotate_left(t_vault *data);
+void			rotate_right(t_vault *data);
+
+/***** raycasting_utils.c *****/
+float			degtorad(float angle);
+int				fix_angle(int angle);
+unsigned int	rgb_to_hex2(int r, int g, int b, int a);
 
 /***** init_3d.c *****/
-void	load_3d(t_vault *data);
-void	reinit_3d(t_vault *data);
-void	background_3d(t_vault *data);
+void			load_3d(t_vault *data);
+void			reinit_3d(t_vault *data);
+void			background_3d(t_vault *data);
 
 /***** audio.c *****/
-void	play_song(t_vault *data);
+void			play_song(t_vault *data);
 
 /***** keyhandler.c *****/
-void	keyhandler_2(mlx_key_data_t keydata, t_vault *data);
+void			keyhandler_2(mlx_key_data_t keydata, t_vault *data);
 
 #endif
