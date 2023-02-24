@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 09:40:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/24 10:39:58 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,33 @@ typedef struct s_player
 	char	direction;
 }	t_player;
 
+typedef struct s_tex
+{
+	xpm_t	*tex_n;
+	xpm_t	*tex_s;
+	xpm_t	*tex_e;
+	xpm_t	*tex_w;
+	int		**north;
+	int		**south;
+	int		**east;
+	int		**west;
+} t_tex;
+
 typedef struct s_rays
 {
 	double	pdx_ray;
 	double	pdy_ray;
-	double	ray_len;
+	double	delta_dist_x; // distance entre segments de grille verticaux (intersections en x)
+	double	delta_dist_y; // distance entre segments de grille horizontaux (intersections en y)
+	double	screen_2d_x; // x sur le plan de la largeur de la fenetre
+	int		map_2d_col; // mouvements dans la carte 2D sur les colonnes (y)
+	int		map_2d_row; // mouvements dans la carte 2D sur les colonnes (x)
+	int		col; // coordonnees map 2D (y)
+	int		row; // coordonnees map 2D (x)
+	double	ray_len_x; // longueur du rayon initial (dans la case du joueur)
+	double	ray_len_y; // longueur du rayon initial (dans la case du joueur)
+	int		side; // quel coté du mur est touché
+	double	ray_len; // longueur du rayon
 	double	plane_x;
 	double	plane_y;
 	double	rot_speed;
@@ -77,11 +99,16 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	mlx_image_t	*ddd;
-	xpm_t		*wall_n;
-	xpm_t		*wall_s;
-	xpm_t		*wall_e;
-	xpm_t		*wall_w;
+	mlx_image_t		*ddd;
+	char			*wall_n;
+	char			*wall_s;
+	char			*wall_e;
+	char			*wall_w;
+	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
+	int				wall_start; // pixel de depart du dessin du mur
+	int				wall_end; // pixel de fin du dessin du mur
+	unsigned int	wall_color; // couleur du mur
+	int				tex_x; // is the x-coordinate of the texture
 }	t_game;
 
 typedef struct s_param
@@ -124,6 +151,7 @@ typedef struct s_vault
 	t_point		*actual;
 	t_game		*game;
 	t_rays		*raycaster;
+	t_tex		*tex;
 }	t_vault;
 
 /***** FONCTIONS *****/
@@ -207,7 +235,17 @@ void	find_orientation_2(t_vault *data, char direction);
 
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);
-void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color);
+void	dist_and_pos(t_vault *data);
+void	dda(t_vault *data);
+void	creating_3d_img(t_vault *data);
+void	draw_tex_wall(t_vault *data, int pixels_2d);
+
+/***** textures.c *****/
+int		rgb_to_hex2(int r, int g, int b, int a);
+void	create_texture(t_vault *data);
+int		**get_texture(xpm_t *tex);
+void	find_tex_hit(t_vault *data, xpm_t *texture);
+void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
 
 /***** moves.c *****/
 void	move_forward(t_vault *data);
@@ -219,10 +257,6 @@ void	move_right(t_vault *data);
 void	reinit_3d(t_vault *data);
 void	rotate_left(t_vault *data);
 void	rotate_right(t_vault *data);
-
-/***** raycasting_utils.c *****/
-float	degtorad(float angle);
-int		fix_angle(int angle);
 
 /***** init_3d.c *****/
 void	load_3d(t_vault *data);

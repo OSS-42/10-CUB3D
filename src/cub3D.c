@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 10:27:03 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/24 10:42:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	create_game(t_vault *data)
 		exit (EXIT_FAILURE);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
+	create_texture(data);
 	load_3d(data);
 	load_player(data);
 	raycaster(data);
@@ -75,6 +76,7 @@ void	init_data(t_vault *data, char **argv)
 	data->actual = ft_calloc(1, sizeof(t_point));
 	data->game = ft_calloc(1, sizeof(t_game));
 	data->raycaster = ft_calloc(1, sizeof(t_rays));
+	data->tex = ft_calloc(1, sizeof(t_tex));
 	data->scene_param->r_ceiling = -1;
 	data->scene_param->g_ceiling = -1;
 	data->scene_param->b_ceiling = -1;

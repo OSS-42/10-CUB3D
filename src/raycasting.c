@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 09:34:32 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/24 10:41:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,129 +14,141 @@
 
 void	raycaster(t_vault *data)
 {
-	double			delta_dist_x; // distance entre segments de grille verticaux (intersections en x)
-	double			delta_dist_y; // distance entre segments de grille horizontaux (intersections en y)
-	double			screen_2d_x; // x sur le plan de la largeur de la fenetre
-	double			ray_len_x; // longueur du rayon initial (dans la case du joueur)
-	double			ray_len_y; // longueur du rayon initial (dans la case du joueur)
-	double			ray_len; // longueur du rayon
-	int				map_2d_col; // mouvements dans la carte 2D sur les colonnes (y)
-	int				map_2d_row; // mouvements dans la carte 2D sur les colonnes (x)
-	int				col; // coordonnees map 2D (y)
-	int				row; // coordonnees map 2D (x)
-	int				impact; // equivaut a 'hit'
-	int				side; // quel coté du mur est touché
 	double			pixels_2d; // compteur pour le plan largeur de la fenetre
-	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
-	int				wall_start; // pixel de depart du dessin du mur
-	int				wall_end; // pixel de fin du dessin du mur
-	unsigned int	wall_color; // couleur du mur
-
+	
 	pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
 	while (pixels_2d < WIDTH)
 	{
-		wall_color = 0;
-		impact = 0;
-		ray_len = 0;
-		side = 0;
-
-		screen_2d_x = 2 * pixels_2d / WIDTH - 1; // de -1 a +1
-		data->raycaster->pdx_ray = data->player->pdx + data->raycaster->plane_x * screen_2d_x;
-		data->raycaster->pdy_ray = data->player->pdy + data->raycaster->plane_y * screen_2d_x;
-
-		col = data->player->col;
-		row = data->player->row;
-
-		if (data->raycaster->pdx_ray == 0)
-			delta_dist_x = 1e30;
-		else
-			delta_dist_x = fabs(1 / data->raycaster->pdx_ray);
-
-		if (data->raycaster->pdy_ray == 0)
-			delta_dist_y = 1e30;
-		else
-			delta_dist_y = fabs(1 / data->raycaster->pdy_ray);
-
-		if (data->raycaster->pdx_ray < 0)
-		{
-			map_2d_col = -1;
-			ray_len_x = (data->player->col - col) * delta_dist_x;
-		}
-		else
-		{
-			map_2d_col = 1;
-			ray_len_x = (col + 1.0 - data->player->col) * delta_dist_x;
-		}
-		if (data->raycaster->pdy_ray < 0)
-		{
-			map_2d_row = -1;
-			ray_len_y = (data->player->row - row) * delta_dist_y;
-		}
-		else
-		{
-			map_2d_row = 1;
-			ray_len_y = (row + 1.0 - data->player->row) * delta_dist_y;
-		}
-
-		while (impact == 0)
-		{
-			if (ray_len_x < ray_len_y)
-			{
-				ray_len_x = ray_len_x + delta_dist_x;
-				col = col + map_2d_col;
-				if (data->raycaster->pdx_ray < 0) // quel cote de mur touche ? EST --> 0, OUEST --> 1
-					side = 0;
-				else
-					side = 1;
-			}
-			else
-			{
-				ray_len_y = ray_len_y + delta_dist_y;
-				row = row + map_2d_row;
-				if (data->raycaster->pdy_ray < 0) // quel cote de mur touche ? NORD --> 3, SUD --> 2
-					side = 2;
-				else
-					side = 3;
-			}
-
-			if (data->map->map[row][col] == '1')
-				impact = 1;
-			else
-				impact = 0;
-		}
-		if (side == 0 || side == 1)
-			ray_len = (ray_len_x - delta_dist_x);
-		else
-			ray_len = (ray_len_y - delta_dist_y);
-		wall_height = (int)(data->raycaster->height_3d / ray_len);
-
-		wall_start = -wall_height / 2 + data->raycaster->height_3d / 2;
-		if (wall_start < 0)
-			wall_start = 0;
-		wall_end = wall_height / 2 + data->raycaster->height_3d / 2;
-		if (wall_end >= data->raycaster->height_3d)
-			wall_end = data->raycaster->height_3d - 1;
-
-		if (side == 0)
-			wall_color = YELLOW;
-		else if (side == 1)
-			wall_color = GREEN;
-		else if (side == 2)
-			wall_color = BLUE;
-		else if (side == 3)
-			wall_color = RED;
-
-		draw_wall_3d(data, wall_start, wall_end, pixels_2d, wall_color);
-
+		data->raycaster->screen_2d_x = 2 * pixels_2d / WIDTH - 1; // de -1 a +1
+		dist_and_pos(data);
+		dda(data);
+		creating_3d_img(data);
+		draw_tex_wall(data, pixels_2d);
 		pixels_2d++;
 	}
 }
 
-void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color)
+void	dist_and_pos(t_vault *data)
 {
-	while (wall_start < wall_end)
+	data->raycaster->pdx_ray = data->player->pdx + data->raycaster->plane_x * data->raycaster->screen_2d_x;
+	data->raycaster->pdy_ray = data->player->pdy + data->raycaster->plane_y * data->raycaster->screen_2d_x;
+
+	// map position
+	data->raycaster->col = data->player->col;
+	data->raycaster->row = data->player->row;
+
+	// distance entre les cases de la grille (la longueur ne compte pas encore, seulement le ratio)
+	if (data->raycaster->pdx_ray == 0)
+		data->raycaster->delta_dist_x = 1e30;
+	else
+		data->raycaster->delta_dist_x = fabs(1 / data->raycaster->pdx_ray);
+
+	if (data->raycaster->pdy_ray == 0)
+		data->raycaster->delta_dist_y = 1e30;
+	else
+		data->raycaster->delta_dist_y = fabs(1 / data->raycaster->pdy_ray);
+
+	// calcul des mouvemements dans la carte 2D et distance entre le joueur et la 1ere intersection
+	if (data->raycaster->pdx_ray < 0)
 	{
-		mlx_put_pixel(data->game->ddd, screen_2d_x, wall_start, wall_color);
-		wall_start++;
+		data->raycaster->map_2d_col = -1;
+		data->raycaster->ray_len_x = (data->player->col - data->raycaster->col) * data->raycaster->delta_dist_x;
+	}
+	else
+	{
+		data->raycaster->map_2d_col = 1;
+		data->raycaster->ray_len_x = (data->raycaster->col + 1.0 - data->player->col) * data->raycaster->delta_dist_x;
+	}
+	if (data->raycaster->pdy_ray < 0)
+	{
+		data->raycaster->map_2d_row = -1;
+		data->raycaster->ray_len_y = (data->player->row - data->raycaster->row) * data->raycaster->delta_dist_y;
+	}
+	else
+	{
+		data->raycaster->map_2d_row = 1;
+		data->raycaster->ray_len_y = (data->raycaster->row + 1.0 - data->player->row) * data->raycaster->delta_dist_y;
+	}
+}
+
+void	dda(t_vault *data)
+{
+	int	impact; // equivaut a 'hit'
+	
+	impact = 0;
+	// perform DDA (calcul longueur total du rayon)
+	while (impact == 0)
+	{
+		//jump to next map square, either in x-direction, or in y-direction
+		if (data->raycaster->ray_len_x < data->raycaster->ray_len_y)
+		{
+			data->raycaster->ray_len_x = data->raycaster->ray_len_x + data->raycaster->delta_dist_x;
+			// row = row + map_2d_row;
+			data->raycaster->col = data->raycaster->col + data->raycaster->map_2d_col;
+			if (data->raycaster->pdx_ray < 0) // quel cote de mur touche ? EST --> 0, OUEST --> 1
+				data->raycaster->side = 0;
+			else
+				data->raycaster->side = 1;
+		}
+		else
+		{
+			data->raycaster->ray_len_y = data->raycaster->ray_len_y + data->raycaster->delta_dist_y;
+			// col = col + map_2d_col;
+			data->raycaster->row = data->raycaster->row + data->raycaster->map_2d_row;
+			if (data->raycaster->pdy_ray < 0) // quel cote de mur touche ? NORD --> 3, SUD --> 2
+				data->raycaster->side = 2;
+			else
+				data->raycaster->side = 3;
+		}
+
+		//Check if ray has hit a wall
+		if (data->map->map[data->raycaster->row][data->raycaster->col] == '1')
+			impact = 1;
+	}
+}
+
+void	creating_3d_img(t_vault *data)
+{
+	//pour la vue 3D
+	//Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
+	if (data->raycaster->side == 0 || data->raycaster->side == 1)
+		data->raycaster->ray_len = (data->raycaster->ray_len_x - data->raycaster->delta_dist_x);
+	else
+		data->raycaster->ray_len = (data->raycaster->ray_len_y - data->raycaster->delta_dist_y);
+
+	// //Calculate height of line to draw on screen
+	data->game->wall_height = (int)(data->raycaster->height_3d / data->raycaster->ray_len);
+
+	//calculate lowest and highest pixel to fill in current stripe
+	data->game->wall_start = -data->game->wall_height / 2 + data->raycaster->height_3d / 2;
+	if (data->game->wall_start < 0)
+		data->game->wall_start = 0;
+	data->game->wall_end = data->game->wall_height / 2 + data->raycaster->height_3d / 2;
+	if (data->game->wall_end >= data->raycaster->height_3d)
+		data->game->wall_end = data->raycaster->height_3d - 1;
+	// draw the pixels of the stripe as a vertical line
+}
+
+void	draw_tex_wall(t_vault *data, int pixels_2d)
+{
+	if (data->raycaster->side == 0)
+	{
+		find_tex_hit(data, data->tex->tex_e);
+		draw_line(data, data->tex->tex_e, data->tex->east, pixels_2d);
+	}
+	if (data->raycaster->side == 1)
+	{
+		find_tex_hit(data, data->tex->tex_w);
+		draw_line(data, data->tex->tex_w, data->tex->west, pixels_2d);
+	}
+	if (data->raycaster->side == 2)
+	{
+		find_tex_hit(data, data->tex->tex_s);
+		draw_line(data, data->tex->tex_s, data->tex->south, pixels_2d);
+	}
+	if (data->raycaster->side == 3)
+	{
+		find_tex_hit(data, data->tex->tex_n);
+		draw_line(data, data->tex->tex_n, data->tex->north, pixels_2d);
 	}
 }

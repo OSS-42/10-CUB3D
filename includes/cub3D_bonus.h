@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 23:43:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:33:14 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,17 @@ typedef struct s_rays
 {
 	double	pdx_ray;
 	double	pdy_ray;
-	double	ray_len;
+	double	delta_dist_x; // distance entre segments de grille verticaux (intersections en x)
+	double	delta_dist_y; // distance entre segments de grille horizontaux (intersections en y)
+	double	screen_2d_x; // x sur le plan de la largeur de la fenetre
+	int		map_2d_col; // mouvements dans la carte 2D sur les colonnes (y)
+	int		map_2d_row; // mouvements dans la carte 2D sur les colonnes (x)
+	int		col; // coordonnees map 2D (y)
+	int		row; // coordonnees map 2D (x)
+	double	ray_len_x; // longueur du rayon initial (dans la case du joueur)
+	double	ray_len_y; // longueur du rayon initial (dans la case du joueur)
+	int		side; // quel coté du mur est touché
+	double	ray_len; // longueur du rayon
 	double	plane_x;
 	double	plane_y;
 	double	rot_speed;
@@ -288,9 +298,6 @@ void	extract_r_floor(t_vault *data, char *rgb_code, int *i, int *len);
 void	extract_g_floor(t_vault *data, char *rgb_code, int *i, int *len);
 void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len);
 
-/***** init_assets_bonus.c *****/
-void	load_minimap_assets(t_vault *data);
-
 /***** flood_fill *****/
 void	flood_fill(t_vault *data, int x, int y, char **temp);
 
@@ -308,24 +315,31 @@ void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);
-void	draw_ray_minimap(t_vault *data, float ray_len);
-void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color);
-void	draw_tex_wall(t_vault *data, int pixels_2d, int side, double raylen);
+void	dist_and_pos(t_vault *data);
+void	dda(t_vault *data);
+void	creating_3d_img(t_vault *data);
+void	draw_tex_wall(t_vault *data, int pixels_2d);
+
+/***** textures.c *****/
+int		rgb_to_hex2(int r, int g, int b, int a);
 void	create_texture(t_vault *data);
-int		**fill_texture(xpm_t *tex);
+int		**get_texture(xpm_t *tex);
+void	find_tex_hit(t_vault *data, xpm_t *texture);
 void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
-void	find_tex_hit(t_vault *data, xpm_t *texture, int side, double ray_len);
 
 /***** init_minimap.c *****/
+void	reinit_minimap(t_vault *data);
 void	show_minimap(t_vault *data);
 void	load_minimap(t_vault *data);
 void	draw_minimap(t_vault *data);
+void	minimap_background(t_vault *data);
+
+/***** minimap_utils.c *****/
 void	draw_tiles(t_vault *data,
 			int screen_x, int screen_y, unsigned int color);
-void	minimap_background(t_vault *data);
 void	full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color);
 void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
-void	reinit_minimap(t_vault *data);
+void	draw_ray_minimap(t_vault *data);
 
 /***** moves.c *****/
 void	move_forward(t_vault *data);
@@ -339,11 +353,6 @@ void	reinit_hud(t_vault *data);
 void	draw_pov(t_vault *data);
 void	rotate_left(t_vault *data);
 void	rotate_right(t_vault *data);
-
-/***** raycasting_utils.c *****/
-float	degtorad(float angle);
-int		fix_angle(int angle);
-unsigned int	rgb_to_hex2(int r, int g, int b, int a);
 
 /***** init_3d.c *****/
 void	load_3d(t_vault *data);
