@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 14:45:57 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 23:42:14 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	create_game(t_vault *data)
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	mlx_cursor_hook(data->mlx, &move_mouse, (void *)data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
+	create_texture(data);
+	
 	load_3d(data);
 	load_hud(data);
 	load_minimap(data);
@@ -56,6 +58,7 @@ void	init_data(t_vault *data, char **argv)
 	data->actual = ft_calloc(1, sizeof(t_point));
 	data->game = ft_calloc(1, sizeof(t_game));
 	data->hud = ft_calloc(1, sizeof(t_hud));
+	data->tex = ft_calloc(1, sizeof(t_tex));
 	data->raycaster = ft_calloc(1, sizeof(t_rays));
 	data->scene_param->r_ceiling = -1;
 	data->scene_param->g_ceiling = -1;
@@ -65,7 +68,8 @@ void	init_data(t_vault *data, char **argv)
 	data->scene_param->b_floor = -1;
 	data->raycaster->mov_speed = 0.15;
 	data->raycaster->rot_speed = 0.15;
-	data->hud->hud_height = HEIGHT / 5;
+	data->hud->hud_height = HEIGHT / 6;
+	data->raycaster->height_3d = HEIGHT - data->hud->hud_height - 1;
 	data->audio = 0;
 	data->old_x_cursor = 0;
 }

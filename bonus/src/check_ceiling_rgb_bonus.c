@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_ceiling_rgb_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:11:11 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 14:12:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 23:41:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_fc_params_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:37:22 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/23 14:14:18 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 23:42:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 14:43:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/23 23:43:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@
 # define PI 3.1415926535
 # define WIDTH 1020
 # define HEIGHT 780
-# define TILE 32
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
+# define HUD_HEIGHT (HEIGHT / 6)
+# define HEIGHT_3D (HEIGHT - HUD_HEIGHT - 1)
+# define TILE (WIDTH / 32)
 # define RED 0xFF0000FF
 # define YELLOW 0xFFFF00FF
 # define GREEN 0x00FF00FF
@@ -81,10 +85,10 @@ typedef struct s_map
 
 typedef struct s_minimap
 {
-	xpm_t		*wall;
-	xpm_t		*floor;
-	xpm_t		*player;
-	xpm_t		*floor_void;
+	// xpm_t		*wall;
+	// xpm_t		*floor;
+	// xpm_t		*player;
+	// xpm_t		*floor_void;
 	void		*start;
 	int			x;
 	int			y;
@@ -96,8 +100,29 @@ typedef struct s_minimap
 
 typedef struct s_game
 {
-	mlx_image_t	*ddd;
+	mlx_image_t		*ddd;
+	char			*wall_n;
+	char			*wall_s;
+	char			*wall_e;
+	char			*wall_w;
+	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
+	int				wall_start; // pixel de depart du dessin du mur
+	int				wall_end; // pixel de fin du dessin du mur
+	unsigned int	wall_color; // couleur du mur
+	int				tex_x; // is the x-coordinate of the texture
 }	t_game;
+
+typedef struct s_tex
+{
+	xpm_t	*tex_n;
+	xpm_t	*tex_s;
+	xpm_t	*tex_e;
+	xpm_t	*tex_w;
+	int		**north;
+	int		**south;
+	int		**east;
+	int		**west;
+} t_tex;
 
 typedef struct s_hud
 {
@@ -189,6 +214,7 @@ typedef struct s_vault
 	t_game		*game;
 	t_hud		*hud;
 	t_rays		*raycaster;
+	t_tex		*tex;
 	mlx_image_t	*cursor;
 }	t_vault;
 
@@ -284,6 +310,11 @@ void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
 void	raycaster(t_vault *data);
 void	draw_ray_minimap(t_vault *data, float ray_len);
 void	draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color);
+void	draw_tex_wall(t_vault *data, int pixels_2d, int side, double raylen);
+void	create_texture(t_vault *data);
+int		**fill_texture(xpm_t *tex);
+void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
+void	find_tex_hit(t_vault *data, xpm_t *texture, int side, double ray_len);
 
 /***** init_minimap.c *****/
 void	show_minimap(t_vault *data);
@@ -312,6 +343,7 @@ void	rotate_right(t_vault *data);
 /***** raycasting_utils.c *****/
 float	degtorad(float angle);
 int		fix_angle(int angle);
+unsigned int	rgb_to_hex2(int r, int g, int b, int a);
 
 /***** init_3d.c *****/
 void	load_3d(t_vault *data);
