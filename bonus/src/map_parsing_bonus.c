@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*   map_parsing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/22 15:10:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:07:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	fill_rest_of_line(t_vault *data, int x)
 	}
 	free(data->map->map[x]);
 	data->map->map[x] = ft_strdup(temp);
-	printf("%s\n", data->map->map[x]);
 	free (temp);
 	temp = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:58:58 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 14:31:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:04:20 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	extract_r_floor(t_vault *data, char *rgb_code, int *i, int *len)
 	*len = *i;
 	if (data->scene_param->r_floor > 255 || data->scene_param->r_floor < 0)
 		data->error_code = 16;
-	printf("F-R : %d\n", data->scene_param->r_floor);
 	errors(data);
+	printf("F-R : %d\n", data->scene_param->r_floor);
 	extract_g_floor(data, rgb_code, i, len);
 }
 
@@ -55,8 +55,8 @@ void	extract_g_floor(t_vault *data, char *rgb_code, int *i, int *len)
 	*len = *i;
 	if (data->scene_param->g_floor > 255 || data->scene_param->g_floor < 0)
 		data->error_code = 16;
-	printf("F-G : %d\n", data->scene_param->g_floor);
 	errors(data);
+	printf("F-G : %d\n", data->scene_param->g_floor);
 	extract_b_floor(data, rgb_code, i, len);
 }
 
@@ -77,7 +77,7 @@ void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len)
 	free (temp);
 	temp = NULL;
 	if (data->scene_param->b_floor > 255 || data->scene_param->b_floor < 0)
-	errors(data);
 		data->error_code = 16;
+	errors(data);
 	printf("F-B : %d\n", data->scene_param->b_floor);
 }
