@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 14:24:47 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/24 14:37:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	errors_2(t_vault *data)
 	else if (data->error_code == 13)
 		printf("%s\n%s\n", "Error", "Parametres non valides");
 	else if (data->error_code == 14)
-		printf("%s\n%s\n", "Error", "Code RGB ou chemin de texture non valides");
+		printf("%s\n%s\n", "Error", "Chemin de texture non valides (FD error)");
 	else if (data->error_code == 15)
 		printf("%s\n%s\n", "Error", "Code RGB non valide");
 	else if (data->error_code == 16)

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:11:11 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 23:41:55 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:31:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	extract_r_ceiling(t_vault *data, char *rgb_code, int *i, int *len)
 	*len = *i;
 	if (data->scene_param->r_ceiling > 255 || data->scene_param->r_ceiling < 0)
 		data->error_code = 16;
+	printf("C-R : %d\n", data->scene_param->r_ceiling);
 	errors(data);
 	extract_g_ceiling(data, rgb_code, i, len);
 }
@@ -54,6 +55,7 @@ void	extract_g_ceiling(t_vault *data, char *rgb_code, int *i, int *len)
 	*len = *i;
 	if (data->scene_param->g_ceiling > 255 || data->scene_param->g_ceiling < 0)
 		data->error_code = 16;
+	printf("C-G : %d\n", data->scene_param->g_ceiling);
 	errors(data);
 	extract_b_ceiling(data, rgb_code, i, len);
 }
@@ -76,5 +78,6 @@ void	extract_b_ceiling(t_vault *data, char *rgb_code, int *i, int *len)
 	temp = NULL;
 	if (data->scene_param->b_ceiling > 255 || data->scene_param->b_ceiling < 0)
 		data->error_code = 16;
+	printf("C-B : %d\n", data->scene_param->b_ceiling);
 	errors(data);
 }

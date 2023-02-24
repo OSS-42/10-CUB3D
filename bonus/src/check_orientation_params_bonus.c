@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_orientation_params.c                         :+:      :+:    :+:   */
+/*   check_orientation_params_bonus.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:08:43 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/22 15:10:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/24 14:33:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	check_no_params(t_vault *data, int i, int j, int slen)
 		free (temp2);
 		break ;
 	}
+	printf("NO : %s\n", data->scene_param->no_wall_path);
 }
 
 void	check_so_params(t_vault *data, int i, int j, int slen)
@@ -60,6 +61,7 @@ void	check_so_params(t_vault *data, int i, int j, int slen)
 		free (temp2);
 		break ;
 	}
+	printf("SO : %s\n", data->scene_param->so_wall_path);
 }
 
 void	check_we_params(t_vault *data, int i, int j, int slen)
@@ -85,6 +87,7 @@ void	check_we_params(t_vault *data, int i, int j, int slen)
 		free (temp2);
 		break ;
 	}
+	printf("WE : %s\n", data->scene_param->we_wall_path);
 }
 
 void	check_ea_params(t_vault *data, int i, int j, int slen)
@@ -110,6 +113,7 @@ void	check_ea_params(t_vault *data, int i, int j, int slen)
 		free (temp2);
 		break ;
 	}
+	printf("EA : %s\n", data->scene_param->ea_wall_path);
 }
 
 void	check_wall_path(t_vault *data)
