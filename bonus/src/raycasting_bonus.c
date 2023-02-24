@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 10:29:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:40:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,12 @@ void	creating_3d_img(t_vault *data)
 	data->game->wall_height = (int)(data->raycaster->height_3d / data->raycaster->ray_len);
 
 	//calculate lowest and highest pixel to fill in current stripe
-	data->game->wall_start = -data->game->wall_height / 2 + HEIGHT_3D / 2;
+	data->game->wall_start = -data->game->wall_height / 2 + data->raycaster->height_3d / 2;
 	if (data->game->wall_start < 0)
 		data->game->wall_start = 0;
-	data->game->wall_end = data->game->wall_height / 2 + HEIGHT_3D / 2;
-	if (data->game->wall_end >= HEIGHT_3D)
-		data->game->wall_end = HEIGHT_3D - 1;
+	data->game->wall_end = data->game->wall_height / 2 + data->raycaster->height_3d / 2;
+	if (data->game->wall_end >= data->raycaster->height_3d)
+		data->game->wall_end = data->raycaster->height_3d - 1;
 	// draw the pixels of the stripe as a vertical line
 }
 
