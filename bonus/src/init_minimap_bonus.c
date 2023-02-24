@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 15:05:38 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/24 10:31:46 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,57 +92,5 @@ void	minimap_background(t_vault *data)
 	{
 		full_line_minimap_hor(data, i, DGRAY);
 		i++;
-	}
-}
-
-
-void	draw_tiles(t_vault *data,
-			int screen_x, int screen_y, unsigned int color)
-{
-	int	rows;
-	int	cols;
-	int	end_x;
-	int	end_y;
-
-	rows = screen_y;
-	end_x = screen_x + TILE - 1;
-	end_y = screen_y + TILE - 1;
-	while (rows < end_y)
-	{
-		cols = screen_x;
-		while (cols < end_x)
-		{
-			mlx_put_pixel(data->minimap->minimap, rows, cols, color);
-			cols++;
-		}
-		rows++;
-	}
-}
-
-void	full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color)
-{
-	int	start;
-	int	len;
-
-	start = 0;
-	len = data->map->max_lenght * TILE;
-	while (start < len)
-	{
-		mlx_put_pixel(data->minimap->minimap, start, screen_y, color);
-		start++;
-	}
-}
-
-void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color)
-{
-	int	start;
-	int	len;
-
-	start = 0;
-	len = data->map->lines * TILE;
-	while (start < len)
-	{
-		mlx_put_pixel(data->minimap->minimap, screen_x, start, color);
-		start++;
 	}
 }
