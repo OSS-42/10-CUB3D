@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_player.c                                      :+:      :+:    :+:   */
+/*   init_player_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/22 15:10:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:22:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	init_player(t_vault *data)
 {
 	data->player->row = data->player->start_x + 0.5;
 	data->player->col = data->player->start_y + 0.5;
-	data->player->ppx = data->player->row * TILE;
-	data->player->ppy = data->player->col * TILE;
+	data->player->ppx = data->player->row * data->minimap->tile_size;
+	data->player->ppy = data->player->col * data->minimap->tile_size;
 }
 
 void	find_orientation(t_vault *data, char direction)
@@ -62,8 +62,8 @@ void	find_orientation(t_vault *data, char direction)
 
 void	draw_player(t_vault *data)
 {
-	data->player->ppx = data->player->col * TILE;
-	data->player->ppy = data->player->row * TILE;
+	data->player->ppx = data->player->col * data->minimap->tile_size;
+	data->player->ppy = data->player->row * data->minimap->tile_size;
 	mlx_put_pixel(data->minimap->minimap,
 		data->player->ppx, data->player->ppy, 0x00FF00FF);
 	mlx_put_pixel(data->minimap->minimap,

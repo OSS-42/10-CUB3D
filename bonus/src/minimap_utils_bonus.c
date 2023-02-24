@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:31:14 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 10:31:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:22:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	draw_tiles(t_vault *data,
 	int	end_y;
 
 	rows = screen_y;
-	end_x = screen_x + TILE - 1;
-	end_y = screen_y + TILE - 1;
+	end_x = screen_x + data->minimap->tile_size - 1;
+	end_y = screen_y + data->minimap->tile_size - 1;
 	while (rows < end_y)
 	{
 		cols = screen_x;
@@ -42,7 +42,7 @@ void	full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color)
 	int	len;
 
 	start = 0;
-	len = data->map->max_lenght * TILE;
+	len = data->map->max_lenght * data->minimap->tile_size;
 	while (start < len)
 	{
 		mlx_put_pixel(data->minimap->minimap, start, screen_y, color);
@@ -56,7 +56,7 @@ void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color)
 	int	len;
 
 	start = 0;
-	len = data->map->lines * TILE;
+	len = data->map->lines * data->minimap->tile_size;
 	while (start < len)
 	{
 		mlx_put_pixel(data->minimap->minimap, screen_x, start, color);
@@ -73,7 +73,7 @@ void	draw_ray_minimap(t_vault *data)
 	len = 0;
 	x = data->player->ppx;
 	y = data->player->ppy;
-	while (len < fabs(data->raycaster->ray_len) * TILE)
+	while (len < fabs(data->raycaster->ray_len) * data->minimap->tile_size)
 	{
 		mlx_put_pixel(data->minimap->minimap, x, y, 0x00FF00FF);
 		x = x + data->raycaster->pdx_ray;

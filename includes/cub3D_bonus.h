@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 12:17:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:21:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define TEXHEIGHT 64
 # define HUD_HEIGHT (HEIGHT / 6)
 # define HEIGHT_3D (HEIGHT - HUD_HEIGHT - 1)
-# define TILE (WIDTH / 32)
 # define RED 0xFF0000FF
 # define YELLOW 0xFFFF00FF
 # define GREEN 0x00FF00FF
@@ -106,6 +105,7 @@ typedef struct s_minimap
 	int			img_y;
 	int			on_screen;
 	mlx_image_t	*minimap;
+	double		tile_size;
 }	t_minimap;
 
 typedef struct s_game
