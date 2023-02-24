@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 10:41:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:43:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	rgb_to_hex2(int r, int g, int b, int a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-void	create_texture(t_vault *data)
+void	load_textures(t_vault *data)
 {
 	data->tex->tex_n = mlx_load_xpm42(data->scene_param->no_wall_path);
 	if (!data->tex->tex_n)

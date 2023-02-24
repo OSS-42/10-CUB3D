@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 15:39:58 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:42:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,7 +320,7 @@ void	draw_tex_wall(t_vault *data, int pixels_2d);
 
 /***** textures.c *****/
 int		rgb_to_hex2(int r, int g, int b, int a);
-void	create_texture(t_vault *data);
+void	load_textures(t_vault *data);
 int		**get_texture(xpm_t *tex);
 void	find_tex_hit(t_vault *data, xpm_t *texture);
 void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
