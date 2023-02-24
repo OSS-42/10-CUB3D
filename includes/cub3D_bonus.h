@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 11:14:09 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/24 11:23:57 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,44 +319,48 @@ void			draw_player(t_vault *data);
 /***** init_hud.c *****/
 void			load_hud(t_vault *data);
 void			draw_hud(t_vault *data);
-void			full_line_hud_hor(t_vault *data, int screen_y, unsigned int color);
-void			full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
+void			full_line_hud_hor(t_vault *data, int screen_y,
+					unsigned int color);
+void			full_line_hud_ver(t_vault *data, int screen_x,
+					unsigned int color);
 
 /***** raycasting.c *****/
-void	raycaster(t_vault *data);
-void	dist_and_pos(t_vault *data);
-void	dda(t_vault *data);
-void	creating_3d_img(t_vault *data);
-void	draw_tex_wall(t_vault *data, int pixels_2d);
+void			raycaster(t_vault *data);
+void			dist_and_pos(t_vault *data);
+void			dda(t_vault *data);
+void			creating_3d_img(t_vault *data);
+void			draw_tex_wall(t_vault *data, int pixels_2d);
 
 /***** textures.c *****/
-int		rgb_to_hex2(int r, int g, int b, int a);
-void	create_texture(t_vault *data);
-int		**get_texture(xpm_t *tex);
-void	find_tex_hit(t_vault *data, xpm_t *texture);
-void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
+int				rgb_to_hex2(int r, int g, int b, int a);
+void			create_texture(t_vault *data);
+int				**get_texture(xpm_t *tex);
+void			find_tex_hit(t_vault *data, xpm_t *texture);
+void			draw_line(t_vault *data, xpm_t *texture,
+					int **tex_buff, int pixels_2d);
 
 /***** init_minimap.c *****/
-void	reinit_minimap(t_vault *data);
-void	show_minimap(t_vault *data);
-void	load_minimap(t_vault *data);
-void	draw_minimap(t_vault *data);
-void	minimap_background(t_vault *data);
+void			reinit_minimap(t_vault *data);
+void			show_minimap(t_vault *data);
+void			load_minimap(t_vault *data);
+void			draw_minimap(t_vault *data);
+void			minimap_background(t_vault *data);
 
 /***** minimap_utils.c *****/
-void	draw_tiles(t_vault *data,
-			int screen_x, int screen_y, unsigned int color);
-void	full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color);
-void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
-void	draw_ray_minimap(t_vault *data);
+void			draw_tiles(t_vault *data,
+					int screen_x, int screen_y, unsigned int color);
+void			full_line_minimap_hor(t_vault *data, int screen_y,
+					unsigned int color);
+void			full_line_minimap_ver(t_vault *data, int screen_x,
+					unsigned int color);
+void			draw_ray_minimap(t_vault *data);
 void			raycaster(t_vault *data);
-void			draw_ray_minimap(t_vault *data, float ray_len);
-void			draw_wall_3d(t_vault *data, double wall_start, double wall_end, double screen_2d_x, unsigned int wall_color);
-void			draw_tex_wall(t_vault *data, int pixels_2d, int side, double raylen);
+void			draw_wall_3d(t_vault *data, double wall_start, double wall_end,
+					double screen_2d_x, unsigned int wall_color);
 void			create_texture(t_vault *data);
 int				**fill_texture(xpm_t *tex);
-void			draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
-void			find_tex_hit(t_vault *data, xpm_t *texture, int side, double ray_len);
+void			draw_line(t_vault *data, xpm_t *texture,
+					int **tex_buff, int pixels_2d);
 
 /***** init_minimap.c *****/
 void			show_minimap(t_vault *data);
@@ -365,8 +369,10 @@ void			draw_minimap(t_vault *data);
 void			draw_tiles(t_vault *data,
 					int screen_x, int screen_y, unsigned int color);
 void			minimap_background(t_vault *data);
-void			full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color);
-void			full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
+void			full_line_minimap_hor(t_vault *data, int screen_y,
+					unsigned int color);
+void			full_line_minimap_ver(t_vault *data, int screen_x,
+					unsigned int color);
 void			reinit_minimap(t_vault *data);
 
 /***** moves.c *****/
@@ -386,7 +392,6 @@ void			rotate_right(t_vault *data);
 /***** raycasting_utils.c *****/
 float			degtorad(float angle);
 int				fix_angle(int angle);
-unsigned int	rgb_to_hex2(int r, int g, int b, int a);
 
 /***** init_3d.c *****/
 void			load_3d(t_vault *data);
