@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 23:42:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:07:19 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	move_mouse(double xpos, double ypos, void *temp)
 	data->raycaster->plane_y = old_plane_x * sin(delta_x)
 		+ data->raycaster->plane_y * cos(delta_x);
 	data->old_x_cursor = xpos;
-	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
+	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
 	reinit_3d(data);
 	reinit_hud(data);
 	reinit_minimap(data);

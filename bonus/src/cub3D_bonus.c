@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 23:42:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:25:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	create_game(t_vault *data)
 	mlx_cursor_hook(data->mlx, &move_mouse, (void *)data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
 	create_texture(data);
-	
 	load_3d(data);
 	load_hud(data);
 	load_minimap(data);
