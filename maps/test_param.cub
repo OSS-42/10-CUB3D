@@ -9,8 +9,7 @@ F 106,106, 106
 SO ./assets/textures/green42_SD.xpm42
 
 EA ./assets/textures/wood42-legion_SD.xpm42
-
-
+NW   ./assets/textures/window42_SD.xpm42
 
 
 
@@ -21,7 +20,7 @@ C     173, 173, 173
 
 111111111
 100000001
-101000101
+101000201
 100000001  111
 100E00001  101
 100000001  111
