@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 17:15:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 21:07:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,15 +130,15 @@ void	creating_3d_img(t_vault *data)
 		draw_ray_minimap(data); // pour la minimap
 
 	// //Calculate height of line to draw on screen
-	data->game->wall_height = (int)(data->raycaster->height_3d / data->raycaster->ray_len);
+	data->game->wall_height = (int)(HEIGHT / data->raycaster->ray_len);
 
 	//calculate lowest and highest pixel to fill in current stripe
-	data->game->wall_start = -data->game->wall_height / 2 + data->raycaster->height_3d / 2;
+	data->game->wall_start = -data->game->wall_height / 2 + HEIGHT / 2;
 	if (data->game->wall_start < 0)
 		data->game->wall_start = 0;
-	data->game->wall_end = data->game->wall_height / 2 + data->raycaster->height_3d / 2;
-	if (data->game->wall_end >= data->raycaster->height_3d)
-		data->game->wall_end = data->raycaster->height_3d - 1;
+	data->game->wall_end = data->game->wall_height / 2 + HEIGHT / 2;
+	if (data->game->wall_end >= HEIGHT)
+		data->game->wall_end = HEIGHT - 1;
 	// draw the pixels of the stripe as a vertical line
 }
 

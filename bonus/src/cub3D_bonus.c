@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 15:42:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/25 00:48:46 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	create_game(t_vault *data)
 	raycaster(data);
 	mlx_loop(data->mlx);
 	mlx_delete_image(data->mlx, data->minimap->minimap);
-	mlx_delete_image(data->mlx, data->hud->hud);
+	mlx_delete_image(data->mlx, data->hud_loc->hud_location);
+	mlx_delete_image(data->mlx, data->hud_col->hud_collect);
 	mlx_delete_image(data->mlx, data->game->ddd);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
@@ -56,7 +57,8 @@ void	init_data(t_vault *data, char **argv)
 	data->size = ft_calloc(1, sizeof(t_point));
 	data->actual = ft_calloc(1, sizeof(t_point));
 	data->game = ft_calloc(1, sizeof(t_game));
-	data->hud = ft_calloc(1, sizeof(t_hud));
+	data->hud_col = ft_calloc(1, sizeof(t_hud_col));
+	data->hud_loc = ft_calloc(1, sizeof(t_hud_loc));
 	data->tex = ft_calloc(1, sizeof(t_tex));
 	data->raycaster = ft_calloc(1, sizeof(t_rays));
 	data->scene_param->r_ceiling = -1;
@@ -67,8 +69,6 @@ void	init_data(t_vault *data, char **argv)
 	data->scene_param->b_floor = -1;
 	data->raycaster->mov_speed = 0.15;
 	data->raycaster->rot_speed = 0.15;
-	data->hud->hud_height = HEIGHT / 6;
-	data->raycaster->height_3d = HEIGHT - data->hud->hud_height - 1;
 	data->audio = 0;
 	data->old_x_cursor = 0;
 }

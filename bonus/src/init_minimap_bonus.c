@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 15:55:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 21:07:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	show_minimap(t_vault *data)
 void	load_minimap(t_vault *data)
 {
 	if (data->map->max_lenght < data->map->lines)
-		data->minimap->tile_size = data->raycaster->height_3d / 32;
+		data->minimap->tile_size = HEIGHT / 32;
 	else
 		data->minimap->tile_size = WIDTH / 32;
 	

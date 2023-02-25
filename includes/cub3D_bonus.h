@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 16:14:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/25 01:12:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct s_rays
 	double	plane_y;
 	double	rot_speed;
 	double	mov_speed;
-	double	height_3d;
 }	t_rays;
 
 typedef struct s_map
@@ -114,6 +113,7 @@ typedef struct s_game
 	char			*wall_e;
 	char			*wall_w;
 	char			*wall_nw;
+	// char			*game_hud;
 	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
 	int				wall_start; // pixel de depart du dessin du mur
 	int				wall_end; // pixel de fin du dessin du mur
@@ -128,22 +128,56 @@ typedef struct s_tex
 	xpm_t	*tex_e;
 	xpm_t	*tex_w;
 	xpm_t	*tex_nw;
+	xpm_t	*tex_collect;
+	xpm_t	*tex_lobby;
+	xpm_t	*tex_reunion;
+	xpm_t	*tex_cuisine;
+	xpm_t	*tex_jeux;
+	xpm_t	*tex_couloir;
+	xpm_t	*tex_detente;
+	xpm_t	*tex_c1;
+	xpm_t	*tex_c2;
+	xpm_t	*tex_c3;
+	xpm_t	*tex_lounge;
+	xpm_t	*tex_bocal;
+	xpm_t	*tex_amphi;
+	xpm_t	*tex_secrete;
 	int		**north;
 	int		**south;
 	int		**east;
 	int		**west;
+	int		**collect;
 	int		**neutral_wall;
+	int		**lobby;
+	int		**lounge;
+	int		**cuisine;
+	int		**reunion;
+	int		**jeux;
+	int		**couloir;
+	int		**detente;
+	int		**c1;
+	int		**c2;
+	int		**c3;
+	int		**bocal;
+	int		**amphi;
+	int		**secrete;
 } t_tex;
 
-typedef struct s_hud
+typedef struct s_hud_col
 {
-	int			lives_count;
 	int			collected;
 	int			total_c;
 	int			hud_height;
-	mlx_image_t	*lives;
-	mlx_image_t	*hud;
-}	t_hud;
+	mlx_image_t	*hud_collect;
+}	t_hud_col;
+
+typedef struct s_hud_loc
+{
+	int			hud_height;
+	int			location;
+	int			**p_loc;
+	mlx_image_t	*hud_location;
+}	t_hud_loc;
 
 // typedef struct s_level
 // {
@@ -225,7 +259,8 @@ typedef struct s_vault
 	t_point		*actual;
 	t_minimap	*minimap;
 	t_game		*game;
-	t_hud		*hud;
+	t_hud_loc	*hud_loc;
+	t_hud_col	*hud_col;
 	t_rays		*raycaster;
 	t_tex		*tex;
 	mlx_image_t	*cursor;
@@ -314,8 +349,10 @@ void	draw_player(t_vault *data);
 /***** init_hud.c *****/
 void	load_hud(t_vault *data);
 void	draw_hud(t_vault *data);
-void	full_line_hud_hor(t_vault *data, int screen_y, unsigned int color);
-void	full_line_hud_ver(t_vault *data, int screen_x, unsigned int color);
+void	full_line_hud_hor(mlx_image_t *hud, int screen_y, unsigned int color);
+void	full_line_hud_ver(mlx_image_t *hud, int screen_x, unsigned int color);
+void	draw_tex_collect(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
+void	draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
 
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);
@@ -333,6 +370,7 @@ void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
 
 /***** extra_textures.c *****/
 void	load_extra_textures(t_vault *data);
+void	player_location(t_vault *data);
 
 /***** init_minimap.c *****/
 void	reinit_minimap(t_vault *data);

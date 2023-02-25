@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:12:30 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 10:44:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/24 21:07:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	load_3d(t_vault *data)
 {
 	data->game->ddd = mlx_new_image(data->mlx, WIDTH,
-			data->raycaster->height_3d);
+			HEIGHT);
 	mlx_image_to_window(data->mlx, data->game->ddd, 0, 0);
 	background_3d(data);
 }
@@ -26,7 +26,7 @@ void	background_3d(t_vault *data)
 	int	start;
 
 	i = 0;
-	while (i < data->raycaster->height_3d / 2)
+	while (i < HEIGHT / 2)
 	{
 		start = -1;
 		while (++start < WIDTH)
@@ -34,7 +34,7 @@ void	background_3d(t_vault *data)
 				i, data->scene_param->hex_ceiling);
 		i++;
 	}
-	while (i < data->raycaster->height_3d)
+	while (i < HEIGHT)
 	{
 		start = -1;
 		while (++start < WIDTH)
