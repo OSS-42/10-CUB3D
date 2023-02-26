@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 08:56:27 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/26 10:58:32 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	rotate_left(t_vault *data)
 		* sin(-data->raycaster->rot_speed);
 	data->raycaster->plane_y = old_plane_x * sin(-data->raycaster->rot_speed)
 		+ data->raycaster->plane_y * cos(-data->raycaster->rot_speed);
-	reinit_3d(data);
-	raycaster(data);
 }
 
 void	rotate_right(t_vault *data)
@@ -48,6 +46,4 @@ void	rotate_right(t_vault *data)
 		* sin(data->raycaster->rot_speed);
 	data->raycaster->plane_y = old_plane_x * sin(data->raycaster->rot_speed)
 		+ data->raycaster->plane_y * cos(data->raycaster->rot_speed);
-	reinit_3d(data);
-	raycaster(data);
 }

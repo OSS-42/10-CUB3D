@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/25 01:12:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/26 10:55:44 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,10 +387,10 @@ void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
 void	draw_ray_minimap(t_vault *data);
 
 /***** moves.c *****/
-void	move_forward(t_vault *data);
-void	move_backward(t_vault *data);
-void	move_left(t_vault *data);
-void	move_right(t_vault *data);
+void	move_forward(t_vault *data, int check_row, int check_col);
+void	move_backward(t_vault *data, int check_row, int check_col);
+void	move_left(t_vault *data, int check_row, int check_col);
+void	move_right(t_vault *data, int check_row, int check_col);
 void	move_mouse(double x, double y, void *temp);
 
 /***** camera.c *****/
