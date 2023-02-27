@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhandler_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/26 10:57:02 by maison           ###   ########.fr       */
+/*   Updated: 2023/02/27 15:52:34 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,5 @@ void	keyhandler_2(mlx_key_data_t keydata, t_vault *data)
 		quit_game(data);
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 		show_minimap(data);
-	// if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS))
-	// 	open_door(data);
-	reinit_3d(data);
-	reinit_hud(data);
-	reinit_minimap(data);
-	raycaster(data);
+	reinit_and_draw(data);
 }

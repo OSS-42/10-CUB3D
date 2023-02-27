@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:01:38 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/27 15:17:21 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:51:52 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,12 @@ void	full_line_hud_ver(mlx_image_t *hud, int screen_x, unsigned int color)
 		mlx_put_pixel(hud, screen_x, start, color);
 		start++;
 	}
+}
+
+void	reinit_and_draw(t_vault *data)
+{
+	reinit_3d(data);
+	reinit_hud(data);
+	reinit_minimap(data);
+	raycaster(data);
 }

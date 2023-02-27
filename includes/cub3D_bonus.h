@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 15:30:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 16:18:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,6 +312,7 @@ void	flood_fill(t_vault *data, int x, int y, char **temp);
 void	load_player(t_vault *data);
 void	init_player(t_vault *data);
 void	find_orientation(t_vault *data, char direction);
+void	find_orientation_2(t_vault *data, char direction);
 void	draw_player(t_vault *data);
 
 /***** init_hud.c *****/
@@ -324,10 +325,13 @@ void	draw_tex_location(t_vault *data, int **tex_buff,
 
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);
-void	dist_and_pos(t_vault *data);
 void	dda(t_vault *data);
 void	creating_3d_img(t_vault *data);
 void	draw_tex_wall(t_vault *data, int pixels_2d);
+
+/***** raycasting_utils.c *****/
+void	dist_and_pos(t_vault *data);
+void	dist_and_pos2(t_vault *data);
 
 /***** textures.c *****/
 int		rgb_to_hex2(int r, int g, int b, int a);
@@ -340,6 +344,7 @@ void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
 void	check_wall_path(t_vault *data);
 void	full_line_hud_hor(mlx_image_t *hud, int screen_y, unsigned int color);
 void	full_line_hud_ver(mlx_image_t *hud, int screen_x, unsigned int color);
+void	reinit_and_draw(t_vault *data);
 
 /***** extra_textures.c *****/
 void	load_extra_textures(t_vault *data);

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 14:04:26 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:57:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	init_data(t_vault *data, char **argv)
 	data->raycaster->mov_speed = 0.15;
 	data->raycaster->rot_speed = 0.15;
 	data->audio = 0;
-	data->old_x_cursor = 0;
+	data->old_x_cursor = WIDTH / 2;
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 09:37:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:33:35 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ void	find_orientation(t_vault *data, char direction)
 		data->raycaster->plane_x = -0.66;
 		data->raycaster->plane_y = 0;
 	}
-	else if (direction == 'E')
+	find_orientation_2(data, direction);
+}
+
+void	find_orientation_2(t_vault *data, char direction)
+{
+	if (direction == 'E')
 	{
 		data->player->pdx = 1;
 		data->player->pdy = 0;
