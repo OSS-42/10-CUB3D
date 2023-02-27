@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/26 10:56:34 by maison           ###   ########.fr       */
+/*   Updated: 2023/02/27 15:58:17 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 		data->player->col = data->player->col + data->player->pdx
 			* data->raycaster->mov_speed;
 }
-
 
 void	move_backward(t_vault *data, int check_row, int check_col)
 {
@@ -99,8 +98,5 @@ void	move_mouse(double xpos, double ypos, void *temp)
 		+ data->raycaster->plane_y * cos(delta_x);
 	data->old_x_cursor = xpos;
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
-	reinit_3d(data);
-	reinit_hud(data);
-	reinit_minimap(data);
-	raycaster(data);
+	reinit_and_draw(data);
 }

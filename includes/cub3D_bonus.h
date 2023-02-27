@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/26 18:46:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:23:27 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,17 @@ typedef struct s_rays
 {
 	double	pdx_ray;
 	double	pdy_ray;
-	double	delta_dist_x; // distance entre segments de grille verticaux (intersections en x)
-	double	delta_dist_y; // distance entre segments de grille horizontaux (intersections en y)
-	double	screen_2d_x; // x sur le plan de la largeur de la fenetre
-	int		map_2d_col; // mouvements dans la carte 2D sur les colonnes (y)
-	int		map_2d_row; // mouvements dans la carte 2D sur les colonnes (x)
-	int		col; // coordonnees map 2D (y)
-	int		row; // coordonnees map 2D (x)
-	double	ray_len_x; // longueur du rayon initial (dans la case du joueur)
-	double	ray_len_y; // longueur du rayon initial (dans la case du joueur)
-	int		side; // quel coté du mur est touché
-	double	ray_len; // longueur du rayon
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	screen_2d_x;
+	int		map_2d_col;
+	int		map_2d_row;
+	int		col;
+	int		row;
+	double	ray_len_x;
+	double	ray_len_y;
+	int		side;
+	double	ray_len;
 	double	plane_x;
 	double	plane_y;
 	double	rot_speed;
@@ -91,10 +91,6 @@ typedef struct s_map
 
 typedef struct s_minimap
 {
-	// xpm_t		*wall;
-	// xpm_t		*floor;
-	// xpm_t		*player;
-	// xpm_t		*floor_void;
 	void		*start;
 	int			x;
 	int			y;
@@ -141,11 +137,11 @@ typedef struct s_game
 	char			*wall_e;
 	char			*wall_w;
 	char			*wall_nw;
-	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
-	int				wall_start; // pixel de depart du dessin du mur
-	int				wall_end; // pixel de fin du dessin du mur
-	unsigned int	wall_color; // couleur du mur
-	int				tex_x; // is the x-coordinate of the texture
+	int				wall_height;
+	int				wall_start;
+	int				wall_end;
+	unsigned int	wall_color;
+	int				tex_x;
 }	t_game;
 
 typedef struct s_tex
@@ -189,8 +185,7 @@ typedef struct s_tex
 	int		**bocal;
 	int		**amphi;
 	int		**secrete;
-	int		**light;
-} t_tex;
+}	t_tex;
 
 typedef struct s_hud_col
 {
@@ -207,31 +202,6 @@ typedef struct s_hud_loc
 	int			**p_loc;
 	mlx_image_t	*hud_location;
 }	t_hud_loc;
-
-// typedef struct s_level
-// {
-// 	void		*corner_1;
-// 	void		*corner_2;
-// 	void		*corner_3;
-// 	void		*corner_4;
-// 	void		*wall_left;
-// 	void		*wall_right;
-// 	void		*wall_top;
-// 	void		*wall_bottom;
-// 	void		*floor;
-// 	void		*pilar;
-// 	void		*collect;
-// 	void		*start;
-// 	void		*exit;
-// 	int			x;
-// 	int			y;
-// 	int			img_x;
-// 	int			img_y;
-// 	mlx_image_t	*floor_img;
-// 	mlx_image_t	*wall_img;
-// 	mlx_image_t	*player_img;
-// 	mlx_image_t	*void_img;
-// }	t_level;
 
 typedef struct s_param
 {
@@ -281,7 +251,6 @@ typedef struct s_vault
 	int			audio;
 	int			old_x_cursor;
 	t_player	*player;
-	// t_level		*lvl1;
 	t_param		*scene_param;
 	t_map		*map;
 	t_point		*size;
@@ -330,7 +299,6 @@ void	check_so_params(t_vault *data, int x, int y, int slen);
 void	check_we_params(t_vault *data, int x, int y, int slen);
 void	check_ea_params(t_vault *data, int x, int y, int slen);
 void	check_nw_params(t_vault *data, int i, int j, int slen);
-void	check_wall_path(t_vault *data);
 
 /***** check_fc_params.c *****/
 void	check_f_params(t_vault *data, int x, int y, int slen);
@@ -374,22 +342,26 @@ void	flood_fill(t_vault *data, int x, int y, char **temp);
 void	load_player(t_vault *data);
 void	init_player(t_vault *data);
 void	find_orientation(t_vault *data, char direction);
+void	find_orientation_2(t_vault *data, char direction);
 void	draw_player(t_vault *data);
 
 /***** init_hud.c *****/
 void	load_hud(t_vault *data);
 void	draw_hud(t_vault *data);
-void	full_line_hud_hor(mlx_image_t *hud, int screen_y, unsigned int color);
-void	full_line_hud_ver(mlx_image_t *hud, int screen_x, unsigned int color);
-void	draw_tex_collect(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
-void	draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
+void	draw_tex_collect(t_vault *data, int **tex_buff,
+			int pixels_2d);
+void	draw_tex_location(t_vault *data, int **tex_buff,
+			int pixels_2d);
 
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);
-void	dist_and_pos(t_vault *data);
 void	dda(t_vault *data);
 void	creating_3d_img(t_vault *data, int pixels_2d);
 void	draw_tex_wall(t_vault *data, int pixels_2d);
+
+/***** raycasting_utils.c *****/
+void	dist_and_pos(t_vault *data);
+void	dist_and_pos2(t_vault *data);
 
 /***** textures.c *****/
 int		rgb_to_hex2(int r, int g, int b, int a);
@@ -398,16 +370,25 @@ int		**get_texture(xpm_t *tex);
 void	find_tex_hit(t_vault *data, xpm_t *texture);
 void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
 
+/***** utils_bonus.c *****/
+void	check_wall_path(t_vault *data);
+void	full_line_hud_hor(mlx_image_t *hud, int screen_y, unsigned int color);
+void	full_line_hud_ver(mlx_image_t *hud, int screen_x, unsigned int color);
+void	reinit_and_draw(t_vault *data);
+
 /***** extra_textures.c *****/
 void	load_extra_textures(t_vault *data);
-void	player_location(t_vault *data);
+void	get_extra_textures(t_vault *data);
+void	player_location(t_vault *data, int col, int row);
+void	player_location_2(t_vault *data, int col, int row);
+void	player_location_3(t_vault *data, int col, int row);
 
 /***** init_minimap.c *****/
 void	reinit_minimap(t_vault *data);
 void	show_minimap(t_vault *data);
 void	load_minimap(t_vault *data);
 void	draw_minimap(t_vault *data);
-void	minimap_background(t_vault *data);
+void	draw_tiles_loop(t_vault *data);
 
 /***** minimap_utils.c *****/
 void	draw_tiles(t_vault *data,

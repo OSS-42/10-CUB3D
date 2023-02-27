@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/26 10:54:39 by maison           ###   ########.fr       */
+/*   Updated: 2023/02/27 13:36:00 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,10 +235,13 @@ void	find_orientation_2(t_vault *data, char direction);
 
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);
-void	dist_and_pos(t_vault *data);
-void	dda(t_vault *data);
+void	dda(t_vault *data, int impact);
 void	creating_3d_img(t_vault *data);
 void	draw_tex_wall(t_vault *data, int pixels_2d);
+
+/***** raycasting_utils.c *****/
+void	dist_and_pos(t_vault *data);
+void	dist_and_pos2(t_vault *data);
 
 /***** textures.c *****/
 int		rgb_to_hex2(int r, int g, int b, int a);

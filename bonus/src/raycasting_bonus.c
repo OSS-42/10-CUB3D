@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/26 18:29:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:22:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	raycaster(t_vault *data)
 {
-	double			pixels_2d; // compteur pour le plan largeur de la fenetre
-	
-	pixels_2d = 0; // on commence a 0 jusqu'a WIDTH
+	double	pixels_2d;
+
+	pixels_2d = 0;
 	while (pixels_2d < WIDTH)
 	{
-		data->raycaster->screen_2d_x = 2 * pixels_2d / WIDTH - 1; // de -1 a +1
+		data->raycaster->screen_2d_x = 2 * pixels_2d / WIDTH - 1;
 		dist_and_pos(data);
 		dda(data);
 		creating_3d_img(data, pixels_2d);
@@ -29,81 +29,35 @@ void	raycaster(t_vault *data)
 	}
 }
 
-void	dist_and_pos(t_vault *data)
-{
-	data->raycaster->pdx_ray = data->player->pdx + data->raycaster->plane_x * data->raycaster->screen_2d_x;
-	data->raycaster->pdy_ray = data->player->pdy + data->raycaster->plane_y * data->raycaster->screen_2d_x;
-
-	// map position
-	data->raycaster->col = data->player->col;
-	data->raycaster->row = data->player->row;
-
-	// distance entre les cases de la grille (la longueur ne compte pas encore, seulement le ratio)
-	if (data->raycaster->pdx_ray == 0)
-		data->raycaster->delta_dist_x = 1e30;
-	else
-		data->raycaster->delta_dist_x = fabs(1 / data->raycaster->pdx_ray);
-
-	if (data->raycaster->pdy_ray == 0)
-		data->raycaster->delta_dist_y = 1e30;
-	else
-		data->raycaster->delta_dist_y = fabs(1 / data->raycaster->pdy_ray);
-
-	// calcul des mouvemements dans la carte 2D et distance entre le joueur et la 1ere intersection
-	if (data->raycaster->pdx_ray < 0)
-	{
-		data->raycaster->map_2d_col = -1;
-		data->raycaster->ray_len_x = (data->player->col - data->raycaster->col) * data->raycaster->delta_dist_x;
-	}
-	else
-	{
-		data->raycaster->map_2d_col = 1;
-		data->raycaster->ray_len_x = (data->raycaster->col + 1.0 - data->player->col) * data->raycaster->delta_dist_x;
-	}
-	if (data->raycaster->pdy_ray < 0)
-	{
-		data->raycaster->map_2d_row = -1;
-		data->raycaster->ray_len_y = (data->player->row - data->raycaster->row) * data->raycaster->delta_dist_y;
-	}
-	else
-	{
-		data->raycaster->map_2d_row = 1;
-		data->raycaster->ray_len_y = (data->raycaster->row + 1.0 - data->player->row) * data->raycaster->delta_dist_y;
-	}
-}
-
 void	dda(t_vault *data)
 {
-	int	impact; // equivaut a 'hit'
-	
+	int	impact;
+
 	impact = 0;
-	// perform DDA (calcul longueur total du rayon)
 	while (impact == 0)
 	{
-		//jump to next map square, either in x-direction, or in y-direction
 		if (data->raycaster->ray_len_x < data->raycaster->ray_len_y)
 		{
-			data->raycaster->ray_len_x = data->raycaster->ray_len_x + data->raycaster->delta_dist_x;
-			data->raycaster->col = data->raycaster->col + data->raycaster->map_2d_col;
-			if (data->raycaster->pdx_ray < 0) // quel cote de mur touche ? EST --> 0, OUEST --> 1
+			data->raycaster->ray_len_x += data->raycaster->delta_dist_x;
+			data->raycaster->col += data->raycaster->map_2d_col;
+			if (data->raycaster->pdx_ray < 0)
 				data->raycaster->side = 0;
-			else if (data->raycaster->pdx_ray > 0) 
+			else if (data->raycaster->pdx_ray > 0)
 				data->raycaster->side = 1;
 		}
 		else
 		{
-			data->raycaster->ray_len_y = data->raycaster->ray_len_y + data->raycaster->delta_dist_y;
-			data->raycaster->row = data->raycaster->row + data->raycaster->map_2d_row;
-			if (data->raycaster->pdy_ray < 0) // quel cote de mur touche ? NORD --> 3, SUD --> 2
+			data->raycaster->ray_len_y += data->raycaster->delta_dist_y;
+			data->raycaster->row += data->raycaster->map_2d_row;
+			if (data->raycaster->pdy_ray < 0)
 				data->raycaster->side = 2;
 			else if (data->raycaster->pdy_ray > 0)
 				data->raycaster->side = 3;
 		}
-
-		//Check if ray has hit a wall
 		if (data->map->map[data->raycaster->row][data->raycaster->col] == '1')
 			impact = 1;
-		else if (data->map->map[data->raycaster->row][data->raycaster->col] == '2')
+		else if (data->map->map[data->raycaster->row][data->raycaster->col]
+			== '2')
 		{
 			impact = 1;
 			if (data->raycaster->side == 0)

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:31:14 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 15:22:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:23:17 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
-
 
 void	draw_tiles(t_vault *data,
 			int screen_x, int screen_y, unsigned int color)
