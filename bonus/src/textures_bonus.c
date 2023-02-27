@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 16:09:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:30:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	load_textures(t_vault *data)
 	data->tex->east = get_texture(data->tex->tex_e);
 	data->tex->west = get_texture(data->tex->tex_w);
 	load_extra_textures(data);
-	
 }
 
 int	**get_texture(xpm_t *tex)
@@ -44,7 +43,7 @@ int	**get_texture(xpm_t *tex)
 	int	**tex_buff;
 	int	i;
 	int	j;
-	
+
 	tex_buff = ft_calloc(sizeof(int *), tex->texture.height + 1);
 	i = 3;
 	while (++i < (int)tex->texture.height + 4)
@@ -89,7 +88,7 @@ void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 	double			tex_pos;
 	double			step;
 	int 			screen_y;
-	
+
 	step = 1.0 * texture->texture.height / data->game->wall_height;
 	// Starting texture coordinate
 	tex_pos = ((double)data->game->wall_start - (double)HEIGHT / 2 + (double)data->game->wall_height / 2) * step;

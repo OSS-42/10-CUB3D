@@ -47,6 +47,7 @@ SRCS =	src/cub3D.c \
 		src/check_floor_rgb.c \
 		src/init_player.c \
 		src/raycasting.c \
+		src/raycasting_utils.c \
 		src/moves.c \
 		src/camera.c \
 		src/textures.c \
@@ -60,7 +61,7 @@ all:	art_intro $(NAME)
 
 $(NAME):	$(D_OBJ) $(LIBFT) $(LIBART) $(MLX42) $(OBJS)
 # Ubuntu
-#	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
+# @$(call creating, $(CC) $(CFLAGS) $(OBJS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
 # MacOS 42
 	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 # Apple M2
@@ -134,10 +135,12 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/init_player_bonus.c \
 				bonus/src/init_hud_bonus.c \
 				bonus/src/raycasting_bonus.c \
+				bonus/src/raycasting_utils_bonus.c \
 				bonus/src/init_minimap_bonus.c \
 				bonus/src/moves_bonus.c \
 				bonus/src/camera_bonus.c \
 				bonus/src/textures_bonus.c \
+				bonus/src/utils_bonus.c \
 				bonus/src/extra_textures_bonus.c \
 				bonus/src/init_3d_bonus.c \
 				bonus/src/audio_bonus.c \
@@ -152,7 +155,7 @@ intro_bonus:
 
 $(NAME_BONUS):	$(D_OBJ_BONUS) $(LIBFT) $(LIBART) $(MLX42) $(OBJS_BONUS)
 # Ubuntu
-#	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
+# @$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
 # MacOS 42
 	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 # Apple M2
