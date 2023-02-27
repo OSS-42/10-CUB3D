@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 13:32:13 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 13:35:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,35 @@ void	raycaster(t_vault *data)
 	{
 		data->raycaster->screen_2d_x = 2 * pixels_2d / WIDTH - 1;
 		dist_and_pos(data);
-		dda(data);
+		dda(data, 0);
 		creating_3d_img(data);
 		draw_tex_wall(data, pixels_2d);
 		pixels_2d++;
 	}
 }
 
-void	dda(t_vault *data)
+void	dda(t_vault *data, int impact)
 {
-	int	impact; // equivaut a 'hit'
-
-	impact = 0;
-	// perform DDA (calcul longueur total du rayon)
 	while (impact == 0)
 	{
-		//jump to next map square, either in x-direction, or in y-direction
 		if (data->raycaster->ray_len_x < data->raycaster->ray_len_y)
 		{
-			data->raycaster->ray_len_x = data->raycaster->ray_len_x + data->raycaster->delta_dist_x;
-			// row = row + map_2d_row;
-			data->raycaster->col = data->raycaster->col + data->raycaster->map_2d_col;
-			if (data->raycaster->pdx_ray < 0) // quel cote de mur touche ? EST --> 0, OUEST --> 1
+			data->raycaster->ray_len_x += data->raycaster->delta_dist_x;
+			data->raycaster->col += data->raycaster->map_2d_col;
+			if (data->raycaster->pdx_ray < 0)
 				data->raycaster->side = 0;
 			else
 				data->raycaster->side = 1;
 		}
 		else
 		{
-			data->raycaster->ray_len_y = data->raycaster->ray_len_y + data->raycaster->delta_dist_y;
-			// col = col + map_2d_col;
-			data->raycaster->row = data->raycaster->row + data->raycaster->map_2d_row;
-			if (data->raycaster->pdy_ray < 0) // quel cote de mur touche ? NORD --> 3, SUD --> 2
+			data->raycaster->ray_len_y += data->raycaster->delta_dist_y;
+			data->raycaster->row += data->raycaster->map_2d_row;
+			if (data->raycaster->pdy_ray < 0)
 				data->raycaster->side = 2;
 			else
 				data->raycaster->side = 3;
 		}
-
-		//Check if ray has hit a wall
 		if (data->map->map[data->raycaster->row][data->raycaster->col] == '1')
 			impact = 1;
 	}

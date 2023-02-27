@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 13:24:06 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 13:36:00 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,7 @@ void	find_orientation_2(t_vault *data, char direction);
 
 /***** raycasting.c *****/
 void	raycaster(t_vault *data);
-void	dda(t_vault *data);
+void	dda(t_vault *data, int impact);
 void	creating_3d_img(t_vault *data);
 void	draw_tex_wall(t_vault *data, int pixels_2d);
 
