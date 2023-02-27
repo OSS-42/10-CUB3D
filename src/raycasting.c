@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 13:35:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 13:38:54 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,22 @@ void	dda(t_vault *data, int impact)
 
 void	creating_3d_img(t_vault *data)
 {
-	//pour la vue 3D
-	//Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
 	if (data->raycaster->side == 0 || data->raycaster->side == 1)
-		data->raycaster->ray_len = (data->raycaster->ray_len_x - data->raycaster->delta_dist_x);
+		data->raycaster->ray_len = (data->raycaster->ray_len_x
+				- data->raycaster->delta_dist_x);
 	else
-		data->raycaster->ray_len = (data->raycaster->ray_len_y - data->raycaster->delta_dist_y);
-
-	// //Calculate height of line to draw on screen
-	data->game->wall_height = (int)(data->raycaster->height_3d / data->raycaster->ray_len);
-
-	//calculate lowest and highest pixel to fill in current stripe
-	data->game->wall_start = -data->game->wall_height / 2 + data->raycaster->height_3d / 2;
+		data->raycaster->ray_len = (data->raycaster->ray_len_y
+				- data->raycaster->delta_dist_y);
+	data->game->wall_height = (int)(data->raycaster->height_3d
+			/ data->raycaster->ray_len);
+	data->game->wall_start = -data->game->wall_height
+		/ 2 + data->raycaster->height_3d / 2;
 	if (data->game->wall_start < 0)
 		data->game->wall_start = 0;
-	data->game->wall_end = data->game->wall_height / 2 + data->raycaster->height_3d / 2;
+	data->game->wall_end = data->game->wall_height
+		/ 2 + data->raycaster->height_3d / 2;
 	if (data->game->wall_end >= data->raycaster->height_3d)
 		data->game->wall_end = data->raycaster->height_3d - 1;
-	// draw the pixels of the stripe as a vertical line
 }
 
 void	draw_tex_wall(t_vault *data, int pixels_2d)
