@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_hud_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:00:20 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/25 01:12:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:58:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_hud(t_vault *data)
 
 	//separations dans HUD
 	// mlx_put_string(data->mlx, "Bottles", data->map->max_lenght * 11 + 40, HEIGHT - data->map->lines * 10);
-	player_location(data);
+	player_location(data, 0, 0);
 	draw_tex_collect(data, data->tex->tex_collect, data->tex->collect, 1);
 	draw_tex_location(data, data->tex->tex_lobby, data->hud_loc->p_loc, 1);
 }
@@ -48,7 +48,7 @@ void	draw_hud(t_vault *data)
 void	draw_tex_collect(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 {
 	int	screen_y;
-	
+
 	(void)texture;
 	while (pixels_2d < 200 - 1)
 	{
@@ -65,7 +65,7 @@ void	draw_tex_collect(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_
 void	draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 {
 	int	screen_y;
-	
+
 	(void)texture;
 	while (pixels_2d < 200 - 1)
 	{
