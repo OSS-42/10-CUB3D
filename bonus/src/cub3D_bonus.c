@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/25 00:48:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:27:03 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ int	create_game(t_vault *data)
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	play_song(data);
-	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
-	mlx_cursor_hook(data->mlx, &move_mouse, (void *)data);
-	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
 	load_textures(data);
 	load_3d(data);
 	load_hud(data);
 	load_minimap(data);
 	load_player(data);
 	raycaster(data);
+	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
+	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
+	mlx_cursor_hook(data->mlx, &move_mouse, (void *)data);
 	mlx_loop(data->mlx);
 	mlx_delete_image(data->mlx, data->minimap->minimap);
 	mlx_delete_image(data->mlx, data->hud_loc->hud_location);
