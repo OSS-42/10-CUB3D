@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 16:31:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:34:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ typedef struct s_tex
 	int		**bocal;
 	int		**amphi;
 	int		**secrete;
+	int		**light; // a transformer en porte
 }	t_tex;
 
 typedef struct s_hud_col
