@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 21:07:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:30:05 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	load_minimap(t_vault *data)
 		data->minimap->tile_size = HEIGHT / 32;
 	else
 		data->minimap->tile_size = WIDTH / 32;
-	
 	data->minimap->minimap = mlx_new_image(data->mlx,
-			data->map->max_lenght * data->minimap->tile_size, data->map->lines * data->minimap->tile_size);
+			data->map->max_lenght * data->minimap->tile_size,
+			data->map->lines * data->minimap->tile_size);
 	if (data->minimap->on_screen == 1)
 	{
 		draw_minimap(data);
@@ -56,40 +56,6 @@ void	load_minimap(t_vault *data)
 
 void	draw_minimap(t_vault *data)
 {
-	//background minimap
-	minimap_background(data);
-	data->minimap->x = 0;
-	while (data->minimap->x < data->map->lines)
-	{
-		data->minimap->y = 0;
-		while (data->minimap->y < data->map->max_lenght)
-		{
-			if (data->map->map[data->minimap->x][data->minimap->y] == '0')
-				draw_tiles(data, data->minimap->x * data->minimap->tile_size, data->minimap->y * data->minimap->tile_size,
-					0x6E99FFFF);
-			else if (data->map->map[data->minimap->x][data->minimap->y] == '1' || data->map->map[data->minimap->x][data->minimap->y] == '2')
-				draw_tiles(data, data->minimap->x * data->minimap->tile_size, data->minimap->y * data->minimap->tile_size,
-					0xFFFFFFFF);
-			else if (data->map->map[data->minimap->x][data->minimap->y] == '.')
-				draw_tiles(data, data->minimap->x * data->minimap->tile_size, data->minimap->y * data->minimap->tile_size,
-					0x000000FF);
-			else if (ft_char_isinset("NSEW", data->map->map[data->minimap->x]
-					[data->minimap->y]) == TRUE)
-				draw_tiles(data, data->minimap->x * data->minimap->tile_size, data->minimap->y * data->minimap->tile_size,
-					0x6E99FFFF);
-			data->minimap->y++;
-		}
-		data->minimap->x++;
-	}
-	//contours MINIMAP
-	full_line_minimap_hor(data, 0, 0xFF00FFFF);
-	full_line_minimap_ver(data, 0, 0xFF00FFFF);
-	full_line_minimap_ver(data, data->map->max_lenght * data->minimap->tile_size - 1, 0xFF00FFFF);
-	full_line_minimap_hor(data, data->map->lines * data->minimap->tile_size - 1, 0xFF00FFFF);
-}
-
-void	minimap_background(t_vault *data)
-{
 	int	i;
 
 	i = 0;
@@ -97,5 +63,44 @@ void	minimap_background(t_vault *data)
 	{
 		full_line_minimap_hor(data, i, DGRAY);
 		i++;
+	}
+	data->minimap->x = 0;
+	while (data->minimap->x < data->map->lines)
+	{
+		data->minimap->y = 0;
+		draw_tiles_loop(data);
+		data->minimap->x++;
+	}
+	full_line_minimap_hor(data, 0, 0xFF00FFFF);
+	full_line_minimap_ver(data, 0, 0xFF00FFFF);
+	full_line_minimap_ver(data, data->map->max_lenght
+		* data->minimap->tile_size - 1, 0xFF00FFFF);
+	full_line_minimap_hor(data, data->map->lines
+		* data->minimap->tile_size - 1, 0xFF00FFFF);
+}
+
+void	draw_tiles_loop(t_vault *data)
+{
+	while (data->minimap->y < data->map->max_lenght)
+	{
+		if (data->map->map[data->minimap->x][data->minimap->y] == '0')
+			draw_tiles(data, data->minimap->x * data->minimap->tile_size,
+				data->minimap->y * data->minimap->tile_size,
+				0x6E99FFFF);
+		else if (data->map->map[data->minimap->x][data->minimap->y] == '1'
+			|| data->map->map[data->minimap->x][data->minimap->y] == '2')
+			draw_tiles(data, data->minimap->x * data->minimap->tile_size,
+				data->minimap->y * data->minimap->tile_size,
+				0xFFFFFFFF);
+		else if (data->map->map[data->minimap->x][data->minimap->y] == '.')
+			draw_tiles(data, data->minimap->x * data->minimap->tile_size,
+				data->minimap->y * data->minimap->tile_size,
+				0x000000FF);
+		else if (ft_char_isinset("NSEW", data->map->map[data->minimap->x]
+				[data->minimap->y]) == TRUE)
+			draw_tiles(data, data->minimap->x * data->minimap->tile_size,
+				data->minimap->y * data->minimap->tile_size,
+				0x6E99FFFF);
+		data->minimap->y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 15:08:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:30:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,11 +317,9 @@ void	draw_player(t_vault *data);
 /***** init_hud.c *****/
 void	load_hud(t_vault *data);
 void	draw_hud(t_vault *data);
-void	full_line_hud_hor(mlx_image_t *hud, int screen_y, unsigned int color);
-void	full_line_hud_ver(mlx_image_t *hud, int screen_x, unsigned int color);
-void	draw_tex_collect(t_vault *data, xpm_t *texture, int **tex_buff,
+void	draw_tex_collect(t_vault *data, int **tex_buff,
 			int pixels_2d);
-void	draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff,
+void	draw_tex_location(t_vault *data, int **tex_buff,
 			int pixels_2d);
 
 /***** raycasting.c *****/
@@ -338,8 +336,10 @@ int		**get_texture(xpm_t *tex);
 void	find_tex_hit(t_vault *data, xpm_t *texture);
 void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
 
-/***** texture_utils.c *****/
+/***** utils_bonus.c *****/
 void	check_wall_path(t_vault *data);
+void	full_line_hud_hor(mlx_image_t *hud, int screen_y, unsigned int color);
+void	full_line_hud_ver(mlx_image_t *hud, int screen_x, unsigned int color);
 
 /***** extra_textures.c *****/
 void	load_extra_textures(t_vault *data);
@@ -353,7 +353,7 @@ void	reinit_minimap(t_vault *data);
 void	show_minimap(t_vault *data);
 void	load_minimap(t_vault *data);
 void	draw_minimap(t_vault *data);
-void	minimap_background(t_vault *data);
+void	draw_tiles_loop(t_vault *data);
 
 /***** minimap_utils.c *****/
 void	draw_tiles(t_vault *data,

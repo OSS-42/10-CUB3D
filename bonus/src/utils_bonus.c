@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures_utils_bonus.c                             :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:01:38 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/27 14:02:56 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:17:21 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,32 @@ void	check_wall_path(t_vault *data)
 		data->error_code = 14;
 	close (fd);
 	errors(data);
+}
+
+void	full_line_hud_hor(mlx_image_t *hud, int screen_y, unsigned int color)
+{
+	int	start;
+	int	len;
+
+	start = 0;
+	len = 200 - 1;
+	while (start < len)
+	{
+		mlx_put_pixel(hud, start, screen_y, color);
+		start++;
+	}
+}
+
+void	full_line_hud_ver(mlx_image_t *hud, int screen_x, unsigned int color)
+{
+	int	start;
+	int	len;
+
+	start = 0;
+	len = 50 - 1;
+	while (start < len)
+	{
+		mlx_put_pixel(hud, screen_x, start, color);
+		start++;
+	}
 }
