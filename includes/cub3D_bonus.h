@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/26 10:55:44 by maison           ###   ########.fr       */
+/*   Updated: 2023/02/26 18:46:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,34 @@ typedef struct s_minimap
 	double		tile_size;
 }	t_minimap;
 
+#define numSprites 19
+
+typedef struct s_sprites
+{
+	double	sprite_x;
+	double	sprite_y;
+	int		texture;
+}	t_sprites;
+
+typedef struct s_sp_param
+{
+	double 	ZBuffer[WIDTH];
+	int		spriteOrder[numSprites];
+	double 	spriteDistance[numSprites];
+	double 	spriteX;
+	double 	spriteY;
+	double	transformX;
+	double	transformY;
+	int		spriteScreenX;
+	int		spriteHeight;
+	int		drawStartY;
+	int		drawEndY;
+	int		spriteWidth;
+	int		drawStartX;
+	int		drawEndX;
+}	t_sp_param;
+
+
 typedef struct s_game
 {
 	mlx_image_t		*ddd;
@@ -113,7 +141,6 @@ typedef struct s_game
 	char			*wall_e;
 	char			*wall_w;
 	char			*wall_nw;
-	// char			*game_hud;
 	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
 	int				wall_start; // pixel de depart du dessin du mur
 	int				wall_end; // pixel de fin du dessin du mur
@@ -142,6 +169,7 @@ typedef struct s_tex
 	xpm_t	*tex_bocal;
 	xpm_t	*tex_amphi;
 	xpm_t	*tex_secrete;
+	xpm_t	*tex_light;
 	int		**north;
 	int		**south;
 	int		**east;
@@ -161,6 +189,7 @@ typedef struct s_tex
 	int		**bocal;
 	int		**amphi;
 	int		**secrete;
+	int		**light;
 } t_tex;
 
 typedef struct s_hud_col
@@ -264,6 +293,7 @@ typedef struct s_vault
 	t_rays		*raycaster;
 	t_tex		*tex;
 	mlx_image_t	*cursor;
+	t_sp_param	*sp_param;
 }	t_vault;
 
 /***** FONCTIONS *****/
@@ -358,7 +388,7 @@ void	draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff, int pixels
 void	raycaster(t_vault *data);
 void	dist_and_pos(t_vault *data);
 void	dda(t_vault *data);
-void	creating_3d_img(t_vault *data);
+void	creating_3d_img(t_vault *data, int pixels_2d);
 void	draw_tex_wall(t_vault *data, int pixels_2d);
 
 /***** textures.c *****/
@@ -409,5 +439,11 @@ void	play_song(t_vault *data);
 
 /***** keyhandler.c *****/
 void	keyhandler_2(mlx_key_data_t keydata, t_vault *data);
+
+/***** sprites_bonus.c *****/
+void	sprite_casting(t_vault *data, int pixels_2d);
+int 	compareSprites(t_sprites *a, t_sprites *b);
+void 	sortSprites(int* order, double* dist, int amount);
+void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff, t_sprites *sprite, int i);
 
 #endif

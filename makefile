@@ -45,7 +45,6 @@ SRCS =	src/cub3D.c \
 		src/flood_fill.c \
 		src/check_ceiling_rgb.c \
 		src/check_floor_rgb.c \
-		src/init_textures.c \
 		src/init_player.c \
 		src/raycasting.c \
 		src/moves.c \
@@ -132,7 +131,6 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/flood_fill_bonus.c \
 				bonus/src/check_ceiling_rgb_bonus.c \
 				bonus/src/check_floor_rgb_bonus.c \
-				bonus/src/init_textures_bonus.c \
 				bonus/src/init_player_bonus.c \
 				bonus/src/init_hud_bonus.c \
 				bonus/src/raycasting_bonus.c \
@@ -144,7 +142,8 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/init_3d_bonus.c \
 				bonus/src/audio_bonus.c \
 				bonus/src/keyhandler_bonus.c \
-				bonus/src/minimap_utils_bonus.c
+				bonus/src/minimap_utils_bonus.c \
+				bonus/src/sprites_bonus.c
 
 bonus: intro_bonus art_intro $(NAME_BONUS)
 
@@ -153,11 +152,11 @@ intro_bonus:
 
 $(NAME_BONUS):	$(D_OBJ_BONUS) $(LIBFT) $(LIBART) $(MLX42) $(OBJS_BONUS)
 # Ubuntu
-	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
+#	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
 # MacOS 42
 #	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 # Apple M2
-#	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 	@echo "$(LGREEN)Software Compilation completed !$(NC)"
 
 $(D_OBJ_BONUS):

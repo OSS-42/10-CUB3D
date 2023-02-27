@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 21:07:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/26 18:29:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	raycaster(t_vault *data)
 		data->raycaster->screen_2d_x = 2 * pixels_2d / WIDTH - 1; // de -1 a +1
 		dist_and_pos(data);
 		dda(data);
-		creating_3d_img(data);
+		creating_3d_img(data, pixels_2d);
 		draw_tex_wall(data, pixels_2d);
+		sprite_casting(data, pixels_2d);
 		pixels_2d++;
 	}
 }
@@ -117,7 +118,7 @@ void	dda(t_vault *data)
 	}
 }
 
-void	creating_3d_img(t_vault *data)
+void	creating_3d_img(t_vault *data, int pixels_2d)
 {
 	//pour la vue 3D
 	//Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
@@ -131,6 +132,8 @@ void	creating_3d_img(t_vault *data)
 
 	// //Calculate height of line to draw on screen
 	data->game->wall_height = (int)(HEIGHT / data->raycaster->ray_len);
+		//SET THE ZBUFFER FOR THE SPRITE CASTING
+    data->sp_param->ZBuffer[pixels_2d] = data->raycaster->ray_len; //perpendicular distance is used
 
 	//calculate lowest and highest pixel to fill in current stripe
 	data->game->wall_start = -data->game->wall_height / 2 + HEIGHT / 2;
