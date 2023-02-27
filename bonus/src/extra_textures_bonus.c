@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/26 14:20:58 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:10:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	load_extra_textures(t_vault *data)
 	if (!data->tex->tex_secrete)
 		quit_game(data);
 	data->tex->secrete = get_texture(data->tex->tex_secrete);
-		data->tex->tex_light = mlx_load_xpm42("./assets/textures/greenlight.xpm42");
+	data->tex->tex_light = mlx_load_xpm42("./assets/textures/greenlight.xpm42");
 	if (!data->tex->tex_light)
 		quit_game(data);
 	data->tex->light = get_texture(data->tex->tex_light);
@@ -144,9 +144,9 @@ void	player_location(t_vault *data)
 		data->hud_loc->location = 11; // lounge
 		data->hud_loc->p_loc = data->tex->lounge;
 	}
-	// else if (data->player->row >= 0 && data->player->row < 7 && data->player->col >= 7 && data->player->col < 13)
-	// {
-	// 	data->hud_loc->location = 12; // salle secrete
-	// 	data->hud_loc->p_loc = data->tex->secrete;
-	// }
+	else if (data->player->row >= 7 && data->player->row < 10 && data->player->col >= 8 && data->player->col < 14)
+	{
+		data->hud_loc->location = 12; // salle secrete
+		data->hud_loc->p_loc = data->tex->secrete;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/24 15:43:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:11:45 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 		if (tex_pos > texture->texture.height - 1)
 			tex_pos = texture->texture.height - 1;
 		tex_pos = tex_pos + step;
-		mlx_put_pixel(data->game->ddd, pixels_2d, screen_y, tex_buff[tex_y][data->game->tex_x]);
+		mlx_put_pixel(data->game->ddd, -pixels_2d, screen_y, tex_buff[tex_y][data->game->tex_x]);
 		screen_y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/26 18:46:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:39:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_sprites
 {
 	double	sprite_x;
 	double	sprite_y;
-	int		texture;
+	unsigned int		texture;
 }	t_sprites;
 
 typedef struct s_sp_param

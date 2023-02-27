@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flood_fill.c                                       :+:      :+:    :+:   */
+/*   flood_fill_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:43:15 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/22 15:10:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:57:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	flood_fill(t_vault *data, int x, int y, char **temp)
 	if (!temp[x] || !temp[x][y] || ((x - 1 < 0 || y - 1 < 0
 			|| x + 1 >= data->map->lines
 			|| y + 1 >= (int)ft_strlen(temp[x]))
-			&& ft_char_isinset("0 ", temp[x][y] == FALSE)) || temp[x][y] == ' ')
+			&& ft_char_isinset("0 2D", temp[x][y] == FALSE)) || temp[x][y] == ' ')
 	{
 		data->error_code = 4;
 		return ;
