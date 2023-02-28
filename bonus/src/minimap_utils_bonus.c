@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:31:14 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 15:23:17 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	draw_ray_minimap(t_vault *data)
 	int		len;
 
 	len = 0;
-	x = data->player->ppx;
-	y = data->player->ppy;
+	x = data->plr->ppx;
+	y = data->plr->ppy;
 	while (len < fabs(data->raycaster->ray_len) * data->minimap->tile_size)
 	{
 		mlx_put_pixel(data->minimap->minimap, x, y, 0x00FF00FF);

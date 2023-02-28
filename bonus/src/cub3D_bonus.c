@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 16:20:52 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	create_game(t_vault *data)
 void	init_data(t_vault *data, char **argv)
 {
 	data->argv = argv[1];
-	data->player = ft_calloc(1, sizeof(t_player));
+	data->plr = ft_calloc(1, sizeof(t_player));
 	data->minimap = ft_calloc(1, sizeof(t_minimap));
 	data->scene_param = ft_calloc(1, sizeof(t_param));
 	data->map = ft_calloc(1, sizeof(t_map));

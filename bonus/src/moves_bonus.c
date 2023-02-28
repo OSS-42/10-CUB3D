@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 14:19:51 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:27:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,73 +14,106 @@
 
 void	move_forward(t_vault *data, int check_row, int check_col)
 {
-	check_row = (int)(data->player->row + data->player->pdy
+	check_row = (int)(data->plr->row + data->plr->pdy
 			* data->raycaster->mov_speed);
-	check_col = (int)(data->player->col + data->player->pdx
+	check_col = (int)(data->plr->col + data->plr->pdx
 			* data->raycaster->mov_speed);
-	if ((data->map->map[check_row][(int)(data->player->col)] != '1')
-			&& (data->map->map[check_row][(int)(data->player->col)] != '2')
-			&& (data->map->map[check_row][(int)(data->player->col)] != 'D'))
-		data->player->row += data->player->pdy * data->raycaster->mov_speed;
-	if ((data->map->map[(int)(data->player->row)][check_col] != '1')
-			&& (data->map->map[(int)(data->player->row)][check_col] != '2')
-			&& (data->map->map[(int)(data->player->row)][check_col] != 'D'))
-		data->player->col = data->player->col + data->player->pdx
-			* data->raycaster->mov_speed;
+	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'D'))
+	{
+		data->plr->old_row = data->plr->row;
+		data->plr->row += data->plr->pdy * data->raycaster->mov_speed;
+	}
+	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+	{
+		data->plr->old_col = data->plr->col;
+		data->plr->col += data->plr->pdx * data->raycaster->mov_speed;
+	}
+	if (data->map->map[data->plr->old_row][data->plr->old_col] == 'W'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'W')
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
 }
 
 void	move_backward(t_vault *data, int check_row, int check_col)
 {
-	check_row = (int)(data->player->row - data->player->pdy
+	check_row = (int)(data->plr->row - data->plr->pdy
 			* data->raycaster->mov_speed);
-	check_col = (int)(data->player->col - data->player->pdx
+	check_col = (int)(data->plr->col - data->plr->pdx
 			* data->raycaster->mov_speed);
-	if ((data->map->map[check_row][(int)(data->player->col)] != '1')
-			&& (data->map->map[check_row][(int)(data->player->col)] != '2')
-			&& (data->map->map[(int)(data->player->row)][check_col] != 'D'))
-		data->player->row = data->player->row - data->player->pdy
-			* data->raycaster->mov_speed;
-	if ((data->map->map[(int)(data->player->row)][check_col] != '1')
-			&& (data->map->map[(int)(data->player->row)][check_col] != '2')
-			&& (data->map->map[(int)(data->player->row)][check_col] != 'D'))
-		data->player->col = data->player->col - data->player->pdx
-			* data->raycaster->mov_speed;
+	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+	{
+		data->plr->old_row = data->plr->row;
+		data->plr->row -= data->plr->pdy * data->raycaster->mov_speed;
+	}
+	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+	{
+		data->plr->old_col = data->plr->col;
+		data->plr->col -= data->plr->pdx * data->raycaster->mov_speed;
+	}
+	if (data->map->map[data->plr->old_row][data->plr->old_col] == 'W'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'W')
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
 }
 
 void	move_left(t_vault *data, int check_row, int check_col)
 {
-	check_row = (int)(data->player->row - data->raycaster->plane_y
+	check_row = (int)(data->plr->row - data->raycaster->plane_y
 			* data->raycaster->mov_speed);
-	check_col = (int)(data->player->col - data->raycaster->plane_x
+	check_col = (int)(data->plr->col - data->raycaster->plane_x
 			* data->raycaster->mov_speed);
-	if ((data->map->map[check_row][(int)(data->player->col)] != '1')
-			&& (data->map->map[check_row][(int)(data->player->col)] != '2')
-			&& (data->map->map[(int)(data->player->row)][check_col] != 'D'))
-		data->player->row = data->player->row - data->raycaster->plane_y
+	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+	{
+		data->plr->old_row = data->plr->row;
+		data->plr->row -= data->raycaster->plane_y
 			* data->raycaster->mov_speed;
-	if ((data->map->map[(int)(data->player->row)][check_col] != '1')
-			&& (data->map->map[(int)(data->player->row)][check_col] != '2')
-			&& (data->map->map[(int)(data->player->row)][check_col] != 'D'))
-		data->player->col = data->player->col - data->raycaster->plane_x
+	}
+	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+	{
+		data->plr->old_col = data->plr->col;
+		data->plr->col -= data->raycaster->plane_x
 			* data->raycaster->mov_speed;
+	}
+	if (data->map->map[data->plr->old_row][data->plr->old_col] == 'W'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'W')
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
 }
 
 void	move_right(t_vault *data, int check_row, int check_col)
 {
-	check_row = (int)(data->player->row + data->raycaster->plane_y
+	check_row = (int)(data->plr->row + data->raycaster->plane_y
 			* data->raycaster->mov_speed);
-	check_col = (int)(data->player->col + data->raycaster->plane_x
+	check_col = (int)(data->plr->col + data->raycaster->plane_x
 			* data->raycaster->mov_speed);
-	if ((data->map->map[check_row][(int)(data->player->col)] != '1')
-			&& (data->map->map[check_row][(int)(data->player->col)] != '2')
-			&& (data->map->map[(int)(data->player->row)][check_col] != 'D'))
-		data->player->row = data->player->row + data->raycaster->plane_y
+	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+	{
+		data->plr->old_row = data->plr->row;
+		data->plr->row += data->raycaster->plane_y
 			* data->raycaster->mov_speed;
-	if ((data->map->map[(int)(data->player->row)][check_col] != '1')
-			&& (data->map->map[(int)(data->player->row)][check_col] != '2')
-			&& (data->map->map[(int)(data->player->row)][check_col] != 'D'))
-		data->player->col = data->player->col + data->raycaster->plane_x
+	}
+	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+	{
+		data->plr->old_col = data->plr->col;
+		data->plr->col += data->raycaster->plane_x
 			* data->raycaster->mov_speed;
+	}
+	if (data->map->map[data->plr->old_row][data->plr->old_col] == 'W'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'W')
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
 }
 
 void	move_mouse(double xpos, double ypos, void *temp)
@@ -92,13 +125,13 @@ void	move_mouse(double xpos, double ypos, void *temp)
 
 	(void)ypos;
 	data = (t_vault *) temp;
-	old_player_pdx = data->player->pdx;
+	old_player_pdx = data->plr->pdx;
 	delta_x = xpos - data->old_x_cursor;
 	delta_x *= 0.005;
-	data->player->pdx = data->player->pdx * cos(-delta_x)
-		- data->player->pdy * sin(delta_x);
-	data->player->pdy = old_player_pdx * sin(delta_x)
-		+ data->player->pdy * cos(delta_x);
+	data->plr->pdx = data->plr->pdx * cos(-delta_x)
+		- data->plr->pdy * sin(delta_x);
+	data->plr->pdy = old_player_pdx * sin(delta_x)
+		+ data->plr->pdy * cos(delta_x);
 	old_plane_x = data->raycaster->plane_x;
 	data->raycaster->plane_x = data->raycaster->plane_x
 		* cos(delta_x) - data->raycaster->plane_y * sin(delta_x);

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/28 14:37:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	open_door(t_vault *data)
 	int	row;
 	int	col;
 
-	row = data->player->row + data->player->pdy * data->raycaster->mov_speed;
-	col = data->player->col + data->player->pdx * data->raycaster->mov_speed;
+	row = data->plr->row + data->plr->pdy * data->raycaster->mov_speed;
+	col = data->plr->col + data->plr->pdx * data->raycaster->mov_speed;
 	if (data->map->map[row][col] == 'D')
 	{
-		data->map->map[row][col] = '0';
+		data->map->map[row][col] = 'W';
 		reinit_and_draw(data);
 	}
 }

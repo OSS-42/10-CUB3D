@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:24:02 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/27 14:01:48 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	check_map(t_vault *data)
 	check_valid_char(data, 0);
 	find_player_start(data);
 	errors(data);
-	flood_fill(data, data->player->start_x, data->player->start_y,
+	flood_fill(data, data->plr->start_x, data->plr->start_y,
 		data->map->temp_map);
 	ft_dbl_ptr_free((void **)data->map->temp_map);
 	errors(data);
@@ -42,9 +42,9 @@ void	find_player_start(t_vault *data)
 			if (data->map->map[x][y] == 'N' || data->map->map[x][y] == 'S'
 				|| data->map->map[x][y] == 'E' || data->map->map[x][y] == 'W')
 			{
-				data->player->direction = data->map->map[x][y];
-				data->player->start_x = x;
-				data->player->start_y = y;
+				data->plr->direction = data->map->map[x][y];
+				data->plr->start_x = x;
+				data->plr->start_y = y;
 				flag++;
 			}
 			y++;

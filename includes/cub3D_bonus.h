@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 14:03:34 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:23 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_player
 	int		start_y;
 	double	row;
 	double	col;
+	int		old_row;
+	int		old_col;
 	int		ppx;
 	int		ppy;
 	double	pdx;
@@ -251,7 +253,7 @@ typedef struct s_vault
 	int			p_dir;
 	int			audio;
 	int			old_x_cursor;
-	t_player	*player;
+	t_player	*plr;
 	t_param		*scene_param;
 	t_map		*map;
 	t_point		*size;
