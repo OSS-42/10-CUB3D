@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 22:40:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:21:11 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,27 @@ int	**get_texture(xpm_t *tex)
 
 void	find_tex_hit(t_vault *data, xpm_t *texture)
 {
-	double	wall_x; //where exactly the wall was hit
+	double	wall_x;
 
-	if (data->raycaster->side == 0 || data->raycaster->side == 1 || data->raycaster->side == 4 || data->raycaster->side == 5 || data->raycaster->side == 8 || data->raycaster->side == 9) 
-		wall_x = data->player->row + data->raycaster->ray_len * data->raycaster->pdy_ray;
+	if (data->raycaster->side == 0 || data->raycaster->side == 1
+		|| data->raycaster->side == 4 || data->raycaster->side == 5
+		|| data->raycaster->side == 8 || data->raycaster->side == 9)
+		wall_x = data->player->row + data->raycaster->ray_len
+			* data->raycaster->pdy_ray;
 	else
-		wall_x = data->player->col + data->raycaster->ray_len * data->raycaster->pdx_ray;
+		wall_x = data->player->col + data->raycaster->ray_len
+			* data->raycaster->pdx_ray;
 	wall_x = wall_x - (int)(wall_x);
-
-	//x coordinate on the texture
 	data->game->tex_x = (int)(wall_x * (double)(texture->texture.width));
-	if ((data->raycaster->side == 0 || data->raycaster->side == 1 || data->raycaster->side == 4 || data->raycaster->side == 5 || data->raycaster->side == 8 || data->raycaster->side == 9) && data->raycaster->pdx_ray > 0) 
+	if ((data->raycaster->side == 0 || data->raycaster->side == 1
+			|| data->raycaster->side == 4 || data->raycaster->side == 5
+			|| data->raycaster->side == 8 || data->raycaster->side == 9)
+		&& data->raycaster->pdx_ray > 0)
 		data->game->tex_x = texture->texture.width - data->game->tex_x - 1;
-	if ((data->raycaster->side == 2 || data->raycaster->side == 3 || data->raycaster->side == 6 || data->raycaster->side == 7 || data->raycaster->side == 10 || data->raycaster->side == 11) && data->raycaster->pdy_ray < 0)
+	if ((data->raycaster->side == 2 || data->raycaster->side == 3
+			|| data->raycaster->side == 6 || data->raycaster->side == 7
+			|| data->raycaster->side == 10 || data->raycaster->side == 11)
+		&& data->raycaster->pdy_ray < 0)
 		data->game->tex_x = texture->texture.width - data->game->tex_x - 1;
 }
 
@@ -87,22 +95,22 @@ void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 	int				tex_y;
 	double			tex_pos;
 	double			step;
-	int 			screen_y;
+	int				screen_y;
 
 	step = 1.0 * texture->texture.height / data->game->wall_height;
-	// Starting texture coordinate
-	tex_pos = ((double)data->game->wall_start - (double)HEIGHT / 2 + (double)data->game->wall_height / 2) * step;
+	tex_pos = ((double)data->game->wall_start - (double)HEIGHT / 2
+			+ (double)data->game->wall_height / 2) * step;
 	if (tex_pos < 0)
 		tex_pos = 0;
 	screen_y = data->game->wall_start;
 	while (screen_y < data->game->wall_end)
 	{
-		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 		tex_y = (int)tex_pos;
 		if (tex_pos > texture->texture.height - 1)
 			tex_pos = texture->texture.height - 1;
 		tex_pos = tex_pos + step;
-		mlx_put_pixel(data->game->ddd, pixels_2d, screen_y, tex_buff[tex_y][data->game->tex_x]);
+		mlx_put_pixel(data->game->ddd, pixels_2d, screen_y,
+			tex_buff[tex_y][data->game->tex_x]);
 		screen_y++;
 	}
 }

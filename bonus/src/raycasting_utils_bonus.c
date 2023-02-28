@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:21:30 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/27 16:14:04 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 10:15:16 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,38 @@ void	dist_and_pos2(t_vault *data)
 		data->raycaster->ray_len_y = (data->raycaster->row + 1.0
 				- data->player->row) * data->raycaster->delta_dist_y;
 	}
+}
+
+void	check_type_wall(t_vault *data, int *impact)
+{
+	if (data->map->map[data->raycaster->row][data->raycaster->col] == '1')
+		*impact = 1;
+	else if (data->map->map[data->raycaster->row][data->raycaster->col]
+		== '2')
+	{
+		*impact = 1;
+		if (data->raycaster->side == 0)
+			data->raycaster->side = 5;
+		else if (data->raycaster->side == 1)
+			data->raycaster->side = 4;
+		else if (data->raycaster->side == 2)
+			data->raycaster->side = 6;
+		else if (data->raycaster->side == 3)
+			data->raycaster->side = 7;
+	}
+	else if (data->map->map[data->raycaster->row][data->raycaster->col] == 'D')
+		check_type_wall_d(data, impact);
+}
+
+void	check_type_wall_d(t_vault *data, int *impact)
+{
+	*impact = 1;
+	if (data->raycaster->side == 0)
+		data->raycaster->side = 8;
+	else if (data->raycaster->side == 1)
+		data->raycaster->side = 9;
+	else if (data->raycaster->side == 2)
+		data->raycaster->side = 10;
+	else if (data->raycaster->side == 3)
+		data->raycaster->side = 11;
 }

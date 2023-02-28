@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 22:44:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:57:36 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,3 @@ void	move_mouse(double xpos, double ypos, void *temp)
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
 	reinit_and_draw(data);
 }
-
-// void	open_door(t_vault *data, int check_row, int check_col)
-// {
-	
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 22:01:59 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:21:42 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,10 +359,13 @@ void	raycaster(t_vault *data);
 void	dda(t_vault *data);
 void	creating_3d_img(t_vault *data, int pixels_2d);
 void	draw_tex_wall(t_vault *data, int pixels_2d);
+void	draw_tex_wall_2(t_vault *data, int pixels_2d);
 
 /***** raycasting_utils.c *****/
 void	dist_and_pos(t_vault *data);
 void	dist_and_pos2(t_vault *data);
+void	check_type_wall(t_vault *data, int *impact);
+void	check_type_wall_d(t_vault *data, int *impact);
 
 /***** textures.c *****/
 int		rgb_to_hex2(int r, int g, int b, int a);
@@ -380,9 +383,6 @@ void	reinit_and_draw(t_vault *data);
 /***** extra_textures.c *****/
 void	load_extra_textures(t_vault *data);
 void	get_extra_textures(t_vault *data);
-void	player_location(t_vault *data, int col, int row);
-void	player_location_2(t_vault *data, int col, int row);
-void	player_location_3(t_vault *data, int col, int row);
 
 /***** init_minimap.c *****/
 void	reinit_minimap(t_vault *data);
@@ -424,8 +424,15 @@ void	keyhandler_2(mlx_key_data_t keydata, t_vault *data);
 
 /***** sprites_bonus.c *****/
 void	sprite_casting(t_vault *data, int pixels_2d);
-int 	compareSprites(t_sprites *a, t_sprites *b);
-void 	sortSprites(int* order, double* dist, int amount);
-void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff, t_sprites *sprite, int i);
+int		compareSprites(t_sprites *a, t_sprites *b);
+void	sortSprites(int *order, double *dist, int amount);
+void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff,
+			t_sprites *sprite, int i);
+
+/***** player_location_bonus.c *****/
+void	player_location(t_vault *data, int col, int row);
+void	player_location_2(t_vault *data, int col, int row);
+void	player_location_3(t_vault *data, int col, int row);
+void	player_location_4(t_vault *data, int col, int row);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extra_textures_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 22:05:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:00:15 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,22 @@ void	load_extra_textures(t_vault *data)
 	data->tex->tex_jeux = mlx_load_xpm42("./assets/tex/hud_jeux.xpm42");
 	data->tex->tex_reunion = mlx_load_xpm42("./assets/tex/hud_reunion.xpm42");
 	data->tex->tex_secret = mlx_load_xpm42("./assets/tex/hud_secret.xpm42");
+	data->tex->tex_secret = mlx_load_xpm42("./assets/tex/hud_secret.xpm42");
+	data->tex->tex_door = mlx_load_xpm42("./assets/tex/tribute.xpm42");
+	get_extra_textures(data);
+}
+
+void	get_extra_textures(t_vault *data)
+{
 	if (!data->tex->tex_nw || !data->tex->tex_collect || !data->tex->tex_amphi
 		|| !data->tex->tex_bocal || !data->tex->tex_c1 || !data->tex->tex_c2
 		|| !data->tex->tex_c3 || !data->tex->tex_couloir
 		|| !data->tex->tex_cuisine || !data->tex->tex_detente
 		|| !data->tex->tex_lobby || !data->tex->tex_lounge
 		|| !data->tex->tex_jeux || !data->tex->tex_reunion
-		|| !data->tex->tex_secret)
+		|| !data->tex->tex_secret || !data->tex->tex_secret
+		|| !data->tex->tex_door)
 		quit_game(data);
-	get_extra_textures(data);
-}
-
-void	get_extra_textures(t_vault *data)
-{
 	data->tex->neutral_wall = get_texture(data->tex->tex_nw);
 	data->tex->collect = get_texture(data->tex->tex_collect);
 	data->tex->amphi = get_texture(data->tex->tex_amphi);
@@ -56,97 +59,5 @@ void	get_extra_textures(t_vault *data)
 	data->tex->lounge = get_texture(data->tex->tex_lounge);
 	data->tex->jeux = get_texture(data->tex->tex_jeux);
 	data->tex->reunion = get_texture(data->tex->tex_reunion);
-	data->tex->tex_secret = mlx_load_xpm42("./assets/tex/hud_secret.xpm42");
-	if (!data->tex->tex_secret)
-		quit_game(data);
-	data->tex->secret = get_texture(data->tex->tex_secret);
-		data->tex->tex_door = mlx_load_xpm42("./assets/tex/tribute.xpm42");
-	if (!data->tex->tex_door)
-		quit_game(data);
 	data->tex->door = get_texture(data->tex->tex_door);
-}
-
-void	player_location(t_vault *data, int col, int row)
-{
-	data->hud_loc->location = 0;
-	data->hud_loc->p_loc = data->tex->lobby;
-	row = data->player->row;
-	col = data->player->col;
-	if (row >= 27 && row < 31 && col < 13)
-	{
-		data->hud_loc->location = 0;
-		data->hud_loc->p_loc = data->tex->lobby;
-	}
-	else if (row >= 31 && col >= 13)
-	{
-		data->hud_loc->location = 1;
-		data->hud_loc->p_loc = data->tex->reunion;
-	}
-	else if (row >= 23 && row < 31 && col >= 13)
-	{
-		data->hud_loc->location = 2;
-		data->hud_loc->p_loc = data->tex->jeux;
-	}
-	else
-		player_location_3(data, col, row);
-}
-
-void	player_location_2(t_vault *data, int col, int row)
-{
-	if (row >= 22 && row < 27 && col < 8)
-	{
-		data->hud_loc->location = 3;
-		data->hud_loc->p_loc = data->tex->cuisine;
-	}
-	else if (row >= 18 && row < 25 && col < 13 && col >= 7)
-	{
-		data->hud_loc->location = 4;
-		data->hud_loc->p_loc = data->tex->couloir;
-	}
-	else if (row >= 12 && row < 23 && col >= 13)
-	{
-		data->hud_loc->location = 5;
-		data->hud_loc->p_loc = data->tex->c1;
-	}
-	else if (row >= 3 && row < 12 && col >= 13)
-	{
-		data->hud_loc->location = 6;
-		data->hud_loc->p_loc = data->tex->c2;
-	}
-	else
-		player_location_3(data, col, row);
-}
-
-void	player_location_3(t_vault *data, int col, int row)
-{
-	if (row >= 0 && row < 3 && col >= 13)
-	{
-		data->hud_loc->location = 7;
-		data->hud_loc->p_loc = data->tex->detente;
-	}
-	else if (row >= 15 && row < 20 && col < 7)
-	{
-		data->hud_loc->location = 8;
-		data->hud_loc->p_loc = data->tex->amphi;
-	}
-	else if (row >= 0 && row < 15 && col < 7)
-	{
-		data->hud_loc->location = 9;
-		data->hud_loc->p_loc = data->tex->c3;
-	}
-	else if (row >= 10 && row < 14 && col >= 7 && col < 13)
-	{
-		data->hud_loc->location = 10;
-		data->hud_loc->p_loc = data->tex->bocal;
-	}
-	else if (row >= 0 && row < 7 && col >= 7 && col < 13)
-	{
-		data->hud_loc->location = 11;
-		data->hud_loc->p_loc = data->tex->lounge;
-	}
-	else if (data->player->row >= 7 && data->player->row < 10 && data->player->col >= 8 && data->player->col < 14)
-	{
-		data->hud_loc->location = 12;
-		data->hud_loc->p_loc = data->tex->secret;
-	}
 }

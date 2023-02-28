@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 22:23:06 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:20:34 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,61 +54,30 @@ void	dda(t_vault *data)
 			else if (data->raycaster->pdy_ray > 0)
 				data->raycaster->side = 3;
 		}
-		if (data->map->map[data->raycaster->row][data->raycaster->col] == '1')
-			impact = 1;
-		else if (data->map->map[data->raycaster->row][data->raycaster->col]
-			== '2')
-		{
-			impact = 1;
-			if (data->raycaster->side == 0)
-				data->raycaster->side = 5;
-			else if (data->raycaster->side == 1)
-				data->raycaster->side = 4;
-			else if (data->raycaster->side == 2)
-				data->raycaster->side = 6;
-			else if (data->raycaster->side == 3)
-				data->raycaster->side = 7;
-		}
-		else if (data->map->map[data->raycaster->row][data->raycaster->col] == 'D')
-		{
-			impact = 1;
-			if (data->raycaster->side == 0)
-				data->raycaster->side = 8;
-			else if (data->raycaster->side == 1)
-				data->raycaster->side = 9;
-			else if (data->raycaster->side == 2)
-				data->raycaster->side = 10;
-			else if (data->raycaster->side == 3)
-				data->raycaster->side = 11;
-		}
+		check_type_wall(data, &impact);
 	}
 }
 
 void	creating_3d_img(t_vault *data, int pixels_2d)
 {
-	//pour la vue 3D
-	//Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
-	if (data->raycaster->side == 0 || data->raycaster->side == 1 || data->raycaster->side == 4 || data->raycaster->side == 5 || data->raycaster->side == 8 || data->raycaster->side == 9)
-		data->raycaster->ray_len = (data->raycaster->ray_len_x - data->raycaster->delta_dist_x);
+	if (data->raycaster->side == 0 || data->raycaster->side == 1
+		|| data->raycaster->side == 4 || data->raycaster->side == 5
+		|| data->raycaster->side == 8 || data->raycaster->side == 9)
+		data->raycaster->ray_len = (data->raycaster->ray_len_x
+				- data->raycaster->delta_dist_x);
 	else
-		data->raycaster->ray_len = (data->raycaster->ray_len_y - data->raycaster->delta_dist_y);
-
+		data->raycaster->ray_len = (data->raycaster->ray_len_y
+				- data->raycaster->delta_dist_y);
 	if (data->minimap->on_screen == 1)
-		draw_ray_minimap(data); // pour la minimap
-
-	// //Calculate height of line to draw on screen
+		draw_ray_minimap(data);
 	data->game->wall_height = (int)(HEIGHT / data->raycaster->ray_len);
-		//SET THE ZBUFFER FOR THE SPRITE CASTING
-	data->sp_param->ZBuffer[pixels_2d] = data->raycaster->ray_len; //perpendicular distance is used
-
-	//calculate lowest and highest pixel to fill in current stripe
+	data->sp_param->ZBuffer[pixels_2d] = data->raycaster->ray_len;
 	data->game->wall_start = -data->game->wall_height / 2 + HEIGHT / 2;
 	if (data->game->wall_start < 0)
 		data->game->wall_start = 0;
 	data->game->wall_end = data->game->wall_height / 2 + HEIGHT / 2;
 	if (data->game->wall_end >= HEIGHT)
 		data->game->wall_end = HEIGHT - 1;
-	// draw the pixels of the stripe as a vertical line
 }
 
 void	draw_tex_wall(t_vault *data, int pixels_2d)
@@ -133,12 +102,19 @@ void	draw_tex_wall(t_vault *data, int pixels_2d)
 		find_tex_hit(data, data->tex->tex_n);
 		draw_line(data, data->tex->tex_n, data->tex->north, pixels_2d);
 	}
-	if (data->raycaster->side == 4 || data->raycaster->side == 5 || data->raycaster->side == 6 || data->raycaster->side == 7)
+	draw_tex_wall_2(data, pixels_2d);
+}
+
+void	draw_tex_wall_2(t_vault *data, int pixels_2d)
+{
+	if (data->raycaster->side == 4 || data->raycaster->side == 5
+		|| data->raycaster->side == 6 || data->raycaster->side == 7)
 	{
 		find_tex_hit(data, data->tex->tex_nw);
 		draw_line(data, data->tex->tex_nw, data->tex->neutral_wall, pixels_2d);
 	}
-	if (data->raycaster->side == 8 || data->raycaster->side == 9 || data->raycaster->side == 10 || data->raycaster->side == 11)
+	if (data->raycaster->side == 8 || data->raycaster->side == 9
+		|| data->raycaster->side == 10 || data->raycaster->side == 11)
 	{
 		find_tex_hit(data, data->tex->tex_door);
 		draw_line(data, data->tex->tex_door, data->tex->door, pixels_2d);
