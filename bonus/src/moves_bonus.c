@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 13:43:20 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 14:19:51 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	if ((data->map->map[check_row][(int)(data->player->col)] != '1')
 			&& (data->map->map[check_row][(int)(data->player->col)] != '2')
-			&& (data->map->map[(int)(data->player->row)][check_col] != 'D'))
+			&& (data->map->map[check_row][(int)(data->player->col)] != 'D'))
 		data->player->row += data->player->pdy * data->raycaster->mov_speed;
 	if ((data->map->map[(int)(data->player->row)][check_col] != '1')
 			&& (data->map->map[(int)(data->player->row)][check_col] != '2')

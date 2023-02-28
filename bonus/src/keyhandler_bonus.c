@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/28 09:57:05 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 14:37:02 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,21 @@ void	keyhandler_2(mlx_key_data_t keydata, t_vault *data)
 		quit_game(data);
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 		show_minimap(data);
+	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+		open_door(data);
 	reinit_and_draw(data);
+}
+
+void	open_door(t_vault *data)
+{
+	int	row;
+	int	col;
+
+	row = data->player->row + data->player->pdy * data->raycaster->mov_speed;
+	col = data->player->col + data->player->pdx * data->raycaster->mov_speed;
+	if (data->map->map[row][col] == 'D')
+	{
+		data->map->map[row][col] = '0';
+		reinit_and_draw(data);
+	}
 }

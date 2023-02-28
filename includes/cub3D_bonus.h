@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 10:21:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 14:03:34 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,6 @@ typedef struct s_vault
 
 /***** cub3D.c *****/
 int		create_game(t_vault *data);
-void	keyhandler(mlx_key_data_t keydata, void *param);
 void	init_data(t_vault *data, char **argv);
 void	quit_game(t_vault *data);
 
@@ -420,7 +419,9 @@ void	background_3d(t_vault *data);
 void	play_song(t_vault *data);
 
 /***** keyhandler.c *****/
+void	keyhandler(mlx_key_data_t keydata, void *param);
 void	keyhandler_2(mlx_key_data_t keydata, t_vault *data);
+void	open_door(t_vault *data);
 
 /***** sprites_bonus.c *****/
 void	sprite_casting(t_vault *data, int pixels_2d);
