@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 22:04:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	sprite_casting(t_vault *data, int pixels_2d)
 {
 	int	i;
 	t_sprites	sprite[numSprites];
-	
+
 	// sprite[numSprites] = ft_calloc(1, sizeof(t_sprites));
 	sprite[0] = (t_sprites){33.5, 8.5, 10}; //green light in front of playerstart
 	i = 0;
 	while (i < numSprites)
 	{
 		data->sp_param->spriteOrder[i] = i;
-		data->sp_param->spriteDistance[i] = ((data->player->row - sprite[i].sprite_x) * (data->player->row - sprite[i].sprite_x) + (data->player->col - sprite[i].sprite_y) * (data->player->col - sprite[i].sprite_y)); //sqrt not taken, unneeded
+		data->sp_param->spriteDistance[i] = ((data->plr->row - sprite[i].sprite_x) * (data->plr->row - sprite[i].sprite_x) + (data->plr->col - sprite[i].sprite_y) * (data->plr->col - sprite[i].sprite_y)); //sqrt not taken, unneeded
 		i++;
 	}
 	sortSprites(data->sp_param->spriteOrder, data->sp_param->spriteDistance, numSprites);
@@ -35,8 +35,8 @@ void	sprite_casting(t_vault *data, int pixels_2d)
 	while (i < numSprites)
 	{
 		//translate sprite position to relative to camera
-		data->sp_param->spriteX = sprite[data->sp_param->spriteOrder[i]].sprite_x - data->player->row;
-		data->sp_param->spriteY = sprite[data->sp_param->spriteOrder[i]].sprite_y - data->player->col;
+		data->sp_param->spriteX = sprite[data->sp_param->spriteOrder[i]].sprite_x - data->plr->row;
+		data->sp_param->spriteY = sprite[data->sp_param->spriteOrder[i]].sprite_y - data->plr->col;
 		i++;
 	}
 
@@ -46,7 +46,7 @@ void	sprite_casting(t_vault *data, int pixels_2d)
 	// [ planeY   dirY ]                                          [ -planeY  planeX ]
 
 	double invDet;
-	
+
 	invDet = 1.0 / (data->raycaster->plane_x * data->raycaster->pdy_ray - data->raycaster->pdx_ray * data->raycaster->plane_y); //required for correct matrix multiplication
 
 	data->sp_param->transformX = invDet * (data->raycaster->pdy_ray * data->sp_param->spriteX - data->raycaster->pdx_ray * data->sp_param->spriteY);
@@ -55,26 +55,26 @@ void	sprite_casting(t_vault *data, int pixels_2d)
 	data->sp_param->spriteScreenX = (int)((WIDTH / 2) * (1 + data->sp_param->transformX / data->sp_param->transformY));
 
 	//calculate height of the sprite on screen
-	
+
 	data->sp_param->spriteHeight = abs((int)(HEIGHT / (data->sp_param->transformY))); //using 'transformY' instead of the real distance prevents fisheye
 	//calculate lowest and highest pixel to fill in current stripe
-	
+
 	data->sp_param->drawStartY = -data->sp_param->spriteHeight / 2 + WIDTH / 2;
 	if (data->sp_param->drawStartY < 0)
 		data->sp_param->drawStartY = 0;
-	
+
 	data->sp_param->drawEndY = data->sp_param->spriteHeight / 2 + HEIGHT / 2;
 	if (data->sp_param->drawEndY >= HEIGHT)
 		data->sp_param->drawEndY = HEIGHT - 1;
 
 	//calculate width of the sprite
-	
+
 	data->sp_param->spriteWidth = fabs((int)HEIGHT / (data->sp_param->transformY));
-	
+
 	data->sp_param->drawStartX = -data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX;
 	if(data->sp_param->drawStartX < 0)
 		data->sp_param->drawStartX = 0;
-	
+
 	data->sp_param->drawEndX = data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX;
 	if(data->sp_param->drawEndX >= WIDTH)
 		data->sp_param->drawEndX = WIDTH - 1;
@@ -89,7 +89,7 @@ void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff, t_sprites *sprit
 	(void) texture;
 	(void) sprite;
 	(void) i;
-	
+
 	stripe = data->sp_param->drawStartX;
 	while (stripe < data->sp_param->drawEndX)
 	{
@@ -115,7 +115,7 @@ void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff, t_sprites *sprit
 			}
 		}
 		stripe++;
-	} 
+	}
 }
 
 void sortSprites(int* order, double* dist, int amount)

@@ -6,7 +6,11 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
+=======
 /*   Updated: 2023/02/28 15:01:04 by ewurstei         ###   ########.fr       */
+>>>>>>> 8aebe850607ee975adfeca1c9c39738904639a44
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +63,7 @@ void	open_door(t_vault *data)
 	col = data->player->col + data->player->pdx * 0.5;
 	if (data->map->map[row][col] == 'D')
 	{
-		data->map->map[row][col] = '0';
+		data->map->map[row][col] = 'W';
 		reinit_and_draw(data);
 	}
 }

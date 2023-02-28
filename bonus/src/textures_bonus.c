@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 10:21:11 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	find_tex_hit(t_vault *data, xpm_t *texture)
 	if (data->raycaster->side == 0 || data->raycaster->side == 1
 		|| data->raycaster->side == 4 || data->raycaster->side == 5
 		|| data->raycaster->side == 8 || data->raycaster->side == 9)
-		wall_x = data->player->row + data->raycaster->ray_len
+		wall_x = data->plr->row + data->raycaster->ray_len
 			* data->raycaster->pdy_ray;
 	else
-		wall_x = data->player->col + data->raycaster->ray_len
+		wall_x = data->plr->col + data->raycaster->ray_len
 			* data->raycaster->pdx_ray;
 	wall_x = wall_x - (int)(wall_x);
 	data->game->tex_x = (int)(wall_x * (double)(texture->texture.width));

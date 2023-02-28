@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:00:16 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/28 09:58:00 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	player_location(t_vault *data, int col, int row)
 {
 	data->hud_loc->location = 0;
 	data->hud_loc->p_loc = data->tex->lobby;
-	row = data->player->row;
-	col = data->player->col;
+	row = data->plr->row;
+	col = data->plr->col;
 	if (row >= 27 && row < 31 && col < 13)
 	{
 		data->hud_loc->location = 0;
