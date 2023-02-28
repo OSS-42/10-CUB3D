@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 09:55:47 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 13:32:22 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ void	draw_tiles_loop(t_vault *data)
 	int	screen_x;
 	int	screen_y;
 
-	screen_x = data->minimap->x * data->minimap->tile_size;
-	screen_y = data->minimap->y * data->minimap->tile_size;
 	while (data->minimap->y < data->map->max_lenght)
 	{
+		screen_x = data->minimap->x * data->minimap->tile_size;
+		screen_y = data->minimap->y * data->minimap->tile_size;
 		if (data->map->map[data->minimap->x][data->minimap->y] == '0')
 			draw_tiles(data, screen_x, screen_y, 0x6E99FFFF);
 		else if (data->map->map[data->minimap->x][data->minimap->y] == '1'
