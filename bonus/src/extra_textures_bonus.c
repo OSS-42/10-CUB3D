@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extra_textures_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 09:00:15 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 11:36:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void	load_extra_textures(t_vault *data)
 	data->tex->tex_jeux = mlx_load_xpm42("./assets/tex/hud_jeux.xpm42");
 	data->tex->tex_reunion = mlx_load_xpm42("./assets/tex/hud_reunion.xpm42");
 	data->tex->tex_secret = mlx_load_xpm42("./assets/tex/hud_secret.xpm42");
-	data->tex->tex_secret = mlx_load_xpm42("./assets/tex/hud_secret.xpm42");
-	data->tex->tex_door = mlx_load_xpm42("./assets/tex/tribute.xpm42");
+	data->tex->tex_door = mlx_load_xpm42("./assets/tex/tribute2.xpm42");
 	get_extra_textures(data);
 }
 
@@ -59,5 +58,6 @@ void	get_extra_textures(t_vault *data)
 	data->tex->lounge = get_texture(data->tex->tex_lounge);
 	data->tex->jeux = get_texture(data->tex->tex_jeux);
 	data->tex->reunion = get_texture(data->tex->tex_reunion);
+	data->tex->secret = get_texture(data->tex->tex_secret);
 	data->tex->door = get_texture(data->tex->tex_door);
 }
