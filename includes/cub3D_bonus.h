@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 16:34:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:01:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,8 @@ typedef struct s_tex
 	xpm_t	*tex_lounge;
 	xpm_t	*tex_bocal;
 	xpm_t	*tex_amphi;
-	xpm_t	*tex_secrete;
-	xpm_t	*tex_light;
+	xpm_t	*tex_secret;
+	xpm_t	*tex_door;
 	int		**north;
 	int		**south;
 	int		**east;
@@ -184,8 +184,8 @@ typedef struct s_tex
 	int		**c3;
 	int		**bocal;
 	int		**amphi;
-	int		**secrete;
-	int		**light; // a transformer en porte
+	int		**secret;
+	int		**door;
 }	t_tex;
 
 typedef struct s_hud_col
@@ -423,9 +423,9 @@ void	play_song(t_vault *data);
 void	keyhandler_2(mlx_key_data_t keydata, t_vault *data);
 
 /***** sprites_bonus.c *****/
-// void	sprite_casting(t_vault *data, int pixels_2d);
-// int 	compareSprites(t_sprites *a, t_sprites *b);
-// void 	sortSprites(int* order, double* dist, int amount);
-// void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff, t_sprites *sprite, int i);
+void	sprite_casting(t_vault *data, int pixels_2d);
+int 	compareSprites(t_sprites *a, t_sprites *b);
+void 	sortSprites(int* order, double* dist, int amount);
+void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff, t_sprites *sprite, int i);
 
 #endif

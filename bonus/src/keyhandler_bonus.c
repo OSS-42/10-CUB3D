@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/27 16:31:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:44:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ void	keyhandler_2(mlx_key_data_t keydata, t_vault *data)
 		quit_game(data);
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 		show_minimap(data);
+	// if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+	// 	open_door(data, 0, 0);
 	reinit_and_draw(data);
 }

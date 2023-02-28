@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 16:33:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:48:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	show_minimap(t_vault *data)
 void	load_minimap(t_vault *data)
 {
 	if (data->map->max_lenght < data->map->lines)
-		data->minimap->tile_size = HEIGHT / 32;
+		data->minimap->tile_size = HEIGHT / 48;
 	else
-		data->minimap->tile_size = WIDTH / 32;
+		data->minimap->tile_size = WIDTH / 48;
 	data->minimap->minimap = mlx_new_image(data->mlx,
 			data->map->max_lenght * data->minimap->tile_size,
 			data->map->lines * data->minimap->tile_size);

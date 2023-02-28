@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 15:31:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:04:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	sprite_casting(t_vault *data, int pixels_2d)
 	if(data->sp_param->drawEndX >= WIDTH)
 		data->sp_param->drawEndX = WIDTH - 1;
 
-	draw_sprite(data, data->tex->tex_light, data->tex->light, sprite, pixels_2d);
+	draw_sprite(data, data->tex->tex_door, data->tex->door, sprite, pixels_2d);
 }
 
 void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff, t_sprites *sprite, int i)

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 16:33:59 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:05:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	load_extra_textures(t_vault *data)
 	data->tex->tex_lounge = mlx_load_xpm42("./assets/tex/hud_lounge.xpm42");
 	data->tex->tex_jeux = mlx_load_xpm42("./assets/tex/hud_jeux.xpm42");
 	data->tex->tex_reunion = mlx_load_xpm42("./assets/tex/hud_reunion.xpm42");
-	data->tex->tex_secrete = mlx_load_xpm42("./assets/tex/hud_reunion.xpm42");
+	data->tex->tex_secret = mlx_load_xpm42("./assets/tex/hud_secret.xpm42");
 	if (!data->tex->tex_nw || !data->tex->tex_collect || !data->tex->tex_amphi
 		|| !data->tex->tex_bocal || !data->tex->tex_c1 || !data->tex->tex_c2
 		|| !data->tex->tex_c3 || !data->tex->tex_couloir
 		|| !data->tex->tex_cuisine || !data->tex->tex_detente
 		|| !data->tex->tex_lobby || !data->tex->tex_lounge
 		|| !data->tex->tex_jeux || !data->tex->tex_reunion
-		|| !data->tex->tex_secrete)
+		|| !data->tex->tex_secret)
 		quit_game(data);
 	get_extra_textures(data);
 }
@@ -56,14 +56,14 @@ void	get_extra_textures(t_vault *data)
 	data->tex->lounge = get_texture(data->tex->tex_lounge);
 	data->tex->jeux = get_texture(data->tex->tex_jeux);
 	data->tex->reunion = get_texture(data->tex->tex_reunion);
-	data->tex->tex_secrete = mlx_load_xpm42("./assets/tex/hud_reunion.xpm42");
-	if (!data->tex->tex_secrete)
+	data->tex->tex_secret = mlx_load_xpm42("./assets/tex/hud_secret.xpm42");
+	if (!data->tex->tex_secret)
 		quit_game(data);
-	data->tex->secrete = get_texture(data->tex->tex_secrete);
-		data->tex->tex_light = mlx_load_xpm42("./assets/tex/greenlight.xpm42");
-	if (!data->tex->tex_light)
+	data->tex->secret = get_texture(data->tex->tex_secret);
+		data->tex->tex_door = mlx_load_xpm42("./assets/tex/tribute.xpm42");
+	if (!data->tex->tex_door)
 		quit_game(data);
-	data->tex->light = get_texture(data->tex->tex_light);
+	data->tex->door = get_texture(data->tex->tex_door);
 }
 
 void	player_location(t_vault *data, int col, int row)
@@ -146,7 +146,7 @@ void	player_location_3(t_vault *data, int col, int row)
 	}
 	else if (data->player->row >= 7 && data->player->row < 10 && data->player->col >= 8 && data->player->col < 14)
 	{
-		data->hud_loc->location = 12; // salle secrete
-		data->hud_loc->p_loc = data->tex->secrete;
+		data->hud_loc->location = 12;
+		data->hud_loc->p_loc = data->tex->secret;
 	}
 }

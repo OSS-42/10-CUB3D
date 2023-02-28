@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 16:31:40 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:23:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	creating_3d_img(t_vault *data, int pixels_2d)
 	// //Calculate height of line to draw on screen
 	data->game->wall_height = (int)(HEIGHT / data->raycaster->ray_len);
 		//SET THE ZBUFFER FOR THE SPRITE CASTING
-    data->sp_param->ZBuffer[pixels_2d] = data->raycaster->ray_len; //perpendicular distance is used
+	data->sp_param->ZBuffer[pixels_2d] = data->raycaster->ray_len; //perpendicular distance is used
 
 	//calculate lowest and highest pixel to fill in current stripe
 	data->game->wall_start = -data->game->wall_height / 2 + HEIGHT / 2;
@@ -140,7 +140,7 @@ void	draw_tex_wall(t_vault *data, int pixels_2d)
 	}
 	if (data->raycaster->side == 8 || data->raycaster->side == 9 || data->raycaster->side == 10 || data->raycaster->side == 11)
 	{
-		find_tex_hit(data, data->tex->tex_nw);
-		draw_line(data, data->tex->tex_light, data->tex->light, pixels_2d);
+		find_tex_hit(data, data->tex->tex_door);
+		draw_line(data, data->tex->tex_door, data->tex->door, pixels_2d);
 	}
 }
