@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 13:43:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:39:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	load_extra_textures(t_vault *data)
 	data->tex->tex_jeux = mlx_load_xpm42("./assets/tex/hud_jeux.xpm42");
 	data->tex->tex_reunion = mlx_load_xpm42("./assets/tex/hud_reunion.xpm42");
 	data->tex->tex_secret = mlx_load_xpm42("./assets/tex/hud_secret.xpm42");
-	data->tex->tex_door = mlx_load_xpm42("./assets/tex/tribute.xpm42");
+	data->tex->tex_door = mlx_load_xpm42("./assets/tex/door.xpm42");
 	get_extra_textures(data);
 }
 
