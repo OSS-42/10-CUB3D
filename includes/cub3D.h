@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 13:36:00 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 16:02:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ typedef struct s_vault
 	int			map_start;
 	int			error_code;
 	int			lines;
-	t_player	*player;
+	t_player	*plr;
 	t_param		*scene_param;
 	t_map		*map;
 	t_point		*size;
