@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 15:30:05 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 22:48:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	show_minimap(t_vault *data)
 void	load_minimap(t_vault *data)
 {
 	if (data->map->max_lenght < data->map->lines)
-		data->minimap->tile_size = HEIGHT / 32;
+		data->minimap->tile_size = HEIGHT / 48;
 	else
-		data->minimap->tile_size = WIDTH / 32;
+		data->minimap->tile_size = WIDTH / 48;
 	data->minimap->minimap = mlx_new_image(data->mlx,
 			data->map->max_lenght * data->minimap->tile_size,
 			data->map->lines * data->minimap->tile_size);
@@ -96,6 +96,10 @@ void	draw_tiles_loop(t_vault *data)
 			draw_tiles(data, data->minimap->x * data->minimap->tile_size,
 				data->minimap->y * data->minimap->tile_size,
 				0x000000FF);
+		else if (data->map->map[data->minimap->x][data->minimap->y] == 'D')
+			draw_tiles(data, data->minimap->x * data->minimap->tile_size,
+				data->minimap->y * data->minimap->tile_size,
+				0xFF00FFFF);
 		else if (ft_char_isinset("NSEW", data->map->map[data->minimap->x]
 				[data->minimap->y]) == TRUE)
 			draw_tiles(data, data->minimap->x * data->minimap->tile_size,

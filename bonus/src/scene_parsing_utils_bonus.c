@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:15:48 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/24 15:54:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:53:13 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	check_param_existence(t_vault *data)
 {
 	if (data->scene_param->c_exist == 0 || data->scene_param->f_exist == 0
 		|| data->scene_param->no_exist == 0 || data->scene_param->so_exist == 0
-		|| data->scene_param->we_exist == 0 || data->scene_param->ea_exist == 0)
+		|| data->scene_param->we_exist == 0 || data->scene_param->ea_exist == 0
+		|| data->scene_param->nw_exist == 0)
 		return (0);
 	return (1);
 }
@@ -82,7 +83,7 @@ void	check_valid_char(t_vault *data, int i)
 {
 	while (data->map->map[i])
 	{
-		if (isinset(data->map->map[i], " 012NSEW") == FALSE)
+		if (isinset(data->map->map[i], " 012NSEWD") == FALSE)
 		{
 			data->error_code = 3;
 			errors(data);

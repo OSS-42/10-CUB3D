@@ -6,21 +6,21 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/26 19:01:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:04:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
 
 //SPRITE CASTING
-    //sort sprites from far to close
+	//sort sprites from far to close
 void	sprite_casting(t_vault *data, int pixels_2d)
 {
-	int	i;	
+	int	i;
 	t_sprites	sprite[numSprites];
 	
 	// sprite[numSprites] = ft_calloc(1, sizeof(t_sprites));
-	sprite[numSprites] = {{33.5, 8.5, 10}}; //green light in front of playerstart
+	sprite[0] = (t_sprites){33.5, 8.5, 10}; //green light in front of playerstart
 	i = 0;
 	while (i < numSprites)
 	{
@@ -79,14 +79,17 @@ void	sprite_casting(t_vault *data, int pixels_2d)
 	if(data->sp_param->drawEndX >= WIDTH)
 		data->sp_param->drawEndX = WIDTH - 1;
 
-	draw_sprite(data, data->tex->tex_light, data->tex->light, sprite, i);
+	draw_sprite(data, data->tex->tex_door, data->tex->door, sprite, pixels_2d);
 }
 
 void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff, t_sprites *sprite, int i)
 {
 	//loop through every vertical stripe of the sprite on screen
 	int	stripe;
-
+	(void) texture;
+	(void) sprite;
+	(void) i;
+	
 	stripe = data->sp_param->drawStartX;
 	while (stripe < data->sp_param->drawEndX)
 	{
@@ -107,10 +110,7 @@ void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff, t_sprites *sprit
 				d = (y) * 256 - HEIGHT * 128 + data->sp_param->spriteHeight * 128; //256 and 128 factors to avoid floats
 				int tex_y;
 				tex_y = ((d * TEXHEIGHT) / data->sp_param->spriteHeight) / 256;
-				unsigned int color;
-				color = texture[sprite[data->sp_param->spriteOrder[i]].texture][TEXWIDTH * tex_y + tex_x]; //get current color from the texture
-				if ((color & 0x00FFFFFF) != 0)
-					tex_buff[y][stripe] = color; //paint pixel if it isn't black, black is the invisible color
+				mlx_put_pixel(data->game->ddd, stripe, tex_y, tex_buff[tex_y][tex_x]);
 				y++; //for every pixel of the current stripe
 			}
 		}
@@ -118,43 +118,35 @@ void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff, t_sprites *sprit
 	} 
 }
 
-//sort algorithm
-//sort the sprites based on distance
-
-int compareSprites(t_sprites *a, t_sprites *b)
-{
-	t_sprites *spriteA;
-		spriteA = a;
-	t_sprites *spriteB;
-		spriteB = b;
-	double diff;
-	diff = spriteB.first - spriteA.first;
-	if (diff > 0) {
-		return 1;
-	}
-	if (diff < 0) {
-		return -1;
-	}
-	return 0;
-}
-
-//function used to sort the sprites
 void sortSprites(int* order, double* dist, int amount)
 {
-	t_sprites	sprites[amount];
-	int i = 0;
-	while (i < amount)
-	{
-		sprites[i].first = dist[i];
-		sprites[i].second = order[i];
-		i++;
+	// Create temporary arrays to store the distance and order values
+	double tempDist[amount];
+	int tempOrder[amount];
+	for (int i = 0; i < amount; i++) {
+		tempDist[i] = dist[i];
+		tempOrder[i] = order[i];
 	}
-	qsort(sprites, amount, sizeof(t_sprites), compareSprites);
-	i = 0;
-	while (i < amount)
-	{
-		dist[i] = sprites[amount - i - 1].first;
-		order[i] = sprites[amount - i - 1].second;
-		i++;
+
+	// Sort the arrays using a simple bubble sort algorithm
+	for (int i = 0; i < amount - 1; i++) {
+		for (int j = 0; j < amount - i - 1; j++) {
+			if (tempDist[j] < tempDist[j + 1]) {
+				// Swap the j-th and (j+1)-th elements of the arrays
+				double tempDistVal = tempDist[j];
+				tempDist[j] = tempDist[j + 1];
+				tempDist[j + 1] = tempDistVal;
+
+				int tempOrderVal = tempOrder[j];
+				tempOrder[j] = tempOrder[j + 1];
+				tempOrder[j + 1] = tempOrderVal;
+			}
+		}
+	}
+
+	// Copy the sorted values back to the original arrays
+	for (int i = 0; i < amount; i++) {
+		dist[i] = tempDist[i];
+		order[i] = tempOrder[i];
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/27 16:23:27 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/27 22:01:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct s_sprites
 {
 	double	sprite_x;
 	double	sprite_y;
-	int		texture;
+	unsigned int		texture;
 }	t_sprites;
 
 typedef struct s_sp_param
@@ -164,8 +164,8 @@ typedef struct s_tex
 	xpm_t	*tex_lounge;
 	xpm_t	*tex_bocal;
 	xpm_t	*tex_amphi;
-	xpm_t	*tex_secrete;
-	xpm_t	*tex_light;
+	xpm_t	*tex_secret;
+	xpm_t	*tex_door;
 	int		**north;
 	int		**south;
 	int		**east;
@@ -184,7 +184,8 @@ typedef struct s_tex
 	int		**c3;
 	int		**bocal;
 	int		**amphi;
-	int		**secrete;
+	int		**secret;
+	int		**door;
 }	t_tex;
 
 typedef struct s_hud_col
