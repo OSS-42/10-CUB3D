@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhandler_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/28 15:44:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/01 00:26:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	open_door(t_vault *data)
 
 	row = data->plr->row + data->plr->pdy * 0.5;
 	col = data->plr->col + data->plr->pdx * 0.5;
+	system("afplay ./assets/audio/H2G2-door_open.mp3&");
 	if (data->map->map[row][col] == 'D')
 	{
 		data->map->map[row][col] = 'W';

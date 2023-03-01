@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 15:27:56 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/01 00:27:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,11 @@ void	move_right(t_vault *data, int check_row, int check_col)
 	}
 	if (data->map->map[data->plr->old_row][data->plr->old_col] == 'W'
 		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'W')
+	{
+		sleep(2);
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
 		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
+	}
 }
 
 void	move_mouse(double xpos, double ypos, void *temp)
