@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:00:16 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/28 23:40:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:46:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	player_location(t_vault *data, int col, int row)
 {
 	row = data->plr->row;
 	col = data->plr->col;
-	printf("row : %d, col : %d\n", row, col);
 	if (row >= 27 && row < 35 && col < 13)
 	{
 		data->hud_loc->location = 0;
