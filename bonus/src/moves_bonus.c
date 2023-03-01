@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/01 00:27:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/01 08:38:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 	}
 	if (data->map->map[data->plr->old_row][data->plr->old_col] == 'W'
 		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'W')
+	{
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
 		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
+	}
 }
 
 void	move_backward(t_vault *data, int check_row, int check_col)
@@ -59,7 +62,10 @@ void	move_backward(t_vault *data, int check_row, int check_col)
 	}
 	if (data->map->map[data->plr->old_row][data->plr->old_col] == 'W'
 		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'W')
+	{
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
 		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
+	}
 }
 
 void	move_left(t_vault *data, int check_row, int check_col)
@@ -86,7 +92,10 @@ void	move_left(t_vault *data, int check_row, int check_col)
 	}
 	if (data->map->map[data->plr->old_row][data->plr->old_col] == 'W'
 		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'W')
+	{
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
 		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
+	}
 }
 
 void	move_right(t_vault *data, int check_row, int check_col)
@@ -114,7 +123,6 @@ void	move_right(t_vault *data, int check_row, int check_col)
 	if (data->map->map[data->plr->old_row][data->plr->old_col] == 'W'
 		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'W')
 	{
-		sleep(2);
 		system("afplay ./assets/audio/H2G2-door_close.mp3&");
 		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
 	}
