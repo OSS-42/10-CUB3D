@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 10:20:34 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/01 16:27:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	raycaster(t_vault *data)
 		dda(data);
 		creating_3d_img(data, pixels_2d);
 		draw_tex_wall(data, pixels_2d);
-		// sprite_casting(data, pixels_2d);
+		// sprite_casting(data);
 		pixels_2d++;
 	}
 }

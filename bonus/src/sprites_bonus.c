@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/01 15:11:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 //SPRITE CASTING
 	//sort sprites from far to close
-void	sprite_casting(t_vault *data, int pixels_2d)
+void	sprite_casting(t_vault *data)
 {
 	int	i;
 	t_sprites	sprite[numSprites];
 
 	// sprite[numSprites] = ft_calloc(1, sizeof(t_sprites));
-	sprite[0] = (t_sprites){33.5, 8.5, 10}; //green light in front of playerstart
+	sprite[0] = (t_sprites){33.5, 8.5, 10}; //door in front of playerstart
 	i = 0;
 	while (i < numSprites)
 	{
@@ -54,12 +54,12 @@ void	sprite_casting(t_vault *data, int pixels_2d)
 
 	data->sp_param->spriteScreenX = (int)((WIDTH / 2) * (1 + data->sp_param->transformX / data->sp_param->transformY));
 
+
 	//calculate height of the sprite on screen
-
-	data->sp_param->spriteHeight = abs((int)(HEIGHT / (data->sp_param->transformY))); //using 'transformY' instead of the real distance prevents fisheye
+	data->sp_param->spriteHeight = abs((int)(HEIGHT / data->sp_param->transformY)); //using 'transformY' instead of the real distance prevents fisheye
+	
 	//calculate lowest and highest pixel to fill in current stripe
-
-	data->sp_param->drawStartY = -data->sp_param->spriteHeight / 2 + WIDTH / 2;
+	data->sp_param->drawStartY = -data->sp_param->spriteHeight / 2 + HEIGHT / 2;
 	if (data->sp_param->drawStartY < 0)
 		data->sp_param->drawStartY = 0;
 
@@ -67,8 +67,8 @@ void	sprite_casting(t_vault *data, int pixels_2d)
 	if (data->sp_param->drawEndY >= HEIGHT)
 		data->sp_param->drawEndY = HEIGHT - 1;
 
-	//calculate width of the sprite
 
+	//calculate width of the sprite
 	data->sp_param->spriteWidth = fabs((int)HEIGHT / (data->sp_param->transformY));
 
 	data->sp_param->drawStartX = -data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX;
@@ -79,44 +79,45 @@ void	sprite_casting(t_vault *data, int pixels_2d)
 	if(data->sp_param->drawEndX >= WIDTH)
 		data->sp_param->drawEndX = WIDTH - 1;
 
-	draw_sprite(data, data->tex->tex_door, data->tex->door, sprite, pixels_2d);
+	draw_sprite(data, data->tex->tex_door, data->tex->door);
 }
 
-void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff, t_sprites *sprite, int i)
+void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff)
 {
 	//loop through every vertical stripe of the sprite on screen
-	int	stripe;
+	int	screen_x;
 	(void) texture;
-	(void) sprite;
-	(void) i;
 
-	stripe = data->sp_param->drawStartX;
-	while (stripe < data->sp_param->drawEndX)
+	screen_x = data->sp_param->drawStartX;
+	while (screen_x < data->sp_param->drawEndX)
 	{
 		int tex_x;
-		tex_x = (int)(256 * (stripe - (-data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX)) * TEXWIDTH / data->sp_param->spriteWidth) / 256;
+		tex_x = (int)(256 * (screen_x - (-data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX)) * TEXWIDTH / data->sp_param->spriteWidth) / 256;
 		//the conditions in the if are:
 		//1) it's in front of camera plane so you don't see things behind you
 		//2) it's on the screen (left)
 		//3) it's on the screen (right)
 		//4) ZBuffer, with perpendicular distance
-		if (data->sp_param->transformY > 0 && stripe > 0 && stripe < WIDTH && data->sp_param->transformY < data->sp_param->ZBuffer[stripe])
+		if (data->sp_param->transformY > 0 && screen_x > 0 && screen_x < WIDTH && data->sp_param->transformY < data->sp_param->ZBuffer[screen_x])
 		{
-			int	y;
-			y = data->sp_param->drawStartY;
-			while (y < data->sp_param->drawEndY)
+			int	screen_y;
+			screen_y = data->sp_param->drawStartY;
+			while (screen_y < data->sp_param->drawEndY)
 			{
 				int d;
-				d = (y) * 256 - HEIGHT * 128 + data->sp_param->spriteHeight * 128; //256 and 128 factors to avoid floats
+				d = (screen_y) * 256 - HEIGHT * 128 + data->sp_param->spriteHeight * 128; //256 and 128 factors to avoid floats
 				int tex_y;
 				tex_y = ((d * TEXHEIGHT) / data->sp_param->spriteHeight) / 256;
-				mlx_put_pixel(data->game->ddd, stripe, tex_y, tex_buff[tex_y][tex_x]);
-				y++; //for every pixel of the current stripe
+				mlx_put_pixel(data->game->ddd, screen_x, screen_y, tex_buff[tex_y][tex_x]);
+				screen_y++; //for every pixel of the current stripe
 			}
 		}
-		stripe++;
+		screen_x++;
 	}
 }
+
+// step = 1.0 * texture->texture.height / data->game->wall_height;
+// 	tex_pos = ((double)data->game->wall_start - (double)HEIGHT / 2 + (double)data->game->wall_height / 2) * step;
 
 void sortSprites(int* order, double* dist, int amount)
 {

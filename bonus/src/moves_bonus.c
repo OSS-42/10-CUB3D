@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/01 08:38:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:31:20 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
 			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
-			&& (data->map->map[check_row][(int)(data->plr->col)] != 'D'))
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'D')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row += data->plr->pdy * data->raycaster->mov_speed;
 	}
 	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
-			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col += data->plr->pdx * data->raycaster->mov_speed;
@@ -37,6 +39,12 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 	{
 		system("afplay ./assets/audio/H2G2-door_close.mp3&");
 		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
+	}
+	else if (data->map->map[data->plr->old_row][data->plr->old_col] == 'X'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'X')
+	{
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'Z';
 	}
 }
 
@@ -48,14 +56,16 @@ void	move_backward(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
 			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
-			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row -= data->plr->pdy * data->raycaster->mov_speed;
 	}
 	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
-			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col -= data->plr->pdx * data->raycaster->mov_speed;
@@ -65,6 +75,12 @@ void	move_backward(t_vault *data, int check_row, int check_col)
 	{
 		system("afplay ./assets/audio/H2G2-door_close.mp3&");
 		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
+	}
+	else if (data->map->map[data->plr->old_row][data->plr->old_col] == 'X'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'X')
+	{
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'Z';
 	}
 }
 
@@ -76,7 +92,8 @@ void	move_left(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
 			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
-			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row -= data->raycaster->plane_y
@@ -84,7 +101,8 @@ void	move_left(t_vault *data, int check_row, int check_col)
 	}
 	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
-			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col -= data->raycaster->plane_x
@@ -96,6 +114,12 @@ void	move_left(t_vault *data, int check_row, int check_col)
 		system("afplay ./assets/audio/H2G2-door_close.mp3&");
 		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
 	}
+	else if (data->map->map[data->plr->old_row][data->plr->old_col] == 'X'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'X')
+	{
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'Z';
+	}
 }
 
 void	move_right(t_vault *data, int check_row, int check_col)
@@ -106,7 +130,8 @@ void	move_right(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
 			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
-			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row += data->raycaster->plane_y
@@ -114,7 +139,8 @@ void	move_right(t_vault *data, int check_row, int check_col)
 	}
 	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
-			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D'))
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col += data->raycaster->plane_x
@@ -125,6 +151,12 @@ void	move_right(t_vault *data, int check_row, int check_col)
 	{
 		system("afplay ./assets/audio/H2G2-door_close.mp3&");
 		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
+	}
+	else if (data->map->map[data->plr->old_row][data->plr->old_col] == 'X'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'X')
+	{
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'Z';
 	}
 }
 

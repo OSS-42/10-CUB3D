@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 13:32:22 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/01 16:32:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,12 @@ void	draw_tiles_loop(t_vault *data)
 	{
 		screen_x = data->minimap->x * data->minimap->tile_size;
 		screen_y = data->minimap->y * data->minimap->tile_size;
-		if (data->map->map[data->minimap->x][data->minimap->y] == '0')
+		if (data->map->map[data->minimap->x][data->minimap->y] == '0'
+			|| data->map->map[data->minimap->x][data->minimap->y] == 'W')
 			draw_tiles(data, screen_x, screen_y, 0x6E99FFFF);
 		else if (data->map->map[data->minimap->x][data->minimap->y] == '1'
-			|| data->map->map[data->minimap->x][data->minimap->y] == '2')
+			|| data->map->map[data->minimap->x][data->minimap->y] == '2'
+			|| data->map->map[data->minimap->x][data->minimap->y] == 'Z')
 			draw_tiles(data, screen_x, screen_y, 0xFFFFFFFF);
 		else if (data->map->map[data->minimap->x][data->minimap->y] == '.')
 			draw_tiles(data, screen_x, screen_y, 0x000000FF);

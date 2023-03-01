@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:15:48 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/27 15:53:13 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:26:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	check_valid_char(t_vault *data, int i)
 {
 	while (data->map->map[i])
 	{
-		if (isinset(data->map->map[i], " 012NSEWD") == FALSE)
+		if (isinset(data->map->map[i], " 012NSEWDZ") == FALSE)
 		{
 			data->error_code = 3;
 			errors(data);

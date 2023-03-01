@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 23:26:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:24:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,6 +363,7 @@ void	load_textures(t_vault *data);
 int		**get_texture(xpm_t *tex);
 void	find_tex_hit(t_vault *data, xpm_t *texture);
 void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
+// uint32_t	darken_pixel(uint32_t color);
 
 /***** utils_bonus.c *****/
 void	check_wall_path(t_vault *data);
@@ -415,11 +416,10 @@ void	keyhandler_2(mlx_key_data_t keydata, t_vault *data);
 void	open_door(t_vault *data);
 
 /***** sprites_bonus.c *****/
-void	sprite_casting(t_vault *data, int pixels_2d);
+void	sprite_casting(t_vault *data);
 int		compareSprites(t_sprites *a, t_sprites *b);
 void	sortSprites(int *order, double *dist, int amount);
-void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff,
-			t_sprites *sprite, int i);
+void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
 
 /***** player_location_bonus.c *****/
 void	player_location(t_vault *data, int col, int row);

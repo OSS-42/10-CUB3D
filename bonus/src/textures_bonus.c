@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/01 16:24:15 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,3 +114,19 @@ void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 		screen_y++;
 	}
 }
+
+// Calculate darker color by multiplying each RGB value by 0.5
+// uint32_t	darken_pixel(uint32_t color)
+// {
+// 	uint8_t	r;
+// 	uint8_t	g;
+// 	uint8_t	b;
+
+// 	r = (color >> 16) & 0xFF;
+// 	g = (color >> 8) & 0xFF;
+// 	b = color & 0xFF;
+// 	r *= 0.5;
+// 	g *= 0.5;
+// 	b *= 0.5;
+// 	return ((r << 16) | (g << 8) | b);
+// }

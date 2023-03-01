@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:21:30 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/01 16:37:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	dist_and_pos2(t_vault *data)
 
 void	check_type_wall(t_vault *data, int *impact)
 {
-	if (data->map->map[data->raycaster->row][data->raycaster->col] == '1')
+	if (data->map->map[data->raycaster->row][data->raycaster->col] == '1'
+		|| data->map->map[data->raycaster->row][data->raycaster->col] == 'Z')
 		*impact = 1;
 	else if (data->map->map[data->raycaster->row][data->raycaster->col]
 		== '2')
