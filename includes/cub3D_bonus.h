@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 15:26:23 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 23:26:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ typedef struct s_tex
 	xpm_t	*tex_e;
 	xpm_t	*tex_w;
 	xpm_t	*tex_nw;
-	xpm_t	*tex_collect;
+	xpm_t	*tex_local;
 	xpm_t	*tex_lobby;
 	xpm_t	*tex_reunion;
 	xpm_t	*tex_cuisine;
@@ -172,7 +172,7 @@ typedef struct s_tex
 	int		**south;
 	int		**east;
 	int		**west;
-	int		**collect;
+	int		**local;
 	int		**neutral_wall;
 	int		**lobby;
 	int		**lounge;
@@ -189,14 +189,6 @@ typedef struct s_tex
 	int		**secret;
 	int		**door;
 }	t_tex;
-
-typedef struct s_hud_col
-{
-	int			collected;
-	int			total_c;
-	int			hud_height;
-	mlx_image_t	*hud_collect;
-}	t_hud_col;
 
 typedef struct s_hud_loc
 {
@@ -261,7 +253,6 @@ typedef struct s_vault
 	t_minimap	*minimap;
 	t_game		*game;
 	t_hud_loc	*hud_loc;
-	t_hud_col	*hud_col;
 	t_rays		*raycaster;
 	t_tex		*tex;
 	mlx_image_t	*cursor;
@@ -350,8 +341,6 @@ void	draw_player(t_vault *data);
 /***** init_hud.c *****/
 void	load_hud(t_vault *data);
 void	draw_hud(t_vault *data);
-void	draw_tex_collect(t_vault *data, int **tex_buff,
-			int pixels_2d);
 void	draw_tex_location(t_vault *data, int **tex_buff,
 			int pixels_2d);
 

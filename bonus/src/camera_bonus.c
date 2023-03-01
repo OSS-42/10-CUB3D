@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/02/28 23:23:37 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	reinit_hud(t_vault *data)
 {
 	mlx_delete_image(data->mlx, data->hud_loc->hud_location);
-	mlx_delete_image(data->mlx, data->hud_col->hud_collect);
 	load_hud(data);
 }
 
