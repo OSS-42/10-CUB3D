@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/01 23:59:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:14:04 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	draw_minimap(t_vault *data)
 	while (data->minimap->x < data->map->lines)
 	{
 		data->minimap->y = 0;
-		draw_tiles_loop(data);
+		draw_tiles_loop(data, 0, 0);
 		data->minimap->x++;
 	}
 	full_line_minimap_hor(data, 0, 0xFF00FFFF);
@@ -79,11 +79,8 @@ void	draw_minimap(t_vault *data)
 		* data->minimap->tile_size - 1, 0xFF00FFFF);
 }
 
-void	draw_tiles_loop(t_vault *data)
+void	draw_tiles_loop(t_vault *data, int screen_x, int screen_y)
 {
-	int	screen_x;
-	int	screen_y;
-
 	while (data->minimap->y < data->map->max_lenght)
 	{
 		screen_x = data->minimap->x * data->minimap->tile_size;

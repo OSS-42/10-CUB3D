@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/02 00:38:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:13:19 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -393,7 +393,7 @@ void	reinit_minimap(t_vault *data);
 void	show_minimap(t_vault *data);
 void	load_minimap(t_vault *data);
 void	draw_minimap(t_vault *data);
-void	draw_tiles_loop(t_vault *data);
+void	draw_tiles_loop(t_vault *data, int screen_x, int screen_y);
 
 /***** minimap_utils.c *****/
 void	draw_tiles(t_vault *data,
