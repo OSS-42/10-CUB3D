@@ -6,37 +6,12 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:23:18 by maison            #+#    #+#             */
-/*   Updated: 2023/03/02 08:25:32 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/02 08:48:06 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
 
-void	check_type_wall_3(t_vault *data, int *impact)
-{
-	*impact = 1;
-	if (data->raycaster->side == 0)
-		data->raycaster->side = 12;
-	else if (data->raycaster->side == 1)
-		data->raycaster->side = 13;
-	else if (data->raycaster->side == 2)
-		data->raycaster->side = 14;
-	else if (data->raycaster->side == 3)
-		data->raycaster->side = 15;
-}
-
-void	check_type_wall_4(t_vault *data, int *impact)
-{
-	*impact = 1;
-	if (data->raycaster->side == 0)
-		data->raycaster->side = 16;
-	else if (data->raycaster->side == 1)
-		data->raycaster->side = 17;
-	else if (data->raycaster->side == 2)
-		data->raycaster->side = 18;
-	else if (data->raycaster->side == 3)
-		data->raycaster->side = 19;
-}
 
 void	check_type_wall_5(t_vault *data, int *impact)
 {

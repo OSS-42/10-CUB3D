@@ -134,8 +134,6 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/init_player_bonus.c \
 				bonus/src/init_hud_bonus.c \
 				bonus/src/raycasting_bonus.c \
-				bonus/src/raycasting_utils_bonus.c \
-				bonus/src/raycasting_utils_bonus2.c \
 				bonus/src/init_minimap_bonus.c \
 				bonus/src/moves_bonus.c \
 				bonus/src/camera_bonus.c \
@@ -147,7 +145,10 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/keyhandler_bonus.c \
 				bonus/src/minimap_utils_bonus.c \
 				bonus/src/sprites_bonus.c \
-				bonus/src/player_location_bonus.c
+				bonus/src/player_location_bonus.c \
+				bonus/src/check_wall_textures_bonus.c \
+				bonus/src/check_wall_textures_bonus2.c \
+				bonus/src/draw_tex_wall_bonus.c
 
 bonus: intro_bonus art_intro $(NAME_BONUS)
 

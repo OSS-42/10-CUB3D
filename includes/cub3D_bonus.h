@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/02 08:30:29 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/02 08:59:09 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,23 +354,25 @@ void	draw_tex_location(t_vault *data, int **tex_buff,
 void	raycaster(t_vault *data);
 void	dda(t_vault *data);
 void	creating_3d_img(t_vault *data, int pixels_2d);
-void	draw_tex_wall(t_vault *data, int pixels_2d);
-void	draw_tex_wall_2(t_vault *data, int pixels_2d);
-void	draw_tex_wall_3(t_vault *data, int pixels_2d);
-
-/***** raycasting_utils.c *****/
 void	dist_and_pos(t_vault *data);
 void	dist_and_pos2(t_vault *data);
+
+/***** check_wall_texture_bonus.c *****/
 void	check_type_wall(t_vault *data, int *impact);
 void	check_bonus_type_wall(t_vault *data, int *impact);
 void	check_type_wall_d(t_vault *data, int *impact);
-
-/***** raycasting_utils2.c *****/
 void	check_type_wall_3(t_vault *data, int *impact);
 void	check_type_wall_4(t_vault *data, int *impact);
+
+/***** check_wall_texture_bonus2.c *****/
 void	check_type_wall_5(t_vault *data, int *impact);
 void	check_type_wall_6(t_vault *data, int *impact);
 void	check_type_wall_7(t_vault *data, int *impact);
+
+/***** draw_wall_texture_bonus.c *****/
+void	draw_tex_wall(t_vault *data, int pixels_2d);
+void	draw_tex_wall_2(t_vault *data, int pixels_2d);
+void	draw_tex_wall_3(t_vault *data, int pixels_2d);
 
 /***** textures.c *****/
 int		rgb_to_hex2(int r, int g, int b, int a);
