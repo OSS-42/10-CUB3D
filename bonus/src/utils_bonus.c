@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:01:38 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/27 15:51:52 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/01 23:26:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ void	check_wall_path(t_vault *data)
 		data->error_code = 14;
 	close (fd);
 	fd = open(data->scene_param->ea_wall_path, 0, 0);
-	if (fd < 0)
-		data->error_code = 14;
-	close (fd);
-	fd = open(data->scene_param->nw_wall_path, 0, 0);
 	if (fd < 0)
 		data->error_code = 14;
 	close (fd);

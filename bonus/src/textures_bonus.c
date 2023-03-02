@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/01 16:24:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/02 01:15:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,12 @@ void	find_tex_hit(t_vault *data, xpm_t *texture)
 
 	if (data->raycaster->side == 0 || data->raycaster->side == 1
 		|| data->raycaster->side == 4 || data->raycaster->side == 5
-		|| data->raycaster->side == 8 || data->raycaster->side == 9)
+		|| data->raycaster->side == 8 || data->raycaster->side == 9
+		|| data->raycaster->side == 12 || data->raycaster->side == 13
+		|| data->raycaster->side == 16 || data->raycaster->side == 17
+		|| data->raycaster->side == 20 || data->raycaster->side == 21
+		|| data->raycaster->side == 24 || data->raycaster->side == 25
+		|| data->raycaster->side == 28 || data->raycaster->side == 29)
 		wall_x = data->plr->row + data->raycaster->ray_len
 			* data->raycaster->pdy_ray;
 	else
@@ -80,12 +85,22 @@ void	find_tex_hit(t_vault *data, xpm_t *texture)
 	data->game->tex_x = (int)(wall_x * (double)(texture->texture.width));
 	if ((data->raycaster->side == 0 || data->raycaster->side == 1
 			|| data->raycaster->side == 4 || data->raycaster->side == 5
-			|| data->raycaster->side == 8 || data->raycaster->side == 9)
+			|| data->raycaster->side == 8 || data->raycaster->side == 9
+			|| data->raycaster->side == 12 || data->raycaster->side == 13
+			|| data->raycaster->side == 16 || data->raycaster->side == 17
+			|| data->raycaster->side == 20 || data->raycaster->side == 21
+			|| data->raycaster->side == 24 || data->raycaster->side == 25
+			|| data->raycaster->side == 28 || data->raycaster->side == 29)
 		&& data->raycaster->pdx_ray > 0)
 		data->game->tex_x = texture->texture.width - data->game->tex_x - 1;
 	if ((data->raycaster->side == 2 || data->raycaster->side == 3
 			|| data->raycaster->side == 6 || data->raycaster->side == 7
-			|| data->raycaster->side == 10 || data->raycaster->side == 11)
+			|| data->raycaster->side == 10 || data->raycaster->side == 11
+			|| data->raycaster->side == 14 || data->raycaster->side == 15
+			|| data->raycaster->side == 18 || data->raycaster->side == 19
+			|| data->raycaster->side == 22 || data->raycaster->side == 23
+			|| data->raycaster->side == 26 || data->raycaster->side == 27
+			|| data->raycaster->side == 30 || data->raycaster->side == 31)
 		&& data->raycaster->pdy_ray < 0)
 		data->game->tex_x = texture->texture.width - data->game->tex_x - 1;
 }

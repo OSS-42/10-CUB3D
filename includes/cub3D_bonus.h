@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/01 16:24:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/02 00:38:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ typedef struct s_game
 	char			*wall_s;
 	char			*wall_e;
 	char			*wall_w;
-	char			*wall_nw;
 	int				wall_height;
 	int				wall_start;
 	int				wall_end;
@@ -152,7 +151,7 @@ typedef struct s_tex
 	xpm_t	*tex_s;
 	xpm_t	*tex_e;
 	xpm_t	*tex_w;
-	xpm_t	*tex_nw;
+	xpm_t	*tex_window;
 	xpm_t	*tex_local;
 	xpm_t	*tex_lobby;
 	xpm_t	*tex_reunion;
@@ -168,12 +167,17 @@ typedef struct s_tex
 	xpm_t	*tex_amphi;
 	xpm_t	*tex_secret;
 	xpm_t	*tex_door;
+	xpm_t	*tex_dungeon;
+	xpm_t	*tex_tribute;
+	xpm_t	*tex_marc;
+	xpm_t	*tex_armada;
+	xpm_t	*tex_torrent;
 	int		**north;
 	int		**south;
 	int		**east;
 	int		**west;
 	int		**local;
-	int		**neutral_wall;
+	int		**window;
 	int		**lobby;
 	int		**lounge;
 	int		**cuisine;
@@ -188,6 +192,11 @@ typedef struct s_tex
 	int		**amphi;
 	int		**secret;
 	int		**door;
+	int		**dungeon;
+	int		**tribute;
+	int		**armada;
+	int		**marc;
+	int		**torrent;
 }	t_tex;
 
 typedef struct s_hud_loc
@@ -208,8 +217,6 @@ typedef struct s_param
 	int				we_exist;
 	char			*ea_wall_path;
 	int				ea_exist;
-	char			*nw_wall_path;
-	int				nw_exist;
 	int				f_exist;
 	int				c_exist;
 	char			*f_color;
@@ -291,7 +298,6 @@ void	check_no_params(t_vault *data, int x, int y, int slen);
 void	check_so_params(t_vault *data, int x, int y, int slen);
 void	check_we_params(t_vault *data, int x, int y, int slen);
 void	check_ea_params(t_vault *data, int x, int y, int slen);
-void	check_nw_params(t_vault *data, int i, int j, int slen);
 
 /***** check_fc_params.c *****/
 void	check_f_params(t_vault *data, int x, int y, int slen);
@@ -350,12 +356,18 @@ void	dda(t_vault *data);
 void	creating_3d_img(t_vault *data, int pixels_2d);
 void	draw_tex_wall(t_vault *data, int pixels_2d);
 void	draw_tex_wall_2(t_vault *data, int pixels_2d);
+void	draw_tex_wall_3(t_vault *data, int pixels_2d);
 
 /***** raycasting_utils.c *****/
 void	dist_and_pos(t_vault *data);
 void	dist_and_pos2(t_vault *data);
 void	check_type_wall(t_vault *data, int *impact);
 void	check_type_wall_d(t_vault *data, int *impact);
+void	check_type_wall_3(t_vault *data, int *impact);
+void	check_type_wall_4(t_vault *data, int *impact);
+void	check_type_wall_5(t_vault *data, int *impact);
+void	check_type_wall_6(t_vault *data, int *impact);
+void	check_type_wall_7(t_vault *data, int *impact);
 
 /***** textures.c *****/
 int		rgb_to_hex2(int r, int g, int b, int a);
@@ -373,6 +385,7 @@ void	reinit_and_draw(t_vault *data);
 
 /***** extra_textures.c *****/
 void	load_extra_textures(t_vault *data);
+void	check_extra_textures(t_vault *data);
 void	get_extra_textures(t_vault *data);
 
 /***** init_minimap.c *****/

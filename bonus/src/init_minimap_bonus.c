@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/01 16:32:40 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:59:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,17 @@ void	draw_tiles_loop(t_vault *data)
 			draw_tiles(data, screen_x, screen_y, 0x6E99FFFF);
 		else if (data->map->map[data->minimap->x][data->minimap->y] == '1'
 			|| data->map->map[data->minimap->x][data->minimap->y] == '2'
-			|| data->map->map[data->minimap->x][data->minimap->y] == 'Z')
+			|| data->map->map[data->minimap->x][data->minimap->y] == 'Z'
+			|| data->map->map[data->minimap->x][data->minimap->y] == '3'
+			|| data->map->map[data->minimap->x][data->minimap->y] == '4'
+			|| data->map->map[data->minimap->x][data->minimap->y] == '5'
+			|| data->map->map[data->minimap->x][data->minimap->y] == '6'
+			|| data->map->map[data->minimap->x][data->minimap->y] == '7')
 			draw_tiles(data, screen_x, screen_y, 0xFFFFFFFF);
 		else if (data->map->map[data->minimap->x][data->minimap->y] == '.')
 			draw_tiles(data, screen_x, screen_y, 0x000000FF);
 		else if (data->map->map[data->minimap->x][data->minimap->y] == 'D')
-			draw_tiles(data, screen_x, screen_y, 0xFF00FFFF);
+			draw_tiles(data, screen_x, screen_y, 0x806040FF);
 		else if (ft_char_isinset("NSEW", data->map->map[data->minimap->x]
 				[data->minimap->y]) == TRUE)
 			draw_tiles(data, screen_x, screen_y, 0x6E99FFFF);

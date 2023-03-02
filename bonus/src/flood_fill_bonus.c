@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:43:15 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/01 16:33:10 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:37:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	flood_fill(t_vault *data, int x, int y, char **temp)
 		data->error_code = 4;
 		return ;
 	}
+	//rajouter ou 'D' et ou 'Z' ?
 	if (temp[x][y] == '0' || ft_char_isinset("NSEW", temp[x][y]))
 		temp[x][y] = '.';
 	else

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/01 16:31:20 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:58:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
 			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
 			&& (data->map->map[check_row][(int)(data->plr->col)] != 'D')
-			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '3')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '4')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '5')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '6')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '7'))
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row += data->plr->pdy * data->raycaster->mov_speed;
@@ -29,7 +34,12 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
-			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'Z')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '3')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '4')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '5')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '6')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '7'))
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col += data->plr->pdx * data->raycaster->mov_speed;
@@ -56,8 +66,13 @@ void	move_backward(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
 			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
-			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
-			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'D')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '3')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '4')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '5')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '6')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '7'))
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row -= data->plr->pdy * data->raycaster->mov_speed;
@@ -65,7 +80,12 @@ void	move_backward(t_vault *data, int check_row, int check_col)
 	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
-			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'Z')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '3')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '4')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '5')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '6')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '7'))
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col -= data->plr->pdx * data->raycaster->mov_speed;
@@ -92,8 +112,13 @@ void	move_left(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
 			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
-			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
-			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'D')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '3')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '4')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '5')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '6')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '7'))
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row -= data->raycaster->plane_y
@@ -102,7 +127,12 @@ void	move_left(t_vault *data, int check_row, int check_col)
 	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
-			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'Z')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '3')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '4')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '5')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '6')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '7'))
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col -= data->raycaster->plane_x
@@ -130,8 +160,13 @@ void	move_right(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	if ((data->map->map[check_row][(int)(data->plr->col)] != '1')
 			&& (data->map->map[check_row][(int)(data->plr->col)] != '2')
-			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
-			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'D')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '3')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '4')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '5')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '6')
+			&& (data->map->map[check_row][(int)(data->plr->col)] != '7'))
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row += data->raycaster->plane_y
@@ -140,7 +175,12 @@ void	move_right(t_vault *data, int check_row, int check_col)
 	if ((data->map->map[(int)(data->plr->row)][check_col] != '1')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != '2')
 			&& (data->map->map[(int)(data->plr->row)][check_col] != 'D')
-			&& (data->map->map[check_row][(int)(data->plr->col)] != 'Z'))
+			&& (data->map->map[(int)(data->plr->row)][check_col] != 'Z')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '3')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '4')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '5')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '6')
+			&& (data->map->map[(int)(data->plr->row)][check_col] != '7'))
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col += data->raycaster->plane_x

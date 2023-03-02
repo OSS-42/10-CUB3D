@@ -1,8 +1,7 @@
-SO   ./assets/tex/green42_SD.xpm42
-EA   ./assets/tex/wood42-legion_SD.xpm42
-WE   ./assets/tex/wood42_SD.xpm42
-NO   ./assets/tex/blue42_SD.xpm42
-NW   ./assets/tex/window42_SD.xpm42
+SO   ./assets/tex/green42.xpm42
+EA   ./assets/tex/wood42_legion.xpm42
+WE   ./assets/tex/wood42.xpm42
+NO   ./assets/tex/blue42.xpm42
 
 F 106,106,106
 C 173,173,173
@@ -17,7 +16,7 @@ C 173,173,173
 1000000111110Z000000000002
 20000001000001000000000001
 10000001000001000000000002
-20000001111111000000000001
+20000001345671000000000001
 10000001000001000000000002
 20000001000001001111111101
 1000000D00000D000000000002
