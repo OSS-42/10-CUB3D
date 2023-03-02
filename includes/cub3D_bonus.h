@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/02 08:13:19 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/02 08:30:29 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -362,7 +362,10 @@ void	draw_tex_wall_3(t_vault *data, int pixels_2d);
 void	dist_and_pos(t_vault *data);
 void	dist_and_pos2(t_vault *data);
 void	check_type_wall(t_vault *data, int *impact);
+void	check_bonus_type_wall(t_vault *data, int *impact);
 void	check_type_wall_d(t_vault *data, int *impact);
+
+/***** raycasting_utils2.c *****/
 void	check_type_wall_3(t_vault *data, int *impact);
 void	check_type_wall_4(t_vault *data, int *impact);
 void	check_type_wall_5(t_vault *data, int *impact);

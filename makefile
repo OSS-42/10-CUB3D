@@ -135,6 +135,7 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/init_hud_bonus.c \
 				bonus/src/raycasting_bonus.c \
 				bonus/src/raycasting_utils_bonus.c \
+				bonus/src/raycasting_utils_bonus2.c \
 				bonus/src/init_minimap_bonus.c \
 				bonus/src/moves_bonus.c \
 				bonus/src/camera_bonus.c \
