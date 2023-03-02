@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:01:38 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/01 23:26:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/02 10:09:16 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,19 @@ void	reinit_and_draw(t_vault *data)
 	reinit_hud(data);
 	reinit_minimap(data);
 	raycaster(data);
+}
+
+int	not_wall(t_vault *data, int row, int col)
+{
+	if (data->map->map[row][col] != '1'
+		&& data->map->map[row][col] != '2'
+		&& data->map->map[row][col] != '3'
+		&& data->map->map[row][col] != '4'
+		&& data->map->map[row][col] != '5'
+		&& data->map->map[row][col] != '6'
+		&& data->map->map[row][col] != '7'
+		&& data->map->map[row][col] != 'D'
+		&& data->map->map[row][col] != 'Z')
+		return (TRUE);
+	return (FALSE);
 }

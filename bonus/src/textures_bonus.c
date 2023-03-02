@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/02 01:15:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/02 09:46:44 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
-
-int	rgb_to_hex2(int r, int g, int b, int a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
 
 void	load_textures(t_vault *data)
 {
@@ -83,6 +78,11 @@ void	find_tex_hit(t_vault *data, xpm_t *texture)
 			* data->raycaster->pdx_ray;
 	wall_x = wall_x - (int)(wall_x);
 	data->game->tex_x = (int)(wall_x * (double)(texture->texture.width));
+	find_tex_hit2(data, texture);
+}
+
+void	find_tex_hit2(t_vault *data, xpm_t *texture)
+{
 	if ((data->raycaster->side == 0 || data->raycaster->side == 1
 			|| data->raycaster->side == 4 || data->raycaster->side == 5
 			|| data->raycaster->side == 8 || data->raycaster->side == 9

@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/02 08:59:09 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/02 10:12:05 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,13 +304,13 @@ void	check_f_params(t_vault *data, int x, int y, int slen);
 void	check_c_params(t_vault *data, int x, int y, int slen);
 void	check_color_code(t_vault *data);
 int		correct_rgb_char(char *rgb_code);
-void	rgb_to_hex(t_vault *data, char flag);
 
 /***** cub3d_utils.c *****/
-void	map_to_new_array(t_vault *data, int x);
 int		check_white_spaces(char c);
 int		ft_find_char(char *src, char c);
 void	correct_rgb_range(t_vault *data, char *rgb_code, char c);
+void	rgb_to_hex(t_vault *data, char flag);
+int		rgb_to_hex2(int r, int g, int b, int a);
 
 /***** map_parsing.c *****/
 void	check_map(t_vault *data);
@@ -375,10 +375,10 @@ void	draw_tex_wall_2(t_vault *data, int pixels_2d);
 void	draw_tex_wall_3(t_vault *data, int pixels_2d);
 
 /***** textures.c *****/
-int		rgb_to_hex2(int r, int g, int b, int a);
 void	load_textures(t_vault *data);
 int		**get_texture(xpm_t *tex);
 void	find_tex_hit(t_vault *data, xpm_t *texture);
+void	find_tex_hit2(t_vault *data, xpm_t *texture);
 void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
 // uint32_t	darken_pixel(uint32_t color);
 
@@ -387,6 +387,7 @@ void	check_wall_path(t_vault *data);
 void	full_line_hud_hor(mlx_image_t *hud, int screen_y, unsigned int color);
 void	full_line_hud_ver(mlx_image_t *hud, int screen_x, unsigned int color);
 void	reinit_and_draw(t_vault *data);
+int		not_wall(t_vault *data, int row, int col);
 
 /***** extra_textures.c *****/
 void	load_extra_textures(t_vault *data);
@@ -427,6 +428,7 @@ void	background_3d(t_vault *data);
 
 /***** audio.c *****/
 void	play_song(t_vault *data);
+void	check_and_play_song(t_vault *data);
 
 /***** keyhandler.c *****/
 void	keyhandler(mlx_key_data_t keydata, void *param);

@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting_utils_bonus2.c                          :+:      :+:    :+:   */
+/*   check_wall_textures_bonus2.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:23:18 by maison            #+#    #+#             */
-/*   Updated: 2023/03/02 08:48:06 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/02 09:54:52 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
-
 
 void	check_type_wall_5(t_vault *data, int *impact)
 {

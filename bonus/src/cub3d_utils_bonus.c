@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:21:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/23 14:33:35 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/02 09:52:42 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,36 @@ int	check_white_spaces(char c)
 		|| c == ' ')
 		return (0);
 	return (1);
+}
+
+void	rgb_to_hex(t_vault *data, char flag)
+{
+	unsigned int	a;
+	int				r;
+	int				g;
+	int				b;
+
+	r = 0;
+	g = 0;
+	b = 0;
+	a = 0xff;
+	if (flag == 'C')
+	{
+		r = data->scene_param->r_ceiling;
+		g = data->scene_param->g_ceiling;
+		b = data->scene_param->b_ceiling;
+		data->scene_param->hex_ceiling = (r << 24) | (g << 16) | (b << 8) | a;
+	}
+	else if (flag == 'F')
+	{
+		r = data->scene_param->r_floor;
+		g = data->scene_param->g_floor;
+		b = data->scene_param->b_floor;
+		data->scene_param->hex_floor = (r << 24) | (g << 16) | (b << 8) | a;
+	}
+}
+
+int	rgb_to_hex2(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
 }

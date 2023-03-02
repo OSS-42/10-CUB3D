@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:43:15 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/01 23:37:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/02 09:54:24 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	flood_fill(t_vault *data, int x, int y, char **temp)
 		data->error_code = 4;
 		return ;
 	}
-	//rajouter ou 'D' et ou 'Z' ?
 	if (temp[x][y] == '0' || ft_char_isinset("NSEW", temp[x][y]))
 		temp[x][y] = '.';
 	else

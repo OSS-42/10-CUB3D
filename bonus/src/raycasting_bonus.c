@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/02 08:58:50 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/02 09:03:32 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	raycaster(t_vault *data)
 {
-	// textures WE et EA sont inversees, a corriger.
 	double	pixels_2d;
 
 	pixels_2d = 0;
