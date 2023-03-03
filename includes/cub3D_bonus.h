@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/03 01:05:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/03 09:05:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -390,7 +390,7 @@ void	find_tex_hit(t_vault *data, xpm_t *texture);
 void	find_tex_hit2(t_vault *data, xpm_t *texture);
 void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
 double calculate_brightness_factor(t_vault *data);
-uint32_t blend_colors(uint32_t color1, uint32_t color2, double blend_factor);
+uint32_t darken_color(uint32_t color, double brightness_factor);
 
 /***** utils_bonus.c *****/
 void	check_wall_path(t_vault *data);

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/03 01:12:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/03 09:15:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,12 @@ void	find_tex_hit2(t_vault *data, xpm_t *texture)
 
 void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 {
-	int				tex_y;
-	double			tex_pos;
-	double			step;
-	int				screen_y;
-	uint32_t		color;
-	uint32_t		dark_color;
-	double			brightness_factor;
+	int tex_y;
+	double tex_pos;
+	double step;
+	int screen_y;
+	uint32_t color;
+	double brightness_factor;
 
 	step = 1.0 * texture->texture.height / data->game->wall_height;
 	tex_pos = ((double)data->game->wall_start - (double)HEIGHT / 2
@@ -137,17 +136,14 @@ void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 			tex_pos = texture->texture.height - 1;
 		tex_pos = tex_pos + step;
 
-		// essai pour noircir les pixels en fonction de la distance au mur
 		// calculate brightness factor based on distance from camera
 		brightness_factor = calculate_brightness_factor(data);
 
-		// darken the pixel by blending with black based on brightness factor
+		// darken the pixel by multiplying its components by the brightness factor
 		color = tex_buff[tex_y][data->game->tex_x];
-		// color = 0xff0000;
-		dark_color = blend_colors(color, 0x000000, brightness_factor);
+		uint32_t dark_color = darken_color(color, brightness_factor);
 
 		mlx_put_pixel(data->game->ddd, pixels_2d, screen_y, dark_color);
-		// tex_buff[tex_y][data->game->tex_x] = previous_color;
 		screen_y++;
 	}
 }
@@ -165,7 +161,7 @@ double calculate_brightness_factor(t_vault *data)
 		distance = max_distance;
 
 	// calculate the brightness factor based on the distance from the camera
-	brightness_factor = distance / max_distance;
+	brightness_factor = 1 - (distance / max_distance);
 
 	if (brightness_factor < 0.0)
 		brightness_factor = 0.0;
@@ -173,20 +169,21 @@ double calculate_brightness_factor(t_vault *data)
 	return (brightness_factor);
 }
 
-uint32_t blend_colors(uint32_t color1, uint32_t color2, double blend_factor)
+uint32_t darken_color(uint32_t color, double brightness_factor)
 {
-    uint8_t r1 = (color1 >> 16);
-    uint8_t g1 = (color1 >> 8);
-    uint8_t b1 = color1;
-    (void) color2;
+	// Extract the red, green, blue, and alpha components of the color
+	uint8_t	r = (color >> 24) & 0xFF;
+	uint8_t	g = (color >> 16) & 0xFF;
+	uint8_t	b = (color >> 8) & 0xFF;
+	uint8_t	a = color & 0xFF;
 
-    // Calculate the weighted average of the color components, based on the blend factor
-    uint8_t r = (uint8_t)(r1 * (1 - blend_factor) + 128 * blend_factor);
-    uint8_t g = (uint8_t)(g1 * (1 - blend_factor) + 128 * blend_factor);
-    uint8_t b = (uint8_t)(b1 * (1 - blend_factor) + 128 * blend_factor);
+	// Calculate the new color components by multiplying them by the brightness factor
+	r *= brightness_factor;
+	g *= brightness_factor;
+	b *= brightness_factor;
 
-    // Combine the color components into a single 32-bit color value
-    uint32_t color = (r << 16) | (g << 8) | b;
+	// Combine the color components into a single 32-bit color value
+	uint32_t dark_color = (r << 24) | (g << 16) | (b << 8) | a;
 
-    return (color);
+	return dark_color;
 }

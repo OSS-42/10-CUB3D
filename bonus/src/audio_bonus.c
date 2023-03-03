@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:24:44 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/02 10:11:48 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/03 09:02:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	play_song(t_vault *data)
 	if (data->audio == 0)
 	{
 		data->audio = 1;
-		system("afplay ./assets/audio/work-it.mp3&");
+		// system("afplay ./assets/audio/work-it.mp3&");
 	}
 }
 
