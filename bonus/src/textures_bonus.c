@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/03 10:46:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:45:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,21 @@ int	**get_texture(xpm_t *tex)
 	int	j;
 
 	tex_buff = ft_calloc(sizeof(int *), tex->texture.height + 1);
-	i = -1;
-	while (++i < (int)tex->texture.height)
+	i = 3;
+	while (++i < (int)tex->texture.height + 4)
 	{
-		j = -1;
-		tex_buff[i] = ft_calloc(sizeof(int), tex->texture.width);
-		while (++j < (int)tex->texture.width)
-			tex_buff[i][j]
+		j = 3;
+		tex_buff[i - 4] = ft_calloc(sizeof(int), tex->texture.width);
+		while (++j < (int)tex->texture.width + 4)
+			tex_buff[i - 4][j - 4]
 				= rgb_to_hex2(tex->texture.pixels[(tex->texture.width * 4
-						* (i)) + (4 * (j)) + 0],
+						* (i - 4)) + (4 * (j - 4)) + 0],
 					tex->texture.pixels[(tex->texture.width * 4
-						* (i)) + (4 * (j)) + 1],
+						* (i - 4)) + (4 * (j - 4)) + 1],
 					tex->texture.pixels[(tex->texture.width * 4
-						* (i)) + (4 * (j)) + 2],
+						* (i - 4)) + (4 * (j - 4)) + 2],
 					tex->texture.pixels[(tex->texture.width * 4
-						* (i)) + (4 * (j)) + 3]);
+						* (i - 4)) + (4 * (j - 4)) + 3]);
 	}
 	return (tex_buff);
 }
@@ -154,7 +154,7 @@ double calculate_brightness_factor(t_vault *data)
 	double	distance;
 	double	brightness_factor;
 
-	max_distance = 20.0;
+	max_distance = 18.0;
 	distance = data->raycaster->ray_len;
 	// set the maximum distance at which walls should be fully visible
 	if (distance > max_distance)
