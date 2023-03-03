@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/03 09:15:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:46:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	find_tex_hit(t_vault *data, xpm_t *texture)
 		wall_x = data->plr->col + data->raycaster->ray_len
 			* data->raycaster->pdx_ray;
 	wall_x = wall_x - (int)(wall_x);
-	data->game->tex_x = (int)(wall_x * (double)(texture->texture.width));
+	data->game->tex_x = 1 - (int)(wall_x * (double)(texture->texture.width));
 	find_tex_hit2(data, texture);
 }
 
@@ -98,7 +98,7 @@ void	find_tex_hit2(t_vault *data, xpm_t *texture)
 			|| data->raycaster->side == 36 || data->raycaster->side == 37
 			|| data->raycaster->side == 40 || data->raycaster->side == 41)
 		&& data->raycaster->pdx_ray > 0)
-		data->game->tex_x = texture->texture.width - data->game->tex_x - 1;
+		data->game->tex_x = texture->texture.width - data->game->tex_x;
 	if ((data->raycaster->side == 2 || data->raycaster->side == 3
 			|| data->raycaster->side == 6 || data->raycaster->side == 7
 			|| data->raycaster->side == 10 || data->raycaster->side == 11
@@ -111,7 +111,7 @@ void	find_tex_hit2(t_vault *data, xpm_t *texture)
 			|| data->raycaster->side == 38 || data->raycaster->side == 39
 			|| data->raycaster->side == 42 || data->raycaster->side == 43)
 		&& data->raycaster->pdy_ray < 0)
-		data->game->tex_x = texture->texture.width - data->game->tex_x - 1;
+		data->game->tex_x = texture->texture.width - data->game->tex_x;
 }
 
 void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
