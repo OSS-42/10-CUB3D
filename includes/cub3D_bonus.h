@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/02 10:12:05 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/02 22:03:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,9 @@ typedef struct s_tex
 	xpm_t	*tex_marc;
 	xpm_t	*tex_armada;
 	xpm_t	*tex_torrent;
+	xpm_t	*tex_wall;
+	xpm_t	*tex_mbertin;
+	xpm_t	*tex_ewurstei;
 	int		**north;
 	int		**south;
 	int		**east;
@@ -197,6 +200,9 @@ typedef struct s_tex
 	int		**armada;
 	int		**marc;
 	int		**torrent;
+	int		**wall;
+	int		**mbertin;
+	int		**ewurstei;
 }	t_tex;
 
 typedef struct s_hud_loc
@@ -360,7 +366,7 @@ void	dist_and_pos2(t_vault *data);
 /***** check_wall_texture_bonus.c *****/
 void	check_type_wall(t_vault *data, int *impact);
 void	check_bonus_type_wall(t_vault *data, int *impact);
-void	check_type_wall_d(t_vault *data, int *impact);
+void	check_type_wall_D(t_vault *data, int *impact);
 void	check_type_wall_3(t_vault *data, int *impact);
 void	check_type_wall_4(t_vault *data, int *impact);
 
@@ -368,6 +374,9 @@ void	check_type_wall_4(t_vault *data, int *impact);
 void	check_type_wall_5(t_vault *data, int *impact);
 void	check_type_wall_6(t_vault *data, int *impact);
 void	check_type_wall_7(t_vault *data, int *impact);
+void	check_type_wall_8(t_vault *data, int *impact);
+void	check_type_wall_9(t_vault *data, int *impact);
+void	check_type_wall_Z(t_vault *data, int *impact);
 
 /***** draw_wall_texture_bonus.c *****/
 void	draw_tex_wall(t_vault *data, int pixels_2d);

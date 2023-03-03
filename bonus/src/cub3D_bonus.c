@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 23:42:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:00:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	quit_game(t_vault *data)
 int	create_game(t_vault *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT,
-			"Une autre journée à 42 Québec !", false);
+			"Une autre journée à 42 Québec !", FALSE);
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	play_song(data);

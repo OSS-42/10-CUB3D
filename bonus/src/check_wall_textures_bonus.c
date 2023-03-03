@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_textures_bonus.c                              :+:      :+:    :+:   */
+/*   check_wall_textures_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:46:07 by maison            #+#    #+#             */
-/*   Updated: 2023/03/02 08:49:27 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/02 21:25:13 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	check_type_wall(t_vault *data, int *impact)
 {
-	if (data->map->map[data->raycaster->row][data->raycaster->col] == '1'
-		|| data->map->map[data->raycaster->row][data->raycaster->col] == 'Z')
+	if (data->map->map[data->raycaster->row][data->raycaster->col] == '1')
 		*impact = 1;
 	else if (data->map->map[data->raycaster->row][data->raycaster->col]
 		== '2')
@@ -37,7 +36,7 @@ void	check_type_wall(t_vault *data, int *impact)
 void	check_bonus_type_wall(t_vault *data, int *impact)
 {
 	if (data->map->map[data->raycaster->row][data->raycaster->col] == 'D')
-		check_type_wall_d(data, impact);
+		check_type_wall_D(data, impact);
 	else if (data->map->map[data->raycaster->row][data->raycaster->col] == '3')
 		check_type_wall_3(data, impact);
 	else if (data->map->map[data->raycaster->row][data->raycaster->col] == '4')
@@ -48,9 +47,20 @@ void	check_bonus_type_wall(t_vault *data, int *impact)
 		check_type_wall_6(data, impact);
 	else if (data->map->map[data->raycaster->row][data->raycaster->col] == '7')
 		check_type_wall_7(data, impact);
+	else if (data->map->map[data->raycaster->row][data->raycaster->col] == '8')
+		check_type_wall_8(data, impact);
+	else if (data->map->map[data->raycaster->row][data->raycaster->col] == '9')
+		check_type_wall_9(data, impact);
+	else if (data->map->map[data->raycaster->row][data->raycaster->col] == 'Z')
+		check_type_wall_Z(data, impact);
 }
 
-void	check_type_wall_d(t_vault *data, int *impact)
+// side = 0 -> on touche (regarde) le mur EST (E)
+// side = 1 -> OUEST (W)
+// side = 2 -> SUD (S)
+// side = 3 -> NORD (N)
+
+void	check_type_wall_D(t_vault *data, int *impact)
 {
 	*impact = 1;
 	if (data->raycaster->side == 0)

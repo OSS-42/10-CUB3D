@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extra_textures_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/02 08:08:16 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/02 22:03:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,16 @@ void	load_extra_textures(t_vault *data)
 	data->tex->tex_reunion = mlx_load_xpm42("./assets/tex/hud_reun_SD.xpm42");
 	data->tex->tex_secret = mlx_load_xpm42("./assets/tex/hud_secret_SD.xpm42");
 	data->tex->tex_local = mlx_load_xpm42("./assets/tex/hud_local_SD.xpm42");
+	data->tex->tex_mbertin = mlx_load_xpm42("./assets/tex/jeunecon.xpm42");
+	data->tex->tex_ewurstei = mlx_load_xpm42("./assets/tex/vieuxcon.xpm42");
 	data->tex->tex_window = mlx_load_xpm42("./assets/tex/window42.xpm42");
 	data->tex->tex_door = mlx_load_xpm42("./assets/tex/door42.xpm42");
 	data->tex->tex_dungeon = mlx_load_xpm42("./assets/tex/dungeon42.xpm42");
-	data->tex->tex_tribute = mlx_load_xpm42("./assets/tex/dungeon_trib.xpm42");
-	data->tex->tex_marc = mlx_load_xpm42("./assets/tex/dungeon_marc.xpm42");
-	data->tex->tex_armada = mlx_load_xpm42("./assets/tex/dungeon_armada.xpm42");
-	data->tex->tex_torrent = mlx_load_xpm42("./assets/tex/dungeon_tor.xpm42");
+	data->tex->tex_tribute = mlx_load_xpm42("./assets/tex/dungeon_tribute_SD.xpm42");
+	data->tex->tex_marc = mlx_load_xpm42("./assets/tex/dungeon_marc_SD.xpm42");
+	data->tex->tex_armada = mlx_load_xpm42("./assets/tex/dungeon_arm_SD.xpm42");
+	data->tex->tex_torrent = mlx_load_xpm42("./assets/tex/dungeon_torrent_SD.xpm42");
+	data->tex->tex_wall = mlx_load_xpm42("./assets/tex/wood42.xpm42");
 	check_extra_textures(data);
 }
 
@@ -74,11 +77,12 @@ void	check_extra_textures(t_vault *data)
 		|| !data->tex->tex_c3 || !data->tex->tex_couloir
 		|| !data->tex->tex_cuisine || !data->tex->tex_detente
 		|| !data->tex->tex_lobby || !data->tex->tex_lounge
+		|| !data->tex->tex_mbertin || !data->tex->tex_ewurstei
 		|| !data->tex->tex_jeux || !data->tex->tex_reunion
 		|| !data->tex->tex_secret || !data->tex->tex_door
 		|| !data->tex->tex_dungeon || !data->tex->tex_tribute
 		|| !data->tex->tex_marc || !data->tex->tex_armada
-		|| !data->tex->tex_torrent)
+		|| !data->tex->tex_torrent || !data->tex->tex_wall)
 		quit_game(data);
 	get_extra_textures(data);
 }
@@ -97,6 +101,8 @@ void	get_extra_textures(t_vault *data)
 	data->tex->lobby = get_texture(data->tex->tex_lobby);
 	data->tex->lounge = get_texture(data->tex->tex_lounge);
 	data->tex->jeux = get_texture(data->tex->tex_jeux);
+	data->tex->mbertin = get_texture(data->tex->tex_mbertin);
+	data->tex->ewurstei = get_texture(data->tex->tex_ewurstei);
 	data->tex->reunion = get_texture(data->tex->tex_reunion);
 	data->tex->secret = get_texture(data->tex->tex_secret);
 	data->tex->window = get_texture(data->tex->tex_window);
@@ -106,4 +112,5 @@ void	get_extra_textures(t_vault *data)
 	data->tex->marc = get_texture(data->tex->tex_marc);
 	data->tex->armada = get_texture(data->tex->tex_armada);
 	data->tex->torrent = get_texture(data->tex->tex_torrent);
+	data->tex->wall = get_texture(data->tex->tex_wall);
 }

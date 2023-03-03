@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:01:38 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/02 10:18:08 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/02 20:55:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	reinit_and_draw(t_vault *data)
 
 int	not_wall(t_vault *data, int row, int col)
 {
+	//nom de la fonction ??
 	if (data->map->map[row][col] != '1'
 		&& data->map->map[row][col] != '2'
 		&& data->map->map[row][col] != '3'
@@ -80,6 +81,8 @@ int	not_wall(t_vault *data, int row, int col)
 		&& data->map->map[row][col] != '5'
 		&& data->map->map[row][col] != '6'
 		&& data->map->map[row][col] != '7'
+		&& data->map->map[row][col] != '8'
+		&& data->map->map[row][col] != '9'
 		&& data->map->map[row][col] != 'D'
 		&& data->map->map[row][col] != 'Z')
 		return (TRUE);

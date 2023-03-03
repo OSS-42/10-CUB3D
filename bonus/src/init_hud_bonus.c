@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:00:20 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/02 01:14:20 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:35:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	load_hud(t_vault *data)
 {
-	data->hud_loc->hud_location = mlx_new_image(data->mlx, 401, 52);
+	data->hud_loc->hud_location = mlx_new_image(data->mlx, 402, 52);
 	draw_hud(data);
 	mlx_image_to_window(data->mlx, data->hud_loc->hud_location,
 		65, 0 + 30);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/02 09:03:32 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/02 21:09:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,10 @@ void	creating_3d_img(t_vault *data, int pixels_2d)
 		|| data->raycaster->side == 16 || data->raycaster->side == 17
 		|| data->raycaster->side == 20 || data->raycaster->side == 21
 		|| data->raycaster->side == 24 || data->raycaster->side == 25
-		|| data->raycaster->side == 28 || data->raycaster->side == 29)
+		|| data->raycaster->side == 28 || data->raycaster->side == 29
+		|| data->raycaster->side == 32 || data->raycaster->side == 33
+		|| data->raycaster->side == 36 || data->raycaster->side == 37
+		|| data->raycaster->side == 40 || data->raycaster->side == 41)
 		data->raycaster->ray_len = (data->raycaster->ray_len_x
 				- data->raycaster->delta_dist_x);
 	else
