@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:00:20 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/03 15:42:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:46:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ void	draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff, int pixels
 {
 	int	screen_y;
 
-	// while (pixels_2d < (int)data->tex->tex_amphi->texture.width - 1)
 	while (pixels_2d < (int)texture->texture.width)
 	{
 		screen_y = 0;
-		// while (screen_y < (int)data->tex->tex_amphi->texture.height - 1)
 		while (screen_y < (int)texture->texture.height)
 		{
 			mlx_put_pixel(data->hud_loc->hud_loc_static, pixels_2d, screen_y,
@@ -47,18 +45,15 @@ void	draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff, int pixels
 		}
 		pixels_2d++;
 	}
-	printf("pixels_2d (#1): %d\n", pixels_2d);
 }
 
 void	draw_tex_location2(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 {
 	int	screen_y;
 
-	// while (pixels_2d < (int)data->tex->tex_amphi->texture.width - 1)
 	while (pixels_2d < (int)texture->texture.width)
 	{
 		screen_y = 0;
-		// while (screen_y < (int)data->tex->tex_amphi->texture.height - 1)
 		while (screen_y < (int)texture->texture.height)
 		{
 			mlx_put_pixel(data->hud_loc->hud_loc_dynamic, pixels_2d, screen_y,
@@ -67,5 +62,4 @@ void	draw_tex_location2(t_vault *data, xpm_t *texture, int **tex_buff, int pixel
 		}
 		pixels_2d++;
 	}
-	printf("pixels_2d (#1): %d\n", pixels_2d);
 }
