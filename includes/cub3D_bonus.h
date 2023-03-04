@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/03 15:43:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/03 19:56:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define TRUE 1
 # define FALSE 0
 # define PI 3.1415926535
-# define WIDTH 1020
-# define HEIGHT 780
+# define WIDTH 1280
+# define HEIGHT 720
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
 # define RED 0xFF0000FF
