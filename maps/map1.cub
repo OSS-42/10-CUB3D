@@ -1,16 +1,15 @@
 
 
-                   NW
-WE       ./assets/tex/window42_SD.xpm42
+WE       ./assets/tex/window42.xpm42
 
-     NO ./assets/tex/blue42_SD.xpm42
+     NO ./assets/tex/blue42.xpm42
 
 F 106,106, 106
 
-SO ./assets/tex/green42_SD.xpm42
+SO ./assets/tex/green42.xpm42
 
-EA ./assets/tex/wood42_legion_SD.xpm42
-
+NW
+EA ./assets/tex/wood42_legion.xpm42
 
 
 C     173, 173, 173

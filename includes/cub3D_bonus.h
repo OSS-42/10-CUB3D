@@ -6,7 +6,11 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/03/04 11:47:30 by maison           ###   ########.fr       */
+=======
+/*   Updated: 2023/03/03 19:56:38 by ewurstei         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +29,8 @@
 # define TRUE 1
 # define FALSE 0
 # define PI 3.1415926535
-# define WIDTH 1020
-# define HEIGHT 780
+# define WIDTH 1280
+# define HEIGHT 720
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
 # define RED 0xFF0000FF
@@ -210,7 +214,9 @@ typedef struct s_hud_loc
 	int			hud_height;
 	int			location;
 	int			**p_loc;
-	mlx_image_t	*hud_location;
+	xpm_t		*tex_p_loc;
+	mlx_image_t	*hud_loc_static;
+	mlx_image_t	*hud_loc_dynamic;
 }	t_hud_loc;
 
 typedef struct s_param
@@ -354,7 +360,9 @@ void	draw_player(t_vault *data);
 /***** init_hud.c *****/
 void	load_hud(t_vault *data);
 void	draw_hud(t_vault *data);
-void	draw_tex_location(t_vault *data, int **tex_buff,
+void	draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff,
+			int pixels_2d);
+void	draw_tex_location2(t_vault *data, xpm_t *texture, int **tex_buff,
 			int pixels_2d);
 
 /***** raycasting.c *****/
@@ -391,7 +399,7 @@ void	find_tex_hit(t_vault *data, xpm_t *texture);
 void	find_tex_hit2(t_vault *data, xpm_t *texture);
 void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
 double calculate_brightness_factor(t_vault *data);
-uint32_t blend_colors(uint32_t color1, uint32_t color2, double blend_factor);
+uint32_t darken_color(uint32_t color, double brightness_factor);
 
 /***** utils_bonus.c *****/
 void	check_wall_path(t_vault *data);

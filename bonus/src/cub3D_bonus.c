@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/02 20:00:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:44:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	create_game(t_vault *data)
 	mlx_cursor_hook(data->mlx, &move_mouse, (void *)data);
 	mlx_loop(data->mlx);
 	mlx_delete_image(data->mlx, data->minimap->minimap);
-	mlx_delete_image(data->mlx, data->hud_loc->hud_location);
+	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_static);
+	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_dynamic);
 	mlx_delete_image(data->mlx, data->game->ddd);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
