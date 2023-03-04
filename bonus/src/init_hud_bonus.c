@@ -6,11 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:00:20 by ewurstei          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/03 13:30:49 by maison           ###   ########.fr       */
-=======
-/*   Updated: 2023/03/03 15:46:57 by ewurstei         ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2023/03/04 11:59:19 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +14,8 @@
 
 void	load_hud(t_vault *data)
 {
-<<<<<<< HEAD
-	data->hud_loc->hud_location = mlx_new_image(data->mlx, 401, 52);
-=======
 	data->hud_loc->hud_loc_static = mlx_new_image(data->mlx, 200, 50);
 	data->hud_loc->hud_loc_dynamic = mlx_new_image(data->mlx, 200, 50);
->>>>>>> master
 	draw_hud(data);
 	mlx_image_to_window(data->mlx, data->hud_loc->hud_loc_static,
 		65, 30);
