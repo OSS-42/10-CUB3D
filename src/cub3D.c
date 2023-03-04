@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/04 11:21:30 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	init_data(t_vault *data, char **argv)
 	data->raycaster->mov_speed = 0.15;
 	data->raycaster->rot_speed = 0.15;
 	data->raycaster->height_3d = HEIGHT - 1;
+	data->scene_element = 0;
 }
 
 int	main(int argc, char **argv)

@@ -61,9 +61,9 @@ all:	art_intro $(NAME)
 
 $(NAME):	$(D_OBJ) $(LIBFT) $(LIBART) $(MLX42) $(OBJS)
 # Ubuntu
-# @$(call creating, $(CC) $(CFLAGS) $(OBJS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
 # MacOS 42
-	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+#	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 # Apple M2
 #	@$(call creating, $(CC) $(CFLAGS) $(OBJS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 #	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
@@ -157,11 +157,11 @@ intro_bonus:
 
 $(NAME_BONUS):	$(D_OBJ_BONUS) $(LIBFT) $(LIBART) $(MLX42) $(OBJS_BONUS)
 # Ubuntu
-#	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
 # MacOS 42
 #	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 # Apple M2
-	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+#	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 	@echo "$(LGREEN)Software Compilation completed !$(NC)"
 
 $(D_OBJ_BONUS):

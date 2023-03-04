@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/03 01:05:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/04 11:47:30 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,6 +291,7 @@ void	check_scene_name(t_vault *data);
 void	scene_to_array(t_vault *data);
 void	check_scene_params(t_vault *data);
 void	check_scene_syntax(t_vault *data, int *x);
+void	check_random_scene_params(t_vault *data, int i);
 
 /***** scene_parsing_utils.c *****/
 void	check_fd(t_vault *data, int fd);

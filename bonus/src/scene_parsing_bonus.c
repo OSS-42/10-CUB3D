@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_parsing_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:54:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/01 23:54:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/04 11:48:29 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,24 @@ void	check_scene_syntax(t_vault *data, int *i)
 			check_f_params(data, *i, y, slen);
 		else if (ft_strncmp(data->scene[*i], "C", 1) == 0)
 			check_c_params(data, *i, y, slen);
+		else
+			check_random_scene_params(data, *i);
 		(*i)++;
+	}
+}
+
+void	check_random_scene_params(t_vault *data, int i)
+{
+	int	j;
+
+	j = 0;
+	while (data->scene[i][j])
+	{
+		if (ft_isalnum(data->scene[i][j]) == 1)
+		{
+			data->error_code = 14;
+			break ;
+		}
+		j++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_orientation_params.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:08:43 by mbertin           #+#    #+#             */
-/*   Updated: 2023/02/03 09:11:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/04 11:22:23 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	check_no_params(t_vault *data, int i, int j, int slen)
 		free (temp2);
 		break ;
 	}
+	data->scene_element++;
 }
 
 void	check_so_params(t_vault *data, int i, int j, int slen)
@@ -60,6 +61,7 @@ void	check_so_params(t_vault *data, int i, int j, int slen)
 		free (temp2);
 		break ;
 	}
+	data->scene_element++;
 }
 
 void	check_we_params(t_vault *data, int i, int j, int slen)
@@ -85,6 +87,7 @@ void	check_we_params(t_vault *data, int i, int j, int slen)
 		free (temp2);
 		break ;
 	}
+	data->scene_element++;
 }
 
 void	check_ea_params(t_vault *data, int i, int j, int slen)
@@ -110,6 +113,7 @@ void	check_ea_params(t_vault *data, int i, int j, int slen)
 		free (temp2);
 		break ;
 	}
+	data->scene_element++;
 }
 
 void	check_wall_path(t_vault *data)
