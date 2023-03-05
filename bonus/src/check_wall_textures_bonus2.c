@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_wall_textures_bonus2.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:23:18 by maison            #+#    #+#             */
-/*   Updated: 2023/03/02 21:01:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/05 11:53:00 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,6 @@ void	check_type_wall_8(t_vault *data, int *impact)
 		data->raycaster->side = 34;
 	else if (data->raycaster->side == 3)
 		data->raycaster->side = 35;
-}
-
-void	check_type_wall_Z(t_vault *data, int *impact)
-{
-	*impact = 1;
-	if (data->raycaster->side == 0)
-		data->raycaster->side = 36;
-	else if (data->raycaster->side == 1)
-		data->raycaster->side = 37;
-	else if (data->raycaster->side == 2)
-		data->raycaster->side = 38;
-	else if (data->raycaster->side == 3)
-		data->raycaster->side = 39;
 }
 
 void	check_type_wall_9(t_vault *data, int *impact)

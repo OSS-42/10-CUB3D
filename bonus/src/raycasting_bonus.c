@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/04 18:32:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/05 12:26:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,14 @@ void	dda(t_vault *data)
 
 void	creating_3d_img(t_vault *data, int pixels_2d)
 {
-	if (data->raycaster->side == 0 || data->raycaster->side == 1
-		|| data->raycaster->side == 4 || data->raycaster->side == 5
-		|| data->raycaster->side == 8 || data->raycaster->side == 9
-		|| data->raycaster->side == 12 || data->raycaster->side == 13
-		|| data->raycaster->side == 16 || data->raycaster->side == 17
-		|| data->raycaster->side == 20 || data->raycaster->side == 21
-		|| data->raycaster->side == 24 || data->raycaster->side == 25
-		|| data->raycaster->side == 28 || data->raycaster->side == 29
-		|| data->raycaster->side == 32 || data->raycaster->side == 33
-		|| data->raycaster->side == 36 || data->raycaster->side == 37
-		|| data->raycaster->side == 40 || data->raycaster->side == 41)
+	int	side;
+
+	side = data->raycaster->side;
+	if (side == 0 || side == 1 || side == 4 || side == 5 || side == 8
+		|| side == 9 || side == 12 || side == 13 || side == 16 || side == 17
+		|| side == 20 || side == 21 || side == 24 || side == 25 || side == 28
+		|| side == 29 || side == 32 || side == 33 || side == 36 || side == 37
+		|| side == 40 || side == 41)
 		data->raycaster->ray_len = (data->raycaster->ray_len_x
 				- data->raycaster->delta_dist_x);
 	else

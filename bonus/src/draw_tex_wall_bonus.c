@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_tex_wall_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:51:54 by maison            #+#    #+#             */
-/*   Updated: 2023/03/02 22:07:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/05 10:19:17 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 void	draw_tex_wall(t_vault *data, int pixels_2d)
 {
-	if (data->raycaster->side == 16 || data->raycaster->side == 36 )
+	if (data->raycaster->side == 16 || data->raycaster->side == 36)
 	{
 		find_tex_hit(data, data->tex->tex_e);
 		draw_line(data, data->tex->tex_e, data->tex->east, pixels_2d);
@@ -102,14 +102,19 @@ void	draw_tex_wall_3(t_vault *data, int pixels_2d)
 		find_tex_hit(data, data->tex->tex_torrent);
 		draw_line(data, data->tex->tex_torrent, data->tex->torrent, pixels_2d);
 	}
+	draw_tex_wall_4(data, pixels_2d);
+}
+
+void	draw_tex_wall_4(t_vault *data, int pixels_2d)
+{
 	if (data->raycaster->side == 38 || data->raycaster->side == 39)
 	{
 		find_tex_hit(data, data->tex->tex_torrent);
 		draw_line(data, data->tex->tex_torrent, data->tex->torrent, pixels_2d);
 	}
-	if (data->raycaster->side == 13 || data->raycaster->side == 40 
+	if (data->raycaster->side == 13 || data->raycaster->side == 40
 		|| data->raycaster->side == 41
-		|| data->raycaster->side == 43  || data->raycaster->side == 35)
+		|| data->raycaster->side == 43 || data->raycaster->side == 35)
 	{
 		find_tex_hit(data, data->tex->tex_wall);
 		draw_line(data, data->tex->tex_wall, data->tex->wall, pixels_2d);
@@ -122,6 +127,7 @@ void	draw_tex_wall_3(t_vault *data, int pixels_2d)
 	if (data->raycaster->side == 12)
 	{
 		find_tex_hit(data, data->tex->tex_ewurstei);
-		draw_line(data, data->tex->tex_ewurstei, data->tex->ewurstei, pixels_2d);
+		draw_line(data, data->tex->tex_ewurstei,
+			data->tex->ewurstei, pixels_2d);
 	}
 }
