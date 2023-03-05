@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_wall_textures_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:46:07 by maison            #+#    #+#             */
-/*   Updated: 2023/03/02 21:25:13 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/05 10:52:36 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	check_type_wall(t_vault *data, int *impact)
 void	check_bonus_type_wall(t_vault *data, int *impact)
 {
 	if (data->map->map[data->raycaster->row][data->raycaster->col] == 'D')
-		check_type_wall_D(data, impact);
+		check_type_wall_d(data, impact);
 	else if (data->map->map[data->raycaster->row][data->raycaster->col] == '3')
 		check_type_wall_3(data, impact);
 	else if (data->map->map[data->raycaster->row][data->raycaster->col] == '4')
@@ -60,7 +60,7 @@ void	check_bonus_type_wall(t_vault *data, int *impact)
 // side = 2 -> SUD (S)
 // side = 3 -> NORD (N)
 
-void	check_type_wall_D(t_vault *data, int *impact)
+void	check_type_wall_d(t_vault *data, int *impact)
 {
 	*impact = 1;
 	if (data->raycaster->side == 0)

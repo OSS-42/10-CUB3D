@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/04 11:56:08 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/05 11:38:20 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,62 +147,68 @@ typedef struct s_game
 
 typedef struct s_tex
 {
-	xpm_t	*tex_n;
-	xpm_t	*tex_s;
-	xpm_t	*tex_e;
-	xpm_t	*tex_w;
-	xpm_t	*tex_window;
-	xpm_t	*tex_local;
-	xpm_t	*tex_lobby;
-	xpm_t	*tex_reunion;
-	xpm_t	*tex_cuisine;
-	xpm_t	*tex_jeux;
-	xpm_t	*tex_couloir;
-	xpm_t	*tex_detente;
-	xpm_t	*tex_c1;
-	xpm_t	*tex_c2;
-	xpm_t	*tex_c3;
-	xpm_t	*tex_lounge;
-	xpm_t	*tex_bocal;
-	xpm_t	*tex_amphi;
-	xpm_t	*tex_secret;
-	xpm_t	*tex_door;
-	xpm_t	*tex_dungeon;
-	xpm_t	*tex_tribute;
-	xpm_t	*tex_marc;
-	xpm_t	*tex_armada;
-	xpm_t	*tex_torrent;
-	xpm_t	*tex_wall;
-	xpm_t	*tex_mbertin;
-	xpm_t	*tex_ewurstei;
-	int		**north;
-	int		**south;
-	int		**east;
-	int		**west;
-	int		**local;
-	int		**window;
-	int		**lobby;
-	int		**lounge;
-	int		**cuisine;
-	int		**reunion;
-	int		**jeux;
-	int		**couloir;
-	int		**detente;
-	int		**c1;
-	int		**c2;
-	int		**c3;
-	int		**bocal;
-	int		**amphi;
-	int		**secret;
-	int		**door;
-	int		**dungeon;
-	int		**tribute;
-	int		**armada;
-	int		**marc;
-	int		**torrent;
-	int		**wall;
-	int		**mbertin;
-	int		**ewurstei;
+	xpm_t		*tex_n;
+	xpm_t		*tex_s;
+	xpm_t		*tex_e;
+	xpm_t		*tex_w;
+	xpm_t		*tex_window;
+	xpm_t		*tex_local;
+	xpm_t		*tex_lobby;
+	xpm_t		*tex_reunion;
+	xpm_t		*tex_cuisine;
+	xpm_t		*tex_jeux;
+	xpm_t		*tex_couloir;
+	xpm_t		*tex_detente;
+	xpm_t		*tex_c1;
+	xpm_t		*tex_c2;
+	xpm_t		*tex_c3;
+	xpm_t		*tex_lounge;
+	xpm_t		*tex_bocal;
+	xpm_t		*tex_amphi;
+	xpm_t		*tex_secret;
+	xpm_t		*tex_door;
+	xpm_t		*tex_dungeon;
+	xpm_t		*tex_tribute;
+	xpm_t		*tex_marc;
+	xpm_t		*tex_armada;
+	xpm_t		*tex_torrent;
+	xpm_t		*tex_wall;
+	xpm_t		*tex_mbertin;
+	xpm_t		*tex_ewurstei;
+	int			**north;
+	int			**south;
+	int			**east;
+	int			**west;
+	int			**local;
+	int			**window;
+	int			**lobby;
+	int			**lounge;
+	int			**cuisine;
+	int			**reunion;
+	int			**jeux;
+	int			**couloir;
+	int			**detente;
+	int			**c1;
+	int			**c2;
+	int			**c3;
+	int			**bocal;
+	int			**amphi;
+	int			**secret;
+	int			**door;
+	int			**dungeon;
+	int			**tribute;
+	int			**armada;
+	int			**marc;
+	int			**torrent;
+	int			**wall;
+	int			**mbertin;
+	int			**ewurstei;
+	double		brightness_factor;
+	uint32_t	dark;
+	uint32_t	color;
+	double		step;
+	double		tex_pos;
+	int			tex_y;
 }	t_tex;
 
 typedef struct s_hud_loc
@@ -277,189 +283,199 @@ typedef struct s_vault
 /***** FONCTIONS *****/
 
 /***** cub3D.c *****/
-int		create_game(t_vault *data);
-void	init_data(t_vault *data, char **argv);
-void	quit_game(t_vault *data);
+int			create_game(t_vault *data);
+void		init_data(t_vault *data, char **argv);
+void		quit_game(t_vault *data);
 
 /***** error_management.c *****/
-void	errors(t_vault *data);
-void	errors_2(t_vault *data);
-void	free_map(t_vault *data);
-void	destroy_and_free_level(t_vault *data);
-void	free_all(t_vault *data);
+void		errors(t_vault *data);
+void		errors_2(t_vault *data);
+void		free_map(t_vault *data);
+void		destroy_and_free_level(t_vault *data);
+void		free_all(t_vault *data);
 
 /***** scene_parsing.c *****/
-void	check_scene_name(t_vault *data);
-void	scene_to_array(t_vault *data);
-void	check_scene_params(t_vault *data);
-void	check_scene_syntax(t_vault *data, int *x);
-void	check_random_scene_params(t_vault *data, int i);
+void		check_scene_name(t_vault *data);
+void		scene_to_array(t_vault *data);
+void		check_scene_params(t_vault *data);
+void		check_scene_syntax(t_vault *data, int *x);
+void		check_random_scene_params(t_vault *data, int i);
 
 /***** scene_parsing_utils.c *****/
-void	check_fd(t_vault *data, int fd);
-int		check_param_existence(t_vault *data);
-void	skip_white_space(t_vault *data, int x, int y, int *slen);
-int		isinset(char *s1, char *set);
-void	check_valid_char(t_vault *data, int x);
+void		check_fd(t_vault *data, int fd);
+int			check_param_existence(t_vault *data);
+void		skip_white_space(t_vault *data, int x, int y, int *slen);
+int			isinset(char *s1, char *set);
+void		check_valid_char(t_vault *data, int x);
 
 /***** check_orientation_params.c *****/
-void	check_no_params(t_vault *data, int x, int y, int slen);
-void	check_so_params(t_vault *data, int x, int y, int slen);
-void	check_we_params(t_vault *data, int x, int y, int slen);
-void	check_ea_params(t_vault *data, int x, int y, int slen);
+void		check_no_params(t_vault *data, int x, int y, int slen);
+void		check_so_params(t_vault *data, int x, int y, int slen);
+void		check_we_params(t_vault *data, int x, int y, int slen);
+void		check_ea_params(t_vault *data, int x, int y, int slen);
 
 /***** check_fc_params.c *****/
-void	check_f_params(t_vault *data, int x, int y, int slen);
-void	check_c_params(t_vault *data, int x, int y, int slen);
-void	check_color_code(t_vault *data);
-int		correct_rgb_char(char *rgb_code);
+void		check_f_params(t_vault *data, int x, int y, int slen);
+void		check_c_params(t_vault *data, int x, int y, int slen);
+void		check_color_code(t_vault *data);
+int			correct_rgb_char(char *rgb_code);
 
 /***** cub3d_utils.c *****/
-int		check_white_spaces(char c);
-int		ft_find_char(char *src, char c);
-void	correct_rgb_range(t_vault *data, char *rgb_code, char c);
-void	rgb_to_hex(t_vault *data, char flag);
-int		rgb_to_hex2(int r, int g, int b, int a);
+int			check_white_spaces(char c);
+int			ft_find_char(char *src, char c);
+void		correct_rgb_range(t_vault *data, char *rgb_code, char c);
+void		rgb_to_hex(t_vault *data, char flag);
+int			rgb_to_hex2(int r, int g, int b, int a);
 
 /***** map_parsing.c *****/
-void	check_map(t_vault *data);
-void	find_player_start(t_vault *data);
-void	fill_map_void(t_vault *data);
-void	replace_voids(t_vault *data, int x);
-void	fill_rest_of_line(t_vault *data, int x);
+void		check_map(t_vault *data);
+void		find_player_start(t_vault *data);
+void		fill_map_void(t_vault *data);
+void		replace_voids(t_vault *data, int x);
+void		fill_rest_of_line(t_vault *data, int x);
 
 /***** map_parsing_utils.c *****/
-void	map_to_new_array(t_vault *data, int x);
-void	find_map_start(t_vault *data);
-void	map_max_lenght(t_vault *data);
+void		map_to_new_array(t_vault *data, int x);
+void		find_map_start(t_vault *data);
+void		map_max_lenght(t_vault *data);
 
 /***** check_ceiling_rgb.c *****/
-void	extract_r_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
-void	extract_g_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
-void	extract_b_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
+void		extract_r_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
+void		extract_g_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
+void		extract_b_ceiling(t_vault *data, char *rgb_code, int *i, int *len);
 
 /***** check_floor_rbg.c *****/
-void	extract_r_floor(t_vault *data, char *rgb_code, int *i, int *len);
-void	extract_g_floor(t_vault *data, char *rgb_code, int *i, int *len);
-void	extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len);
+void		extract_r_floor(t_vault *data, char *rgb_code, int *i, int *len);
+void		extract_g_floor(t_vault *data, char *rgb_code, int *i, int *len);
+void		extract_b_floor(t_vault *data, char *rgb_code, int *i, int *len);
 
 /***** flood_fill *****/
-void	flood_fill(t_vault *data, int x, int y, char **temp);
+void		flood_fill(t_vault *data, int x, int y, char **temp);
 
 /***** init_player.c *****/
-void	load_player(t_vault *data);
-void	init_player(t_vault *data);
-void	find_orientation(t_vault *data, char direction);
-void	find_orientation_2(t_vault *data, char direction);
-void	draw_player(t_vault *data);
+void		load_player(t_vault *data);
+void		init_player(t_vault *data);
+void		find_orientation(t_vault *data, char direction);
+void		find_orientation_2(t_vault *data, char direction);
+void		draw_player(t_vault *data);
 
 /***** init_hud.c *****/
-void	load_hud(t_vault *data);
-void	draw_hud(t_vault *data);
-void	draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff,
-			int pixels_2d);
-void	draw_tex_location2(t_vault *data, xpm_t *texture, int **tex_buff,
-			int pixels_2d);
+void		load_hud(t_vault *data);
+void		draw_hud(t_vault *data);
+void		draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff,
+				int pixels_2d);
+void		draw_tex_location2(t_vault *data, xpm_t *texture, int **tex_buff,
+				int pixels_2d);
 
 /***** raycasting.c *****/
-void	raycaster(t_vault *data);
-void	dda(t_vault *data);
-void	creating_3d_img(t_vault *data, int pixels_2d);
-void	dist_and_pos(t_vault *data);
-void	dist_and_pos2(t_vault *data);
+void		raycaster(t_vault *data);
+void		dda(t_vault *data);
+void		creating_3d_img(t_vault *data, int pixels_2d);
+void		dist_and_pos(t_vault *data);
+void		dist_and_pos2(t_vault *data);
 
 /***** check_wall_texture_bonus.c *****/
-void	check_type_wall(t_vault *data, int *impact);
-void	check_bonus_type_wall(t_vault *data, int *impact);
-void	check_type_wall_D(t_vault *data, int *impact);
-void	check_type_wall_3(t_vault *data, int *impact);
-void	check_type_wall_4(t_vault *data, int *impact);
+void		check_type_wall(t_vault *data, int *impact);
+void		check_bonus_type_wall(t_vault *data, int *impact);
+void		check_type_wall_d(t_vault *data, int *impact);
+void		check_type_wall_3(t_vault *data, int *impact);
+void		check_type_wall_4(t_vault *data, int *impact);
 
 /***** check_wall_texture_bonus2.c *****/
-void	check_type_wall_5(t_vault *data, int *impact);
-void	check_type_wall_6(t_vault *data, int *impact);
-void	check_type_wall_7(t_vault *data, int *impact);
-void	check_type_wall_8(t_vault *data, int *impact);
-void	check_type_wall_9(t_vault *data, int *impact);
-void	check_type_wall_Z(t_vault *data, int *impact);
+void		check_type_wall_5(t_vault *data, int *impact);
+void		check_type_wall_6(t_vault *data, int *impact);
+void		check_type_wall_7(t_vault *data, int *impact);
+void		check_type_wall_8(t_vault *data, int *impact);
+void		check_type_wall_9(t_vault *data, int *impact);
+void		check_type_wall_Z(t_vault *data, int *impact);
 
 /***** draw_wall_texture_bonus.c *****/
-void	draw_tex_wall(t_vault *data, int pixels_2d);
-void	draw_tex_wall_2(t_vault *data, int pixels_2d);
-void	draw_tex_wall_3(t_vault *data, int pixels_2d);
+void		draw_tex_wall(t_vault *data, int pixels_2d);
+void		draw_tex_wall_2(t_vault *data, int pixels_2d);
+void		draw_tex_wall_3(t_vault *data, int pixels_2d);
+void		draw_tex_wall_4(t_vault *data, int pixels_2d);
 
 /***** textures.c *****/
-void	load_textures(t_vault *data);
-int		**get_texture(xpm_t *tex);
-void	find_tex_hit(t_vault *data, xpm_t *texture);
-void	find_tex_hit2(t_vault *data, xpm_t *texture);
-void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d);
-double calculate_brightness_factor(t_vault *data);
-uint32_t darken_color(uint32_t color, double brightness_factor);
+void		load_textures(t_vault *data);
+int			**get_texture(xpm_t *tex);
+void		draw_line(t_vault *data, xpm_t *texture, int **tex_buff,
+				int pixels_2d);
+double		calculate_brightness_factor(t_vault *data);
+uint32_t	darken_color(uint32_t color, double brightness_factor,
+				uint32_t dark_color);
+
+/***** textures_utils.c *****/
+void		find_tex_hit(t_vault *data, xpm_t *texture);
+void		find_tex_hit2(t_vault *data, xpm_t *texture, int side);
 
 /***** utils_bonus.c *****/
-void	check_wall_path(t_vault *data);
-void	full_line_hud_hor(mlx_image_t *hud, int screen_y, unsigned int color);
-void	full_line_hud_ver(mlx_image_t *hud, int screen_x, unsigned int color);
-void	reinit_and_draw(t_vault *data);
-int		not_wall(t_vault *data, int row, int col);
+void		check_wall_path(t_vault *data);
+void		full_line_hud_hor(mlx_image_t *hud, int screen_y,
+				unsigned int color);
+void		full_line_hud_ver(mlx_image_t *hud, int screen_x,
+				unsigned int color);
+void		reinit_and_draw(t_vault *data);
+int			not_wall(t_vault *data, int row, int col);
 
 /***** extra_textures.c *****/
-void	load_extra_textures(t_vault *data);
-void	check_extra_textures(t_vault *data);
-void	get_extra_textures(t_vault *data);
+void		load_extra_textures(t_vault *data);
+void		check_extra_textures(t_vault *data);
+void		get_extra_textures(t_vault *data);
 
 /***** init_minimap.c *****/
-void	reinit_minimap(t_vault *data);
-void	show_minimap(t_vault *data);
-void	load_minimap(t_vault *data);
-void	draw_minimap(t_vault *data);
-void	draw_tiles_loop(t_vault *data, int screen_x, int screen_y);
+void		reinit_minimap(t_vault *data);
+void		show_minimap(t_vault *data);
+void		load_minimap(t_vault *data);
+void		draw_minimap(t_vault *data);
+void		draw_tiles_loop(t_vault *data, int screen_x, int screen_y);
 
 /***** minimap_utils.c *****/
-void	draw_tiles(t_vault *data,
-			int screen_x, int screen_y, unsigned int color);
-void	full_line_minimap_hor(t_vault *data, int screen_y, unsigned int color);
-void	full_line_minimap_ver(t_vault *data, int screen_x, unsigned int color);
-void	draw_ray_minimap(t_vault *data);
+void		draw_tiles(t_vault *data,
+				int screen_x, int screen_y, unsigned int color);
+void		full_line_minimap_hor(t_vault *data, int screen_y,
+				unsigned int color);
+void		full_line_minimap_ver(t_vault *data, int screen_x,
+				unsigned int color);
+void		draw_ray_minimap(t_vault *data);
+int			is_a_wall(t_vault *data, int row, int line);
 
 /***** moves.c *****/
-void	move_forward(t_vault *data, int check_row, int check_col);
-void	move_backward(t_vault *data, int check_row, int check_col);
-void	move_left(t_vault *data, int check_row, int check_col);
-void	move_right(t_vault *data, int check_row, int check_col);
-void	move_mouse(double x, double y, void *temp);
+void		move_forward(t_vault *data, int check_row, int check_col);
+void		move_backward(t_vault *data, int check_row, int check_col);
+void		move_left(t_vault *data, int check_row, int check_col);
+void		move_right(t_vault *data, int check_row, int check_col);
+void		move_mouse(double x, double y, void *temp);
 
 /***** camera.c *****/
-void	reinit_hud(t_vault *data);
-void	draw_pov(t_vault *data);
-void	rotate_left(t_vault *data);
-void	rotate_right(t_vault *data);
+void		reinit_hud(t_vault *data);
+void		draw_pov(t_vault *data);
+void		rotate_left(t_vault *data);
+void		rotate_right(t_vault *data);
 
 /***** init_3d.c *****/
-void	load_3d(t_vault *data);
-void	reinit_3d(t_vault *data);
-void	background_3d(t_vault *data);
+void		load_3d(t_vault *data);
+void		reinit_3d(t_vault *data);
+void		background_3d(t_vault *data);
 
 /***** audio.c *****/
-void	play_song(t_vault *data);
-void	check_and_play_song(t_vault *data);
+void		play_song(t_vault *data);
+void		check_and_play_song(t_vault *data);
 
 /***** keyhandler.c *****/
-void	keyhandler(mlx_key_data_t keydata, void *param);
-void	keyhandler_2(mlx_key_data_t keydata, t_vault *data);
-void	open_door(t_vault *data);
+void		keyhandler(mlx_key_data_t keydata, void *param);
+void		keyhandler_2(mlx_key_data_t keydata, t_vault *data);
+void		open_door(t_vault *data);
 
 /***** sprites_bonus.c *****/
-void	sprite_casting(t_vault *data);
-int		compareSprites(t_sprites *a, t_sprites *b);
-void	sortSprites(int *order, double *dist, int amount);
-void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
+void		sprite_casting(t_vault *data);
+int			compareSprites(t_sprites *a, t_sprites *b);
+void		sortSprites(int *order, double *dist, int amount);
+void		draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
 
 /***** player_location_bonus.c *****/
-void	player_location(t_vault *data, int col, int row);
-void	player_location_2(t_vault *data, int col, int row);
-void	player_location_3(t_vault *data, int col, int row);
-void	player_location_4(t_vault *data, int col, int row);
+void		player_location(t_vault *data, int col, int row);
+void		player_location_2(t_vault *data, int col, int row);
+void		player_location_3(t_vault *data, int col, int row);
+void		player_location_4(t_vault *data, int col, int row);
 
 #endif

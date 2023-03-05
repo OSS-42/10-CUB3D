@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:31:14 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/05 10:23:42 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,20 @@ void	draw_ray_minimap(t_vault *data)
 		y = y + data->raycaster->pdy_ray;
 		len++;
 	}
+}
+
+int	is_a_wall(t_vault *data, int row, int line)
+{
+	if (data->map->map[row][line] == '1'
+		|| data->map->map[row][line] == '2'
+		|| data->map->map[row][line] == '3'
+		|| data->map->map[row][line] == '4'
+		|| data->map->map[row][line] == '5'
+		|| data->map->map[row][line] == '6'
+		|| data->map->map[row][line] == '7'
+		|| data->map->map[row][line] == '8'
+		|| data->map->map[row][line] == '9'
+		|| data->map->map[row][line] == 'Z')
+		return (TRUE);
+	return (FALSE);
 }

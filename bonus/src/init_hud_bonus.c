@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:00:20 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/04 11:59:19 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/05 10:27:20 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	draw_hud(t_vault *data)
 	draw_tex_location2(data, data->hud_loc->tex_p_loc, data->hud_loc->p_loc, 1);
 }
 
-void	draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
+void	draw_tex_location(t_vault *data, xpm_t *texture,
+	int **tex_buff, int pixels_2d)
 {
 	int	screen_y;
 
@@ -47,7 +48,8 @@ void	draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff, int pixels
 	}
 }
 
-void	draw_tex_location2(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
+void	draw_tex_location2(t_vault *data, xpm_t *texture,
+	int **tex_buff, int pixels_2d)
 {
 	int	screen_y;
 
