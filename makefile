@@ -149,6 +149,7 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/player_location_bonus.c \
 				bonus/src/check_wall_textures_bonus.c \
 				bonus/src/check_wall_textures_bonus2.c \
+				bonus/src/check_wall_textures_bonus3.c \
 				bonus/src/draw_tex_wall_bonus.c
 
 bonus: intro_bonus art_intro $(NAME_BONUS)

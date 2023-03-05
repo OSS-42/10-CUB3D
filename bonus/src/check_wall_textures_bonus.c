@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:46:07 by maison            #+#    #+#             */
-/*   Updated: 2023/03/05 10:52:36 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/05 11:48:01 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	check_bonus_type_wall(t_vault *data, int *impact)
 	else if (data->map->map[data->raycaster->row][data->raycaster->col] == '9')
 		check_type_wall_9(data, impact);
 	else if (data->map->map[data->raycaster->row][data->raycaster->col] == 'Z')
-		check_type_wall_Z(data, impact);
+		check_type_wall_z(data, impact);
 }
 
 // side = 0 -> on touche (regarde) le mur EST (E)

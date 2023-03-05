@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 10:25:35 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/05 12:03:29 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	draw_tiles_loop(t_vault *data, int screen_x, int screen_y)
 		if (data->map->map[data->minimap->x][data->minimap->y] == '0'
 			|| data->map->map[data->minimap->x][data->minimap->y] == 'W')
 			draw_tiles(data, screen_x, screen_y, 0x6E99FFFF);
-		else if (is_a_wall(data, data->minimap->x, data->minimap->y) == TRUE)
+		else if (is_not_wall(data, data->minimap->x, data->minimap->y) == FALSE)
 			draw_tiles(data, screen_x, screen_y, 0xFFFFFFFF);
 		else if (data->map->map[data->minimap->x][data->minimap->y] == '.')
 			draw_tiles(data, screen_x, screen_y, 0x000000FF);

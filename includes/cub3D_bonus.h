@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 11:38:20 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/05 12:01:41 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,7 +387,9 @@ void		check_type_wall_6(t_vault *data, int *impact);
 void		check_type_wall_7(t_vault *data, int *impact);
 void		check_type_wall_8(t_vault *data, int *impact);
 void		check_type_wall_9(t_vault *data, int *impact);
-void		check_type_wall_Z(t_vault *data, int *impact);
+void		check_type_wall_z(t_vault *data, int *impact);
+
+/***** check_wall_texture_bonus3.c *****/
 
 /***** draw_wall_texture_bonus.c *****/
 void		draw_tex_wall(t_vault *data, int pixels_2d);
@@ -415,7 +417,7 @@ void		full_line_hud_hor(mlx_image_t *hud, int screen_y,
 void		full_line_hud_ver(mlx_image_t *hud, int screen_x,
 				unsigned int color);
 void		reinit_and_draw(t_vault *data);
-int			not_wall(t_vault *data, int row, int col);
+int			is_not_wall(t_vault *data, int row, int col);
 
 /***** extra_textures.c *****/
 void		load_extra_textures(t_vault *data);
@@ -437,7 +439,6 @@ void		full_line_minimap_hor(t_vault *data, int screen_y,
 void		full_line_minimap_ver(t_vault *data, int screen_x,
 				unsigned int color);
 void		draw_ray_minimap(t_vault *data);
-int			is_a_wall(t_vault *data, int row, int line);
 
 /***** moves.c *****/
 void		move_forward(t_vault *data, int check_row, int check_col);
