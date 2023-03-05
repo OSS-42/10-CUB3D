@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 12:26:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/05 12:27:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -486,12 +486,12 @@ void		player_location_4(t_vault *data, int col, int row);
 // void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
 
 /***** sprites2_bonus.c *****/
-void	sprite_casting(t_vault *data);
-void	distance_to_camera(t_vault *data, t_sprites *sprite);
-void	transform_inverse_matrix(t_vault *data);
-void	calculate_sprite_height(t_vault *data);
-void	calculate_sprite_width(t_vault *data);
-void	draw_sprite(t_vault *data, int **tex_buff);
-void	sort_sprites(int *order, double *distance, int count);
+void		sprite_casting(t_vault *data);
+void		distance_to_camera(t_vault *data, t_sprites *sprite);
+void		transform_inverse_matrix(t_vault *data);
+void		calculate_sprite_height(t_vault *data);
+void		calculate_sprite_width(t_vault *data);
+void		draw_sprite(t_vault *data, int **tex_buff);
+void		sort_sprites(int *order, double *distance, int count);
 
 #endif
