@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/04 11:56:08 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/04 22:57:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,16 +450,25 @@ void	keyhandler(mlx_key_data_t keydata, void *param);
 void	keyhandler_2(mlx_key_data_t keydata, t_vault *data);
 void	open_door(t_vault *data);
 
-/***** sprites_bonus.c *****/
-void	sprite_casting(t_vault *data);
-int		compareSprites(t_sprites *a, t_sprites *b);
-void	sortSprites(int *order, double *dist, int amount);
-void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
-
 /***** player_location_bonus.c *****/
 void	player_location(t_vault *data, int col, int row);
 void	player_location_2(t_vault *data, int col, int row);
 void	player_location_3(t_vault *data, int col, int row);
 void	player_location_4(t_vault *data, int col, int row);
+
+// /***** sprites_bonus.c *****/
+// void	sprite_casting(t_vault *data);
+// int		compareSprites(t_sprites *a, t_sprites *b);
+// void	sortSprites(int *order, double *dist, int amount);
+// void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
+
+/***** sprites2_bonus.c *****/
+void	sprite_casting(t_vault *data);
+void	distance_to_camera(t_vault *data, t_sprites *sprite);
+void	transform_inverse_matrix(t_vault *data);
+void	calculate_sprite_height(t_vault *data);
+void	calculate_sprite_width(t_vault *data);
+void	draw_sprite(t_vault *data, int **tex_buff);
+void	sort_sprites(int *order, double *distance, int count);
 
 #endif

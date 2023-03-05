@@ -6,8 +6,8 @@ NAME_BONUS = cub3D_bonus
 
 CC = gcc
 #CC = gcc-11
-CFLAGS = -g -Wall -Werror -Wextra
-#CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+#CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 RM = rm -rf
 
 #LSAN_OPTIONS=detect_leaks=1 ./cub3D
@@ -144,7 +144,7 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/audio_bonus.c \
 				bonus/src/keyhandler_bonus.c \
 				bonus/src/minimap_utils_bonus.c \
-				bonus/src/sprites_bonus.c \
+				bonus/src/sprites2_bonus.c \
 				bonus/src/player_location_bonus.c \
 				bonus/src/check_wall_textures_bonus.c \
 				bonus/src/check_wall_textures_bonus2.c \
