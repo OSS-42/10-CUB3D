@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 12:27:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/06 09:01:46 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define PI 3.1415926535
 # define WIDTH 1280
 # define HEIGHT 720
-# define TEXWIDTH 64
-# define TEXHEIGHT 64
+# define TEXWIDTH 256
+# define TEXHEIGHT 256
 # define RED 0xFF0000FF
 # define YELLOW 0xFFFF00FF
 # define GREEN 0x00FF00FF
@@ -103,7 +103,7 @@ typedef struct s_minimap
 	double		tile_size;
 }	t_minimap;
 
-#define numSprites 19
+#define numSprites 1
 
 typedef struct s_sprites
 {
