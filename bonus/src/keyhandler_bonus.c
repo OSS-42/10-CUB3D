@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhandler_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/01 16:30:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/06 09:51:15 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,24 @@ void	open_door(t_vault *data)
 	else if (data->map->map[row][col] == 'Z')
 	{
 		system("afplay ./assets/audio/H2G2-door_open.mp3&");
+		system("afplay ./assets/audio/exam-final.mp3&");
 		data->map->map[row][col] = 'X';
 		reinit_and_draw(data);
+	}
+}
+
+void	close_door(t_vault *data)
+{
+	if (data->map->map[data->plr->old_row][data->plr->old_col] == 'W'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'W')
+	{
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
+	}
+	else if (data->map->map[data->plr->old_row][data->plr->old_col] == 'X'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'X')
+	{
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'Z';
 	}
 }

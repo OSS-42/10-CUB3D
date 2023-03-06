@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 12:04:23 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/06 09:55:06 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 		data->plr->old_col = data->plr->col;
 		data->plr->col += data->plr->pdx * data->raycaster->mov_speed;
 	}
-	check_and_play_song(data);
+	close_door(data);
 }
 
 void	move_backward(t_vault *data, int check_row, int check_col)
@@ -47,7 +47,7 @@ void	move_backward(t_vault *data, int check_row, int check_col)
 		data->plr->old_col = data->plr->col;
 		data->plr->col -= data->plr->pdx * data->raycaster->mov_speed;
 	}
-	check_and_play_song(data);
+	close_door(data);
 }
 
 void	move_left(t_vault *data, int check_row, int check_col)
@@ -68,7 +68,7 @@ void	move_left(t_vault *data, int check_row, int check_col)
 		data->plr->col -= data->raycaster->plane_x
 			* data->raycaster->mov_speed;
 	}
-	check_and_play_song(data);
+	close_door(data);
 }
 
 void	move_right(t_vault *data, int check_row, int check_col)
@@ -89,7 +89,7 @@ void	move_right(t_vault *data, int check_row, int check_col)
 		data->plr->col += data->raycaster->plane_x
 			* data->raycaster->mov_speed;
 	}
-	check_and_play_song(data);
+	close_door(data);
 }
 
 void	move_mouse(double xpos, double ypos, void *temp)
@@ -103,7 +103,7 @@ void	move_mouse(double xpos, double ypos, void *temp)
 	data = (t_vault *) temp;
 	old_player_pdx = data->plr->pdx;
 	delta_x = xpos - data->old_x_cursor;
-	delta_x *= 0.005;
+	delta_x *= 0.05;
 	data->plr->pdx = data->plr->pdx * cos(-delta_x)
 		- data->plr->pdy * sin(delta_x);
 	data->plr->pdy = old_player_pdx * sin(delta_x)

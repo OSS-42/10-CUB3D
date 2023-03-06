@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 12:01:41 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/06 09:50:21 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,14 +458,11 @@ void		load_3d(t_vault *data);
 void		reinit_3d(t_vault *data);
 void		background_3d(t_vault *data);
 
-/***** audio.c *****/
-void		play_song(t_vault *data);
-void		check_and_play_song(t_vault *data);
-
 /***** keyhandler.c *****/
 void		keyhandler(mlx_key_data_t keydata, void *param);
 void		keyhandler_2(mlx_key_data_t keydata, t_vault *data);
 void		open_door(t_vault *data);
+void		close_door(t_vault *data);
 
 /***** sprites_bonus.c *****/
 void		sprite_casting(t_vault *data);

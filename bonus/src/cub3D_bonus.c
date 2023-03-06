@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/03 15:44:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/06 09:52:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	quit_game(t_vault *data)
 {
 	printf("%s\n", "Au revoir !");
-	system("killall afplay");
 	free_all(data);
 }
 
@@ -27,7 +26,6 @@ int	create_game(t_vault *data)
 			"Une autre journée à 42 Québec !", FALSE);
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
-	play_song(data);
 	load_textures(data);
 	load_3d(data);
 	load_minimap(data);
