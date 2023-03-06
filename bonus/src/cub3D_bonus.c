@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/06 09:52:07 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/06 10:16:09 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	init_data(t_vault *data, char **argv)
 	data->hud_loc = ft_calloc(1, sizeof(t_hud_loc));
 	data->tex = ft_calloc(1, sizeof(t_tex));
 	data->raycaster = ft_calloc(1, sizeof(t_rays));
-	data->sp_param = ft_calloc(1, sizeof(t_sp_param));
 	data->scene_param->r_ceiling = -1;
 	data->scene_param->g_ceiling = -1;
 	data->scene_param->b_ceiling = -1;

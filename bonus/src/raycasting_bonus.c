@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 10:33:33 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/06 10:17:35 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ void	raycaster(t_vault *data)
 		data->raycaster->screen_2d_x = 2 * pixels_2d / WIDTH - 1;
 		dist_and_pos(data);
 		dda(data);
-		creating_3d_img(data, pixels_2d);
+		creating_3d_img(data);
 		draw_tex_wall(data, pixels_2d);
-		// sprite_casting(data);
 		pixels_2d++;
 	}
 }
@@ -105,7 +104,7 @@ void	dda(t_vault *data)
 	}
 }
 
-void	creating_3d_img(t_vault *data, int pixels_2d)
+void	creating_3d_img(t_vault *data)
 {
 	int	side;
 
@@ -123,7 +122,6 @@ void	creating_3d_img(t_vault *data, int pixels_2d)
 	if (data->minimap->on_screen == 1)
 		draw_ray_minimap(data);
 	data->game->wall_height = (int)(HEIGHT / data->raycaster->ray_len);
-	data->sp_param->ZBuffer[pixels_2d] = data->raycaster->ray_len;
 	data->game->wall_start = -data->game->wall_height / 2 + HEIGHT / 2;
 	if (data->game->wall_start < 0)
 		data->game->wall_start = 0;

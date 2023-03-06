@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:43:15 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/02 19:59:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/06 10:09:35 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	flood_fill(t_vault *data, int x, int y, char **temp)
 {
-	//a voir pour les caracteres manquants dans le set qui sont aussi des murs
 	if (!temp[x] || !temp[x][y] || ((x - 1 < 0 || y - 1 < 0
 			|| x + 1 >= data->map->lines || y + 1 >= (int)ft_strlen(temp[x]))
 			&& ft_char_isinset("0 2DZ", temp[x][y] == FALSE))

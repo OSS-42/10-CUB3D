@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/06 09:50:21 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/06 10:17:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,34 +102,6 @@ typedef struct s_minimap
 	mlx_image_t	*minimap;
 	double		tile_size;
 }	t_minimap;
-
-#define numSprites 19
-
-typedef struct s_sprites
-{
-	double	sprite_x;
-	double	sprite_y;
-	unsigned int		texture;
-}	t_sprites;
-
-typedef struct s_sp_param
-{
-	double 	ZBuffer[WIDTH];
-	int		spriteOrder[numSprites];
-	double 	spriteDistance[numSprites];
-	double 	spriteX;
-	double 	spriteY;
-	double	transformX;
-	double	transformY;
-	int		spriteScreenX;
-	int		spriteHeight;
-	int		drawStartY;
-	int		drawEndY;
-	int		spriteWidth;
-	int		drawStartX;
-	int		drawEndX;
-}	t_sp_param;
-
 
 typedef struct s_game
 {
@@ -277,7 +249,6 @@ typedef struct s_vault
 	t_rays		*raycaster;
 	t_tex		*tex;
 	mlx_image_t	*cursor;
-	t_sp_param	*sp_param;
 }	t_vault;
 
 /***** FONCTIONS *****/
@@ -370,7 +341,7 @@ void		draw_tex_location2(t_vault *data, xpm_t *texture, int **tex_buff,
 /***** raycasting.c *****/
 void		raycaster(t_vault *data);
 void		dda(t_vault *data);
-void		creating_3d_img(t_vault *data, int pixels_2d);
+void		creating_3d_img(t_vault *data);
 void		dist_and_pos(t_vault *data);
 void		dist_and_pos2(t_vault *data);
 
@@ -463,12 +434,6 @@ void		keyhandler(mlx_key_data_t keydata, void *param);
 void		keyhandler_2(mlx_key_data_t keydata, t_vault *data);
 void		open_door(t_vault *data);
 void		close_door(t_vault *data);
-
-/***** sprites_bonus.c *****/
-void		sprite_casting(t_vault *data);
-int			compareSprites(t_sprites *a, t_sprites *b);
-void		sortSprites(int *order, double *dist, int amount);
-void		draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
 
 /***** player_location_bonus.c *****/
 void		player_location(t_vault *data, int col, int row);
