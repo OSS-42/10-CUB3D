@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/06 10:03:17 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/06 12:13:43 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ void	open_door(t_vault *data)
 	else if (data->map->map[row][col] == 'Z')
 	{
 		system("afplay ./assets/audio/H2G2-door_open.mp3&");
-		system("afplay ./assets/audio/exam-final.mp3&");
+		if (data->audio == FALSE)
+		{
+			system("afplay ./assets/audio/exam-final.mp3&");
+			data->audio = TRUE;
+		}
 		data->map->map[row][col] = 'X';
 		reinit_and_draw(data);
 	}
