@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/07 18:05:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/07 18:19:09 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@
 # include <fcntl.h>
 # include <math.h>
 
+// pour écran plus grand, plus petit
+// 1920, 1080
+// 640,480
+# define WIDTH 1280
+# define HEIGHT 720
 # define TRUE 1
 # define FALSE 0
 # define PI 3.1415926535
-# define WIDTH 1280
-# define HEIGHT 720
 # define TEXWIDTH 256
 # define TEXHEIGHT 256
 # define RED 0xFF0000FF

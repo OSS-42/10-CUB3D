@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/07 18:05:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/07 18:15:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	delete_images(t_vault *data)
 	mlx_delete_image(data->mlx, data->game->ddd);
 }
 
-// pour écran plus grand
-// data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true);
 int	create_game(t_vault *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT,
