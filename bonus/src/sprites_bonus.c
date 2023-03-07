@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/01 15:11:01 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/06 22:52:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	sprite_casting(t_vault *data)
 	t_sprites	sprite[numSprites];
 
 	// sprite[numSprites] = ft_calloc(1, sizeof(t_sprites));
-	sprite[0] = (t_sprites){33.5, 8.5, 10}; //door in front of playerstart
+	sprite[0] = (t_sprites){33.5, 8.5, 1}; //door in front of playerstart
 	i = 0;
 	while (i < numSprites)
 	{
@@ -28,15 +28,15 @@ void	sprite_casting(t_vault *data)
 		data->sp_param->spriteDistance[i] = ((data->plr->row - sprite[i].sprite_x) * (data->plr->row - sprite[i].sprite_x) + (data->plr->col - sprite[i].sprite_y) * (data->plr->col - sprite[i].sprite_y)); //sqrt not taken, unneeded
 		i++;
 	}
-	sortSprites(data->sp_param->spriteOrder, data->sp_param->spriteDistance, numSprites);
+	sort_sprites(data);
 
 	//after sorting the sprites, do the projection and draw them
 	i = 0;
 	while (i < numSprites)
 	{
 		//translate sprite position to relative to camera
-		data->sp_param->spriteX = sprite[data->sp_param->spriteOrder[i]].sprite_x - data->plr->row;
-		data->sp_param->spriteY = sprite[data->sp_param->spriteOrder[i]].sprite_y - data->plr->col;
+		data->sp_param->spriteY = sprite[data->sp_param->spriteOrder[i]].sprite_x - data->plr->row;
+		data->sp_param->spriteX = sprite[data->sp_param->spriteOrder[i]].sprite_y - data->plr->col;
 		i++;
 	}
 
@@ -119,35 +119,32 @@ void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff)
 // step = 1.0 * texture->texture.height / data->game->wall_height;
 // 	tex_pos = ((double)data->game->wall_start - (double)HEIGHT / 2 + (double)data->game->wall_height / 2) * step;
 
-void sortSprites(int* order, double* dist, int amount)
+void	sort_sprites(t_vault *data)
 {
-	// Create temporary arrays to store the distance and order values
-	double tempDist[amount];
-	int tempOrder[amount];
-	for (int i = 0; i < amount; i++) {
-		tempDist[i] = dist[i];
-		tempOrder[i] = order[i];
-	}
+	int	i;
+	int	j;
+	int	sprite_i;
+	int	sprite_j;
+	double dist_i;
+	double dist_j;
 
-	// Sort the arrays using a simple bubble sort algorithm
-	for (int i = 0; i < amount - 1; i++) {
-		for (int j = 0; j < amount - i - 1; j++) {
-			if (tempDist[j] < tempDist[j + 1]) {
-				// Swap the j-th and (j+1)-th elements of the arrays
-				double tempDistVal = tempDist[j];
-				tempDist[j] = tempDist[j + 1];
-				tempDist[j + 1] = tempDistVal;
-
-				int tempOrderVal = tempOrder[j];
-				tempOrder[j] = tempOrder[j + 1];
-				tempOrder[j + 1] = tempOrderVal;
+	i = 0;
+	while (i < numSprites - 1)
+	{
+		j = i + 1;
+		while (j < numSprites)
+		{
+			sprite_i = data->sp_param->spriteOrder[i];
+			sprite_j = data->sp_param->spriteOrder[j];
+			dist_i = data->sp_param->spriteDistance[sprite_i];
+			dist_j = data->sp_param->spriteDistance[sprite_j];
+			if (dist_i < dist_j)
+			{
+				data->sp_param->spriteOrder[i] = sprite_j;
+				data->sp_param->spriteOrder[j] = sprite_i;
 			}
+			j++;
 		}
-	}
-
-	// Copy the sorted values back to the original arrays
-	for (int i = 0; i < amount; i++) {
-		dist[i] = tempDist[i];
-		order[i] = tempOrder[i];
+		i++;
 	}
 }

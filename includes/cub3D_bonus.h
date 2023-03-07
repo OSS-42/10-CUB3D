@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/06 09:01:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/06 22:43:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,7 @@ typedef struct s_vault
 {
 	void		*img;
 	void		*mlx;
-	void		*mlx_win;
+	// void		*mlx_win;
 	char		**scene;
 	char		*argv;
 	int			map_start;
@@ -473,19 +473,19 @@ void		player_location_2(t_vault *data, int col, int row);
 void		player_location_3(t_vault *data, int col, int row);
 void		player_location_4(t_vault *data, int col, int row);
 
-// /***** sprites_bonus.c *****/
-// void	sprite_casting(t_vault *data);
-// int		compareSprites(t_sprites *a, t_sprites *b);
-// void	sortSprites(int *order, double *dist, int amount);
-// void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
+/***** sprites_bonus.c *****/
+void	sprite_casting(t_vault *data);
+int		compareSprites(t_sprites *a, t_sprites *b);
+void	sort_sprites(t_vault *data);
+void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
 
-/***** sprites2_bonus.c *****/
-void		sprite_casting(t_vault *data);
-void		distance_to_camera(t_vault *data, t_sprites *sprite);
-void		transform_inverse_matrix(t_vault *data);
-void		calculate_sprite_height(t_vault *data);
-void		calculate_sprite_width(t_vault *data);
-void		draw_sprite(t_vault *data, int **tex_buff);
-void		sort_sprites(int *order, double *distance, int count);
+// /***** sprites2_bonus.c *****/
+// void		sprite_casting(t_vault *data);
+// void		distance_to_camera(t_vault *data, t_sprites *sprite);
+// void		transform_inverse_matrix(t_vault *data);
+// void		calculate_sprite_height(t_vault *data);
+// void		calculate_sprite_width(t_vault *data);
+// void		draw_sprite(t_vault *data);
+// void		sort_sprites(t_vault *data);
 
 #endif
