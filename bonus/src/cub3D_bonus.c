@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/07 17:29:20 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/07 18:05:41 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,23 @@ void	quit_game(t_vault *data)
 	free_all(data);
 }
 
+void	loading_game(t_vault *data)
+{
+	load_textures(data);
+	load_minimap(data);
+	load_3d(data);
+	load_player(data);
+	load_hud(data);
+}
+
+void	delete_images(t_vault *data)
+{
+	mlx_delete_image(data->mlx, data->minimap->minimap);
+	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_static);
+	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_dynamic);
+	mlx_delete_image(data->mlx, data->game->ddd);
+}
+
 // pour écran plus grand
 // data->mlx = mlx_init(1920, 1080, "Une autre journée à 42 Québec !", true);
 int	create_game(t_vault *data)
@@ -27,21 +44,14 @@ int	create_game(t_vault *data)
 			"Une autre journée à 42 Québec !", FALSE);
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
-	play_song(data);
-	load_textures(data);
-	load_minimap(data);
-	load_3d(data);
-	load_player(data);
-	load_hud(data);
+	loading_game(data);
+	// mlx_loop_hook(data->mlx, (void *) &raycaster, (void *)data);
 	raycaster(data);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
 	mlx_cursor_hook(data->mlx, &move_mouse, (void *)data);
 	mlx_loop(data->mlx);
-	mlx_delete_image(data->mlx, data->minimap->minimap);
-	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_static);
-	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_dynamic);
-	mlx_delete_image(data->mlx, data->game->ddd);
+	delete_images(data);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
 }

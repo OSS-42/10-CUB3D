@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:00:20 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/07 17:33:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:58:42 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ void	load_hud(t_vault *data)
 {
 	data->hud_loc->hud_loc_static = mlx_new_image(data->mlx, 200, 50);
 	data->hud_loc->hud_loc_dynamic = mlx_new_image(data->mlx, 200, 50);
-	player_location(data, data->plr->row, data->plr->col);
-	draw_tex_location(data, data->tex->tex_local, data->tex->local, 1);
-	draw_tex_location2(data, data->hud_loc->tex_p_loc, data->hud_loc->p_loc, 1);
 	mlx_image_to_window(data->mlx, data->hud_loc->hud_loc_static, 65, 30);
 	mlx_image_to_window(data->mlx, data->hud_loc->hud_loc_dynamic, 265, 30);
 }

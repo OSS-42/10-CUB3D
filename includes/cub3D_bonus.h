@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/07 17:52:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/07 18:05:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,8 @@ typedef struct s_vault
 /***** FONCTIONS *****/
 
 /***** cub3D.c *****/
+void		loading_game(t_vault *data);
+void		delete_images(t_vault *data);
 int			create_game(t_vault *data);
 void		init_data(t_vault *data, char **argv);
 void		quit_game(t_vault *data);
@@ -291,7 +293,6 @@ void		quit_game(t_vault *data);
 void		errors(t_vault *data);
 void		errors_2(t_vault *data);
 void		free_map(t_vault *data);
-void		destroy_and_free_level(t_vault *data);
 void		free_all(t_vault *data);
 
 /***** scene_parsing.c *****/
