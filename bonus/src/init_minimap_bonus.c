@@ -3,35 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 12:03:29 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/07 17:47:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
 
-void	reinit_minimap(t_vault *data)
-{
-	mlx_delete_image(data->mlx, data->minimap->minimap);
-	if (data->minimap->on_screen == 1)
-		load_minimap(data);
-}
-
 void	show_minimap(t_vault *data)
 {
-	if (data->minimap->on_screen == 1)
-	{
-		data->minimap->on_screen = 0;
-		mlx_delete_image(data->mlx, data->minimap->minimap);
-	}
-	else
-	{
-		data->minimap->on_screen = 1;
 		load_minimap(data);
+		draw_minimap(data);
 		draw_player(data);
-	}
 }
 
 void	load_minimap(t_vault *data)
@@ -43,11 +28,6 @@ void	load_minimap(t_vault *data)
 	data->minimap->minimap = mlx_new_image(data->mlx,
 			data->map->max_lenght * data->minimap->tile_size,
 			data->map->lines * data->minimap->tile_size);
-	if (data->minimap->on_screen == 1)
-	{
-		draw_minimap(data);
-		draw_player(data);
-	}
 	mlx_image_to_window(data->mlx,
 		data->minimap->minimap,
 		(WIDTH / 2) - (data->map->max_lenght * data->minimap->tile_size / 2),
@@ -88,7 +68,8 @@ void	draw_tiles_loop(t_vault *data, int screen_x, int screen_y)
 		if (data->map->map[data->minimap->x][data->minimap->y] == '0'
 			|| data->map->map[data->minimap->x][data->minimap->y] == 'W')
 			draw_tiles(data, screen_x, screen_y, 0x6E99FFFF);
-		else if (is_not_wall(data, data->minimap->x, data->minimap->y) == FALSE)
+		else if (is_not_wall_limited(data, data->minimap->x, data->minimap->y)
+			== FALSE)
 			draw_tiles(data, screen_x, screen_y, 0xFFFFFFFF);
 		else if (data->map->map[data->minimap->x][data->minimap->y] == '.')
 			draw_tiles(data, screen_x, screen_y, 0x000000FF);

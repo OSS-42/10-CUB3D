@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   init_hud_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:00:20 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 10:27:20 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/07 17:33:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
 
+void	reinit_hud(t_vault *data)
+{
+	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_static);
+	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_dynamic);
+	load_hud(data);
+}
+
 void	load_hud(t_vault *data)
 {
 	data->hud_loc->hud_loc_static = mlx_new_image(data->mlx, 200, 50);
 	data->hud_loc->hud_loc_dynamic = mlx_new_image(data->mlx, 200, 50);
-	draw_hud(data);
-	mlx_image_to_window(data->mlx, data->hud_loc->hud_loc_static,
-		65, 30);
-	mlx_image_to_window(data->mlx, data->hud_loc->hud_loc_dynamic,
-		265, 30);
-}
-
-void	draw_hud(t_vault *data)
-{
 	player_location(data, data->plr->row, data->plr->col);
 	draw_tex_location(data, data->tex->tex_local, data->tex->local, 1);
 	draw_tex_location2(data, data->hud_loc->tex_p_loc, data->hud_loc->p_loc, 1);
+	mlx_image_to_window(data->mlx, data->hud_loc->hud_loc_static, 65, 30);
+	mlx_image_to_window(data->mlx, data->hud_loc->hud_loc_dynamic, 265, 30);
 }
 
 void	draw_tex_location(t_vault *data, xpm_t *texture,

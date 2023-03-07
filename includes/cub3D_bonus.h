@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/06 22:43:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:52:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,14 +354,13 @@ void		flood_fill(t_vault *data, int x, int y, char **temp);
 
 /***** init_player.c *****/
 void		load_player(t_vault *data);
-void		init_player(t_vault *data);
 void		find_orientation(t_vault *data, char direction);
 void		find_orientation_2(t_vault *data, char direction);
 void		draw_player(t_vault *data);
 
 /***** init_hud.c *****/
+void		reinit_hud(t_vault *data);
 void		load_hud(t_vault *data);
-void		draw_hud(t_vault *data);
 void		draw_tex_location(t_vault *data, xpm_t *texture, int **tex_buff,
 				int pixels_2d);
 void		draw_tex_location2(t_vault *data, xpm_t *texture, int **tex_buff,
@@ -402,7 +401,7 @@ void		load_textures(t_vault *data);
 int			**get_texture(xpm_t *tex);
 void		draw_line(t_vault *data, xpm_t *texture, int **tex_buff,
 				int pixels_2d);
-double		calculate_brightness_factor(t_vault *data);
+double		brightness_factor(t_vault *data);
 uint32_t	darken_color(uint32_t color, double brightness_factor,
 				uint32_t dark_color);
 
@@ -416,8 +415,8 @@ void		full_line_hud_hor(mlx_image_t *hud, int screen_y,
 				unsigned int color);
 void		full_line_hud_ver(mlx_image_t *hud, int screen_x,
 				unsigned int color);
-void		reinit_and_draw(t_vault *data);
-int			is_not_wall(t_vault *data, int row, int col);
+int			is_not_wall_limited(t_vault *data, int row, int col);
+int			is_not_wall_full(t_vault *data, int row, int col);
 
 /***** extra_textures.c *****/
 void		load_extra_textures(t_vault *data);
@@ -425,7 +424,6 @@ void		check_extra_textures(t_vault *data);
 void		get_extra_textures(t_vault *data);
 
 /***** init_minimap.c *****/
-void		reinit_minimap(t_vault *data);
 void		show_minimap(t_vault *data);
 void		load_minimap(t_vault *data);
 void		draw_minimap(t_vault *data);
@@ -448,7 +446,6 @@ void		move_right(t_vault *data, int check_row, int check_col);
 void		move_mouse(double x, double y, void *temp);
 
 /***** camera.c *****/
-void		reinit_hud(t_vault *data);
 void		draw_pov(t_vault *data);
 void		rotate_left(t_vault *data);
 void		rotate_right(t_vault *data);
@@ -457,15 +454,16 @@ void		rotate_right(t_vault *data);
 void		load_3d(t_vault *data);
 void		reinit_3d(t_vault *data);
 void		background_3d(t_vault *data);
+void		reinit_and_draw(t_vault *data);
 
 /***** audio.c *****/
 void		play_song(t_vault *data);
-void		check_and_play_song(t_vault *data);
 
 /***** keyhandler.c *****/
 void		keyhandler(mlx_key_data_t keydata, void *param);
 void		keyhandler_2(mlx_key_data_t keydata, t_vault *data);
 void		open_door(t_vault *data);
+void		close_door(t_vault *data);
 
 /***** player_location_bonus.c *****/
 void		player_location(t_vault *data, int col, int row);

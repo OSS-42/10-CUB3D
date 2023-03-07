@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/01 16:30:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:26:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,15 @@ void	keyhandler_2(mlx_key_data_t keydata, t_vault *data)
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		quit_game(data);
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
-		show_minimap(data);
+	{
+		if (data->minimap->on_screen == 1)
+			data->minimap->on_screen = 0;
+		else
+		{
+			data->minimap->on_screen = 1;
+			show_minimap(data);
+		}
+	}
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		open_door(data);
 	reinit_and_draw(data);
@@ -68,5 +76,21 @@ void	open_door(t_vault *data)
 		system("afplay ./assets/audio/H2G2-door_open.mp3&");
 		data->map->map[row][col] = 'X';
 		reinit_and_draw(data);
+	}
+}
+
+void	close_door(t_vault *data)
+{
+	if (data->map->map[data->plr->old_row][data->plr->old_col] == 'W'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'W')
+	{
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'D';
+	}
+	else if (data->map->map[data->plr->old_row][data->plr->old_col] == 'X'
+		&& data->map->map[(int)data->plr->row][(int)data->plr->col] != 'X')
+	{
+		system("afplay ./assets/audio/H2G2-door_close.mp3&");
+		data->map->map[data->plr->old_row][data->plr->old_col] = 'Z';
 	}
 }

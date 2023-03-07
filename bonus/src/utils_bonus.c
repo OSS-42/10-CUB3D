@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:01:38 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/05 12:01:44 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/07 17:50:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,23 @@ void	full_line_hud_ver(mlx_image_t *hud, int screen_x, unsigned int color)
 	}
 }
 
-void	reinit_and_draw(t_vault *data)
+int	is_not_wall_limited(t_vault *data, int row, int col)
 {
-	reinit_3d(data);
-	reinit_hud(data);
-	reinit_minimap(data);
-	raycaster(data);
+	if (data->map->map[row][col] != '1'
+		&& data->map->map[row][col] != '2'
+		&& data->map->map[row][col] != '3'
+		&& data->map->map[row][col] != '4'
+		&& data->map->map[row][col] != '5'
+		&& data->map->map[row][col] != '6'
+		&& data->map->map[row][col] != '7'
+		&& data->map->map[row][col] != '8'
+		&& data->map->map[row][col] != '9'
+		&& data->map->map[row][col] != 'Z')
+		return (TRUE);
+	return (FALSE);
 }
 
-int	is_not_wall(t_vault *data, int row, int col)
+int	is_not_wall_full(t_vault *data, int row, int col)
 {
 	if (data->map->map[row][col] != '1'
 		&& data->map->map[row][col] != '2'

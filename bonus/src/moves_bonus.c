@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 12:04:23 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/07 17:48:20 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	check_col = (int)(data->plr->col + data->plr->pdx
 			* data->raycaster->mov_speed);
-	if (is_not_wall(data, check_row, (int)(data->plr->col)) == TRUE)
+	if (is_not_wall_full(data, check_row, (int)(data->plr->col)) == TRUE)
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row += data->plr->pdy * data->raycaster->mov_speed;
 	}
-	if (is_not_wall(data, (int)(data->plr->row), check_col) == TRUE)
+	if (is_not_wall_full(data, (int)(data->plr->row), check_col) == TRUE)
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col += data->plr->pdx * data->raycaster->mov_speed;
 	}
-	check_and_play_song(data);
+	close_door(data);
 }
 
 void	move_backward(t_vault *data, int check_row, int check_col)
@@ -37,17 +37,17 @@ void	move_backward(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	check_col = (int)(data->plr->col - data->plr->pdx
 			* data->raycaster->mov_speed);
-	if (is_not_wall(data, check_row, (int)(data->plr->col)) == TRUE)
+	if (is_not_wall_full(data, check_row, (int)(data->plr->col)) == TRUE)
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row -= data->plr->pdy * data->raycaster->mov_speed;
 	}
-	if (is_not_wall(data, (int)(data->plr->row), check_col) == TRUE)
+	if (is_not_wall_full(data, (int)(data->plr->row), check_col) == TRUE)
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col -= data->plr->pdx * data->raycaster->mov_speed;
 	}
-	check_and_play_song(data);
+	close_door(data);
 }
 
 void	move_left(t_vault *data, int check_row, int check_col)
@@ -56,19 +56,19 @@ void	move_left(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	check_col = (int)(data->plr->col - data->raycaster->plane_x
 			* data->raycaster->mov_speed);
-	if (is_not_wall(data, check_row, (int)(data->plr->col)) == TRUE)
+	if (is_not_wall_full(data, check_row, (int)(data->plr->col)) == TRUE)
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row -= data->raycaster->plane_y
 			* data->raycaster->mov_speed;
 	}
-	if (is_not_wall(data, (int)(data->plr->row), check_col) == TRUE)
+	if (is_not_wall_full(data, (int)(data->plr->row), check_col) == TRUE)
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col -= data->raycaster->plane_x
 			* data->raycaster->mov_speed;
 	}
-	check_and_play_song(data);
+	close_door(data);
 }
 
 void	move_right(t_vault *data, int check_row, int check_col)
@@ -77,19 +77,19 @@ void	move_right(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed);
 	check_col = (int)(data->plr->col + data->raycaster->plane_x
 			* data->raycaster->mov_speed);
-	if (is_not_wall(data, check_row, (int)(data->plr->col)) == TRUE)
+	if (is_not_wall_full(data, check_row, (int)(data->plr->col)) == TRUE)
 	{
 		data->plr->old_row = data->plr->row;
 		data->plr->row += data->raycaster->plane_y
 			* data->raycaster->mov_speed;
 	}
-	if (is_not_wall(data, (int)(data->plr->row), check_col) == TRUE)
+	if (is_not_wall_full(data, (int)(data->plr->row), check_col) == TRUE)
 	{
 		data->plr->old_col = data->plr->col;
 		data->plr->col += data->raycaster->plane_x
 			* data->raycaster->mov_speed;
 	}
-	check_and_play_song(data);
+	close_door(data);
 }
 
 void	move_mouse(double xpos, double ypos, void *temp)

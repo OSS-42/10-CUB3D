@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:16:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 23:43:26 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/07 16:47:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,12 @@
 
 void	load_player(t_vault *data)
 {
-	init_player(data);
-	find_orientation(data, data->plr->direction);
-	data->map->map[data->plr->start_x][data->plr->start_y] = '0';
-}
-
-void	init_player(t_vault *data)
-{
 	data->plr->row = data->plr->start_x + 0.5;
 	data->plr->col = data->plr->start_y + 0.5;
 	data->plr->ppx = data->plr->row * data->minimap->tile_size;
 	data->plr->ppy = data->plr->col * data->minimap->tile_size;
+	find_orientation(data, data->plr->direction);
+	data->map->map[data->plr->start_x][data->plr->start_y] = '0';
 }
 
 void	find_orientation(t_vault *data, char direction)

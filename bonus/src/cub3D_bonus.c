@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/03 15:44:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:29:20 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	create_game(t_vault *data)
 		exit (EXIT_FAILURE);
 	play_song(data);
 	load_textures(data);
-	load_3d(data);
 	load_minimap(data);
+	load_3d(data);
 	load_player(data);
 	load_hud(data);
 	raycaster(data);

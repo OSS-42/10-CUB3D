@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 12:26:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:37:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,8 @@ void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 		if (data->tex->tex_pos > texture->texture.height - 1)
 			data->tex->tex_pos = texture->texture.height - 1;
 		data->tex->tex_pos = data->tex->tex_pos + data->tex->step;
-		data->tex->brightness_factor = calculate_brightness_factor(data);
-		if (data->game->tex_x >= 0 && data->game->tex_x
-			< (int)texture->texture.width)
-			data->tex->color = tex_buff[data->tex->tex_y][data->game->tex_x];
-		else
-			data->tex->color = 0xff0000ff;
+		data->tex->brightness_factor = brightness_factor(data);
+		data->tex->color = tex_buff[data->tex->tex_y][data->game->tex_x];
 		data->tex->dark = darken_color(data->tex->color,
 				data->tex->brightness_factor, 0);
 		mlx_put_pixel(data->game->ddd, pixels_2d, screen_y, data->tex->dark);
@@ -88,7 +84,7 @@ void	draw_line(t_vault *data, xpm_t *texture, int **tex_buff, int pixels_2d)
 	}
 }
 
-double	calculate_brightness_factor(t_vault *data)
+double	brightness_factor(t_vault *data)
 {
 	double	max_distance;
 	double	distance;

@@ -6,18 +6,11 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/03 15:44:29 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:05:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
-
-void	reinit_hud(t_vault *data)
-{
-	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_static);
-	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_dynamic);
-	load_hud(data);
-}
 
 void	draw_pov(t_vault *data)
 {
@@ -53,10 +46,10 @@ void	rotate_left(t_vault *data)
 		* sin(-data->raycaster->rot_speed);
 	data->raycaster->plane_y = old_plane_x * sin(-data->raycaster->rot_speed)
 		+ data->raycaster->plane_y * cos(-data->raycaster->rot_speed);
-	reinit_3d(data);
-	reinit_hud(data);
-	reinit_minimap(data);
-	raycaster(data);
+	// reinit_3d(data);
+	// reinit_hud(data);
+	// reinit_minimap(data);
+	// raycaster(data);
 }
 
 void	rotate_right(t_vault *data)
@@ -75,8 +68,8 @@ void	rotate_right(t_vault *data)
 		* sin(data->raycaster->rot_speed);
 	data->raycaster->plane_y = old_plane_x * sin(data->raycaster->rot_speed)
 		+ data->raycaster->plane_y * cos(data->raycaster->rot_speed);
-	reinit_3d(data);
-	reinit_hud(data);
-	reinit_minimap(data);
-	raycaster(data);
+	// reinit_3d(data);
+	// reinit_hud(data);
+	// reinit_minimap(data);
+	// raycaster(data);
 }
