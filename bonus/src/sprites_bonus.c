@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/09 20:30:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/09 21:38:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	sprite_ordering(t_vault *data, t_sprites *sprite)
 
 void	sprite_casting(t_vault *data, t_sprites *sprite, int sprite_num, int i)
 {
-	data->sp_param->spriteY = sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_x - data->plr->row;
-	data->sp_param->spriteX = sprite[data->sp_param->spriteOrder[i]].sprite_y - data->plr->col;
+	data->sp_param->sprite_y = sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_x - data->plr->row;
+	data->sp_param->sprite_x = sprite[data->sp_param->spriteOrder[i]].sprite_y - data->plr->col;
 
-	data->sp_param->transformX = data->sp_param->invDet * (data->raycaster->pdy_ray * data->sp_param->spriteX - data->raycaster->pdx_ray * data->sp_param->spriteY);
-	data->sp_param->transformY = data->sp_param->invDet * (-data->raycaster->plane_y * data->sp_param->spriteX + data->raycaster->plane_x * data->sp_param->spriteY); //this is actually the depth inside the screen, that what Z is in 3D
+	data->sp_param->transformX = data->sp_param->invDet * (data->raycaster->pdy_ray * data->sp_param->sprite_x - data->raycaster->pdx_ray * data->sp_param->sprite_y);
+	data->sp_param->transformY = data->sp_param->invDet * (-data->raycaster->plane_y * data->sp_param->sprite_x + data->raycaster->plane_x * data->sp_param->sprite_y); //this is actually the depth inside the screen, that what Z is in 3D
 
 	data->sp_param->spriteScreenX = ((WIDTH / 2) * (1 + data->sp_param->transformX / data->sp_param->transformY));
 

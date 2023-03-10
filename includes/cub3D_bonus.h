@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/09 20:19:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/09 20:32:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ typedef struct s_sp_param
 	double 	ZBuffer[WIDTH];
 	int		spriteOrder[numSprites];
 	double 	spriteDistance[numSprites];
-	double 	spriteX;
-	double 	spriteY;
+	double 	sprite_x;
+	double 	sprite_y;
 	double	transformX;
 	double	transformY;
 	double		spriteScreenX;
