@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/09 21:38:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/10 11:11:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,34 @@
 //SPRITE CASTING
 	//sort sprites from far to close
 
-void	init_sprites(t_vault *data)
+void	load_sprites(t_vault *data)
+{
+	data->sp_param->sprite[0].sprite_x = 34.5;
+	data->sp_param->sprite[0].sprite_y = 8.5;
+	data->sp_param->sprite[0].texture = 1;
+	
+	data->sp_param->sprite[1].sprite_x = 32.5;
+	data->sp_param->sprite[1].sprite_y = 8.5;
+	data->sp_param->sprite[1].texture = 2;
+}
+
+void	sprite_casting(t_vault *data)
 {
 	int	i;
 
 	i = 0;
-	t_sprites sprite[numSprites] = {
-	{34.5, 8.5, 1},
-	{32.5, 8.5, 2}
-	};
-	sprite_ordering(data, sprite);
+	sprite_ordering(data);
 	data->sp_param->invDet = 1.0 / (data->raycaster->plane_x
 			* data->raycaster->pdy_ray - data->raycaster->pdx_ray
 				* data->raycaster->plane_y);
 	while (i < numSprites)
 	{
-		sprite_casting(data, sprite, sprite[i].texture, i);
+		sprite_computing(data, data->sp_param->sprite, data->sp_param->sprite[i].texture, i);
 		i++;
 	}
 }
 
-void	sprite_ordering(t_vault *data, t_sprites *sprite)
+void	sprite_ordering(t_vault *data)
 {
 	int	i;
 
@@ -45,19 +52,21 @@ void	sprite_ordering(t_vault *data, t_sprites *sprite)
 	{
 		data->sp_param->spriteOrder[i] = i;
 		data->sp_param->spriteDistance[i]
-			= ((data->plr->col - sprite[i].sprite_x)
-				* (data->plr->col - sprite[i].sprite_x)
-				+ (data->plr->row - sprite[i].sprite_y) 
-				* (data->plr->row - sprite[i].sprite_y)); //sqrt not taken, unneeded
+			= ((data->plr->col - data->sp_param->sprite[i].sprite_x)
+				* (data->plr->col - data->sp_param->sprite[i].sprite_x)
+				+ (data->plr->row - data->sp_param->sprite[i].sprite_y) 
+				* (data->plr->row - data->sp_param->sprite[i].sprite_y)); //sqrt not taken, unneeded
 		i++;
 	}
 	sort_sprites(data);
 }
 
-void	sprite_casting(t_vault *data, t_sprites *sprite, int sprite_num, int i)
+void	sprite_computing(t_vault *data, t_sprites *sprite, int sprite_num, int i)
 {
-	data->sp_param->sprite_y = sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_x - data->plr->row;
-	data->sp_param->sprite_x = sprite[data->sp_param->spriteOrder[i]].sprite_y - data->plr->col;
+	(void) sprite;
+	
+	data->sp_param->sprite_y = data->sp_param->sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_x - data->plr->row;
+	data->sp_param->sprite_x = data->sp_param->sprite[data->sp_param->spriteOrder[i]].sprite_y - data->plr->col;
 
 	data->sp_param->transformX = data->sp_param->invDet * (data->raycaster->pdy_ray * data->sp_param->sprite_x - data->raycaster->pdx_ray * data->sp_param->sprite_y);
 	data->sp_param->transformY = data->sp_param->invDet * (-data->raycaster->plane_y * data->sp_param->sprite_x + data->raycaster->plane_x * data->sp_param->sprite_y); //this is actually the depth inside the screen, that what Z is in 3D

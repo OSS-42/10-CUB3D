@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/07 18:15:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/10 09:32:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	loading_game(t_vault *data)
 	load_3d(data);
 	load_player(data);
 	load_hud(data);
+	load_sprites(data);
 }
 
 void	delete_images(t_vault *data)

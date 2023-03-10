@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/09 20:32:55 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/10 09:47:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct s_sp_param
 	double 	ZBuffer[WIDTH];
 	int		spriteOrder[numSprites];
 	double 	spriteDistance[numSprites];
+	t_sprites 		sprite[numSprites];
 	double 	sprite_x;
 	double 	sprite_y;
 	double	transformX;
@@ -481,9 +482,10 @@ void		player_location_3(t_vault *data, int col, int row);
 void		player_location_4(t_vault *data, int col, int row);
 
 /***** sprites_bonus.c *****/
-void	init_sprites(t_vault *data);
-void	sprite_ordering(t_vault *data, t_sprites *sprite);
-void	sprite_casting(t_vault *data, t_sprites *sprite, int sprite_num, int i);
+void	load_sprites(t_vault *data);
+void	sprite_casting(t_vault *data);
+void	sprite_ordering(t_vault *data);
+void	sprite_computing(t_vault *data, t_sprites *sprite, int sprite_num, int i);
 int		compareSprites(t_sprites *a, t_sprites *b);
 void	sort_sprites(t_vault *data);
 void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
