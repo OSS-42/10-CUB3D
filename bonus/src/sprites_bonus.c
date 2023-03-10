@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/06 22:52:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/09 20:30:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,58 @@
 
 //SPRITE CASTING
 	//sort sprites from far to close
-void	sprite_casting(t_vault *data)
+
+void	init_sprites(t_vault *data)
 {
 	int	i;
-	t_sprites	sprite[numSprites];
 
-	// sprite[numSprites] = ft_calloc(1, sizeof(t_sprites));
-	sprite[0] = (t_sprites){33.5, 8.5, 1}; //door in front of playerstart
 	i = 0;
+	t_sprites sprite[numSprites] = {
+	{34.5, 8.5, 1},
+	{32.5, 8.5, 2}
+	};
+	sprite_ordering(data, sprite);
+	data->sp_param->invDet = 1.0 / (data->raycaster->plane_x
+			* data->raycaster->pdy_ray - data->raycaster->pdx_ray
+				* data->raycaster->plane_y);
+	while (i < numSprites)
+	{
+		sprite_casting(data, sprite, sprite[i].texture, i);
+		i++;
+	}
+}
+
+void	sprite_ordering(t_vault *data, t_sprites *sprite)
+{
+	int	i;
+
+	i = 0;
+
 	while (i < numSprites)
 	{
 		data->sp_param->spriteOrder[i] = i;
-		data->sp_param->spriteDistance[i] = ((data->plr->row - sprite[i].sprite_x) * (data->plr->row - sprite[i].sprite_x) + (data->plr->col - sprite[i].sprite_y) * (data->plr->col - sprite[i].sprite_y)); //sqrt not taken, unneeded
+		data->sp_param->spriteDistance[i]
+			= ((data->plr->col - sprite[i].sprite_x)
+				* (data->plr->col - sprite[i].sprite_x)
+				+ (data->plr->row - sprite[i].sprite_y) 
+				* (data->plr->row - sprite[i].sprite_y)); //sqrt not taken, unneeded
 		i++;
 	}
 	sort_sprites(data);
+}
 
-	//after sorting the sprites, do the projection and draw them
-	i = 0;
-	while (i < numSprites)
-	{
-		//translate sprite position to relative to camera
-		data->sp_param->spriteY = sprite[data->sp_param->spriteOrder[i]].sprite_x - data->plr->row;
-		data->sp_param->spriteX = sprite[data->sp_param->spriteOrder[i]].sprite_y - data->plr->col;
-		i++;
-	}
+void	sprite_casting(t_vault *data, t_sprites *sprite, int sprite_num, int i)
+{
+	data->sp_param->spriteY = sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_x - data->plr->row;
+	data->sp_param->spriteX = sprite[data->sp_param->spriteOrder[i]].sprite_y - data->plr->col;
 
-	//transform sprite with the inverse camera matrix
-	// [ planeX   dirX ] -1                                       [ dirY      -dirX ]
-	// [               ]       =  1/(planeX*dirY-dirX*planeY) *   [                 ]
-	// [ planeY   dirY ]                                          [ -planeY  planeX ]
+	data->sp_param->transformX = data->sp_param->invDet * (data->raycaster->pdy_ray * data->sp_param->spriteX - data->raycaster->pdx_ray * data->sp_param->spriteY);
+	data->sp_param->transformY = data->sp_param->invDet * (-data->raycaster->plane_y * data->sp_param->spriteX + data->raycaster->plane_x * data->sp_param->spriteY); //this is actually the depth inside the screen, that what Z is in 3D
 
-	double invDet;
+	data->sp_param->spriteScreenX = ((WIDTH / 2) * (1 + data->sp_param->transformX / data->sp_param->transformY));
 
-	invDet = 1.0 / (data->raycaster->plane_x * data->raycaster->pdy_ray - data->raycaster->pdx_ray * data->raycaster->plane_y); //required for correct matrix multiplication
+	data->sp_param->spriteHeight = fabs((HEIGHT / data->sp_param->transformY)); //using 'transformY' instead of the real distance prevents fisheye
 
-	data->sp_param->transformX = invDet * (data->raycaster->pdy_ray * data->sp_param->spriteX - data->raycaster->pdx_ray * data->sp_param->spriteY);
-	data->sp_param->transformY = invDet * (-data->raycaster->plane_y * data->sp_param->spriteX + data->raycaster->plane_x * data->sp_param->spriteY); //this is actually the depth inside the screen, that what Z is in 3D
-
-	data->sp_param->spriteScreenX = (int)((WIDTH / 2) * (1 + data->sp_param->transformX / data->sp_param->transformY));
-
-
-	//calculate height of the sprite on screen
-	data->sp_param->spriteHeight = abs((int)(HEIGHT / data->sp_param->transformY)); //using 'transformY' instead of the real distance prevents fisheye
-	
-	//calculate lowest and highest pixel to fill in current stripe
 	data->sp_param->drawStartY = -data->sp_param->spriteHeight / 2 + HEIGHT / 2;
 	if (data->sp_param->drawStartY < 0)
 		data->sp_param->drawStartY = 0;
@@ -67,9 +74,7 @@ void	sprite_casting(t_vault *data)
 	if (data->sp_param->drawEndY >= HEIGHT)
 		data->sp_param->drawEndY = HEIGHT - 1;
 
-
-	//calculate width of the sprite
-	data->sp_param->spriteWidth = fabs((int)HEIGHT / (data->sp_param->transformY));
+	data->sp_param->spriteWidth = data->sp_param->spriteHeight;
 
 	data->sp_param->drawStartX = -data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX;
 	if(data->sp_param->drawStartX < 0)
@@ -78,13 +83,14 @@ void	sprite_casting(t_vault *data)
 	data->sp_param->drawEndX = data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX;
 	if(data->sp_param->drawEndX >= WIDTH)
 		data->sp_param->drawEndX = WIDTH - 1;
-
-	draw_sprite(data, data->tex->tex_door, data->tex->door);
+	if (sprite_num == 1)
+		draw_sprite(data, data->tex->tex_sprite1, data->tex->sprite1);
+	else if (sprite_num == 2)
+		draw_sprite(data, data->tex->tex_sprite2, data->tex->sprite2);
 }
 
 void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff)
 {
-	//loop through every vertical stripe of the sprite on screen
 	int	screen_x;
 	(void) texture;
 
@@ -92,12 +98,7 @@ void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff)
 	while (screen_x < data->sp_param->drawEndX)
 	{
 		int tex_x;
-		tex_x = (int)(256 * (screen_x - (-data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX)) * TEXWIDTH / data->sp_param->spriteWidth) / 256;
-		//the conditions in the if are:
-		//1) it's in front of camera plane so you don't see things behind you
-		//2) it's on the screen (left)
-		//3) it's on the screen (right)
-		//4) ZBuffer, with perpendicular distance
+		tex_x = (256 * (screen_x - (-data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX)) * TEXWIDTH / data->sp_param->spriteWidth) / 256;
 		if (data->sp_param->transformY > 0 && screen_x > 0 && screen_x < WIDTH && data->sp_param->transformY < data->sp_param->ZBuffer[screen_x])
 		{
 			int	screen_y;
@@ -108,16 +109,14 @@ void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff)
 				d = (screen_y) * 256 - HEIGHT * 128 + data->sp_param->spriteHeight * 128; //256 and 128 factors to avoid floats
 				int tex_y;
 				tex_y = ((d * TEXHEIGHT) / data->sp_param->spriteHeight) / 256;
-				mlx_put_pixel(data->game->ddd, screen_x, screen_y, tex_buff[tex_y][tex_x]);
+				if (tex_buff[tex_y][tex_x] != (int)0xff00ffff)
+					mlx_put_pixel(data->game->ddd, screen_x, screen_y, tex_buff[tex_y][tex_x]);
 				screen_y++; //for every pixel of the current stripe
 			}
 		}
 		screen_x++;
 	}
 }
-
-// step = 1.0 * texture->texture.height / data->game->wall_height;
-// 	tex_pos = ((double)data->game->wall_start - (double)HEIGHT / 2 + (double)data->game->wall_height / 2) * step;
 
 void	sort_sprites(t_vault *data)
 {

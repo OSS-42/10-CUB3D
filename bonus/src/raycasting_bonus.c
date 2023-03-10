@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/07 17:59:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/09 20:04:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	raycaster(t_vault *data)
 		dda(data);
 		creating_3d_img(data, pixels_2d);
 		draw_tex_wall(data, pixels_2d);
-		// sprite_casting(data);
 		pixels_2d++;
 	}
+	init_sprites(data);
 }
 
 void	dist_and_pos(t_vault *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extra_textures_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/05 10:03:40 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/09 17:21:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	load_extra_textures(t_vault *data)
 	data->tex->tex_armada = mlx_load_xpm42("./assets/tex/dung_arm_SD.xpm42");
 	data->tex->tex_torrent = mlx_load_xpm42("./assets/tex/dung_tor_SD.xpm42");
 	data->tex->tex_wall = mlx_load_xpm42("./assets/tex/wood42.xpm42");
+	data->tex->tex_sprite1 = mlx_load_xpm42("./assets/tex/legion_sprite.xpm42");
+	data->tex->tex_sprite2 = mlx_load_xpm42("./assets/tex/marc_sprite.xpm42");
 	check_extra_textures(data);
 }
 
@@ -82,7 +84,8 @@ void	check_extra_textures(t_vault *data)
 		|| !data->tex->tex_secret || !data->tex->tex_door
 		|| !data->tex->tex_dungeon || !data->tex->tex_tribute
 		|| !data->tex->tex_marc || !data->tex->tex_armada
-		|| !data->tex->tex_torrent || !data->tex->tex_wall)
+		|| !data->tex->tex_torrent || !data->tex->tex_wall
+		|| !data->tex->tex_sprite1 || !data->tex->tex_sprite2)
 		quit_game(data);
 	get_extra_textures(data);
 }
@@ -113,4 +116,6 @@ void	get_extra_textures(t_vault *data)
 	data->tex->armada = get_texture(data->tex->tex_armada);
 	data->tex->torrent = get_texture(data->tex->tex_torrent);
 	data->tex->wall = get_texture(data->tex->tex_wall);
+	data->tex->sprite1 = get_texture(data->tex->tex_sprite1);
+	data->tex->sprite2 = get_texture(data->tex->tex_sprite2);
 }
