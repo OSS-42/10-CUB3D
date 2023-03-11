@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/10 11:11:55 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/11 14:18:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	sprite_casting(t_vault *data)
 				* data->raycaster->plane_y);
 	while (i < numSprites)
 	{
-		sprite_computing(data, data->sp_param->sprite, data->sp_param->sprite[i].texture, i);
+		sprite_computing(data, data->sp_param->sprite[i].texture, i);
 		i++;
 	}
 }
@@ -61,10 +61,8 @@ void	sprite_ordering(t_vault *data)
 	sort_sprites(data);
 }
 
-void	sprite_computing(t_vault *data, t_sprites *sprite, int sprite_num, int i)
+void	sprite_computing(t_vault *data, int sprite_num, int i)
 {
-	(void) sprite;
-	
 	data->sp_param->sprite_y = data->sp_param->sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_x - data->plr->row;
 	data->sp_param->sprite_x = data->sp_param->sprite[data->sp_param->spriteOrder[i]].sprite_y - data->plr->col;
 
@@ -93,15 +91,14 @@ void	sprite_computing(t_vault *data, t_sprites *sprite, int sprite_num, int i)
 	if(data->sp_param->drawEndX >= WIDTH)
 		data->sp_param->drawEndX = WIDTH - 1;
 	if (sprite_num == 1)
-		draw_sprite(data, data->tex->tex_sprite1, data->tex->sprite1);
+		draw_sprite(data, data->tex->sprite1);
 	else if (sprite_num == 2)
-		draw_sprite(data, data->tex->tex_sprite2, data->tex->sprite2);
+		draw_sprite(data, data->tex->sprite2);
 }
 
-void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff)
+void	draw_sprite(t_vault *data, int **tex_buff)
 {
 	int	screen_x;
-	(void) texture;
 
 	screen_x = data->sp_param->drawStartX;
 	while (screen_x < data->sp_param->drawEndX)

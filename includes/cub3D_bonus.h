@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/10 17:06:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/11 14:18:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -485,10 +485,9 @@ void		player_location_4(t_vault *data, int col, int row);
 void	load_sprites(t_vault *data);
 void	sprite_casting(t_vault *data);
 void	sprite_ordering(t_vault *data);
-void	sprite_computing(t_vault *data, t_sprites *sprite, int sprite_num, int i);
-int		compareSprites(t_sprites *a, t_sprites *b);
+void	sprite_computing(t_vault *data, int sprite_num, int i);
 void	sort_sprites(t_vault *data);
-void	draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
+void	draw_sprite(t_vault *data, int **tex_buff);
 
 // /***** sprites2_bonus.c *****/
 // void		sprite_casting(t_vault *data);
