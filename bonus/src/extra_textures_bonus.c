@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/09 17:21:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:15:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	load_extra_textures(t_vault *data)
 	data->tex->tex_armada = mlx_load_xpm42("./assets/tex/dung_arm_SD.xpm42");
 	data->tex->tex_torrent = mlx_load_xpm42("./assets/tex/dung_tor_SD.xpm42");
 	data->tex->tex_wall = mlx_load_xpm42("./assets/tex/wood42.xpm42");
-	data->tex->tex_sprite1 = mlx_load_xpm42("./assets/tex/legion_sprite.xpm42");
-	data->tex->tex_sprite2 = mlx_load_xpm42("./assets/tex/marc_sprite.xpm42");
+	data->tex->tex_sprite1 = mlx_load_xpm42("./assets/tex/marc_sprite.xpm42");
+	data->tex->tex_sprite2 = mlx_load_xpm42("./assets/tex/legion_sprite.xpm42");
 	check_extra_textures(data);
 }
 
