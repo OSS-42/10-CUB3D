@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/10 15:13:20 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:20:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	keyhandler_2(mlx_key_data_t keydata, t_vault *data)
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 	{
 		if (data->minimap->on_screen == 1)
+		{
+			mlx_delete_image(data->mlx, data->minimap->minimap);
 			data->minimap->on_screen = 0;
+		}
 		else
 		{
 			data->minimap->on_screen = 1;

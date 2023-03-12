@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/07 17:37:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:15:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ double	brightness_factor(t_vault *data)
 	double	distance;
 	double	brightness_factor;
 
-	max_distance = 18.0;
+	max_distance = 15.0;
 	distance = data->raycaster->ray_len;
 	if (distance > max_distance)
 		distance = max_distance;

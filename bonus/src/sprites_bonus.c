@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/11 14:18:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:09:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	load_sprites(t_vault *data)
 	data->sp_param->sprite[0].sprite_y = 8.5;
 	data->sp_param->sprite[0].texture = 1;
 	
-	data->sp_param->sprite[1].sprite_x = 32.5;
+	data->sp_param->sprite[1].sprite_x = 35.5;
 	data->sp_param->sprite[1].sprite_y = 8.5;
 	data->sp_param->sprite[1].texture = 2;
 }
@@ -64,7 +64,7 @@ void	sprite_ordering(t_vault *data)
 void	sprite_computing(t_vault *data, int sprite_num, int i)
 {
 	data->sp_param->sprite_y = data->sp_param->sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_x - data->plr->row;
-	data->sp_param->sprite_x = data->sp_param->sprite[data->sp_param->spriteOrder[i]].sprite_y - data->plr->col;
+	data->sp_param->sprite_x = data->sp_param->sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_y - data->plr->col;
 
 	data->sp_param->transformX = data->sp_param->invDet * (data->raycaster->pdy_ray * data->sp_param->sprite_x - data->raycaster->pdx_ray * data->sp_param->sprite_y);
 	data->sp_param->transformY = data->sp_param->invDet * (-data->raycaster->plane_y * data->sp_param->sprite_x + data->raycaster->plane_x * data->sp_param->sprite_y); //this is actually the depth inside the screen, that what Z is in 3D
