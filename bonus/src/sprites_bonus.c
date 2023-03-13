@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/13 10:53:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/13 11:18:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ void	sprite_computing(t_vault *data, int i)
 
 	printf("s_diff_row: %f\n", data->sp_param->s_diff_row);
 	printf("s_diff_col: %f\n", data->sp_param->s_diff_col);
-	data->sp_param->invDet = 1.0 / (data->raycaster->plane_x * data->raycaster->pdy_ray - data->raycaster->pdx_ray * data->raycaster->plane_y);
+	data->sp_param->invDet = 1.0 / (data->raycaster->plane_x * data->plr->pdy - data->plr->pdx * data->raycaster->plane_y);
 
-	data->sp_param->transformY = data->sp_param->invDet * (data->raycaster->pdy_ray * data->sp_param->s_diff_row - data->raycaster->pdx_ray * data->sp_param->s_diff_col);
-	data->sp_param->transformX = data->sp_param->invDet * (-data->raycaster->plane_y * data->sp_param->s_diff_row + data->raycaster->plane_x * data->sp_param->s_diff_col); //this is actually the depth inside the screen, that what Z is in 3D
+	data->sp_param->transformY = data->sp_param->invDet * (-data->plr->pdy * data->sp_param->s_diff_row - data->plr->pdx * data->sp_param->s_diff_col);
+	data->sp_param->transformX = data->sp_param->invDet * (data->raycaster->plane_y * data->sp_param->s_diff_row + data->raycaster->plane_x * data->sp_param->s_diff_col); //this is actually the depth inside the screen, that what Z is in 3D
 
 	data->sp_param->spriteScreenX = (int)((WIDTH / 2) * (1 - data->sp_param->transformX / data->sp_param->transformY));
 	printf("screen_x: %f\n", data->sp_param->spriteScreenX);
