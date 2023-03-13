@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/11 14:18:54 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/12 22:54:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ typedef struct s_minimap
 
 typedef struct s_sprites
 {
-	double	sprite_x;
-	double	sprite_y;
+	double	sprite_row;
+	double	sprite_col;
 	unsigned int		texture;
 }	t_sprites;
 
@@ -121,8 +121,8 @@ typedef struct s_sp_param
 	int		spriteOrder[numSprites];
 	double 	spriteDistance[numSprites];
 	t_sprites 		sprite[numSprites];
-	double 	sprite_x;
-	double 	sprite_y;
+	double 	s_diff_row;
+	double 	s_diff_col;
 	double	transformX;
 	double	transformY;
 	double		spriteScreenX;
@@ -485,17 +485,8 @@ void		player_location_4(t_vault *data, int col, int row);
 void	load_sprites(t_vault *data);
 void	sprite_casting(t_vault *data);
 void	sprite_ordering(t_vault *data);
-void	sprite_computing(t_vault *data, int sprite_num, int i);
+void	sprite_computing(t_vault *data, int i);
 void	sort_sprites(t_vault *data);
-void	draw_sprite(t_vault *data, int **tex_buff);
-
-// /***** sprites2_bonus.c *****/
-// void		sprite_casting(t_vault *data);
-// void		distance_to_camera(t_vault *data, t_sprites *sprite);
-// void		transform_inverse_matrix(t_vault *data);
-// void		calculate_sprite_height(t_vault *data);
-// void		calculate_sprite_width(t_vault *data);
-// void		draw_sprite(t_vault *data);
-// void		sort_sprites(t_vault *data);
+void	draw_sprite(t_vault *data, int screen_y, int tex_x, int screen_x, int **tex_buff);
 
 #endif

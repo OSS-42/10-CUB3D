@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/11 23:09:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/12 23:38:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,41 @@
 
 void	load_sprites(t_vault *data)
 {
-	data->sp_param->sprite[0].sprite_x = 34.5;
-	data->sp_param->sprite[0].sprite_y = 8.5;
+	data->sp_param->sprite[0].sprite_row = 33.5;
+	data->sp_param->sprite[0].sprite_col = 7.5;
 	data->sp_param->sprite[0].texture = 1;
 	
-	data->sp_param->sprite[1].sprite_x = 35.5;
-	data->sp_param->sprite[1].sprite_y = 8.5;
+	data->sp_param->sprite[1].sprite_row = 33.5;
+	data->sp_param->sprite[1].sprite_col = 8.5;
 	data->sp_param->sprite[1].texture = 2;
 }
 
 void	sprite_casting(t_vault *data)
 {
 	int	i;
+	int	screen_x;
+	int	screen_y;
+	int tex_x;
 
 	i = 0;
 	sprite_ordering(data);
-	data->sp_param->invDet = 1.0 / (data->raycaster->plane_x
-			* data->raycaster->pdy_ray - data->raycaster->pdx_ray
-				* data->raycaster->plane_y);
 	while (i < numSprites)
 	{
-		sprite_computing(data, data->sp_param->sprite[i].texture, i);
+		sprite_computing(data, i);
+		screen_x = data->sp_param->drawStartX;
+		while (screen_x < data->sp_param->drawEndX)
+		{
+			tex_x = (int)(256 * (screen_x - (-data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX)) * TEXWIDTH / data->sp_param->spriteWidth) / 256;
+			if (data->sp_param->transformY > 0 && screen_x > 0 && screen_x < WIDTH && data->sp_param->transformY < data->sp_param->ZBuffer[screen_x])
+			{
+				screen_y = data->sp_param->drawStartY;
+				if (data->sp_param->sprite[i].texture == 1)
+					draw_sprite(data, screen_y, tex_x, screen_x, data->tex->sprite1);
+				else if (data->sp_param->sprite[i].texture == 2)
+					draw_sprite(data, screen_y, tex_x, screen_x, data->tex->sprite2);
+			}
+			screen_x++;
+		}
 		i++;
 	}
 }
@@ -52,26 +66,36 @@ void	sprite_ordering(t_vault *data)
 	{
 		data->sp_param->spriteOrder[i] = i;
 		data->sp_param->spriteDistance[i]
-			= ((data->plr->col - data->sp_param->sprite[i].sprite_x)
-				* (data->plr->col - data->sp_param->sprite[i].sprite_x)
-				+ (data->plr->row - data->sp_param->sprite[i].sprite_y) 
-				* (data->plr->row - data->sp_param->sprite[i].sprite_y)); //sqrt not taken, unneeded
+			= ((data->plr->row - data->sp_param->sprite[i].sprite_row)
+				* (data->plr->row - data->sp_param->sprite[i].sprite_row)
+				+ (data->plr->col - data->sp_param->sprite[i].sprite_col) 
+				* (data->plr->col - data->sp_param->sprite[i].sprite_col)); //sqrt not taken, unneeded
+		printf("s #%d, dist : %f\n", i, data->sp_param->spriteDistance[i]);
 		i++;
 	}
 	sort_sprites(data);
 }
 
-void	sprite_computing(t_vault *data, int sprite_num, int i)
+void	sprite_computing(t_vault *data, int i)
 {
-	data->sp_param->sprite_y = data->sp_param->sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_x - data->plr->row;
-	data->sp_param->sprite_x = data->sp_param->sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_y - data->plr->col;
+	printf("row : %f\n", data->sp_param->sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_row);
+	printf("col : %f\n", data->sp_param->sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_col);
+	data->sp_param->s_diff_row = data->sp_param->sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_row - (data->plr->row);
+	data->sp_param->s_diff_col = data->sp_param->sprite[data->sp_param->spriteOrder[numSprites - 1 - i]].sprite_col - (data->plr->col);
 
-	data->sp_param->transformX = data->sp_param->invDet * (data->raycaster->pdy_ray * data->sp_param->sprite_x - data->raycaster->pdx_ray * data->sp_param->sprite_y);
-	data->sp_param->transformY = data->sp_param->invDet * (-data->raycaster->plane_y * data->sp_param->sprite_x + data->raycaster->plane_x * data->sp_param->sprite_y); //this is actually the depth inside the screen, that what Z is in 3D
+	printf("p_row : %f\n", data->plr->row);
+	printf("p_col : %f\n", data->plr->col);	
 
-	data->sp_param->spriteScreenX = ((WIDTH / 2) * (1 + data->sp_param->transformX / data->sp_param->transformY));
+	printf("s_diff_row: %f\n", data->sp_param->s_diff_row);
+	printf("s_diff_col: %f\n", data->sp_param->s_diff_col);
+	data->sp_param->invDet = 1.0 / (data->raycaster->plane_x * data->raycaster->pdy_ray - data->raycaster->pdx_ray * data->raycaster->plane_y);
 
-	data->sp_param->spriteHeight = fabs((HEIGHT / data->sp_param->transformY)); //using 'transformY' instead of the real distance prevents fisheye
+	data->sp_param->transformY = data->sp_param->invDet * (data->raycaster->pdy_ray * data->sp_param->s_diff_row - data->raycaster->pdx_ray * data->sp_param->s_diff_col);
+	data->sp_param->transformX = data->sp_param->invDet * (-data->raycaster->plane_y * data->sp_param->s_diff_row + data->raycaster->plane_x * data->sp_param->s_diff_col); //this is actually the depth inside the screen, that what Z is in 3D
+
+	data->sp_param->spriteScreenX = (int)((WIDTH / 2) * (1 + data->sp_param->transformX / data->sp_param->transformY));
+
+	data->sp_param->spriteHeight = abs((int)(HEIGHT / data->sp_param->transformY)); //using 'transformY' instead of the real distance prevents fisheye
 
 	data->sp_param->drawStartY = -data->sp_param->spriteHeight / 2 + HEIGHT / 2;
 	if (data->sp_param->drawStartY < 0)
@@ -81,7 +105,7 @@ void	sprite_computing(t_vault *data, int sprite_num, int i)
 	if (data->sp_param->drawEndY >= HEIGHT)
 		data->sp_param->drawEndY = HEIGHT - 1;
 
-	data->sp_param->spriteWidth = data->sp_param->spriteHeight;
+	data->sp_param->spriteWidth = abs((int)(HEIGHT / data->sp_param->transformY));
 
 	data->sp_param->drawStartX = -data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX;
 	if(data->sp_param->drawStartX < 0)
@@ -90,63 +114,43 @@ void	sprite_computing(t_vault *data, int sprite_num, int i)
 	data->sp_param->drawEndX = data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX;
 	if(data->sp_param->drawEndX >= WIDTH)
 		data->sp_param->drawEndX = WIDTH - 1;
-	if (sprite_num == 1)
-		draw_sprite(data, data->tex->sprite1);
-	else if (sprite_num == 2)
-		draw_sprite(data, data->tex->sprite2);
 }
 
-void	draw_sprite(t_vault *data, int **tex_buff)
+void	draw_sprite(t_vault *data, int screen_y, int tex_x, int screen_x, int **tex_buff)
 {
-	int	screen_x;
+	int	tex_y;
+	int	d;
 
-	screen_x = data->sp_param->drawStartX;
-	while (screen_x < data->sp_param->drawEndX)
+	while (screen_y < data->sp_param->drawEndY)
 	{
-		int tex_x;
-		tex_x = (256 * (screen_x - (-data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX)) * TEXWIDTH / data->sp_param->spriteWidth) / 256;
-		if (data->sp_param->transformY > 0 && screen_x > 0 && screen_x < WIDTH && data->sp_param->transformY < data->sp_param->ZBuffer[screen_x])
-		{
-			int	screen_y;
-			screen_y = data->sp_param->drawStartY;
-			while (screen_y < data->sp_param->drawEndY)
-			{
-				int d;
-				d = (screen_y) * 256 - HEIGHT * 128 + data->sp_param->spriteHeight * 128; //256 and 128 factors to avoid floats
-				int tex_y;
-				tex_y = ((d * TEXHEIGHT) / data->sp_param->spriteHeight) / 256;
-				if (tex_buff[tex_y][tex_x] != (int)0xff00ffff)
-					mlx_put_pixel(data->game->ddd, screen_x, screen_y, tex_buff[tex_y][tex_x]);
-				screen_y++; //for every pixel of the current stripe
-			}
-		}
-		screen_x++;
+		d = (int)(screen_y) * 256 - HEIGHT * 128 + data->sp_param->spriteHeight * 128; //256 and 128 factors to avoid floats
+		tex_y = ((d * TEXHEIGHT) / data->sp_param->spriteHeight) / 256;
+		if (tex_buff[tex_y][tex_x] != (int)0xff00ffff)
+			mlx_put_pixel(data->game->ddd, screen_x, screen_y, tex_buff[tex_y][tex_x]);
+		screen_y++;
 	}
 }
 
 void	sort_sprites(t_vault *data)
 {
-	int	i;
-	int	j;
-	int	sprite_i;
-	int	sprite_j;
-	double dist_i;
-	double dist_j;
+	int		i;
+	int		j;
+	double	tmp;
 
 	i = 0;
-	while (i < numSprites - 1)
+	while (i < numSprites)
 	{
-		j = i + 1;
-		while (j < numSprites)
+		j = 0;
+		while (j < numSprites - 1)
 		{
-			sprite_i = data->sp_param->spriteOrder[i];
-			sprite_j = data->sp_param->spriteOrder[j];
-			dist_i = data->sp_param->spriteDistance[sprite_i];
-			dist_j = data->sp_param->spriteDistance[sprite_j];
-			if (dist_i < dist_j)
+			if (data->sp_param->spriteDistance[j] < data->sp_param->spriteDistance[j + 1])
 			{
-				data->sp_param->spriteOrder[i] = sprite_j;
-				data->sp_param->spriteOrder[j] = sprite_i;
+				tmp = data->sp_param->spriteDistance[j];
+				data->sp_param->spriteDistance[j] = data->sp_param->spriteDistance[j + 1];
+				data->sp_param->spriteDistance[j + 1] = tmp;
+				tmp = data->sp_param->spriteOrder[j];
+				data->sp_param->spriteOrder[j] = data->sp_param->spriteOrder[j + 1];
+				data->sp_param->spriteOrder[j + 1] = (int)tmp;
 			}
 			j++;
 		}
