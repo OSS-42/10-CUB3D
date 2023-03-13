@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/13 10:10:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:53:46 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	sprite_casting(t_vault *data)
 			if (data->sp_param->transformY > 0 && screen_x > 0 && screen_x < WIDTH && data->sp_param->transformY < data->sp_param->ZBuffer[screen_x])
 			{
 				screen_y = data->sp_param->drawStartY;
-				if (data->sp_param->sprite[i].texture == 1)
+				if (data->sp_param->sprite[data->sp_param->spriteOrder[i]].texture == 1)
 					draw_sprite(data, screen_y, tex_x, screen_x, data->tex->sprite1);
-				else if (data->sp_param->sprite[i].texture == 2)
+				else if (data->sp_param->sprite[data->sp_param->spriteOrder[i]].texture == 2)
 					draw_sprite(data, screen_y, tex_x, screen_x, data->tex->sprite2);
 			}
 			screen_x++;
@@ -150,7 +150,7 @@ void	sort_sprites(t_vault *data)
 		j = 0;
 		while (j < numSprites - 1)
 		{
-			if (data->sp_param->spriteDistance[j] < data->sp_param->spriteDistance[j + 1])
+			if (data->sp_param->spriteDistance[j] < data->sp_param->spriteDistance[j + 1] && (data->sp_param->spriteOrder[j] < data->sp_param->spriteOrder[j + 1]))
 			{
 				// tmp = data->sp_param->spriteDistance[j];
 				// data->sp_param->spriteDistance[j] = data->sp_param->spriteDistance[j + 1];
