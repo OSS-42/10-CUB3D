@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 12:10:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:04:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	load_extra_textures2(t_vault *data)
 	data->tex->tex_sprite1 = mlx_load_xpm42("./assets/tex/marc_sprite.xpm42");
 	data->tex->tex_sprite2 = mlx_load_xpm42("./assets/tex/legion_sprite.xpm42");
 	data->tex->tex_pillar = mlx_load_xpm42("./assets/tex/sprite_pillar.xpm42");
-	data->tex->tex_fire_tor = mlx_load_xpm42("./assets/tex/sprite_tor_fire.xpm42");
 	data->tex->tex_plants = mlx_load_xpm42("./assets/tex/sprite_plants.xpm42");
+	data->tex->tex_fire_tor = mlx_load_xpm42("./assets/tex/spt_tor_fire.xpm42");
 	check_extra_textures(data);
 }
 

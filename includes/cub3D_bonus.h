@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 16:01:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:04:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,6 @@ typedef struct s_s_par
 	int			screen_x;
 	int			screen_y;
 	int			tex_sx;
-	int			tex_sy;
 }	t_s_par;
 
 typedef struct s_game
@@ -482,12 +481,6 @@ void		keyhandler(mlx_key_data_t keydata, void *param);
 void		keyhandler_2(mlx_key_data_t keydata, t_vault *data);
 void		open_door(t_vault *data);
 void		close_door(t_vault *data);
-
-// /***** sprites_bonus.c *****/
-// void		sprite_casting(t_vault *data);
-// int			compareSprites(t_sprites *a, t_sprites *b);
-// void		sortSprites(int *order, double *dist, int amount);
-// void		draw_sprite(t_vault *data, xpm_t *texture, int **tex_buff);
 
 /***** player_location_bonus.c *****/
 void		player_location(t_vault *data, int col, int row);

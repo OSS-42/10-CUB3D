@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 15:48:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:05:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //s_par \ sp_param
 //s_ds_x \ drawStartX
 //s_de_y \ drawEndY
-//s_prio \ spriteOrder 
+//s_prio \ spriteOrder
 //s_dist \ spriteDistance
 
 void	sprite_casting(t_vault *data)

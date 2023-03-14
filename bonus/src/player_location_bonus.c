@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_location_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:00:16 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/13 20:19:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:35:04 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
