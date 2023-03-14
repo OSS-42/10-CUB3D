@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 13:07:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:33:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define BLUE 0x00FFFFFF
 # define DGRAY 0x3C3C3FFF
 # define LGRAY 0x89898DFF
-# define NUMSPRITES 5
+# define NUMSPRITES 14
 
 /***** STRUCTURES *****/
 
