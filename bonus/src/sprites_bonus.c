@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 13:07:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:08:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	sprite_choice(t_vault *data, int i)
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 3)
 		draw_sprite(data, data->tex->pillar);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 4)
-		draw_sprite_loop(data, tex_x, data->tex->fire_tor);
+		draw_sprite_loop(data);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 5)
-		draw_sprite(data, tex_x, data->tex->plants);
+		draw_sprite(data, data->tex->plants);
 }
 
 void	sprite_computing(t_vault *data, int i)
