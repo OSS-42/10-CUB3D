@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:36:27 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 15:40:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:01:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	load_sprites_coord(t_vault *data)
 	data->s_par->s[1].s_col = 8.5;
 	data->s_par->s[1].texture = 2;
 
-	data->s_par->s[2].s_row = 8.5; //poteau
+	data->s_par->s[2].s_row = 8.5; //poteau au fond a gauche
 	data->s_par->s[2].s_col = 15.5;
 	data->s_par->s[2].texture = 3;
 
-	data->s_par->s[3].s_row = 8.5; //poteau
+	data->s_par->s[3].s_row = 8.5; //poteau au fond a droite
 	data->s_par->s[3].s_col = 20.5;
 	data->s_par->s[3].texture = 3;
 
@@ -106,7 +106,8 @@ void	sort_sprites(t_vault *data)
 {
 	int		i;
 	int		j;
-	double	tmp;
+	double	tmp_dist;
+	double	tmp_prio;
 
 	i = 0;
 	while (i < NUMSPRITES)
@@ -114,17 +115,33 @@ void	sort_sprites(t_vault *data)
 		j = 0;
 		while (j < NUMSPRITES - 1)
 		{
-			if (data->s_par->s_dist[j]
-				< data->s_par->s_dist[j + 1]
-				&& (data->s_par->s_prio[j]
-					< data->s_par->s_prio[j + 1]))
+			if (data->s_par->s_dist[j] < data->s_par->s_dist[j + 1])
 			{
-				tmp = data->s_par->s_prio[j];
+				tmp_dist = data->s_par->s_dist[j];
+				data->s_par->s_dist[j] = data->s_par->s_dist[j + 1];
+				data->s_par->s_dist[j + 1] = tmp_dist;
+
+				tmp_prio = data->s_par->s_prio[j];
 				data->s_par->s_prio[j] = data->s_par->s_prio[j + 1];
-				data->s_par->s_prio[j + 1] = (int)tmp;
+				data->s_par->s_prio[j + 1] = tmp_prio;
 			}
 			j++;
 		}
 		i++;
 	}
+	print_sprite_order(data);
+}
+
+void	print_sprite_order(t_vault *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 14)
+	{
+		printf("%d sprites à dessiner est le sprite numéro %d\n", i, data->s_par->s_prio[i]);
+		printf("qui est a une distance de %f case\n", data->s_par->s_dist[i]);
+		i++;
+	}
+	printf("\n");
 }

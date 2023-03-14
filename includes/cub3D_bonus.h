@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 15:47:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:01:14 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -509,5 +509,6 @@ void		load_sprites_coord(t_vault *data);
 void		reinit_sprites(t_vault *data);
 void		sprite_ordering(t_vault *data);
 void		sort_sprites(t_vault *data);
+void		print_sprite_order(t_vault *data);
 
 #endif
