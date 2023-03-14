@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 00:13:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:07:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	sprite_casting(t_vault *data)
 		data->s_par->screen_x = data->s_par->s_ds_x;
 		while (data->s_par->screen_x < data->s_par->s_de_x)
 		{
-			tex_x = (int)(256 * (data->s_par->screen_x
-						- (-data->s_par->s_w / 2 + data->s_par->s_sc_x))
+			tex_x = fabs((int)(256 * (data->s_par->screen_x
+							- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
 					* TEXWIDTH / data->s_par->s_w) / 256;
 			if (data->s_par->tr_y > 0 && data->s_par->screen_x > 0
 				&& data->s_par->screen_x < WIDTH
@@ -105,7 +105,7 @@ void	draw_sprite(t_vault *data, int tex_x, int **tex_buff)
 	{
 		d = (int)((data->s_par->screen_y) * 256 - HEIGHT
 				* 128 + data->s_par->s_h * 128);
-		tex_y = ((d * TEXHEIGHT) / data->s_par->s_h) / 256;
+		tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
 		if (tex_buff[tex_y][tex_x] != (int)0xff00ffff)
 			mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
 				data->s_par->screen_y, tex_buff[tex_y][tex_x]);
@@ -122,15 +122,13 @@ void	draw_sprite_loop(t_vault *data, int tex_x, int **tex_buff)
 
 	loop = 0;
 	max = 0;
-	while (loop < 5 && max < 100)
+	while (loop < 5)
 	{
-		printf("loop #%d\n", loop);
 		while (data->s_par->screen_y < data->s_par->s_de_y)
 		{
-			printf("coucou\n");
 			d = (int)((data->s_par->screen_y) * 256 - HEIGHT
 					* 128 + data->s_par->s_h * 128);
-			tex_y = ((d * TEXHEIGHT) / data->s_par->s_h) / 256;
+			tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
 			if (tex_buff[tex_y][tex_x] != (int)0xff00ffff)
 				mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
 					data->s_par->screen_y, tex_buff[tex_y + loop * 256][tex_x]);
@@ -140,5 +138,7 @@ void	draw_sprite_loop(t_vault *data, int tex_x, int **tex_buff)
 		if (loop == 5)
 			loop = 0;
 		max++;
+		if (max == 10)
+			break ;
 	}
 }

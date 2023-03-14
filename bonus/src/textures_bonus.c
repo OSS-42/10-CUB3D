@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:42:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/11 16:15:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 08:57:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	**get_texture(xpm_t *tex)
 	int	i;
 	int	j;
 
-	tex_buff = ft_calloc(sizeof(int *), tex->texture.height + 1);
+	tex_buff = ft_calloc(sizeof(int *), tex->texture.height + 50);
 	i = 3;
 	while (++i < (int)tex->texture.height + 4)
 	{
