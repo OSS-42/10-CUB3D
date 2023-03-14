@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 09:07:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:19:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ void	sprite_casting(t_vault *data)
 		data->s_par->screen_x = data->s_par->s_ds_x;
 		while (data->s_par->screen_x < data->s_par->s_de_x)
 		{
-			tex_x = fabs((int)(256 * (data->s_par->screen_x
-							- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
-					* TEXWIDTH / data->s_par->s_w) / 256;
+			tex_x
+				= fabs((int)(256 * (data->s_par->screen_x - (-data->s_par->s_w / 2 + data->s_par->s_sc_x))) * TEXWIDTH / data->s_par->s_w) / 256;
 			if (data->s_par->tr_y > 0 && data->s_par->screen_x > 0
 				&& data->s_par->screen_x < WIDTH
 				&& data->s_par->tr_y
