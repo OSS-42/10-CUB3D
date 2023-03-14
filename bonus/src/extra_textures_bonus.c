@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extra_textures_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/13 23:49:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:34:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
