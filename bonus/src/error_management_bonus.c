@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/02/28 15:26:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/13 20:07:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,11 @@ void	free_all(t_vault *data)
 	free (data->plr);
 	system("killall afplay");
 	free_map(data);
+}
+
+void	quit_game(t_vault *data)
+{
+	printf("%s\n", "Au revoir !");
+	system("killall afplay");
+	free_all(data);
 }

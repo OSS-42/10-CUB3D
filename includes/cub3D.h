@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/04 11:45:29 by maison           ###   ########.fr       */
+/*   Updated: 2023/03/13 20:25:09 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,23 @@ typedef struct s_tex
 	int		**south;
 	int		**east;
 	int		**west;
-} t_tex;
+}	t_tex;
 
 typedef struct s_rays
 {
 	double	pdx_ray;
 	double	pdy_ray;
-	double	delta_dist_x; // distance entre segments de grille verticaux (intersections en x)
-	double	delta_dist_y; // distance entre segments de grille horizontaux (intersections en y)
-	double	screen_2d_x; // x sur le plan de la largeur de la fenetre
-	int		map_2d_col; // mouvements dans la carte 2D sur les colonnes (y)
-	int		map_2d_row; // mouvements dans la carte 2D sur les colonnes (x)
-	int		col; // coordonnees map 2D (y)
-	int		row; // coordonnees map 2D (x)
-	double	ray_len_x; // longueur du rayon initial (dans la case du joueur)
-	double	ray_len_y; // longueur du rayon initial (dans la case du joueur)
-	int		side; // quel coté du mur est touché
-	double	ray_len; // longueur du rayon
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	screen_2d_x;
+	int		map_2d_col;
+	int		map_2d_row;
+	int		col;
+	int		row;
+	double	ray_len_x;
+	double	ray_len_y;
+	int		side;
+	double	ray_len;
 	double	plane_x;
 	double	plane_y;
 	double	rot_speed;
@@ -104,11 +104,11 @@ typedef struct s_game
 	char			*wall_s;
 	char			*wall_e;
 	char			*wall_w;
-	int				wall_height; // hauteur de la ligne de pixels pour le mur a dessiner
-	int				wall_start; // pixel de depart du dessin du mur
-	int				wall_end; // pixel de fin du dessin du mur
-	unsigned int	wall_color; // couleur du mur
-	int				tex_x; // is the x-coordinate of the texture
+	int				wall_height;
+	int				wall_start;
+	int				wall_end;
+	unsigned int	wall_color;
+	int				tex_x;
 }	t_game;
 
 typedef struct s_param
@@ -137,7 +137,7 @@ typedef struct s_param
 
 typedef struct s_vault
 {
-	void		*img; //à supprimer ?
+	void		*img;
 	void		*mlx;
 	char		**scene;
 	char		*argv;

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/11 23:19:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:08:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	show_minimap(t_vault *data)
 {
-		load_minimap(data);
-		draw_minimap(data);
-		draw_player(data);
+	load_minimap(data);
+	draw_minimap(data);
+	draw_player(data);
 }
 
 void	load_minimap(t_vault *data)

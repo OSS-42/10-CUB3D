@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:00:16 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/03 13:54:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:19:53 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,19 @@ void	player_location_2(t_vault *data, int col, int row)
 		data->hud_loc->p_loc = data->tex->c1;
 		data->hud_loc->tex_p_loc = data->tex->tex_c1;
 	}
-	else if (row >= 3 && row < 12 && col >= 13)
-	{
-		data->hud_loc->location = 6;
-		data->hud_loc->p_loc = data->tex->c2;
-		data->hud_loc->tex_p_loc = data->tex->tex_c2;
-	}
 	else
 		player_location_3(data, col, row);
 }
 
 void	player_location_3(t_vault *data, int col, int row)
 {
-	if (row >= 0 && row < 3 && col >= 13)
+	if (row >= 3 && row < 12 && col >= 13)
+	{
+		data->hud_loc->location = 6;
+		data->hud_loc->p_loc = data->tex->c2;
+		data->hud_loc->tex_p_loc = data->tex->tex_c2;
+	}
+	else if (row >= 0 && row < 3 && col >= 13)
 	{
 		data->hud_loc->location = 7;
 		data->hud_loc->p_loc = data->tex->detente;
@@ -82,7 +82,13 @@ void	player_location_3(t_vault *data, int col, int row)
 		data->hud_loc->p_loc = data->tex->amphi;
 		data->hud_loc->tex_p_loc = data->tex->tex_amphi;
 	}
-	else if (row >= 0 && row < 15 && col < 7)
+	else
+		player_location_4(data, col, row);
+}
+
+void	player_location_4(t_vault *data, int col, int row)
+{
+	if (row >= 0 && row < 15 && col < 7)
 	{
 		data->hud_loc->location = 9;
 		data->hud_loc->p_loc = data->tex->c3;
@@ -94,13 +100,7 @@ void	player_location_3(t_vault *data, int col, int row)
 		data->hud_loc->p_loc = data->tex->bocal;
 		data->hud_loc->tex_p_loc = data->tex->tex_bocal;
 	}
-	else
-		player_location_4(data, col, row);
-}
-
-void	player_location_4(t_vault *data, int col, int row)
-{
-	if (row >= 0 && row < 7 && col >= 7 && col < 13)
+	else if (row >= 0 && row < 7 && col >= 7 && col < 13)
 	{
 		data->hud_loc->location = 11;
 		data->hud_loc->p_loc = data->tex->lounge;

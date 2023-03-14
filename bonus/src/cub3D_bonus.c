@@ -6,18 +6,11 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/10 09:32:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:07:37 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
-
-void	quit_game(t_vault *data)
-{
-	printf("%s\n", "Au revoir !");
-	system("killall afplay");
-	free_all(data);
-}
 
 void	loading_game(t_vault *data)
 {
@@ -44,7 +37,6 @@ int	create_game(t_vault *data)
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	loading_game(data);
-	// mlx_loop_hook(data->mlx, (void *) &raycaster, (void *)data);
 	raycaster(data);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
@@ -68,7 +60,7 @@ void	init_data(t_vault *data, char **argv)
 	data->hud_loc = ft_calloc(1, sizeof(t_hud_loc));
 	data->tex = ft_calloc(1, sizeof(t_tex));
 	data->raycaster = ft_calloc(1, sizeof(t_rays));
-	data->sp_param = ft_calloc(1, sizeof(t_sp_param));
+	data->s_par = ft_calloc(1, sizeof(t_s_par));
 	data->scene_param->r_ceiling = -1;
 	data->scene_param->g_ceiling = -1;
 	data->scene_param->b_ceiling = -1;

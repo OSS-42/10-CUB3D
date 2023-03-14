@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/12 22:54:01 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/13 22:42:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define BLUE 0x00FFFFFF
 # define DGRAY 0x3C3C3FFF
 # define LGRAY 0x89898DFF
+# define NUMSPRITES 2
 
 /***** STRUCTURES *****/
 
@@ -106,35 +107,34 @@ typedef struct s_minimap
 	double		tile_size;
 }	t_minimap;
 
-#define numSprites 2
-
 typedef struct s_sprites
 {
-	double	sprite_row;
-	double	sprite_col;
-	unsigned int		texture;
+	double			s_row;
+	double			s_col;
+	unsigned int	texture;
 }	t_sprites;
 
-typedef struct s_sp_param
+typedef struct s_s_par
 {
-	double 	ZBuffer[WIDTH];
-	int		spriteOrder[numSprites];
-	double 	spriteDistance[numSprites];
-	t_sprites 		sprite[numSprites];
-	double 	s_diff_row;
-	double 	s_diff_col;
-	double	transformX;
-	double	transformY;
-	double		spriteScreenX;
-	double		spriteHeight;
-	double		drawStartY;
-	double		drawEndY;
-	double		spriteWidth;
-	double		drawStartX;
-	double		drawEndX;
-	double 	invDet;
-}	t_sp_param;
-
+	double		z_buff[WIDTH];
+	int			s_prio[NUMSPRITES];
+	double		s_dist[NUMSPRITES];
+	t_sprites	s[NUMSPRITES];
+	double		s_diff_row;
+	double		s_diff_col;
+	double		tr_x;
+	double		tr_y;
+	double		s_sc_x;
+	double		s_h;
+	double		s_ds_y;
+	double		s_de_y;
+	double		s_w;
+	double		s_ds_x;
+	double		s_de_x;
+	double		inv_det;
+	int			screen_x;
+	int			screen_y;
+}	t_s_par;
 
 typedef struct s_game
 {
@@ -260,7 +260,6 @@ typedef struct s_vault
 {
 	void		*img;
 	void		*mlx;
-	// void		*mlx_win;
 	char		**scene;
 	char		*argv;
 	int			map_start;
@@ -286,7 +285,7 @@ typedef struct s_vault
 	t_rays		*raycaster;
 	t_tex		*tex;
 	mlx_image_t	*cursor;
-	t_sp_param	*sp_param;
+	t_s_par		*s_par;
 }	t_vault;
 
 /***** FONCTIONS *****/
@@ -296,13 +295,13 @@ void		loading_game(t_vault *data);
 void		delete_images(t_vault *data);
 int			create_game(t_vault *data);
 void		init_data(t_vault *data, char **argv);
-void		quit_game(t_vault *data);
 
 /***** error_management.c *****/
 void		errors(t_vault *data);
 void		errors_2(t_vault *data);
 void		free_map(t_vault *data);
 void		free_all(t_vault *data);
+void		quit_game(t_vault *data);
 
 /***** scene_parsing.c *****/
 void		check_scene_name(t_vault *data);
@@ -430,8 +429,10 @@ int			is_not_wall_full(t_vault *data, int row, int col);
 
 /***** extra_textures.c *****/
 void		load_extra_textures(t_vault *data);
+void		load_extra_textures2(t_vault *data);
 void		check_extra_textures(t_vault *data);
 void		get_extra_textures(t_vault *data);
+void		get_extra_textures2(t_vault *data);
 
 /***** init_minimap.c *****/
 void		show_minimap(t_vault *data);
@@ -482,11 +483,15 @@ void		player_location_3(t_vault *data, int col, int row);
 void		player_location_4(t_vault *data, int col, int row);
 
 /***** sprites_bonus.c *****/
-void	load_sprites(t_vault *data);
-void	sprite_casting(t_vault *data);
-void	sprite_ordering(t_vault *data);
-void	sprite_computing(t_vault *data, int i);
-void	sort_sprites(t_vault *data);
-void	draw_sprite(t_vault *data, int screen_y, int tex_x, int screen_x, int **tex_buff);
+void		sprite_casting(t_vault *data);
+void		sprite_computing(t_vault *data, int i);
+void		sprite_computing2(t_vault *data);
+void		sprite_choice(t_vault *data, int tex_x, int i);
+void		draw_sprite(t_vault *data, int tex_x, int **tex_buff);
+
+/***** sprite_utils_bonus.c *****/
+void		load_sprites(t_vault *data);
+void		sprite_ordering(t_vault *data);
+void		sort_sprites(t_vault *data);
 
 #endif

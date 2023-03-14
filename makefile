@@ -150,7 +150,8 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/check_wall_textures_bonus.c \
 				bonus/src/check_wall_textures_bonus2.c \
 				bonus/src/check_wall_textures_bonus3.c \
-				bonus/src/draw_tex_wall_bonus.c
+				bonus/src/draw_tex_wall_bonus.c \
+				bonus/src/sprite_utils_bonus.c
 
 bonus: intro_bonus art_intro $(NAME_BONUS)
 
@@ -161,9 +162,9 @@ $(NAME_BONUS):	$(D_OBJ_BONUS) $(LIBFT) $(LIBART) $(MLX42) $(OBJS_BONUS)
 # Ubuntu
 #	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
 # MacOS 42
-	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+#	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 # Apple M2
-#	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 	@echo "$(LGREEN)Software Compilation completed !$(NC)"
 
 $(D_OBJ_BONUS):

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/11 23:20:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/13 22:43:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ void	keyhandler(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_A
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		move_left(data, 0, 0);
-	keyhandler_2(keydata, data);
-}
-
-void	keyhandler_2(mlx_key_data_t keydata, t_vault *data)
-{
 	if (keydata.key == MLX_KEY_D
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		move_right(data, 0, 0);
 	if (keydata.key == MLX_KEY_LEFT
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		rotate_left(data);
+	keyhandler_2(keydata, data);
+}
+
+void	keyhandler_2(mlx_key_data_t keydata, t_vault *data)
+{
 	if (keydata.key == MLX_KEY_RIGHT
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		rotate_right(data);
@@ -58,7 +58,6 @@ void	keyhandler_2(mlx_key_data_t keydata, t_vault *data)
 	}
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		open_door(data);
-	// reinit_and_draw(data);
 }
 
 void	open_door(t_vault *data)

@@ -6,151 +6,105 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/13 16:33:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/13 22:42:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
 
-//SPRITE CASTING
-	//sort sprites from far to close
-
-void	load_sprites(t_vault *data)
-{
-	data->sp_param->sprite[0].sprite_row = 9.5;
-	data->sp_param->sprite[0].sprite_col = 20.5;
-	data->sp_param->sprite[0].texture = 1;
-
-	data->sp_param->sprite[1].sprite_row = 33.5;
-	data->sp_param->sprite[1].sprite_col = 8.5;
-	data->sp_param->sprite[1].texture = 2;
-}
+// -current-\-old-
+//s_par \ sp_param
+//s_ds_x \ drawStartX
+//s_de_y \ drawEndY
+//s_prio \ spriteOrder 
+//s_dist \ spriteDistance
 
 void	sprite_casting(t_vault *data)
 {
 	int	i;
-	int	screen_x;
-	int	screen_y;
-	int tex_x;
+	int	tex_x;
 
-	i = 0;
+	i = -1;
 	sprite_ordering(data);
-	while (i < numSprites)
+	while (++i < NUMSPRITES)
 	{
 		sprite_computing(data, i);
-		screen_x = data->sp_param->drawStartX;
-		while (screen_x < data->sp_param->drawEndX)
+		data->s_par->screen_x = data->s_par->s_ds_x;
+		while (data->s_par->screen_x < data->s_par->s_de_x)
 		{
-			tex_x = (int)(256 * (screen_x - (-data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX)) * TEXWIDTH / data->sp_param->spriteWidth) / 256;
-			if (data->sp_param->transformY > 0 && screen_x > 0 && screen_x < WIDTH && data->sp_param->transformY < data->sp_param->ZBuffer[screen_x])
-			{
-				screen_y = data->sp_param->drawStartY;
-				if (data->sp_param->sprite[data->sp_param->spriteOrder[i]].texture == 1)
-					draw_sprite(data, screen_y, tex_x, screen_x, data->tex->sprite1);
-				else if (data->sp_param->sprite[data->sp_param->spriteOrder[i]].texture == 2)
-					draw_sprite(data, screen_y, tex_x, screen_x, data->tex->sprite2);
-			}
-			screen_x++;
+			tex_x = (int)(256 * (data->s_par->screen_x
+						- (-data->s_par->s_w / 2 + data->s_par->s_sc_x))
+					* TEXWIDTH / data->s_par->s_w) / 256;
+			if (data->s_par->tr_y > 0 && data->s_par->screen_x > 0
+				&& data->s_par->screen_x < WIDTH
+				&& data->s_par->tr_y
+				< data->s_par->z_buff[data->s_par->screen_x])
+				sprite_choice(data, tex_x, i);
+			data->s_par->screen_x++;
 		}
-		i++;
 	}
 }
 
-void	sprite_ordering(t_vault *data)
+void	sprite_choice(t_vault *data, int tex_x, int i)
 {
-	int	i;
-
-	i = 0;
-	while (i < numSprites)
-	{
-		data->sp_param->spriteOrder[i] = i;
-		data->sp_param->spriteDistance[i]
-			= ((data->plr->row - data->sp_param->sprite[i].sprite_row)
-				* (data->plr->row - data->sp_param->sprite[i].sprite_row)
-				+ (data->plr->col - data->sp_param->sprite[i].sprite_col) 
-				* (data->plr->col - data->sp_param->sprite[i].sprite_col));
-		i++;
-	}
-	sort_sprites(data);
+	data->s_par->screen_y = data->s_par->s_ds_y;
+	if (data->s_par->s[data->s_par->s_prio[i]].texture == 1)
+		draw_sprite(data, tex_x, data->tex->sprite1);
+	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 2)
+		draw_sprite(data, tex_x, data->tex->sprite2);
 }
 
 void	sprite_computing(t_vault *data, int i)
 {
-	// double player_angle = atan2(data->plr->pdy, data->plr->pdx);
-	
-	data->sp_param->s_diff_col = data->sp_param->sprite[data->sp_param->spriteOrder[i]].sprite_row - (data->plr->row);
-	data->sp_param->s_diff_row = data->sp_param->sprite[data->sp_param->spriteOrder[i]].sprite_col - (data->plr->col);
-
-	data->sp_param->invDet = 1.0 / (data->raycaster->plane_x * data->plr->pdy - data->plr->pdx * data->raycaster->plane_y);
-
-
-	data->sp_param->transformX = data->sp_param->invDet * (data->plr->pdy * data->sp_param->s_diff_row - data->plr->pdx * data->sp_param->s_diff_col);
-	data->sp_param->transformY = data->sp_param->invDet * (-data->raycaster->plane_y * data->sp_param->s_diff_row + data->raycaster->plane_x * data->sp_param->s_diff_col);
-
-	// data->sp_param->transformY = data->sp_param->invDet * (-data->plr->pdy * data->sp_param->s_diff_row - data->plr->pdx * data->sp_param->s_diff_col);
-	// data->sp_param->transformX = data->sp_param->invDet * (data->raycaster->plane_y * data->sp_param->s_diff_row + data->raycaster->plane_x * data->sp_param->s_diff_col); //this is actually the depth inside the screen, that what Z is in 3D
-
-	data->sp_param->spriteScreenX = (int)((WIDTH / 2) * (1 + data->sp_param->transformX / data->sp_param->transformY));
-
-	data->sp_param->spriteHeight = abs((int)(HEIGHT / data->sp_param->transformY)); //using 'transformY' instead of the real distance prevents fisheye
-
-	data->sp_param->drawStartY = -data->sp_param->spriteHeight / 2 + HEIGHT / 2;
-	if (data->sp_param->drawStartY < 0)
-		data->sp_param->drawStartY = 0;
-
-	data->sp_param->drawEndY = data->sp_param->spriteHeight / 2 + HEIGHT / 2;
-	if (data->sp_param->drawEndY >= HEIGHT)
-		data->sp_param->drawEndY = HEIGHT - 1;
-
-	data->sp_param->spriteWidth = abs((int)(HEIGHT / data->sp_param->transformY));
-
-	data->sp_param->drawStartX = -data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX;
-	if(data->sp_param->drawStartX < 0)
-		data->sp_param->drawStartX = 0;
-
-	data->sp_param->drawEndX = data->sp_param->spriteWidth / 2 + data->sp_param->spriteScreenX;
-	if(data->sp_param->drawEndX >= WIDTH)
-		data->sp_param->drawEndX = WIDTH - 1;
+	data->s_par->s_diff_col
+		= data->s_par->s[data->s_par->s_prio[i]].s_row - (data->plr->row);
+	data->s_par->s_diff_row
+		= data->s_par->s[data->s_par->s_prio[i]].s_col - (data->plr->col);
+	data->s_par->inv_det = 1.0 / (data->raycaster->plane_x * data->plr->pdy
+			- data->plr->pdx * data->raycaster->plane_y);
+	data->s_par->tr_x
+		= data->s_par->inv_det * (data->plr->pdy * data->s_par->s_diff_row
+			- data->plr->pdx * data->s_par->s_diff_col);
+	data->s_par->tr_y
+		= data->s_par->inv_det * (-data->raycaster->plane_y
+			* data->s_par->s_diff_row + data->raycaster->plane_x
+			* data->s_par->s_diff_col);
+	data->s_par->s_sc_x = (int)((WIDTH / 2)
+			* (1 + data->s_par->tr_x / data->s_par->tr_y));
+	sprite_computing2(data);
 }
 
-void	draw_sprite(t_vault *data, int screen_y, int tex_x, int screen_x, int **tex_buff)
+void	sprite_computing2(t_vault *data)
+{
+	data->s_par->s_h = abs((int)(HEIGHT / data->s_par->tr_y));
+	data->s_par->s_ds_y = -data->s_par->s_h / 2 + HEIGHT / 2;
+	if (data->s_par->s_ds_y < 0)
+		data->s_par->s_ds_y = 0;
+	data->s_par->s_de_y = data->s_par->s_h / 2 + HEIGHT / 2;
+	if (data->s_par->s_de_y >= HEIGHT)
+		data->s_par->s_de_y = HEIGHT - 1;
+	data->s_par->s_w = abs((int)(HEIGHT / data->s_par->tr_y));
+	data->s_par->s_ds_x = -data->s_par->s_w / 2 + data->s_par->s_sc_x;
+	if (data->s_par->s_ds_x < 0)
+		data->s_par->s_ds_x = 0;
+	data->s_par->s_de_x = data->s_par->s_w / 2 + data->s_par->s_sc_x;
+	if (data->s_par->s_de_x >= WIDTH)
+		data->s_par->s_de_x = WIDTH - 1;
+}
+
+void	draw_sprite(t_vault *data, int tex_x, int **tex_buff)
 {
 	int	tex_y;
 	int	d;
 
-	while (screen_y < data->sp_param->drawEndY)
+	while (data->s_par->screen_y < data->s_par->s_de_y)
 	{
-		d = (int)(screen_y) * 256 - HEIGHT * 128 + data->sp_param->spriteHeight * 128; //256 and 128 factors to avoid floats
-		tex_y = ((d * TEXHEIGHT) / data->sp_param->spriteHeight) / 256;
+		d = (int)((data->s_par->screen_y) * 256 - HEIGHT
+				* 128 + data->s_par->s_h * 128);
+		tex_y = ((d * TEXHEIGHT) / data->s_par->s_h) / 256;
 		if (tex_buff[tex_y][tex_x] != (int)0xff00ffff)
-			mlx_put_pixel(data->game->ddd, screen_x, screen_y, tex_buff[tex_y][tex_x]);
-		screen_y++;
-	}
-}
-
-void	sort_sprites(t_vault *data)
-{
-	int		i;
-	int		j;
-	double	tmp;
-
-	i = 0;
-	while (i < numSprites)
-	{
-		j = 0;
-		while (j < numSprites - 1)
-		{
-			if (data->sp_param->spriteDistance[j] < data->sp_param->spriteDistance[j + 1] && (data->sp_param->spriteOrder[j] < data->sp_param->spriteOrder[j + 1]))
-			{
-				// tmp = data->sp_param->spriteDistance[j];
-				// data->sp_param->spriteDistance[j] = data->sp_param->spriteDistance[j + 1];
-				// data->sp_param->spriteDistance[j + 1] = tmp;
-				tmp = data->sp_param->spriteOrder[j];
-				data->sp_param->spriteOrder[j] = data->sp_param->spriteOrder[j + 1];
-				data->sp_param->spriteOrder[j + 1] = (int)tmp;
-			}
-			j++;
-		}
-		i++;
+			mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
+				data->s_par->screen_y, tex_buff[tex_y][tex_x]);
+		data->s_par->screen_y++;
 	}
 }
