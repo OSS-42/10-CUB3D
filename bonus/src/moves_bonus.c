@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/10 15:13:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:22:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 		data->plr->col += data->plr->pdx * data->raycaster->mov_speed;
 	}
 	close_door(data);
-	reinit_and_draw(data);
 }
 
 void	move_backward(t_vault *data, int check_row, int check_col)
@@ -49,7 +48,6 @@ void	move_backward(t_vault *data, int check_row, int check_col)
 		data->plr->col -= data->plr->pdx * data->raycaster->mov_speed;
 	}
 	close_door(data);
-	reinit_and_draw(data);
 }
 
 void	move_left(t_vault *data, int check_row, int check_col)
@@ -71,7 +69,6 @@ void	move_left(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed;
 	}
 	close_door(data);
-	reinit_and_draw(data);
 }
 
 void	move_right(t_vault *data, int check_row, int check_col)
@@ -93,7 +90,6 @@ void	move_right(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed;
 	}
 	close_door(data);
-	reinit_and_draw(data);
 }
 
 void	move_mouse(double xpos, double ypos, void *temp)
@@ -107,7 +103,7 @@ void	move_mouse(double xpos, double ypos, void *temp)
 	data = (t_vault *) temp;
 	old_player_pdx = data->plr->pdx;
 	delta_x = xpos - data->old_x_cursor;
-	delta_x *= 0.005;
+	delta_x *= 0.05;
 	data->plr->pdx = data->plr->pdx * cos(-delta_x)
 		- data->plr->pdy * sin(delta_x);
 	data->plr->pdy = old_player_pdx * sin(delta_x)

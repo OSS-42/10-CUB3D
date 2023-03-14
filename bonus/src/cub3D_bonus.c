@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 00:05:55 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:21:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	delete_images(t_vault *data)
 	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_static);
 	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_dynamic);
 	mlx_delete_image(data->mlx, data->game->ddd);
+	printf("%s\n", "Au revoir !");
+	free_all(data);
 }
 
 int	create_game(t_vault *data)
