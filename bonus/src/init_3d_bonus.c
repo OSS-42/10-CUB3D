@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:12:30 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/11 23:20:06 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:38:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	reinit_3d(t_vault *data)
 
 void	load_3d(t_vault *data)
 {
-	data->game->ddd = mlx_new_image(data->mlx, WIDTH,
-			HEIGHT);
+	data->game->ddd = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(data->mlx, data->game->ddd, 0, 0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 13:08:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:48:45 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	draw_sprite(t_vault *data, int **tex_buff)
 				* 128 + data->s_par->s_h * 128);
 		tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
 		if (tex_buff[tex_y][data->s_par->tex_sx] != (int)0xff00ffff)
-			mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
+			mlx_put_pixel(data->game->sprite, data->s_par->screen_x,
 				data->s_par->screen_y, tex_buff[tex_y][data->s_par->tex_sx]);
 		data->s_par->screen_y++;
 	}
@@ -116,31 +116,34 @@ void	draw_sprite(t_vault *data, int **tex_buff)
 
 void	draw_sprite_loop(void *temp)
 {
-	int	tex_y;
-	int	d;
-	int	loop;
-	int	max;
+	int		tex_y;
+	int		d;
+	int		loop;
+	int		max;
 	t_vault	*data;
 
-	loop = -1;
 	max = 0;
 	data = temp;
-	while (++loop < 5)
+	while (max < 10)
 	{
-		while (data->s_par->screen_y < data->s_par->s_de_y)
+		loop = 0;
+		while (loop < 5)
 		{
-			d = (int)((data->s_par->screen_y) * 256 - HEIGHT
-					* 128 + data->s_par->s_h * 128);
-			tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
-			if (data->tex->fire_tor[tex_y + loop * 256][data->s_par->tex_sx] != (int)0xff00ffff)
-				mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
-					data->s_par->screen_y, data->tex->fire_tor[tex_y + loop * 256][data->s_par->tex_sx]);
-			data->s_par->screen_y++;
+			data->s_par->screen_y = data->s_par->s_ds_y;
+			while (data->s_par->screen_y < data->s_par->s_de_y)
+			{
+				d = (int)((data->s_par->screen_y) * 256 - HEIGHT
+						* 128 + data->s_par->s_h * 128);
+				tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
+				if (data->tex->fire_tor[tex_y][data->s_par->tex_sx + loop * 256] != (int)0xff00ffff)
+					mlx_put_pixel(data->game->sprite, data->s_par->screen_x,
+						data->s_par->screen_y, data->tex->fire_tor[tex_y][data->s_par->tex_sx + loop * 256]);
+				data->s_par->screen_y++;
+			}
+			// usleep(1000);
+			// reinit_sprites(data);
+			loop++;
 		}
-		if (loop == 5)
-			loop = 0;
 		max++;
-		if (max == 10)
-			break ;
 	}
 }

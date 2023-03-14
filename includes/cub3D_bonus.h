@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 13:33:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:47:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef struct s_s_par
 typedef struct s_game
 {
 	mlx_image_t		*ddd;
+	mlx_image_t		*sprite;
 	char			*wall_n;
 	char			*wall_s;
 	char			*wall_e;
@@ -504,6 +505,8 @@ void		draw_sprite_loop(void *temp);
 
 /***** sprite_utils_bonus.c *****/
 void		load_sprites(t_vault *data);
+void		load_sprites_coord(t_vault *data);
+void		reinit_sprites(t_vault *data);
 void		sprite_ordering(t_vault *data);
 void		sort_sprites(t_vault *data);
 

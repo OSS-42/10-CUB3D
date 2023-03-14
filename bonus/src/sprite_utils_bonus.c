@@ -6,13 +6,25 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:36:27 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 13:33:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:40:09 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
 
 void	load_sprites(t_vault *data)
+{
+	data->game->sprite = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(data->mlx, data->game->sprite, 0, 0);
+}
+
+void	reinit_sprites(t_vault *data)
+{
+	mlx_delete_image(data->mlx, data->game->sprite);
+	load_sprites(data);
+}
+
+void	load_sprites_coord(t_vault *data)
 {
 	data->s_par->s[0].s_row = 8.5; //marc
 	data->s_par->s[0].s_col = 9.5;

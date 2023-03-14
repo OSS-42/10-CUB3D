@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 09:21:55 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:49:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	loading_game(t_vault *data)
 	load_3d(data);
 	load_player(data);
 	load_hud(data);
-	load_sprites(data);
+	load_sprites_coord(data);
 }
 
 void	delete_images(t_vault *data)
@@ -28,6 +28,7 @@ void	delete_images(t_vault *data)
 	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_static);
 	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_dynamic);
 	mlx_delete_image(data->mlx, data->game->ddd);
+	mlx_delete_image(data->mlx, data->game->sprite);
 	printf("%s\n", "Au revoir !");
 	free_all(data);
 }
