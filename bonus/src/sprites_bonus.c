@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 09:19:01 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:46:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 //s_par \ sp_param
 //s_ds_x \ drawStartX
 //s_de_y \ drawEndY
-//s_prio \ spriteOrder 
+//s_prio \ spriteOrder
 //s_dist \ spriteDistance
 
 void	sprite_casting(t_vault *data)
 {
 	int	i;
-	int	tex_x;
 
 	i = -1;
 	sprite_ordering(data);
@@ -32,13 +31,14 @@ void	sprite_casting(t_vault *data)
 		data->s_par->screen_x = data->s_par->s_ds_x;
 		while (data->s_par->screen_x < data->s_par->s_de_x)
 		{
-			tex_x
-				= fabs((int)(256 * (data->s_par->screen_x - (-data->s_par->s_w / 2 + data->s_par->s_sc_x))) * TEXWIDTH / data->s_par->s_w) / 256;
+			data->s_par->tex_sx = fabs((int)(256 * (data->s_par->screen_x
+							- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
+					*TEXWIDTH / data->s_par->s_w) / 256;
 			if (data->s_par->tr_y > 0 && data->s_par->screen_x > 0
 				&& data->s_par->screen_x < WIDTH
 				&& data->s_par->tr_y
 				< data->s_par->z_buff[data->s_par->screen_x])
-				sprite_choice(data, tex_x, i);
+				sprite_choice(data, data->s_par->tex_sx, i);
 			data->s_par->screen_x++;
 		}
 	}
@@ -54,7 +54,7 @@ void	sprite_choice(t_vault *data, int tex_x, int i)
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 3)
 		draw_sprite(data, tex_x, data->tex->pillar);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 4)
-		draw_sprite_loop(data, tex_x, data->tex->fire_tor);
+		draw_sprite_loop((void *)data);
 }
 
 void	sprite_computing(t_vault *data, int i)
@@ -112,28 +112,60 @@ void	draw_sprite(t_vault *data, int tex_x, int **tex_buff)
 	}
 }
 
-void	draw_sprite_loop(t_vault *data, int tex_x, int **tex_buff)
-{
-	int	tex_y;
-	int	d;
-	int	loop;
-	int	max;
+// void	draw_sprite_loop(t_vault *data, int tex_x, int **tex_buff)
+// {
+// 	int	tex_y;
+// 	int	d;
+// 	int	loop;
+// 	int	max;
 
-	loop = 0;
+// 	loop = -1;
+// 	max = 0;
+// 	while (++loop < 5)
+// 	{
+// 		while (data->s_par->screen_y < data->s_par->s_de_y)
+// 		{
+// 			d = (int)((data->s_par->screen_y) * 256 - HEIGHT
+// 					* 128 + data->s_par->s_h * 128);
+// 			tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
+// 			if (tex_buff[tex_y][tex_x] != (int)0xff00ffff)
+// 				mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
+// 					data->s_par->screen_y, tex_buff[tex_y + loop * 256][tex_x]);
+// 			data->s_par->screen_y++;
+// 		}
+// 		if (loop == 5)
+// 			loop = 0;
+// 		max++;
+// 		if (max == 10)
+// 			break ;
+// 	}
+// }
+
+void	draw_sprite_loop(void *temp)
+{
+	int		tex_y;
+	int		d;
+	int		loop;
+	int		max;
+	t_vault	*data;
+
+	data = temp;
+	loop = -1;
 	max = 0;
-	while (loop < 5)
+	while (++loop < 5)
 	{
 		while (data->s_par->screen_y < data->s_par->s_de_y)
 		{
 			d = (int)((data->s_par->screen_y) * 256 - HEIGHT
 					* 128 + data->s_par->s_h * 128);
 			tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
-			if (tex_buff[tex_y][tex_x] != (int)0xff00ffff)
+			if (data->tex->fire_tor[tex_y][data->s_par->tex_sx]
+				!= (int)0xff00ffff)
 				mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
-					data->s_par->screen_y, tex_buff[tex_y + loop * 256][tex_x]);
+					data->s_par->screen_y, data->tex->fire_tor
+				[tex_y + loop * 256][data->s_par->tex_sx]);
 			data->s_par->screen_y++;
 		}
-		loop++;
 		if (loop == 5)
 			loop = 0;
 		max++;

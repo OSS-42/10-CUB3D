@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 09:38:08 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/14 13:43:19 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct s_s_par
 	double		inv_det;
 	int			screen_x;
 	int			screen_y;
+	int			tex_sx;
 }	t_s_par;
 
 typedef struct s_game
@@ -383,7 +384,7 @@ void		draw_tex_location2(t_vault *data, xpm_t *texture, int **tex_buff,
 /***** raycasting.c *****/
 void		raycaster(t_vault *data);
 void		dda(t_vault *data);
-void		creating_3d_img(t_vault *data);
+void		creating_3d_img(t_vault *data, int pixels_2d);
 void		dist_and_pos(t_vault *data);
 void		dist_and_pos2(t_vault *data);
 
@@ -490,7 +491,8 @@ void		sprite_computing(t_vault *data, int i);
 void		sprite_computing2(t_vault *data);
 void		sprite_choice(t_vault *data, int tex_x, int i);
 void		draw_sprite(t_vault *data, int tex_x, int **tex_buff);
-void		draw_sprite_loop(t_vault *data, int tex_x, int **tex_buff);
+// void		draw_sprite_loop(t_vault *data, int tex_x, int **tex_buff);
+void		draw_sprite_loop(void *temp);
 
 /***** sprite_utils_bonus.c *****/
 void		load_sprites(t_vault *data);

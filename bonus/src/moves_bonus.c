@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 09:22:55 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:51:41 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 		data->plr->col += data->plr->pdx * data->raycaster->mov_speed;
 	}
 	close_door(data);
+	reinit_and_draw(data);
 }
 
 void	move_backward(t_vault *data, int check_row, int check_col)
@@ -48,6 +49,7 @@ void	move_backward(t_vault *data, int check_row, int check_col)
 		data->plr->col -= data->plr->pdx * data->raycaster->mov_speed;
 	}
 	close_door(data);
+	reinit_and_draw(data);
 }
 
 void	move_left(t_vault *data, int check_row, int check_col)
@@ -69,6 +71,7 @@ void	move_left(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed;
 	}
 	close_door(data);
+	reinit_and_draw(data);
 }
 
 void	move_right(t_vault *data, int check_row, int check_col)
@@ -90,6 +93,7 @@ void	move_right(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed;
 	}
 	close_door(data);
+	reinit_and_draw(data);
 }
 
 void	move_mouse(double xpos, double ypos, void *temp)

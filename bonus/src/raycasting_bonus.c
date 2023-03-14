@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 09:35:35 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/14 09:47:22 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	raycaster(t_vault *data)
 		data->raycaster->screen_2d_x = 2 * pixels_2d / WIDTH - 1;
 		dist_and_pos(data);
 		dda(data);
-		creating_3d_img(data);
+		creating_3d_img(data, pixels_2d);
 		draw_tex_wall(data, pixels_2d);
 		pixels_2d++;
 	}
@@ -109,7 +109,7 @@ void	dda(t_vault *data)
 	}
 }
 
-void	creating_3d_img(t_vault *data)
+void	creating_3d_img(t_vault *data, int pixels_2d)
 {
 	int	side;
 
