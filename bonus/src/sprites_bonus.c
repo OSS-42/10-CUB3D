@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/13 22:42:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 00:13:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ void	sprite_choice(t_vault *data, int tex_x, int i)
 		draw_sprite(data, tex_x, data->tex->sprite1);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 2)
 		draw_sprite(data, tex_x, data->tex->sprite2);
+	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 3)
+		draw_sprite(data, tex_x, data->tex->pillar);
+	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 4)
+		draw_sprite_loop(data, tex_x, data->tex->fire_tor);
 }
 
 void	sprite_computing(t_vault *data, int i)
@@ -106,5 +110,35 @@ void	draw_sprite(t_vault *data, int tex_x, int **tex_buff)
 			mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
 				data->s_par->screen_y, tex_buff[tex_y][tex_x]);
 		data->s_par->screen_y++;
+	}
+}
+
+void	draw_sprite_loop(t_vault *data, int tex_x, int **tex_buff)
+{
+	int	tex_y;
+	int	d;
+	int	loop;
+	int	max;
+
+	loop = 0;
+	max = 0;
+	while (loop < 5 && max < 100)
+	{
+		printf("loop #%d\n", loop);
+		while (data->s_par->screen_y < data->s_par->s_de_y)
+		{
+			printf("coucou\n");
+			d = (int)((data->s_par->screen_y) * 256 - HEIGHT
+					* 128 + data->s_par->s_h * 128);
+			tex_y = ((d * TEXHEIGHT) / data->s_par->s_h) / 256;
+			if (tex_buff[tex_y][tex_x] != (int)0xff00ffff)
+				mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
+					data->s_par->screen_y, tex_buff[tex_y + loop * 256][tex_x]);
+			data->s_par->screen_y++;
+		}
+		loop++;
+		if (loop == 5)
+			loop = 0;
+		max++;
 	}
 }

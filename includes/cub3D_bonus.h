@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/13 22:42:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 00:06:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 // pour écran plus grand, plus petit
 // 1920, 1080
 // 640,480
-# define WIDTH 1280
-# define HEIGHT 720
+// 1600,1200
+# define WIDTH 1024
+# define HEIGHT 768
 # define TRUE 1
 # define FALSE 0
 # define PI 3.1415926535
@@ -38,7 +39,7 @@
 # define BLUE 0x00FFFFFF
 # define DGRAY 0x3C3C3FFF
 # define LGRAY 0x89898DFF
-# define NUMSPRITES 2
+# define NUMSPRITES 5
 
 /***** STRUCTURES *****/
 
@@ -182,6 +183,8 @@ typedef struct s_tex
 	xpm_t		*tex_ewurstei;
 	xpm_t		*tex_sprite1;
 	xpm_t		*tex_sprite2;
+	xpm_t		*tex_pillar;
+	xpm_t		*tex_fire_tor;
 	int			**north;
 	int			**south;
 	int			**east;
@@ -212,6 +215,8 @@ typedef struct s_tex
 	int			**ewurstei;
 	int			**sprite1;
 	int			**sprite2;
+	int			**pillar;
+	int			**fire_tor;
 	double		brightness_factor;
 	uint32_t	dark;
 	uint32_t	color;
@@ -488,6 +493,7 @@ void		sprite_computing(t_vault *data, int i);
 void		sprite_computing2(t_vault *data);
 void		sprite_choice(t_vault *data, int tex_x, int i);
 void		draw_sprite(t_vault *data, int tex_x, int **tex_buff);
+void		draw_sprite_loop(t_vault *data, int tex_x, int **tex_buff);
 
 /***** sprite_utils_bonus.c *****/
 void		load_sprites(t_vault *data);

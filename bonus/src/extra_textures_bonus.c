@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/13 20:29:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/13 23:49:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	load_extra_textures2(t_vault *data)
 	data->tex->tex_wall = mlx_load_xpm42("./assets/tex/wood42.xpm42");
 	data->tex->tex_sprite1 = mlx_load_xpm42("./assets/tex/marc_sprite.xpm42");
 	data->tex->tex_sprite2 = mlx_load_xpm42("./assets/tex/legion_sprite.xpm42");
+	data->tex->tex_pillar = mlx_load_xpm42("./assets/tex/sprite_pillar.xpm42");
+	data->tex->tex_fire_tor = mlx_load_xpm42("./assets/tex/sprite_tor_fire.xpm42");
 	check_extra_textures(data);
 }
 
@@ -62,7 +64,8 @@ void	check_extra_textures(t_vault *data)
 		|| !data->tex->tex_dungeon || !data->tex->tex_tribute
 		|| !data->tex->tex_marc || !data->tex->tex_armada
 		|| !data->tex->tex_torrent || !data->tex->tex_wall
-		|| !data->tex->tex_sprite1 || !data->tex->tex_sprite2)
+		|| !data->tex->tex_sprite1 || !data->tex->tex_sprite2
+		|| !data->tex->tex_pillar || !data->tex->tex_fire_tor)
 		quit_game(data);
 	get_extra_textures(data);
 }
@@ -100,4 +103,6 @@ void	get_extra_textures2(t_vault *data)
 	data->tex->wall = get_texture(data->tex->tex_wall);
 	data->tex->sprite1 = get_texture(data->tex->tex_sprite1);
 	data->tex->sprite2 = get_texture(data->tex->tex_sprite2);
+	data->tex->pillar = get_texture(data->tex->tex_pillar);
+	data->tex->fire_tor = get_texture(data->tex->tex_fire_tor);
 }
