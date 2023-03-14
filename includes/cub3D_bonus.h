@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 09:24:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 10:43:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ typedef struct s_s_par
 	double		inv_det;
 	int			screen_x;
 	int			screen_y;
+	int			tex_sx;
+	int			tex_sy;
 }	t_s_par;
 
 typedef struct s_game
@@ -494,9 +496,9 @@ void		player_location_4(t_vault *data, int col, int row);
 void		sprite_casting(t_vault *data);
 void		sprite_computing(t_vault *data, int i);
 void		sprite_computing2(t_vault *data);
-void		sprite_choice(t_vault *data, int tex_x, int i);
-void		draw_sprite(t_vault *data, int tex_x, int **tex_buff);
-void		draw_sprite_loop(t_vault *data, int tex_x, int **tex_buff);
+void		sprite_choice(t_vault *data, int i);
+void		draw_sprite(t_vault *data, int **tex_buff);
+void		draw_sprite_loop(void *temp);
 
 /***** sprite_utils_bonus.c *****/
 void		load_sprites(t_vault *data);

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 09:19:01 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 10:48:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 void	sprite_casting(t_vault *data)
 {
 	int	i;
-	int	tex_x;
 
 	i = -1;
 	sprite_ordering(data);
@@ -32,29 +31,30 @@ void	sprite_casting(t_vault *data)
 		data->s_par->screen_x = data->s_par->s_ds_x;
 		while (data->s_par->screen_x < data->s_par->s_de_x)
 		{
-			tex_x
-				= fabs((int)(256 * (data->s_par->screen_x - (-data->s_par->s_w / 2 + data->s_par->s_sc_x))) * TEXWIDTH / data->s_par->s_w) / 256;
+			data->s_par->tex_sx = fabs((int)(256 * (data->s_par->screen_x
+							- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
+					*TEXWIDTH / data->s_par->s_w / 256);
 			if (data->s_par->tr_y > 0 && data->s_par->screen_x > 0
 				&& data->s_par->screen_x < WIDTH
 				&& data->s_par->tr_y
 				< data->s_par->z_buff[data->s_par->screen_x])
-				sprite_choice(data, tex_x, i);
+				sprite_choice(data, i);
 			data->s_par->screen_x++;
 		}
 	}
 }
 
-void	sprite_choice(t_vault *data, int tex_x, int i)
+void	sprite_choice(t_vault *data, int i)
 {
 	data->s_par->screen_y = data->s_par->s_ds_y;
 	if (data->s_par->s[data->s_par->s_prio[i]].texture == 1)
-		draw_sprite(data, tex_x, data->tex->sprite1);
+		draw_sprite(data, data->tex->sprite1);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 2)
-		draw_sprite(data, tex_x, data->tex->sprite2);
+		draw_sprite(data, data->tex->sprite2);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 3)
-		draw_sprite(data, tex_x, data->tex->pillar);
+		draw_sprite(data, data->tex->pillar);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 4)
-		draw_sprite_loop(data, tex_x, data->tex->fire_tor);
+		mlx_loop_hook(data->mlx, &draw_sprite_loop, (void *)data);
 }
 
 void	sprite_computing(t_vault *data, int i)
@@ -95,7 +95,7 @@ void	sprite_computing2(t_vault *data)
 		data->s_par->s_de_x = WIDTH - 1;
 }
 
-void	draw_sprite(t_vault *data, int tex_x, int **tex_buff)
+void	draw_sprite(t_vault *data, int **tex_buff)
 {
 	int	tex_y;
 	int	d;
@@ -105,35 +105,36 @@ void	draw_sprite(t_vault *data, int tex_x, int **tex_buff)
 		d = (int)((data->s_par->screen_y) * 256 - HEIGHT
 				* 128 + data->s_par->s_h * 128);
 		tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
-		if (tex_buff[tex_y][tex_x] != (int)0xff00ffff)
+		if (tex_buff[tex_y][data->s_par->tex_sx] != (int)0xff00ffff)
 			mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
-				data->s_par->screen_y, tex_buff[tex_y][tex_x]);
+				data->s_par->screen_y, tex_buff[tex_y][data->s_par->tex_sx]);
 		data->s_par->screen_y++;
 	}
 }
 
-void	draw_sprite_loop(t_vault *data, int tex_x, int **tex_buff)
+void	draw_sprite_loop(void *temp)
 {
 	int	tex_y;
 	int	d;
 	int	loop;
 	int	max;
+	t_vault	*data;
 
-	loop = 0;
+	loop = -1;
 	max = 0;
-	while (loop < 5)
+	data = temp;
+	while (++loop < 5)
 	{
 		while (data->s_par->screen_y < data->s_par->s_de_y)
 		{
 			d = (int)((data->s_par->screen_y) * 256 - HEIGHT
 					* 128 + data->s_par->s_h * 128);
 			tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
-			if (tex_buff[tex_y][tex_x] != (int)0xff00ffff)
+			if (data->tex->fire_tor[tex_y + loop * 256][data->s_par->tex_sx] != (int)0xff00ffff)
 				mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
-					data->s_par->screen_y, tex_buff[tex_y + loop * 256][tex_x]);
+					data->s_par->screen_y, data->tex->fire_tor[tex_y + loop * 256][data->s_par->tex_sx]);
 			data->s_par->screen_y++;
 		}
-		loop++;
 		if (loop == 5)
 			loop = 0;
 		max++;
