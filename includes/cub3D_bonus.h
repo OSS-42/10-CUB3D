@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 13:33:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 14:01:02 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -506,5 +506,6 @@ void		draw_sprite_loop(void *temp);
 void		load_sprites(t_vault *data);
 void		sprite_ordering(t_vault *data);
 void		sort_sprites(t_vault *data);
+void		print_sprite_order(t_vault *data);
 
 #endif
