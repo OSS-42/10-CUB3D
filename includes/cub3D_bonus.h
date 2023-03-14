@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 10:43:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:07:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ typedef struct s_tex
 	xpm_t		*tex_sprite2;
 	xpm_t		*tex_pillar;
 	xpm_t		*tex_fire_tor;
+	xpm_t		*tex_plants;
 	int			**north;
 	int			**south;
 	int			**east;
@@ -219,6 +220,7 @@ typedef struct s_tex
 	int			**sprite2;
 	int			**pillar;
 	int			**fire_tor;
+	int			**plants;
 	double		brightness_factor;
 	uint32_t	dark;
 	uint32_t	color;

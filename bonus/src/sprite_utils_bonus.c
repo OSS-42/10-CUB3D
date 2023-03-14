@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:36:27 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/13 23:46:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:10:35 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	load_sprites(t_vault *data)
 	// data->s_par->s[6].texture = 3;
 	data->s_par->s[4].s_row = 33.5;
 	data->s_par->s[4].s_col = 8.5;
-	data->s_par->s[4].texture = 4;
+	data->s_par->s[4].texture = 5;
 }
 
 void	sprite_ordering(t_vault *data)
