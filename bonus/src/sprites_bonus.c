@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 16:05:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:02:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ void	sprite_casting(t_vault *data)
 
 void	sprite_choice(t_vault *data, int i)
 {
+	int	frame;
+
+	frame = 0;
 	data->s_par->screen_y = data->s_par->s_ds_y;
 	if (data->s_par->s[data->s_par->s_prio[i]].texture == 1)
 		draw_sprite(data, data->tex->sprite1);
@@ -54,9 +57,36 @@ void	sprite_choice(t_vault *data, int i)
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 3)
 		draw_sprite(data, data->tex->pillar);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 4)
-		draw_sprite_loop(data);
+	{
+		while (frame < 5)
+		{
+			data->s_par->tex_sx = fabs((int)(256 * (data->s_par->screen_x
+							- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
+					*TEXWIDTH / data->s_par->s_w / 256) + frame * 256;
+			printf("frame : %d\n", frame);
+			draw_sprite(data, data->tex->fire_tor);
+			frame++;
+		}
+	}
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 5)
 		draw_sprite(data, data->tex->plants);
+}
+
+void	draw_sprite(t_vault *data, int **tex_buff)
+{
+	int	tex_y;
+	int	d;
+
+	while (data->s_par->screen_y < data->s_par->s_de_y)
+	{
+		d = (int)((data->s_par->screen_y) * 256 - HEIGHT
+				* 128 + data->s_par->s_h * 128);
+		tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
+		if (tex_buff[tex_y][data->s_par->tex_sx] != (int)0xff00ffff)
+			mlx_put_pixel(data->game->sprite, data->s_par->screen_x,
+				data->s_par->screen_y, tex_buff[tex_y][data->s_par->tex_sx]);
+		data->s_par->screen_y++;
+	}
 }
 
 void	sprite_computing(t_vault *data, int i)
@@ -97,53 +127,36 @@ void	sprite_computing2(t_vault *data)
 		data->s_par->s_de_x = WIDTH - 1;
 }
 
-void	draw_sprite(t_vault *data, int **tex_buff)
-{
-	int	tex_y;
-	int	d;
+// void	draw_sprite_loop(void *temp)
+// {
+// 	int		tex_y;
+// 	int		d;
+// 	int		frame;
+// 	int		max;
+// 	t_vault	*data;
 
-	while (data->s_par->screen_y < data->s_par->s_de_y)
-	{
-		d = (int)((data->s_par->screen_y) * 256 - HEIGHT
-				* 128 + data->s_par->s_h * 128);
-		tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
-		if (tex_buff[tex_y][data->s_par->tex_sx] != (int)0xff00ffff)
-			mlx_put_pixel(data->game->sprite, data->s_par->screen_x,
-				data->s_par->screen_y, tex_buff[tex_y][data->s_par->tex_sx]);
-		data->s_par->screen_y++;
-	}
-}
-
-void	draw_sprite_loop(void *temp)
-{
-	int		tex_y;
-	int		d;
-	int		loop;
-	int		max;
-	t_vault	*data;
-
-	max = 0;
-	data = temp;
-	while (max < 10)
-	{
-		loop = 0;
-		while (loop < 5)
-		{
-			data->s_par->screen_y = data->s_par->s_ds_y;
-			while (data->s_par->screen_y < data->s_par->s_de_y)
-			{
-				d = (int)((data->s_par->screen_y) * 256 - HEIGHT
-						* 128 + data->s_par->s_h * 128);
-				tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
-				if (data->tex->fire_tor[tex_y][data->s_par->tex_sx + loop * 256] != (int)0xff00ffff)
-					mlx_put_pixel(data->game->sprite, data->s_par->screen_x,
-						data->s_par->screen_y, data->tex->fire_tor[tex_y][data->s_par->tex_sx + loop * 256]);
-				data->s_par->screen_y++;
-			}
-			// usleep(1000);
-			// reinit_sprites(data);
-			loop++;
-		}
-		max++;
-	}
-}
+// 	max = 0;
+// 	data = temp;
+// 	while (max < 10)
+// 	{
+// 		frame = 0;
+// 		while (frame < 5)
+// 		{
+// 			data->s_par->screen_y = data->s_par->s_ds_y;
+// 			while (data->s_par->screen_y < data->s_par->s_de_y)
+// 			{
+// 				d = (int)((data->s_par->screen_y) * 256 - HEIGHT
+// 						* 128 + data->s_par->s_h * 128);
+// 				tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
+// 				if (data->tex->fire_tor[tex_y][data->s_par->tex_sx + frame * 256] != (int)0xff00ffff)
+// 					mlx_put_pixel(data->game->sprite, data->s_par->screen_x,
+// 						data->s_par->screen_y, data->tex->fire_tor[tex_y][data->s_par->tex_sx + frame * 256]);
+// 				data->s_par->screen_y++;
+// 			}
+// 			// usleep(1000);
+// 			// reinit_sprites(data);
+// 			frame++;
+// 		}
+// 		max++;
+// 	}
+// }

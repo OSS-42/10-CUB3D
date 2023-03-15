@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:12:30 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 15:38:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:05:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	background_3d(t_vault *data)
 void	reinit_and_draw(t_vault *data)
 {
 	reinit_3d(data);
+	reinit_sprites(data);
 	reinit_hud(data);
 	if (data->minimap->on_screen == 1)
 	{
