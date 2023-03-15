@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 22:02:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/15 10:21:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,45 +46,54 @@ void	sprite_casting(t_vault *data)
 
 void	sprite_choice(t_vault *data, int i)
 {
-	int	frame;
+	double	current_time;
 
-	frame = 0;
+	current_time = get_time_in_milliseconds();
 	data->s_par->screen_y = data->s_par->s_ds_y;
 	if (data->s_par->s[data->s_par->s_prio[i]].texture == 1)
-		draw_sprite(data, data->tex->sprite1);
+		draw_sprite(data, data->tex->sprite1, 0);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 2)
-		draw_sprite(data, data->tex->sprite2);
+		draw_sprite(data, data->tex->sprite2, 0);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 3)
-		draw_sprite(data, data->tex->pillar);
+		draw_sprite(data, data->tex->pillar, 0);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 4)
 	{
-		while (frame < 5)
+		if (current_time - data->last_frame_update >= data->anim_update_interval)
 		{
-			data->s_par->tex_sx = fabs((int)(256 * (data->s_par->screen_x
-							- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
-					*TEXWIDTH / data->s_par->s_w / 256) + frame * 256;
-			printf("frame : %d\n", frame);
-			draw_sprite(data, data->tex->fire_tor);
-			frame++;
+			data->anim_frame = (data->anim_frame + 1) % 5;
+			data->last_frame_update = current_time;
 		}
+		data->s_par->tex_sx = fabs((int)(256 * (data->s_par->screen_x
+						- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
+				*TEXWIDTH / data->s_par->s_w / 256);
+		printf("frame : %d\n", data->anim_frame);
+		draw_sprite(data, data->tex->fire_tor, data->anim_frame);
 	}
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 5)
-		draw_sprite(data, data->tex->plants);
+		draw_sprite(data, data->tex->plants, 0);
 }
 
-void	draw_sprite(t_vault *data, int **tex_buff)
+void	draw_sprite(t_vault *data, int **tex_buff, int frame)
 {
-	int	tex_y;
-	int	d;
+	int			tex_y;
+	int			d;
+	uint32_t	color;
+	uint32_t	dark_color;
+	double		b_factor;
 
+	b_factor = b_factor_sprites(data, data->s_par->tr_y);
 	while (data->s_par->screen_y < data->s_par->s_de_y)
 	{
 		d = (int)((data->s_par->screen_y) * 256 - HEIGHT
 				* 128 + data->s_par->s_h * 128);
 		tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
-		if (tex_buff[tex_y][data->s_par->tex_sx] != (int)0xff00ffff)
+		color = tex_buff[tex_y][data->s_par->tex_sx + frame * 256];
+		if (color != (unsigned int)0xff00ffff)
+		{
+			dark_color = darken_color(color, b_factor, 0);
 			mlx_put_pixel(data->game->sprite, data->s_par->screen_x,
-				data->s_par->screen_y, tex_buff[tex_y][data->s_par->tex_sx]);
+				data->s_par->screen_y, dark_color);
+		}
 		data->s_par->screen_y++;
 	}
 }
@@ -127,36 +136,17 @@ void	sprite_computing2(t_vault *data)
 		data->s_par->s_de_x = WIDTH - 1;
 }
 
-// void	draw_sprite_loop(void *temp)
-// {
-// 	int		tex_y;
-// 	int		d;
-// 	int		frame;
-// 	int		max;
-// 	t_vault	*data;
+double	b_factor_sprites(t_vault *data, double distance)
+{
+	double	max_distance;
+	double	brightness_factor;
+	(void) data;
 
-// 	max = 0;
-// 	data = temp;
-// 	while (max < 10)
-// 	{
-// 		frame = 0;
-// 		while (frame < 5)
-// 		{
-// 			data->s_par->screen_y = data->s_par->s_ds_y;
-// 			while (data->s_par->screen_y < data->s_par->s_de_y)
-// 			{
-// 				d = (int)((data->s_par->screen_y) * 256 - HEIGHT
-// 						* 128 + data->s_par->s_h * 128);
-// 				tex_y = fabs(((d * TEXHEIGHT) / data->s_par->s_h) / 256);
-// 				if (data->tex->fire_tor[tex_y][data->s_par->tex_sx + frame * 256] != (int)0xff00ffff)
-// 					mlx_put_pixel(data->game->sprite, data->s_par->screen_x,
-// 						data->s_par->screen_y, data->tex->fire_tor[tex_y][data->s_par->tex_sx + frame * 256]);
-// 				data->s_par->screen_y++;
-// 			}
-// 			// usleep(1000);
-// 			// reinit_sprites(data);
-// 			frame++;
-// 		}
-// 		max++;
-// 	}
-// }
+	max_distance = 15.0;
+	if (distance > max_distance)
+		distance = max_distance;
+	brightness_factor = 1 - (distance / max_distance);
+	if (brightness_factor < 0.0)
+		brightness_factor = 0.0;
+	return (brightness_factor);
+}

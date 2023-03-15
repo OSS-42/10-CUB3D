@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:33:50 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 22:06:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/15 09:59:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	create_game(t_vault *data)
 	if (!data->mlx)
 		exit (EXIT_FAILURE);
 	loading_game(data);
-	raycaster(data);
+	// raycaster(data);
+	mlx_loop_hook(data->mlx, (void *) &raycaster, (void *) data);
 	mlx_key_hook(data->mlx, &keyhandler, (void *) data);
 	mlx_close_hook(data->mlx, (void *) &quit_game, (void *) data);
 	mlx_cursor_hook(data->mlx, &move_mouse, (void *)data);
@@ -49,6 +50,14 @@ int	create_game(t_vault *data)
 	delete_images(data);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
+}
+
+double	get_time_in_milliseconds(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000.0 + tv.tv_usec / 1000.0);
 }
 
 void	init_data(t_vault *data, char **argv)
@@ -74,9 +83,12 @@ void	init_data(t_vault *data, char **argv)
 	data->raycaster->mov_speed = 0.15;
 	data->raycaster->rot_speed = 0.15;
 	data->audio = 0;
+	data->anim_frame = 0;
 	data->old_x_cursor = WIDTH / 2;
 	data->hud_loc->location = 0;
 	data->hud_loc->p_loc = data->tex->lobby;
+	data->last_frame_update = get_time_in_milliseconds();
+	data->anim_update_interval = 100;
 }
 
 int	main(int argc, char **argv)

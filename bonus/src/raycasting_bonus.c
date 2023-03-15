@@ -6,17 +6,20 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 23:54:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 22:06:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/15 10:07:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
 
-void	raycaster(t_vault *data)
+void	raycaster(void *param)
 {
 	double	pixels_2d;
+	t_vault	*data;
 
 	pixels_2d = 0;
+	data = param;
+	reinit_sprites(data);
 	background_3d(data);
 	player_location(data, data->plr->row, data->plr->col);
 	draw_tex_location(data, data->tex->tex_local, data->tex->local, 1);

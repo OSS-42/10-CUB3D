@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 16:04:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/15 10:19:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
+# include <sys/time.h>
 
 // pour écran plus grand, plus petit
 // 1920, 1080
@@ -283,6 +284,9 @@ typedef struct s_vault
 	int			p_dir;
 	int			audio;
 	int			old_x_cursor;
+	int			anim_frame;
+	double		last_frame_update;
+	double		anim_update_interval;
 	t_player	*plr;
 	t_param		*scene_param;
 	t_map		*map;
@@ -304,6 +308,7 @@ void		loading_game(t_vault *data);
 void		delete_images(t_vault *data);
 int			create_game(t_vault *data);
 void		init_data(t_vault *data, char **argv);
+double		get_time_in_milliseconds(void);
 
 /***** error_management.c *****/
 void		errors(t_vault *data);
@@ -385,7 +390,7 @@ void		draw_tex_location2(t_vault *data, xpm_t *texture, int **tex_buff,
 				int pixels_2d);
 
 /***** raycasting.c *****/
-void		raycaster(t_vault *data);
+void		raycaster(void *param);
 void		dda(t_vault *data);
 void		creating_3d_img(t_vault *data, int pixels_2d);
 void		dist_and_pos(t_vault *data);
@@ -493,8 +498,8 @@ void		sprite_casting(t_vault *data);
 void		sprite_computing(t_vault *data, int i);
 void		sprite_computing2(t_vault *data);
 void		sprite_choice(t_vault *data, int i);
-void		draw_sprite(t_vault *data, int **tex_buff);
-void		draw_sprite_loop(void *temp);
+void		draw_sprite(t_vault *data, int **tex_buff, int frame);
+double		b_factor_sprites(t_vault *data, double distance);
 
 /***** sprite_utils_bonus.c *****/
 void		load_sprites(t_vault *data);
