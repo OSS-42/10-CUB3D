@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/10 19:52:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:07:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,15 @@ void	rotate_right(t_vault *data)
 	data->raycaster->plane_y = old_plane_x * sin(data->raycaster->rot_speed)
 		+ data->raycaster->plane_y * cos(data->raycaster->rot_speed);
 	reinit_and_draw(data);
+}
+
+void	delete_images(t_vault *data)
+{
+	mlx_delete_image(data->mlx, data->minimap->minimap);
+	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_static);
+	mlx_delete_image(data->mlx, data->hud_loc->hud_loc_dynamic);
+	mlx_delete_image(data->mlx, data->game->ddd);
+	mlx_delete_image(data->mlx, data->game->sprite);
+	printf("%s\n", "Au revoir !");
+	free_all(data);
 }

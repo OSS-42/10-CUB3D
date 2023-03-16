@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:24:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 17:45:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:19:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	load_c2_spt_pot(t_vault *data)
 	data->s_par->s[42].s_row = 12.5;
 	data->s_par->s[42].s_col = 20.5;
 	data->s_par->s[42].texture = 3;
-	data->s_par->s[43].s_row = 7.5; 
+	data->s_par->s[43].s_row = 7.5;
 	data->s_par->s[43].s_col = 20.5;
 	data->s_par->s[43].texture = 5;
 	load_c2_spt_tab_p1(data);

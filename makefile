@@ -151,6 +151,7 @@ SRCS_BONUS =	bonus/src/cub3D_bonus.c \
 				bonus/src/draw_tex_wall_bonus.c \
 				bonus/src/sprites_bonus.c \
 				bonus/src/sprites_utils_bonus.c \
+				bonus/src/sprites_utils2_bonus.c \
 				bonus/src/c1_spt_bonus.c \
 				bonus/src/c2_spt_bonus.c \
 				bonus/src/c3_spt_p1_bonus.c \

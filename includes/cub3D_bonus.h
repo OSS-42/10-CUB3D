@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 17:49:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:23:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define BLUE 0x00FFFFFF
 # define DGRAY 0x3C3C3FFF
 # define LGRAY 0x89898DFF
-# define NUMSPRITES 113
+# define NUMSPRITES 114
 
 /***** STRUCTURES *****/
 
@@ -317,7 +317,6 @@ typedef struct s_vault
 
 /***** cub3D.c *****/
 void		loading_game(t_vault *data);
-void		delete_images(t_vault *data);
 int			create_game(t_vault *data);
 void		init_data(t_vault *data, char **argv);
 double		get_time_in_milliseconds(void);
@@ -486,6 +485,7 @@ void		move_mouse(double x, double y, void *temp);
 void		draw_pov(t_vault *data);
 void		rotate_left(t_vault *data);
 void		rotate_right(t_vault *data);
+void		delete_images(t_vault *data);
 
 /***** init_3d.c *****/
 void		load_3d(t_vault *data);
@@ -507,11 +507,10 @@ void		player_location_4(t_vault *data, int col, int row);
 
 /***** sprites_bonus.c *****/
 void		sprite_casting(t_vault *data);
-void		sprite_computing(t_vault *data, int i);
-void		sprite_computing2(t_vault *data);
 void		sprite_choice(t_vault *data, int i);
+void		sprite_choice2(t_vault *data, double now_time, int i);
+void		sprite_choice3(t_vault *data, double now_time, int i);
 void		draw_sprite(t_vault *data, int **tex_buff, int frame);
-double		b_factor_sprites(t_vault *data, double distance);
 
 /***** sprite_utils_bonus.c *****/
 void		load_sprites(t_vault *data);
@@ -519,7 +518,11 @@ void		load_sprites_coord(t_vault *data);
 void		reinit_sprites(t_vault *data);
 void		sprite_ordering(t_vault *data);
 void		sort_sprites(t_vault *data);
-void		print_sprite_order(t_vault *data);
+
+/***** sprite_utils2_bonus.c *****/
+void		sprite_computing(t_vault *data, int i);
+void		sprite_computing2(t_vault *data);
+double		b_factor_sprites(double distance);
 
 /***** c1_spt.c *****/
 void		load_c1_spt_pot(t_vault *data);

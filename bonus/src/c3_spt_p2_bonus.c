@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:26:04 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 17:49:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:23:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	load_c3_spt_lmp(t_vault *data)
 	data->s_par->s[96].s_row = 2.5;
 	data->s_par->s[96].s_col = 2.5;
 	data->s_par->s[96].texture = 9;
-	data->s_par->s[96].s_row = 2.5;
-	data->s_par->s[96].s_col = 3.5;
-	data->s_par->s[96].texture = 9;
+	data->s_par->s[113].s_row = 2.5;
+	data->s_par->s[113].s_col = 3.5;
+	data->s_par->s[113].texture = 9;
 	data->s_par->s[97].s_row = 2.5;
 	data->s_par->s[97].s_col = 4.5;
 	data->s_par->s[97].texture = 9;

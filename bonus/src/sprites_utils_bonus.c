@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:36:27 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 17:41:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:08:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	sort_sprites(t_vault *data)
 				tmp_dist = data->s_par->s_dist[j];
 				data->s_par->s_dist[j] = data->s_par->s_dist[j + 1];
 				data->s_par->s_dist[j + 1] = tmp_dist;
-
 				tmp_prio = data->s_par->s_prio[j];
 				data->s_par->s_prio[j] = data->s_par->s_prio[j + 1];
 				data->s_par->s_prio[j + 1] = tmp_prio;
@@ -95,19 +94,4 @@ void	sort_sprites(t_vault *data)
 		}
 		i++;
 	}
-	// print_sprite_order(data);
 }
-
-// void	print_sprite_order(t_vault *data)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < 14)
-// 	{
-// 		printf("%d sprites à dessiner est le sprite numéro %d\n", i, data->s_par->s_prio[i]);
-// 		printf("qui est a une distance de %f case\n", data->s_par->s_dist[i]);
-// 		i++;
-// 	}
-// 	printf("\n");
-// }
