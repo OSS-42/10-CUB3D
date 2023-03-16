@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 16:04:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 00:10:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void	load_extra_textures2(t_vault *data)
 	data->tex->tex_pillar = mlx_load_xpm42("./assets/tex/sprite_pillar.xpm42");
 	data->tex->tex_plants = mlx_load_xpm42("./assets/tex/sprite_plants.xpm42");
 	data->tex->tex_fire_tor = mlx_load_xpm42("./assets/tex/spt_tor_fire.xpm42");
+	data->tex->tex_fire_arm = mlx_load_xpm42("./assets/tex/spt_arm_fire.xpm42");
+	data->tex->tex_lamp = mlx_load_xpm42("./assets/tex/spt_lampe.xpm42");
+	data->tex->tex_babyfoot = mlx_load_xpm42("./assets/tex/spt_babyfoot.xpm42");
+	data->tex->tex_billard = mlx_load_xpm42("./assets/tex/spt_billard.xpm42");
+	data->tex->tex_patrol = mlx_load_xpm42("./assets/tex/spt_patrouille.xpm42");
 	check_extra_textures(data);
 }
 
@@ -67,7 +72,9 @@ void	check_extra_textures(t_vault *data)
 		|| !data->tex->tex_torrent || !data->tex->tex_wall
 		|| !data->tex->tex_sprite1 || !data->tex->tex_sprite2
 		|| !data->tex->tex_pillar || !data->tex->tex_fire_tor
-		|| !data->tex->tex_plants)
+		|| !data->tex->tex_plants || !data->tex->tex_fire_arm
+		|| !data->tex->tex_lamp || !data->tex->tex_babyfoot
+		|| !data->tex->tex_billard || !data->tex->tex_patrol)
 		quit_game(data);
 	get_extra_textures(data);
 }
@@ -108,4 +115,9 @@ void	get_extra_textures2(t_vault *data)
 	data->tex->pillar = get_texture(data->tex->tex_pillar);
 	data->tex->fire_tor = get_texture(data->tex->tex_fire_tor);
 	data->tex->plants = get_texture(data->tex->tex_plants);
+	data->tex->fire_arm = get_texture(data->tex->tex_fire_arm);
+	data->tex->lamp = get_texture(data->tex->tex_lamp);
+	data->tex->billard = get_texture(data->tex->tex_billard);
+	data->tex->babyfoot = get_texture(data->tex->tex_babyfoot);
+	data->tex->patrol = get_texture(data->tex->tex_patrol);
 }

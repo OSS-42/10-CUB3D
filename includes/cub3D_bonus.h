@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/15 10:19:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 00:08:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define BLUE 0x00FFFFFF
 # define DGRAY 0x3C3C3FFF
 # define LGRAY 0x89898DFF
-# define NUMSPRITES 14
+# define NUMSPRITES 39
 
 /***** STRUCTURES *****/
 
@@ -189,6 +189,11 @@ typedef struct s_tex
 	xpm_t		*tex_pillar;
 	xpm_t		*tex_fire_tor;
 	xpm_t		*tex_plants;
+	xpm_t		*tex_fire_arm;
+	xpm_t		*tex_lamp;
+	xpm_t		*tex_babyfoot;
+	xpm_t		*tex_billard;
+	xpm_t		*tex_patrol;
 	int			**north;
 	int			**south;
 	int			**east;
@@ -222,6 +227,11 @@ typedef struct s_tex
 	int			**pillar;
 	int			**fire_tor;
 	int			**plants;
+	int			**fire_arm;
+	int			**lamp;
+	int			**babyfoot;
+	int			**billard;
+	int			**patrol;
 	double		brightness_factor;
 	uint32_t	dark;
 	uint32_t	color;

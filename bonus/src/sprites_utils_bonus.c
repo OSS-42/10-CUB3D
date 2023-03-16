@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:36:27 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 19:58:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 00:09:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	load_sprites_coord(t_vault *data)
 	data->s_par->s[0].texture = 1;
 
 	data->s_par->s[1].s_row = 34.5; //legion
-	data->s_par->s[1].s_col = 8.5;
+	data->s_par->s[1].s_col = 14.5;
 	data->s_par->s[1].texture = 2;
 
 	data->s_par->s[2].s_row = 8.5; //poteau au fond a gauche
@@ -66,8 +66,8 @@ void	load_sprites_coord(t_vault *data)
 	data->s_par->s[9].s_col = 20.5;
 	data->s_par->s[9].texture = 3;
 
-	data->s_par->s[10].s_row = 33.5; //feu
-	data->s_par->s[10].s_col = 8.5;
+	data->s_par->s[10].s_row = 16.5; //feu tor
+	data->s_par->s[10].s_col = 4.5;
 	data->s_par->s[10].texture = 4;
 
 	data->s_par->s[11].s_row = 7.5; //plantes
@@ -82,6 +82,105 @@ void	load_sprites_coord(t_vault *data)
 	data->s_par->s[13].s_col = 20.5;
 	data->s_par->s[13].texture = 5;
 
+	data->s_par->s[14].s_row = 1.5; //feu arm
+	data->s_par->s[14].s_col = 22.5;
+	data->s_par->s[14].texture = 6;
+
+	data->s_par->s[15].s_row = 25.5; //billard
+	data->s_par->s[15].s_col = 20.5;
+	data->s_par->s[15].texture = 7;
+
+	data->s_par->s[16].s_row = 29.5; //babyfoot
+	data->s_par->s[16].s_col = 13.5;
+	data->s_par->s[16].texture = 8;
+
+	data->s_par->s[17].s_row = 5.5; //poteau
+	data->s_par->s[17].s_col = 5.5;
+	data->s_par->s[17].texture = 3;
+
+	data->s_par->s[18].s_row = 9.5; //poteau
+	data->s_par->s[18].s_col = 5.5;
+	data->s_par->s[18].texture = 3;
+
+	data->s_par->s[19].s_row = 13.5; //poteau
+	data->s_par->s[19].s_col = 5.5;
+	data->s_par->s[19].texture = 3;
+
+	data->s_par->s[20].s_row = 5.5; //lampe
+	data->s_par->s[20].s_col = 2.5;
+	data->s_par->s[20].texture = 9;
+
+	data->s_par->s[21].s_row = 5.5; //lampe
+	data->s_par->s[21].s_col = 3.5;
+	data->s_par->s[21].texture = 9;
+
+	data->s_par->s[22].s_row = 5.5; //lampe
+	data->s_par->s[22].s_col = 4.5;
+	data->s_par->s[22].texture = 9;
+
+	data->s_par->s[23].s_row = 2.5; //lampe
+	data->s_par->s[23].s_col = 2.5;
+	data->s_par->s[23].texture = 9;
+
+	data->s_par->s[24].s_row = 2.5; //lampe
+	data->s_par->s[24].s_col = 3.5;
+	data->s_par->s[24].texture = 9;
+
+	data->s_par->s[25].s_row = 2.5; //lampe
+	data->s_par->s[25].s_col = 4.5;
+	data->s_par->s[25].texture = 9;
+
+	data->s_par->s[26].s_row = 7.5; //lampe
+	data->s_par->s[26].s_col = 2.5;
+	data->s_par->s[26].texture = 9;
+
+	data->s_par->s[27].s_row = 7.5; //lampe
+	data->s_par->s[27].s_col = 3.5;
+	data->s_par->s[27].texture = 9;
+
+	data->s_par->s[28].s_row = 7.5; //lampe
+	data->s_par->s[28].s_col = 4.5;
+	data->s_par->s[28].texture = 9;
+
+	data->s_par->s[29].s_row = 9.5; //lampe
+	data->s_par->s[29].s_col = 2.5;
+	data->s_par->s[29].texture = 9;
+
+	data->s_par->s[30].s_row = 9.5; //lampe
+	data->s_par->s[30].s_col = 3.5;
+	data->s_par->s[30].texture = 9;
+
+	data->s_par->s[31].s_row = 9.5; //lampe
+	data->s_par->s[31].s_col = 4.5;
+	data->s_par->s[31].texture = 9;
+
+	data->s_par->s[32].s_row = 11.5; //lampe
+	data->s_par->s[32].s_col = 2.5;
+	data->s_par->s[32].texture = 9;
+
+	data->s_par->s[33].s_row = 11.5; //lampe
+	data->s_par->s[33].s_col = 3.5;
+	data->s_par->s[33].texture = 9;
+
+	data->s_par->s[34].s_row = 11.5; //lampe
+	data->s_par->s[34].s_col = 4.5;
+	data->s_par->s[34].texture = 9;
+
+	data->s_par->s[35].s_row = 13.5; //lampe
+	data->s_par->s[35].s_col = 2.5;
+	data->s_par->s[35].texture = 9;
+
+	data->s_par->s[36].s_row = 13.5; //lampe
+	data->s_par->s[36].s_col = 3.5;
+	data->s_par->s[36].texture = 9;
+
+	data->s_par->s[37].s_row = 13.5; //lampe
+	data->s_par->s[37].s_col = 4.5;
+	data->s_par->s[37].texture = 9;
+
+	data->s_par->s[37].s_row = 12.5; //patrouille
+	data->s_par->s[37].s_col = 11.5;
+	data->s_par->s[37].texture = 10;
 }
 
 void	sprite_ordering(t_vault *data)

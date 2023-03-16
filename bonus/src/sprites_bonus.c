@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/15 10:21:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 00:07:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,42 @@ void	sprite_choice(t_vault *data, int i)
 		data->s_par->tex_sx = fabs((int)(256 * (data->s_par->screen_x
 						- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
 				*TEXWIDTH / data->s_par->s_w / 256);
-		printf("frame : %d\n", data->anim_frame);
 		draw_sprite(data, data->tex->fire_tor, data->anim_frame);
 	}
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 5)
 		draw_sprite(data, data->tex->plants, 0);
+	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 6)
+	{
+		if (current_time - data->last_frame_update >= data->anim_update_interval)
+		{
+			data->anim_frame = (data->anim_frame + 1) % 5;
+			data->last_frame_update = current_time;
+		}
+		data->s_par->tex_sx = fabs((int)(256 * (data->s_par->screen_x
+						- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
+				*TEXWIDTH / data->s_par->s_w / 256);
+		printf("frame : %d\n", data->anim_frame);
+		draw_sprite(data, data->tex->fire_arm, data->anim_frame);
+	}
+	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 7)
+		draw_sprite(data, data->tex->billard, 0);
+	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 8)
+		draw_sprite(data, data->tex->babyfoot, 0);
+	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 9)
+		draw_sprite(data, data->tex->lamp, 0);
+	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 10)
+	{
+		if (current_time - data->last_frame_update >= data->anim_update_interval)
+		{
+			data->anim_frame = (data->anim_frame + 1) % 2;
+			data->last_frame_update = current_time;
+		}
+		data->s_par->tex_sx = fabs((int)(256 * (data->s_par->screen_x
+						- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
+				*TEXWIDTH / data->s_par->s_w / 256);
+		printf("frame : %d\n", data->anim_frame);
+		draw_sprite(data, data->tex->patrol, data->anim_frame);
+	}
 }
 
 void	draw_sprite(t_vault *data, int **tex_buff, int frame)
