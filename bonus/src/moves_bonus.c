@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 16:05:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 10:10:53 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	move_mouse(double xpos, double ypos, void *temp)
 	data = (t_vault *) temp;
 	old_player_pdx = data->plr->pdx;
 	delta_x = xpos - data->old_x_cursor;
-	delta_x *= 0.05;
+	delta_x *= 0.03;
 	data->plr->pdx = data->plr->pdx * cos(-delta_x)
 		- data->plr->pdy * sin(delta_x);
 	data->plr->pdy = old_player_pdx * sin(delta_x)

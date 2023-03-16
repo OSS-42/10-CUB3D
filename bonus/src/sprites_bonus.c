@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 00:07:59 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 10:07:59 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	sprite_choice(t_vault *data, int i)
 		data->s_par->tex_sx = fabs((int)(256 * (data->s_par->screen_x
 						- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
 				*TEXWIDTH / data->s_par->s_w / 256);
-		printf("frame : %d\n", data->anim_frame);
+		// printf("frame : %d\n", data->anim_frame);
 		draw_sprite(data, data->tex->fire_arm, data->anim_frame);
 	}
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 7)
