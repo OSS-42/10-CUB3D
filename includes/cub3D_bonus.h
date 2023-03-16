@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 00:08:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:49:35 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define BLUE 0x00FFFFFF
 # define DGRAY 0x3C3C3FFF
 # define LGRAY 0x89898DFF
-# define NUMSPRITES 39
+# define NUMSPRITES 113
 
 /***** STRUCTURES *****/
 
@@ -194,6 +194,7 @@ typedef struct s_tex
 	xpm_t		*tex_babyfoot;
 	xpm_t		*tex_billard;
 	xpm_t		*tex_patrol;
+	xpm_t		*tex_table;
 	int			**north;
 	int			**south;
 	int			**east;
@@ -232,6 +233,7 @@ typedef struct s_tex
 	int			**babyfoot;
 	int			**billard;
 	int			**patrol;
+	int			**table;
 	double		brightness_factor;
 	uint32_t	dark;
 	uint32_t	color;
@@ -518,5 +520,31 @@ void		reinit_sprites(t_vault *data);
 void		sprite_ordering(t_vault *data);
 void		sort_sprites(t_vault *data);
 void		print_sprite_order(t_vault *data);
+
+/***** c1_spt.c *****/
+void		load_c1_spt_pot(t_vault *data);
+void		load_c1_spt_tab_p1(t_vault *data);
+void		load_c1_spt_tab_p2(t_vault *data);
+void		load_c1_spt_tab_p3(t_vault *data);
+void		load_c1_spt_tab_p4(t_vault *data);
+
+/***** c2_spt.c *****/
+void		load_c2_spt_pot(t_vault *data);
+void		load_c2_spt_tab_p1(t_vault *data);
+void		load_c2_spt_tab_p2(t_vault *data);
+void		load_c2_spt_tab_p3(t_vault *data);
+
+/***** c3_spt_p1.c *****/
+void		load_c3_spt_pot(t_vault *data);
+void		load_c3_spt_tab_p1(t_vault *data);
+void		load_c3_spt_tab_p2(t_vault *data);
+void		load_c3_spt_tab_p3(t_vault *data);
+void		load_c3_spt_tab_p4(t_vault *data);
+
+/***** c3_spt_p2.c *****/
+void		load_c3_spt_tab_p5(t_vault *data);
+void		load_c3_spt_lmp(t_vault *data);
+void		load_c3_spt_lmp_p1(t_vault *data);
+void		load_c3_spt_lmp_p2(t_vault *data);
 
 #endif

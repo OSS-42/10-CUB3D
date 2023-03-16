@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 10:07:59 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/16 15:14:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	sprite_choice(t_vault *data, int i)
 		printf("frame : %d\n", data->anim_frame);
 		draw_sprite(data, data->tex->patrol, data->anim_frame);
 	}
+	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 11)
+		draw_sprite(data, data->tex->table, 0);
 }
 
 void	draw_sprite(t_vault *data, int **tex_buff, int frame)
