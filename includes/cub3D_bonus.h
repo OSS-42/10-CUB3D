@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/17 09:32:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/17 11:33:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define BLUE 0x00FFFFFF
 # define DGRAY 0x3C3C3FFF
 # define LGRAY 0x89898DFF
-# define NUMSPRITES 115
+# define NUMSPRITES 117
 
 /***** STRUCTURES *****/
 

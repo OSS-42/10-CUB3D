@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/17 09:23:19 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/17 11:29:47 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	move_mouse(double xpos, double ypos, void *temp)
 	data = (t_vault *) temp;
 	old_player_pdx = data->plr->pdx;
 	delta_x = xpos - data->old_x_cursor;
-	delta_x *= 0.001;
+	delta_x *= 0.0015;
 	data->plr->pdx = data->plr->pdx * cos(-delta_x)
 		- data->plr->pdy * sin(delta_x);
 	data->plr->pdy = old_player_pdx * sin(delta_x)
