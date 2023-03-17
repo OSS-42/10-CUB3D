@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:34:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 21:44:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/17 09:32:42 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 // 1920, 1080
 // 640,480
 // 1600,1200
-# define WIDTH 1024
-# define HEIGHT 768
+# define WIDTH 1920
+# define HEIGHT 1080
 # define TRUE 1
 # define FALSE 0
 # define PI 3.1415926535
@@ -466,6 +466,7 @@ void		show_minimap(t_vault *data);
 void		load_minimap(t_vault *data);
 void		draw_minimap(t_vault *data);
 void		draw_tiles_loop(t_vault *data, int screen_x, int screen_y);
+void		reinit_minimap(t_vault *data);
 
 /***** minimap_utils.c *****/
 void		draw_tiles(t_vault *data,
@@ -493,7 +494,6 @@ void		delete_images(t_vault *data);
 void		load_3d(t_vault *data);
 void		reinit_3d(t_vault *data);
 void		background_3d(t_vault *data);
-void		reinit_and_draw(t_vault *data);
 
 /***** keyhandler.c *****/
 void		keyhandler(mlx_key_data_t keydata, void *param);
