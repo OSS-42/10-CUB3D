@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:38:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 10:10:53 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/17 09:23:19 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	move_forward(t_vault *data, int check_row, int check_col)
 		data->plr->col += data->plr->pdx * data->raycaster->mov_speed;
 	}
 	close_door(data);
-	reinit_and_draw(data);
 }
 
 void	move_backward(t_vault *data, int check_row, int check_col)
@@ -49,7 +48,6 @@ void	move_backward(t_vault *data, int check_row, int check_col)
 		data->plr->col -= data->plr->pdx * data->raycaster->mov_speed;
 	}
 	close_door(data);
-	reinit_and_draw(data);
 }
 
 void	move_left(t_vault *data, int check_row, int check_col)
@@ -71,7 +69,6 @@ void	move_left(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed;
 	}
 	close_door(data);
-	reinit_and_draw(data);
 }
 
 void	move_right(t_vault *data, int check_row, int check_col)
@@ -93,7 +90,6 @@ void	move_right(t_vault *data, int check_row, int check_col)
 			* data->raycaster->mov_speed;
 	}
 	close_door(data);
-	reinit_and_draw(data);
 }
 
 void	move_mouse(double xpos, double ypos, void *temp)
@@ -107,7 +103,7 @@ void	move_mouse(double xpos, double ypos, void *temp)
 	data = (t_vault *) temp;
 	old_player_pdx = data->plr->pdx;
 	delta_x = xpos - data->old_x_cursor;
-	delta_x *= 0.03;
+	delta_x *= 0.001;
 	data->plr->pdx = data->plr->pdx * cos(-delta_x)
 		- data->plr->pdy * sin(delta_x);
 	data->plr->pdy = old_player_pdx * sin(delta_x)
@@ -119,5 +115,4 @@ void	move_mouse(double xpos, double ypos, void *temp)
 		+ data->raycaster->plane_y * cos(delta_x);
 	data->old_x_cursor = xpos;
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
-	reinit_and_draw(data);
 }

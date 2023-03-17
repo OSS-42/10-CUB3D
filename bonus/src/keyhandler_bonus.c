@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:09 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/14 09:34:35 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/17 09:35:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	open_door(t_vault *data)
 	{
 		system("afplay ./assets/audio/H2G2-door_open.mp3&");
 		data->map->map[row][col] = 'W';
-		reinit_and_draw(data);
 	}
 	else if (data->map->map[row][col] == 'Z')
 	{
@@ -82,7 +81,6 @@ void	open_door(t_vault *data)
 			data->audio = TRUE;
 		}
 		data->map->map[row][col] = 'X';
-		reinit_and_draw(data);
 	}
 }
 

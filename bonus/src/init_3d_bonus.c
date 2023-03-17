@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_3d_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:12:30 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/14 22:05:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/17 09:33:15 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,4 @@ void	background_3d(t_vault *data)
 		}
 		i++;
 	}
-}
-
-void	reinit_and_draw(t_vault *data)
-{
-	reinit_3d(data);
-	reinit_sprites(data);
-	reinit_hud(data);
-	if (data->minimap->on_screen == 1)
-	{
-		mlx_delete_image(data->mlx, data->minimap->minimap);
-		show_minimap(data);
-	}
-	raycaster(data);
 }

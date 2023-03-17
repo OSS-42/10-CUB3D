@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 21:51:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/17 09:19:53 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	draw_sprite(t_vault *data, int **tex_buff, int frame)
 		if (color != (unsigned int)0xff00ffff)
 		{
 			dark_color = darken_color(color, b_factor, 0);
-			mlx_put_pixel(data->game->sprite, data->s_par->screen_x,
+			mlx_put_pixel(data->game->ddd, data->s_par->screen_x,
 				data->s_par->screen_y, dark_color);
 		}
 		data->s_par->screen_y++;

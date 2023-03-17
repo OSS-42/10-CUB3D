@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:43:15 by mbertin           #+#    #+#             */
-/*   Updated: 2023/03/06 10:09:35 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/17 10:03:31 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	flood_fill(t_vault *data, int x, int y, char **temp)
 {
 	if (!temp[x] || !temp[x][y] || ((x - 1 < 0 || y - 1 < 0
 			|| x + 1 >= data->map->lines || y + 1 >= (int)ft_strlen(temp[x]))
-			&& ft_char_isinset("0 2DZ", temp[x][y] == FALSE))
+			&& !ft_char_isinset("123456789", temp[x][y]))
 			|| temp[x][y] == ' ')
 	{
 		data->error_code = 4;

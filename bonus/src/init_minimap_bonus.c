@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/13 20:08:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/17 09:33:06 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,14 @@ void	draw_tiles_loop(t_vault *data, int screen_x, int screen_y)
 				[data->minimap->y]) == TRUE)
 			draw_tiles(data, screen_x, screen_y, 0x6E99FFFF);
 		data->minimap->y++;
+	}
+}
+
+void	reinit_minimap(t_vault *data)
+{
+	if (data->minimap->on_screen == 1)
+	{
+		mlx_delete_image(data->mlx, data->minimap->minimap);
+		show_minimap(data);
 	}
 }

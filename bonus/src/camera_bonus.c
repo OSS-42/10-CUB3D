@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 22:40:10 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 18:07:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/17 09:08:49 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	rotate_left(t_vault *data)
 		* sin(-data->raycaster->rot_speed);
 	data->raycaster->plane_y = old_plane_x * sin(-data->raycaster->rot_speed)
 		+ data->raycaster->plane_y * cos(-data->raycaster->rot_speed);
-	reinit_and_draw(data);
 }
 
 void	rotate_right(t_vault *data)
@@ -65,7 +64,6 @@ void	rotate_right(t_vault *data)
 		* sin(data->raycaster->rot_speed);
 	data->raycaster->plane_y = old_plane_x * sin(data->raycaster->rot_speed)
 		+ data->raycaster->plane_y * cos(data->raycaster->rot_speed);
-	reinit_and_draw(data);
 }
 
 void	delete_images(t_vault *data)
