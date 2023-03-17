@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:45:59 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 16:03:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 21:43:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	load_extra_textures2(t_vault *data)
 	data->tex->tex_billard = mlx_load_xpm42("./assets/tex/spt_billard.xpm42");
 	data->tex->tex_patrol = mlx_load_xpm42("./assets/tex/spt_patrouille.xpm42");
 	data->tex->tex_table = mlx_load_xpm42("./assets/tex/spt_table.xpm42");
+	data->tex->tex_fire = mlx_load_xpm42("./assets/tex/spt_fireworks.xpm42");
 	check_extra_textures(data);
 }
 
@@ -76,7 +77,7 @@ void	check_extra_textures(t_vault *data)
 		|| !data->tex->tex_plants || !data->tex->tex_fire_arm
 		|| !data->tex->tex_lamp || !data->tex->tex_babyfoot
 		|| !data->tex->tex_billard || !data->tex->tex_patrol
-		|| !data->tex->tex_table)
+		|| !data->tex->tex_table || !data->tex->tex_fire)
 		quit_game(data);
 	get_extra_textures(data);
 }
@@ -123,4 +124,5 @@ void	get_extra_textures2(t_vault *data)
 	data->tex->babyfoot = get_texture(data->tex->tex_babyfoot);
 	data->tex->patrol = get_texture(data->tex->tex_patrol);
 	data->tex->table = get_texture(data->tex->tex_table);
+	data->tex->fire = get_texture(data->tex->tex_fire);
 }

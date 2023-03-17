@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:43:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 18:20:54 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/16 21:51:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	sprite_choice2(t_vault *data, double now_time, int i)
 		draw_sprite(data, data->tex->babyfoot, 0);
 	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 9)
 		draw_sprite(data, data->tex->lamp, 0);
+	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 11)
+		draw_sprite(data, data->tex->table, 0);
 	else
 		sprite_choice3(data, now_time, i);
 }
@@ -112,8 +114,18 @@ void	sprite_choice3(t_vault *data, double now_time, int i)
 				*TEXWIDTH / data->s_par->s_w / 256);
 		draw_sprite(data, data->tex->patrol, data->anim_frame);
 	}
-	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 11)
-		draw_sprite(data, data->tex->table, 0);
+	else if (data->s_par->s[data->s_par->s_prio[i]].texture == 12)
+	{
+		if (now_time - data->last_frame_update >= data->anim_update_interval)
+		{
+			data->anim_frame = (data->anim_frame + 1) % 12;
+			data->last_frame_update = now_time;
+		}
+		data->s_par->tex_sx = fabs((int)(256 * (data->s_par->screen_x
+						- (-data->s_par->s_w / 2 + data->s_par->s_sc_x)))
+				*TEXWIDTH / data->s_par->s_w / 256);
+		draw_sprite(data, data->tex->fire, data->anim_frame);
+	}
 }
 
 void	draw_sprite(t_vault *data, int **tex_buff, int frame)
