@@ -9,6 +9,8 @@
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/xDeadpoolx/10-CUB3D?style=for-the-badge)
 
+Contributor : <a href="https://github.com/Mbertin44"><img src="https://avatars.githubusercontent.com/u/100396045?v=4" width="50" height="50" /></a>
+
 Re-Design of 42 Quebec school floor (Bonus Part).
 
 Use of MLX42 from Codam.
