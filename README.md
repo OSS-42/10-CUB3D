@@ -9,5 +9,17 @@
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/xDeadpoolx/10-CUB3D?style=for-the-badge)
 
+Re-Design of 42 Quebec school floor (Bonus Part).
 
+Use of MLX42 from Codam.
+
+# List of Bonus :
+- [X] Mouse lateral control
+- [X] Sounds & Music
+- [X] Animated Sprites
+- [X] Minimap (press M to put on screen)
+- [X] Hud (Player Location)
+- [X] Depth effect on texture and sprite
+- [X] Door with opening/close system (press Spacebar to open)
+- [X] Secret Door & Secret Room
 
