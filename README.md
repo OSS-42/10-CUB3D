@@ -14,6 +14,7 @@ Re-Design of 42 Quebec school floor (Bonus Part).
 Use of MLX42 from Codam.
 
 # List of Bonus :
+- [X] Collision system (is also present on mandatory part)
 - [X] Mouse lateral control
 - [X] Sounds & Music
 - [X] Animated Sprites
@@ -22,4 +23,3 @@ Use of MLX42 from Codam.
 - [X] Depth effect on texture and sprite
 - [X] Door with opening/close system (press Spacebar to open)
 - [X] Secret Door & Secret Room
-
