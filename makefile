@@ -25,6 +25,7 @@ D_LIBARTHEAD = libart/includes/libart.h
 
 D_MLX42 = MLX42/
 MLX42 = MLX42/build/libmlx42.a
+GIT_MLX = https://github.com/codam-coding-college/MLX42.git
 
 #------------------------------------------------------------------------------#
 #									SOURCES									   #
@@ -82,8 +83,23 @@ $(LIBART):	$(D_LIBARTHEAD)
 $(MLX42):
 	@echo "$(LGREEN)MLX42 Configuration started ...$(NC)"
 	@brew update --quiet
-	@brew install glfw --quiet
-	@echo "$(LGREEN)MLX42 Configuration completed ...$(NC)"
+	@if brew list cmake &> /dev/null; then \
+        echo "$(LGREEN)CMAKE is already installed$(NC)"; \
+    else \
+        echo "$(LYELLOW)CMAKE is not installed, installing...$(NC)"; \
+        @brew install cmake &> /dev/null; \
+    fi
+	@if brew list glfw &> /dev/null; then \
+        echo "$(LGREEN)GLFW is already installed$(NC)"; \
+    else \
+        echo "$(LYELLOW)GLFW is not installed, installing...$(NC)"; \
+        @brew install glfw &> /dev/null; \
+    fi
+	@git clone $(GIT_MLX) &> /dev/null
+	@echo "$(LGREEN)MLX42 cloning in progres ...$(NC)"
+	@cd $(D_MLX42) && cmake -B build &> /dev/null
+	@cd $(D_MLX42) && cmake --build build -j4 &> /dev/null
+	@echo "$(LGREEN)MLX42 Configuration completed !$(NC)"
 
 $(D_OBJ):
 	@mkdir -p $(D_OBJ)
@@ -107,8 +123,9 @@ lclean: fclean
 	@$(call lcleaning)
 	@$(MAKE) -s --no-print-directory -C $(D_LIBFT) fclean
 	@$(MAKE) -s --no-print-directory -C $(D_LIBART) fclean
+	@$(RM) $(D_MLX42)
 
-re:	fclean all
+re:	lclean all
 
 .PHONY: all clean fclean lclean re
 
@@ -166,9 +183,9 @@ $(NAME_BONUS):	$(D_OBJ_BONUS) $(LIBFT) $(LIBART) $(MLX42) $(OBJS_BONUS)
 # Ubuntu
 #	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) $(MLX42) -I include -ldl -lglfw -pthread -lm -o $@ $(LIBFT) $(LIBART))
 # MacOS 42
-	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+#	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 # Apple M2
-#	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 	@echo "$(LGREEN)Software Compilation completed !$(NC)"
 
 $(D_OBJ_BONUS):
@@ -187,6 +204,9 @@ lclean_bonus: fclean_bonus
 	@$(call lcleaning)
 	@$(MAKE) -s --no-print-directory -C $(D_LIBFT) fclean
 	@$(MAKE) -s --no-print-directory -C $(D_LIBART) fclean
+	@$(RM) $(D_MLX42)
+
+re_bonus: lclean_bonus bonus
 
 #------------------------------------------------------------------------------#
 #								  MAKEUP RULES								   #
