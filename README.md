@@ -1,4 +1,5 @@
 # 10-CUB3D
+
 ![CUB3D](https://github.com/byaliego/42-project-badges/blob/main/badges/cub3d-bonus.png)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/xDeadpoolx/10-CUB3D?style=for-the-badge)
@@ -11,7 +12,13 @@
 
 Contributor : <a href="https://github.com/Mbertin44"><img src="https://avatars.githubusercontent.com/u/100396045?v=4" width="50" height="50" /></a>
 
-Re-Design of 42 Quebec school floor (Bonus Part).
+# Usage
+
+Ensure BREW is installed on your system.
+
+Do `make` to load the mandatory part of the project (very tuned down version).
+
+Do `make bonus`to load the bonus part of the project which is a Re-Design of 42 Quebec school floor, enjoy :)
 
 Use of MLX42 from Codam.
 
