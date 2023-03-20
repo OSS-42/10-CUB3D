@@ -187,6 +187,9 @@ $(NAME_BONUS):	$(D_OBJ_BONUS) $(LIBFT) $(LIBART) $(MLX42) $(OBJS_BONUS)
 # Apple M2
 	@$(call creating, $(CC) $(CFLAGS) $(OBJS_BONUS) -I include -lglfw -L /opt/homebrew/opt/glfw/lib/ -o $@ $(LIBFT) $(LIBART) $(MLX42))
 	@echo "$(LGREEN)Software Compilation completed !$(NC)"
+	@sleep 2
+	@clear
+	@./cub3D_bonus maps/map42.cub
 
 $(D_OBJ_BONUS):
 	@mkdir -p $(D_OBJ_BONUS)
