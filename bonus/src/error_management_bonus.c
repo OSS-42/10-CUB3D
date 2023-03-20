@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:39:18 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/17 08:55:30 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/17 11:15:35 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ void	free_all(t_vault *data)
 void	quit_game(t_vault *data)
 {
 	printf("%s\n", "Au revoir !");
-	system("killall afplay");
+	system("pkill afplay");
 	free_all(data);
 }

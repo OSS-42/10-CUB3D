@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c1_spt_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:23:23 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/16 17:43:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/03/17 11:33:48 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ void	load_c1_spt_tab_p3(t_vault *data)
 	data->s_par->s[32].s_row = 18.5;
 	data->s_par->s[32].s_col = 23.5;
 	data->s_par->s[32].texture = 11;
+	data->s_par->s[115].s_row = 25.5;
+	data->s_par->s[115].s_col = 6.5;
+	data->s_par->s[115].texture = 3;
 	load_c1_spt_tab_p4(data);
 }
 
@@ -130,5 +133,8 @@ void	load_c1_spt_tab_p4(t_vault *data)
 	data->s_par->s[38].s_row = 20.5;
 	data->s_par->s[38].s_col = 23.5;
 	data->s_par->s[38].texture = 11;
+	data->s_par->s[116].s_row = 25.5;
+	data->s_par->s[116].s_col = 8.5;
+	data->s_par->s[116].texture = 3;
 	load_c2_spt_pot(data);
 }
