@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 21:39:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/03/17 09:33:06 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/03/23 16:29:20 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void	load_minimap(t_vault *data)
 			data->map->lines * data->minimap->tile_size);
 	mlx_image_to_window(data->mlx,
 		data->minimap->minimap,
-		(WIDTH / 2) - (data->map->max_lenght * data->minimap->tile_size / 2),
+		(WIDTH - data->map->max_lenght * data->minimap->tile_size),
 		(HEIGHT / 2) - (data->map->lines * data->minimap->tile_size / 2));
 }
+		// (WIDTH / 2) - (data->map->max_lenght * data->minimap->tile_size / 2),
 
 void	draw_minimap(t_vault *data)
 {
