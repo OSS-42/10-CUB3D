@@ -45,3 +45,7 @@ Dans la version bonus, en plus des flèches directionnel vous pouvez également 
 - Effet d'ombrage sur les textures et sprites
 - Interaction du joueur avec les portes (ouvrir, fermer)
 - Porte secrète et pièce secrète
+
+## Auteur
+
+[Mbertin44](https://github.com/Mbertin44)
