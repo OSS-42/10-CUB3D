@@ -8,7 +8,7 @@
 
 Cub3D est un projet de l'école 42 qui consiste à créer un moteur de jeu inspiré du célèbre Wolfenstein 3D. Le projet est codé en C et nous utilisons la bibliothèque [MLX de CODAM](https://github.com/codam-coding-college/MLX42).
 
-Pour ce projet, j'ai eu le plaisir de collaborer avec [OSS-42](https://github.com/OSS-42).
+Pour ce projet, [OSS-42](https://github.com/OSS-42) et [moi](https://github.com/Mbertin44) avons collaboré ensemble.
 
 ## Utilisation
 
@@ -18,13 +18,21 @@ Pour installer le projet, vous devez avoir brew d'installé, puis exécuter la c
 
 Pour exécuter le programme, utiliser la commande `make` puis `./cub3D maps/map1.cub`.
 
-Vous pouvez utiliser les touches WASD pour déplacer le joueur et les flèches directionnelles pour déplacer la caméra, ainsi que la touche Échap pour quitter le jeu.
+Les contrôles :
+
+* `WASD` pour déplacer le joueur.
+* Vous pouvez utiliser les flèches directionnelles pour déplacer la caméra.
+* `Échap` pour quitter le jeu.
 
 ## Version bonus
 
 Pour exécuter le programme, utiliser la commande `make bonus` puis `./cub3D_bonus maps/map42.cub`
 
-Dans la version bonus, en plus des flèches directionnel vous pouvez également déplacer la caméra avec la souris, afficher la minimap en appuyant sur la touche M et ouvrir les portes avec la barre d'espace.
+Dans la version bonus, en plus des flèches directionnel vous pouvez également ;
+
+* Déplacer la caméra avec la souris
+* Afficher la minimap en appuyant sur la touche `M`
+* Ouvrir les portes avec la touche `espace`.
 
 ## Fonctionnalités supplémentaires de la version bonus
 
