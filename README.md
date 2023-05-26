@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/byaliego/42-project-badges/blob/main/badges/cub3d-bonus.png">
+  <img src="https://github.com/byaliego/42-project-badges/blob/main/badges/cub3dm.png">
 </p>
 
 # Nom du projet : cub3D
