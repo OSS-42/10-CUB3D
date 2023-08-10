@@ -1,34 +1,51 @@
-# 10-CUB3D
+<p align="center">
+  <img src="https://github.com/byaliego/42-project-badges/blob/main/badges/cub3dm.png">
+</p>
 
-![CUB3D](https://github.com/byaliego/42-project-badges/blob/main/badges/cub3d-bonus.png)
+# Nom du projet : cub3D
 
-![GitHub repo size](https://img.shields.io/github/repo-size/xDeadpoolx/10-CUB3D?style=for-the-badge)
+## Description
 
-![GitHub language count](https://img.shields.io/github/languages/count/xDeadpoolx/10-CUB3D?style=for-the-badge)
+Cub3D est un projet de l'école 42 qui consiste à créer un moteur de jeu inspiré du célèbre Wolfenstein 3D. Le projet est codé en C et nous utilisons la bibliothèque [MLX de CODAM](https://github.com/codam-coding-college/MLX42).
 
-![GitHub top language](https://img.shields.io/github/languages/top/xDeadpoolx/10-CUB3D?style=for-the-badge)
+Pour ce projet, [OSS-42](https://github.com/OSS-42) et [moi](https://github.com/Mbertin44) avons collaboré ensemble.
 
-![GitHub last commit](https://img.shields.io/github/last-commit/xDeadpoolx/10-CUB3D?style=for-the-badge)
+## Utilisation
 
-Contributor : <a href="https://github.com/Mbertin44"><img src="https://avatars.githubusercontent.com/u/100396045?v=4" width="50" height="50" /></a>
+Pour installer le projet, vous devez avoir brew d'installé, puis exécuter la commande `make` pour la version mandatoire du projet ou `make bonus` pour voir la version finale et plus complète du projet.
 
-# Usage
+## Version mandatoire
 
-Ensure BREW is installed on your system.
+Pour exécuter le programme, utiliser la commande `make` puis `./cub3D maps/map1.cub`.
 
-Do `make` to load the mandatory part of the project (very tuned down version).
+Les contrôles :
 
-Do `make bonus`to load the bonus part of the project which is a Re-Design of 42 Quebec school floor, enjoy :)
+* `WASD` pour déplacer le joueur.
+* Vous pouvez utiliser les flèches directionnelles pour déplacer la caméra.
+* `Échap` pour quitter le jeu.
 
-Use of MLX42 from Codam.
+## Version bonus
 
-# List of Bonus :
-- [X] Collision system (is also present on mandatory part)
-- [X] Mouse lateral control
-- [X] Sounds & Music
-- [X] Animated Sprites
-- [X] Minimap (press M to put on screen)
-- [X] Hud (Player Location)
-- [X] Depth effect on texture and sprite
-- [X] Door with opening/close system (press Spacebar to open)
-- [X] Secret Door & Secret Room
+Pour exécuter le programme, utiliser la commande `make bonus` puis `./cub3D_bonus maps/map42.cub`
+
+Dans la version bonus, en plus des flèches directionnel vous pouvez également ;
+
+* Déplacer la caméra avec la souris
+* Afficher la minimap en appuyant sur la touche `M`
+* Ouvrir les portes avec la touche `espace`.
+
+## Fonctionnalités supplémentaires de la version bonus
+
+- Système de collision 
+- Contrôle de la caméra avec la souris
+- Effets sonores et musique
+- Sprite animé
+- Minimap
+- HUD (Localisation du joueur)
+- Effet d'ombrage sur les textures et sprites
+- Interaction du joueur avec les portes (ouvrir, fermer)
+- Porte secrète et pièce secrète
+
+## Auteur
+
+[Mbertin44](https://github.com/Mbertin44)
